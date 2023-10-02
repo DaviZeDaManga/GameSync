@@ -1,10 +1,11 @@
 import './index.scss'
+import axios from 'axios'
 
 import BarraLateral from '../../components/barraLateral'
 import BarraDeCima from '../../components/baraDeCima'
 import FooterPage from '../../components/footerpage/index,'
 
-import { useState, useRef } from 'react'
+
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 
@@ -14,10 +15,24 @@ import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
+import { useEffect, useState } from 'react'
 
-export default function Produto() {{
+export default function Produto() {
+    const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const [mostdesc, setMostdesc] = useState (true)
     const [mostcoment, setMostcoment] = useState (false)
+    const [infoprod, setInfoprod] = useState ([])
+    const [idprod, setIdprod] = useState ("Broforce")
+
+    const [nome, setNome] = useState ('')
+    const [desc, setDesc] = useState ('')
+    const [lancamento, setLancamento] = useState ('')
+    const [imagem, setImagem] = useState ('')
+    const [imagens, setImagens] = useState ([])
+    const [plataformas, setPlataformas] = useState ([])
+    const [developers, setDevelopers] = useState ([])
+    const [publicador, setPublicador] = useState ([])
+
 
     function MostrarDescricao () {
         setMostdesc(true)
@@ -29,18 +44,58 @@ export default function Produto() {{
         setMostcoment(true)
     }
 
-    const [thumbsSwiper, setThumbsSwiper] = useState(null);
+    
+
+
+
+    
+    
+    async function ProdutoInfo () {
+        let url = 'https://api.rawg.io/api/games/' + idprod + '?key=0a526d3c3985430c9469d8d6951eb5cb&'
+        let resposta = await axios.get(url)
+
+
+        setNome(resposta.data.name)
+        setDesc(resposta.data.description_raw)
+        setLancamento(resposta.data.released)
+        setImagem(resposta.data.background_image)
+        setPlataformas(resposta.data.parent_platforms)
+        setDevelopers(resposta.data.developers)
+        setPublicador(resposta.data.publishers)
+    }
+
+    useEffect (() => {
+        ProdutoInfo()
+    }, [])
+
+    async function Capturas() {
+        let url = 'https://api.rawg.io/api/games/screenshots/'+ idprod +'?key=0a526d3c3985430c9469d8d6951eb5cb&'
+        let respostaCapturas = await axios.get(url)
+
+
+        setImagens(respostaCapturas.data.results.image)
+    }
+
+    // useEffect (() => {
+    //     Capturas()
+    // }, [])
+
+
+
+
+
 
     return(
         <div className="Produto">
             <BarraLateral/>
             <BarraDeCima/>
+
             <section id="produto">
-                
+
                 <section id="info-produto">      
                     <div className="titulo">
-                        <h1>The Texas Chain Saw Massacre</h1>
-                        <p>O personagem Leatherface teve como inspiração o assassino serial Ed Gein, (1906-1984), que deu origem a outros vilões em outros livros e filmes, mas o caso real do assassino é bem mais monstruoso do que qualquer ficção. Sua primeira vítima foi seu irmão Henry, morto em 1944, embora nada tenha sido provado na época. No ano seguinte, a mãe dele morreu, e então Gein perdeu a razão e, eventualmente, começou a criar roupas e acessórios dos corpos de suas vítimas, das quais guardava os órgãos na sua casa.</p>
+                        <h1>{nome}</h1>
+                        <p>'{desc}'</p>
                     </div>
                     <section id='Comprar'>
                         <div className='info'>
@@ -56,68 +111,40 @@ export default function Produto() {{
                             </div>
                         </div>
                     </section>
-                    <div id="classificacao">
+                    {/* <div id="classificacao">
                         <div className="classificado">
-                            <img src="" />
+                            <img src='' />
                         </div>
-                    </div>
-                </section>
+                    </div> */}
+                </section>    
+                
 
                 <main id="produto-images">
                 
-                <Swiper
-                    style={{
-                    '--swiper-navigation-color': '#fff',
-                    '--swiper-pagination-color': '#fff',
-                    }}
-                    loop={true}
-                    spaceBetween={10}
-                    navigation={true}
-                    thumbs={{ swiper: thumbsSwiper }}
-                    modules={[FreeMode, Navigation, Thumbs]}
-                    className="mySwiper2"
-                >
-                    <SwiperSlide>
-                    <img src="/assets/images/teste/jogo.jpg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                    <img src="/assets/images/teste/jogo1.jpg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                    <img src="/assets/images/teste/jogo2.jfif" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                    <img src="/assets/images/teste/jogo3.jpg" />
-                    </SwiperSlide>
-                </Swiper>
+                    <Swiper
+                        style={{
+                        '--swiper-navigation-color': '#fff',
+                        '--swiper-pagination-color': '#fff',
+                        }}
+                        loop={true}
+                        spaceBetween={10}
+                        navigation={true}
+                        thumbs={{ swiper: thumbsSwiper }}
+                        modules={[FreeMode, Navigation, Thumbs]}
+                        className="mySwiper2"
+                    >
+                        <SwiperSlide>
+                        <img src={imagem} />
+                        </SwiperSlide>
+                        
+                        {imagens.map( item =>
+                            <SwiperSlide>
+                                <img src={item.image} />
+                            </SwiperSlide>    
+                        )}
 
-                {/*<Swiper
-                    onSwiper={setThumbsSwiper}
-                    loop={true}
-                    spaceBetween={10}
-                    slidesPerView={4}
-                    freeMode={true}
-                    watchSlidesProgress={true}
-                    modules={[FreeMode, Navigation, Thumbs]}
-                    className="mySwiper"
-                >
-                    <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-                    </SwiperSlide>
-                </Swiper>*/}
-                
-
-
-                    
+                    </Swiper>
+    
                 </main>
 
             </section>
@@ -142,26 +169,30 @@ export default function Produto() {{
 
                         <div className="detalhe">
                             <h2>Desenvolvido por</h2>
-                            <p>Sumo Nottingham</p>
+                            <div className='developers'>
+                                {developers.map( item =>
+                                    <p>{item.name}</p>
+                                )}
+                            </div>
+                            
                         </div>
                         <div className="detalhe">
                             <h2>Publicado por</h2>
-                            <p>Gun Interactive</p>
+                            {publicador.map(item =>
+                            <p>{item.name}</p>    
+                            )}
                         </div>
                         <div className="detalhe">
                             <h2>Data de lançamento</h2>
-                            <p>03/09/23</p>
+                            <p>{lancamento}</p>
                         </div>
                         <div className="detalhe">
                             <h2>Tamanho</h2>
-                            <p>32.45GB</p>
+                            <p>Indefinido</p>
                         </div>
 
                     </div>
-                    <p>O personagem Leatherface teve como inspiração o assassino serial Ed Gein, (1906-1984), que deu origem a outros vilões em outros livros e filmes, mas o caso real do assassino é bem mais monstruoso do que qualquer ficção. Sua primeira vítima foi seu irmão Henry, morto em 1944, embora nada tenha sido provado na época. No ano seguinte, a mãe dele morreu, e então Gein perdeu a razão e, eventualmente, começou a criar roupas e acessórios dos corpos de suas vítimas, das quais guardava os órgãos na sua casa.
-
-                    Assuma o papel de alguém da notória família Slaughter, ou de suas vítimas, em The Texas Chain Saw Massacre, uma experiência de terror assimétrico em terceira pessoa baseada no inovador e icônico filme de terror de 1974.
-                    </p>
+                    <p>{desc}</p>
                 </div>
                 <div className="status">
                     <h1>Estatisticas</h1>
@@ -194,7 +225,18 @@ export default function Produto() {{
                     </div>
                     <div></div>
                 </div>
-                
+            </section>
+
+            <section id='plataformas'>
+                <section className='plataformas'>
+
+                    {plataformas.map( item =>
+                        <div className='plataforma'>
+                            <p>{item.platform.name}</p>
+                        </div>    
+                    )}
+
+                </section>
             </section>
             
             <section id='titles'>
@@ -433,4 +475,4 @@ Os visuais de "Aurora Eterna" são simplesmente deslumbrantes. Cada cenário é 
             <FooterPage/>
         </div>
     )
-}}
+}
