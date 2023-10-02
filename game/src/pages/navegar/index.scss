@@ -82,12 +82,15 @@
                     border-radius: 5px;
                     -moz-transition: all 0.5s;
                     -webkit-transition: all 0.5s;
-                    background: rgba(0, 0, 0, 0.295) ;
+                    background: rgba(0, 0, 0, 0.493) ;
 
                     > h1 {
                         font-size: 15px;
                         color: #ececec;
                         transition: 0.3s;
+                        // background-color: rgba(0, 0, 0, 0.61);
+                        // border-radius: 5px;
+                        // padding: 5px 10px;
                     }
                 }
             }
