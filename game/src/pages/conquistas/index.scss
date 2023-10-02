@@ -1,0 +1,242 @@
+
+
+#Conquista {
+    width: 1600px;
+    
+    .image-frame{
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+
+        .image-main{
+            display: flex;
+            align-items: start;
+            background-image:linear-gradient(rgba(0, 0, 0, 0.795) , rgba(0, 0, 0, 0.61) 95%);
+            background-size: cover;
+        
+            flex-direction: column;
+        
+            height: 50rem;
+            width: 100%;
+            padding: 20px;
+            border-radius: 20px;
+        }
+        
+        .search-bar{
+            display: flex;
+            flex-direction: row;
+            align-items: end;    
+            width: 100%;
+        }
+        
+        .search-button {
+            color: #ffffff;
+            background-color: #333333;
+
+            outline: none;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 20px;
+            margin: 3px 10px;
+            transition: 0.3s;
+
+            > a {
+                color: #ffffff;
+                text-decoration: none;
+            }
+        }
+
+        .search-button:hover {
+            background-color: rgb(90, 90, 90);
+        }
+        
+        .search-image-frame {
+                width: 100%;
+                height: 40px;
+
+                border-radius: 50px;
+                border: none;
+                outline: none;
+
+                padding: 20px;
+                margin-right: 20px;
+
+                background-color: #333333;
+                color: #ffffff;      
+        }
+        
+        .user-search-frame {
+            flex-direction: row;
+            justify-content: center;
+            display: flex;
+            align-items: center;
+
+            height: 40px;
+            width: 40px;
+            padding: 10px;
+            border-radius: 100px;
+            background-color: #ffffff;
+
+            > img {
+                height: 100%;
+            }
+        }
+
+        .section-texts{
+            height: 100%;
+        }
+        .text-conquistas{
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            
+            padding: 10px;
+            height: 100%;
+            width: 665px;
+        }
+        .text-conquistas h2 {
+            font-size: 26px;
+            margin-bottom: 5px;
+        }
+
+        .text-conquistas p {
+            font-size: 16px;
+        }
+    }
+    .achivements {
+
+        .achivements-sections{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: start;
+
+            padding: 30px 0px;
+            width: 100%;
+
+            .title-achive {
+                display: flex;
+                flex-direction: row;
+                
+            }
+            .title-achive img {
+                height: 40px;
+                width: 60px;
+            }
+            .section-left{
+                display: flex;
+                flex-direction: column;
+                align-items: start;
+                justify-content: start;
+                width: 550px;
+
+                .block-points p {
+                    font-size: 25px;
+                }
+
+                .block-points{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+
+                    background-image:linear-gradient( rgba(64, 180, 205), rgba(37,97,140));
+
+                    width: 360px;
+                    height: 290px;
+                    margin-top: 30px;
+                    border-radius: 20px;
+
+                    .points-img {
+                        height: 40px;
+                        margin-right: 10px;
+                    }
+                    .achivements-points{
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        margin-bottom: 40px;
+                    }
+                    .line{
+
+                        height: 5px;
+                        width: 340px;
+                        margin: 15px 0px;
+                        
+                        border-radius: 20px;
+                        background-color: #ffffff;
+                    }
+                    .feats-img {
+                        height: 30px;
+                        margin-right: 10px;
+                    }
+                    .achivements-feats{
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        margin-top: 40px;
+
+                    }
+                }
+                
+            }
+    
+            .section-right{
+
+                .search-achives {
+                    width: 1100px;
+                    height: 40px;
+                    border-radius: 20px;
+                    border: none;
+                    outline: none;
+                    padding: 20px;
+                    background-color: #333333;
+                    color: #ffffff;
+                    margin-bottom: 30px;
+                }
+                .achive-unlock{
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    width: 1100px;
+                    gap: 33px;
+
+                    .awards{ 
+
+                        .awards-s1{
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+
+                            border-radius: 10px;
+                            background-image:linear-gradient(rgba(86,42,42,0.7), rgba(69,38,38));
+                            height: 230px;
+                            width: 250px;
+                        }
+                        .awards-s2{
+                            background-color: #333333;
+                            height: 70px;
+                            width: 250px;
+                            position: relative;
+                            top: -10px;
+                            border-radius: 0px 0px 10px 10px;
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+
+    
+
+
+
+
+
+
+
+}
+
+

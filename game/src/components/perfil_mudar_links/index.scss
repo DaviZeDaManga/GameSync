@@ -1,0 +1,53 @@
+.Change-links{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-around;
+    height: 7rem;
+
+    .Change-links-a{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        justify-content: space-around;
+        width: 45rem;
+        height: 3rem;
+    
+        a{
+            color: rgba(134, 134, 134, 1);
+            text-decoration: none;
+            transition: all 0.3s ease;
+
+            &:hover {
+                color: #ADD8E6;
+                transform: scale(1.1); // aumenta 10% tamanho
+                opacity: 0.8;
+            }
+        }
+        
+    }
+}
+
+
+.Information-name{
+    display: flex;
+    flex-direction: column;
+
+    input{
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+
+        input:focus {
+            border: 2px solid #007bff;
+          }
+          input:hover {
+            transform: scale(1.05); /* Aumenta o tamanho ao passar o mouse */
+          }
+          input::placeholder {
+            color: #999; /* Cor do texto de espaço reservado */
+            font-style: italic; /* Itálico para o texto de espaço reservado */
+          }
+    }
+    
+}

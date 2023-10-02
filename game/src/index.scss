@@ -1,0 +1,164 @@
+* {
+  box-sizing: border-box;
+  margin: 0px;
+}
+
+body {
+  background-color: #1F1F1F;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    padding: 0px 0px 20px 100px;
+    color: white;
+    position: relative;
+    z-index: 1;
+}
+
+.produto {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 290px;
+  height: 260px;
+  background-color: #28262e;
+  border-radius: 10px;
+  transition: 0.3s;
+  overflow: hidden;
+
+  position: relative;
+
+  .imagem-produto {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      width: 100%;
+      height: 100%;
+      background-color: #2e2e2e;
+      border-top-right-radius: 10px;
+      border-top-left-radius: 10px;
+      
+      z-index: 1;
+      position: absolute;
+
+      .sombra {
+          display: flex;
+          flex-direction: column;
+          justify-content: end;
+          align-items: start;
+
+          position: absolute;
+          z-index: 1;
+          width: 100%;
+          height: 100%;
+          border-top-right-radius: 10px;
+          border-top-left-radius: 10px;
+          background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(19, 19, 19, 0.658) 100%);
+
+          .linha {
+              width: 100%;
+              height: 3px;
+              background-color: #131313;
+          }
+      }
+
+      .produtoIMG {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+          position: absolute;
+
+          img {
+              height: 100%;
+          }
+      }
+  }
+
+  h1 {
+      font-size: 15px;   
+      color: #c5c5c5;
+  }
+
+  h3 {
+      font-size: 15px;   
+      color: #cfcfcf;
+      font-weight: 400;
+  }
+
+  p {
+      font-size: 15px;   
+      color: #969696;
+  }
+
+  a {
+      text-decoration: none;
+      font-size: 15px;   
+      color: #c5c5c5;
+      overflow-x: hidden;
+      max-width: 30ch;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+  }
+
+  .informacoes {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+
+      width: 100%;
+      height: 100px;
+      background-color: #28262ed8;
+      bottom: -40px;
+      transition: 0.3s;
+
+      z-index: 1;
+      position: absolute;
+
+      .dados {
+          display: flex;
+          flex-direction: column;
+          justify-content: start;
+          align-items: start;
+  
+          width: 100%;
+          height: auto;
+          padding: 10px 10px 10px 10px;
+      }
+  
+      .info {
+          display: flex;
+          flex-direction: row;
+          justify-content: start;
+          align-items: center;
+  
+          width: 100%;
+          padding: 0px 10px 10px 10px;
+      }
+  }
+}
+
+.produto:hover {
+  background-color: #3b3b3b;
+  border: solid 1px white;
+}
+
+.produto:hover > .informacoes {
+  bottom: 0;
+}
