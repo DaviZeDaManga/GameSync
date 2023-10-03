@@ -1,0 +1,195 @@
+#mae {
+    width: 1600px;
+  
+    .mae-formulario {
+      display: flex;
+      flex-direction: column;
+      width: 95rem;
+      height: 40rem;
+      align-items: center;
+      justify-content: center;
+  
+      .n-creio {
+        position: fixed;
+        background-color: #1c1c1c;
+        width: 30rem;
+        height: 30rem;
+        border-radius: 8px;
+        overflow: hidden;
+
+        &::before {
+            content: '';
+            position: absolute;
+            width: 30rem;
+            height: 30rem;
+            top: -50%;
+            left: -50%;
+            background: linear-gradient(0deg, transparent, transparent, #45f3ff, #45f3ff, #45f3ff);
+            z-index: 1;
+            transform-origin: bottom right;
+            animation: animate 6s linear infinite;
+          }
+
+          &::after {
+            content: '';
+            position: absolute;
+            width: 30rem;
+            height: 30rem;
+            top: -50%;
+            left: -50%;
+            background: linear-gradient(0deg, transparent, transparent, #45f3ff, #45f3ff, #45f3ff);
+            z-index: 1;
+            transform-origin: bottom right;
+            animation: animate 6s linear infinite;
+            animation-delay: -3s;
+        }
+
+          @keyframes animate {
+            0%{
+                transform: rotate(0deg);
+            }
+            100%{
+                transform: rotate(360deg);
+            }
+          }
+
+          .borda2{
+            position: absolute;
+            top: 0;
+            inset: 0;
+
+            &::before{
+                content: '';
+                position: absolute;
+                width: 30rem;
+                height: 30rem;
+                top: -50%;
+                left: -50%;
+                background: linear-gradient(0deg, transparent, transparent, #fa4081, #fa4081, #fa4081);
+                z-index: 1;
+                transform-origin: bottom right;
+                animation: animate 6s linear infinite;
+                animation-delay: -1.5s;
+              }
+
+            &::after {
+                content: '';
+                position: absolute;
+                width: 30rem;
+                height: 30rem;
+                top: -50%;
+                left: -50%;
+                background: linear-gradient(0deg, transparent, transparent, #fa4081, #fa4081, #fa4081);
+                z-index: 1;
+                z-index: 1;
+                transform-origin: bottom right;
+                animation: animate 6s linear infinite;
+                animation-delay: -4.5s;
+            }
+
+              @keyframes animate {
+            0%{
+                transform: rotate(0deg);
+            }
+            100%{
+                transform: rotate(360deg);
+            }
+          }
+          }
+
+
+        form {
+          position: absolute;
+          inset: 4px;
+          background-color: #222;
+          padding: 50px 40px;
+          border-radius: 8px;
+          z-index: 2;
+  
+          h1 {
+            color: whitesmoke;
+            font-weight: 500;
+            text-align: center;
+            letter-spacing: 0.1em;
+          }
+  
+          .formulario {
+            display: flex;
+            width: 400px;
+            margin-top: 40px;
+  
+            > input {
+              position: relative;
+              width: 100%;
+              padding: 20px 10px 10px;
+              background: transparent;
+              outline: none;
+              box-shadow: none;
+              border: none;
+              color: black;
+              font-size: 1em;
+              letter-spacing: 0.1em;
+              transition: 0.5s;
+              z-index: 10;
+            }
+  
+            > span {
+              position: absolute;
+              left: 0;
+              padding: 20px 10px 10px;
+              pointer-events: none;
+              color: gainsboro;
+              font-size: 1em;
+              letter-spacing: 0.5em;
+              transition: 0.5s;
+            }
+  
+            > input:valid ~ span,
+            > input:focus ~ span {
+              color: white;
+              font-size: 0.75em;
+              transform: translateY(-34px);
+            }
+
+            > i {
+                position: absolute;
+                left: 0;
+                bottom: 10;
+                width: 100%;
+                height: 2px;
+                background-color: #fff;
+                border-radius: 4px;
+                overflow: hidden;
+                transition: 0.5s;
+                pointer-events: none;
+            }
+
+            > input:valid ~ i,
+            > input:focus ~ i{
+              color: white;
+             height: 44px;
+
+            }
+          }
+          .botao > button{
+            border: none;
+            outline: none;
+            padding: 9px 27px;
+            background-color: #fff;
+            cursor: pointer;
+            font-size: 0.9em;
+            border-radius: 4px;
+            font-weight: 600;
+            width: 25rem;
+            margin-top: 40px;
+            transition: background-color 0.5s;
+           }  
+           .botao > button:hover {
+            background: linear-gradient(to top,  #45f3ff, #fa4081);
+          }
+           
+        }
+      }
+    }
+  }
+  

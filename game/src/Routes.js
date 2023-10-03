@@ -1,16 +1,19 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import Produto from './pages/produto';
-import Planos from './pages/planos';
-import Conquistas from './pages/conquistas';
-import MudarPerfil from './pages/changes';
-import Navegar from './pages/navegar';
-import Admin from './pages/admin';
-import GameSync from './pages/GameSync';
-import Descobrir from './pages/descobrir';
-import Cadastro from './pages/cadastro';
-import EscolherLogin from './pages/escolherconta';
+import Descobrir from './pages/web/descobrir'
+import Produto from './pages/web/produto'
+import Planos from './pages/web/planos'
+import Conquistas from './pages/web/conquistas'
+import MudarPerfil from './pages/web/changes'
+import Navegar from './pages/web/navegar'
+import GameSync from './pages/web/GameSync'
+import Cadastro from './pages/web/cadastro'
+import EscolherLogin from './pages/web/escolherconta'
 
+import CadastroAdmin from './pages/admin/authentication'
+import HomeAdmin from './pages/admin/home'
+
+import NotFound from './errors'
 export default function Routess(){
     return(
         <BrowserRouter>
@@ -21,10 +24,14 @@ export default function Routess(){
                 <Route path='/conquistas' element={<Conquistas/>} />
                 <Route path='/perfil' element={<MudarPerfil/>} />
                 <Route path='/procurar' element={<Navegar/>} />
-                <Route path='/admin' element={<Admin/>} />
                 <Route path='/sobregamesync' element={<GameSync/>} />
                 <Route path='/login' element={<Cadastro/>} />
                 <Route path='/escolherlogin' element={<EscolherLogin/>} />
+
+                <Route path='/admin/home' element={<HomeAdmin/>} />
+                <Route path='/admin' element={<CadastroAdmin/>} />
+
+                <Route path='*' element={<NotFound/>} />
             </Routes>
         </BrowserRouter>
     )

@@ -1,0 +1,250 @@
+.GameSync {
+    width: 1600px;
+
+    #vinheta {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgb(44, 45, 59);
+        top: 0;
+        z-index: 3;
+        left: -100vw;
+        animation: vinheta 1.8s;
+    }
+    
+    #GameSync {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        
+        width: 100%;
+        height: 680px;
+        padding: 40px;
+        background: rgb(167, 48, 167);
+        border-radius: 10px;
+        animation: game infinite 10s linear;
+
+        > div {
+            display: flex;
+            flex-direction: column;
+        
+            > h1 {
+                font-size: 50px;
+                margin-bottom: 10px;
+            }
+    
+            > p {
+                max-width: 400px;
+            }
+        }
+
+        #secret {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+
+            width: 300px;
+            height: 300px;
+            background: rgb(167, 48, 167);
+            animation: game infinite 10s linear;
+            overflow: hidden;
+
+            .swiper {
+                width: 120%;
+                height: 120%;
+            }
+              
+            .swiper-slide {
+                background-position: center;
+                background-size: cover;
+    
+                > .secret {
+                    width: 100%;
+                    height: 100%;
+                    background: rgb(167, 48, 167);
+                    animation: game infinite 10s linear;
+                }
+
+                > .a {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+
+                    width: 100%;
+                    height: 100%;
+                    background-color: black;               
+                }
+            }
+              
+            .swiper-slide img {
+                display: block;
+                width: 100%;
+            }
+        }
+    }
+
+    #beneficios {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        width: 100%;
+        height: auto;
+        padding: 20px 0px;
+        gap: 20px;
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: start;
+
+            width: 100%;
+            max-width: 380px;
+            height: 150px;
+            padding: 20px;
+            background-color: rgb(44, 44, 44);
+            border-radius: 10px;
+
+            > .title {
+                display: flex;
+                flex-direction: row;
+                justify-content: start;
+                align-items: center;
+
+                width: 100%;
+                height: 40px;
+
+                > img {
+                    height: 100%;
+                    margin-right: 10px;
+                }
+            }
+
+            > p {
+                margin-top: 10px;
+            }
+        }
+    }
+
+    #sobre {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        width: 1600px;
+        height: auto;
+        padding: 20px 0px;
+        gap: 20px;
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: start;
+
+            width: 100%;
+            height: 600px;
+            padding: 0px 60px;
+            background-color: rgb(44, 44, 44);
+            border-radius: 10px;
+            border: solid 1px rgb(167, 48, 167);
+            animation: bordatop infinite linear 5s;
+
+            p {
+                margin: 10px 0px 0px 0px ;
+            }
+        }
+
+        .card-2 {
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: start;
+
+            width: 100%;
+            height: 600px;
+            gap: 20px;
+
+            > .card {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: start;
+    
+                width: 100%;
+                height: 600px;
+                padding: 0px 60px;
+                background-color: rgb(44, 44, 44);
+            }
+
+            .white {
+                background-color: white;
+
+                > h1 {
+                    color: rgb(26, 26, 26);
+                }
+                > p {
+                    color: rgb(26, 26, 26);
+                }
+            }
+        }
+    }
+}
+
+@keyframes game {
+    20% {
+        background: rgb(139, 48, 167);
+    }
+    40% {
+        background: rgb(58, 173, 173);
+    }
+    60% {
+        background: rgb(35, 114, 160);
+    }
+    80% {
+        background: rgb(35, 160, 108);
+    }
+    100% {
+        background: rgb(167, 48, 167);
+    }
+}
+
+@keyframes bordatop {
+    20% {
+        border: solid 1px rgb(139, 48, 167);
+    }
+    40% {
+        border: solid 1px rgb(58, 173, 173);
+    }
+    60% {
+        border: solid 1px rgb(35, 114, 160);
+    }
+    80% {
+        border: solid 1px rgb(35, 160, 108);
+    }
+    100% {
+        border: solid 1px rgb(167, 48, 167);
+    }
+}
+
+@keyframes vinheta {
+    0% {
+        left: 0;
+    }
+    50% {
+        left: 0px;
+    }
+    100% {
+        left: -100vw;
+    }
+}
