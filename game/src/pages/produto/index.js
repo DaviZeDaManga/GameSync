@@ -20,7 +20,7 @@ export default function Produto() {
     const [mostdesc, setMostdesc] = useState (true)
     const [mostcoment, setMostcoment] = useState (false)
     const [mostcompl, setMostcompl] = useState (false)
-    const [idprod, setIdprod] = useState ("4345")
+    const [idprod, setIdprod] = useState ("42645")
 
     const [nome, setNome] = useState ('')
     const [desc, setDesc] = useState ('')

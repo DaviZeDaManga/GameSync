@@ -120,6 +120,9 @@ export default function BarraDeCima (props) {
                     <div className='acoes'>
                         {pagina >= 2 &&
                         <button onClick={AntPage}>Voltar página</button>}
+
+                        {pagina == 1 &&
+                        <button>Sair</button>}
                         <h1>Pagina {pagina}</h1>
                         <div>
                             {/* <input type='number' placeholder='Numero da Pagina' onChange={() => (setPagina)} value={pagina}/> */}

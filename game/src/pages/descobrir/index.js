@@ -20,6 +20,7 @@ export default function Descobrir () {
     };
 
     const [tgames, setTgames] = useState ([])
+    const [indie, setIndie] = useState ([])
 
     async function ProcurarGames () {
         let url = 'https://api.rawg.io/api/games?key=0a526d3c3985430c9469d8d6951eb5cb&page_size=3'
@@ -31,6 +32,21 @@ export default function Descobrir () {
     useEffect(()=> {
         ProcurarGames()
     }, [])
+
+    async function Indie() {
+        let url = 'https://api.rawg.io/api/genres?key=0a526d3c3985430c9469d8d6951eb5cb&page_size=5'
+        let resposta = await axios.get(url)
+
+        setIndie(resposta.data)
+    }
+
+
+
+
+
+
+
+
 
     return (
         <div className='Descobrir'>
