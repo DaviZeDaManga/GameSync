@@ -206,7 +206,7 @@
         height: 100vh;
         top: 0;
         z-index: 1;
-        background-color: #1F1F1F;
+        background-color: #242227;
         position: fixed;
         gap: 23px;
         padding: 120px 20px 20px 20px;
@@ -251,5 +251,19 @@
                 outline: none;
             }
         }
+    }
+
+    ::-webkit-scrollbar {
+        height: 5px;
+        width: 5px; 
+    }
+      
+    ::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+    
+    ::-webkit-scrollbar-thumb { 
+        background-color: transparent;
+        border-radius: 10px;
     }
 }

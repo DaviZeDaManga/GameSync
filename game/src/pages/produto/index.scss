@@ -13,15 +13,25 @@
             font-size: 15px;
             color: white;
             border-radius: 5px;
+            background-color: #3d308688;
             padding: 10px 20px;
         }
 
         > .tinf {
-            border: solid 1px rgb(61, 93, 161);
+            border: solid 3px rgb(61, 93, 161);
         }
 
         > .t2 {
-            border: solid 1px rgb(123, 61, 161);
+            border: solid 3px rgb(123, 61, 161);
+        }
+
+        > button {
+            height: 100%;
+            padding: 0px 20px;
+            background-color: #38363b;
+            border-radius: 10px;
+            color: white;
+            border: none;
         }
 
         .temas {
@@ -464,18 +474,18 @@
         .plataformas {
             display: flex;
             flex-direction: row;
-            justify-content: start;
+            justify-content: center;
             align-items: center;
     
             width: 100%;
             height: 40px;
             border-radius: 10px;
-            background-color: rgb(46, 46, 46);
+            background-color: rgb(55, 50, 59);
 
             .plataforma {
                 display: flex;
                 flex-direction: row;
-                justify-content: space-between;
+                justify-content: start;
                 align-items: center;
 
                 height: 100%;
@@ -504,6 +514,7 @@
 
         width: 100%;
         height: auto;
+        overflow-x: hidden;
         padding: 20px;
     }
 

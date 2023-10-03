@@ -5,8 +5,6 @@ import BarraLateral from '../../components/barraLateral'
 import BarraDeCima from '../../components/baraDeCima'
 import FooterPage from '../../components/footerpage/index,'
 
-
-
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 import 'swiper/css';
@@ -21,17 +19,20 @@ export default function Produto() {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const [mostdesc, setMostdesc] = useState (true)
     const [mostcoment, setMostcoment] = useState (false)
-    const [infoprod, setInfoprod] = useState ([])
     const [idprod, setIdprod] = useState ("Broforce")
 
     const [nome, setNome] = useState ('')
     const [desc, setDesc] = useState ('')
     const [lancamento, setLancamento] = useState ('')
-    const [imagem, setImagem] = useState ('')
-    const [imagens, setImagens] = useState ([])
     const [plataformas, setPlataformas] = useState ([])
     const [developers, setDevelopers] = useState ([])
     const [publicador, setPublicador] = useState ([])
+
+    const [imagem, setImagem] = useState ('')
+    const [imagens, setImagens] = useState ([])
+    const [videos, setVideos] = useState ([])
+
+    const [conquistas, setConquistas] = useState ([])
 
 
     function MostrarDescricao () {
@@ -68,19 +69,39 @@ export default function Produto() {
         ProdutoInfo()
     }, [])
 
-    async function Capturas() {
-        let url = 'https://api.rawg.io/api/games/screenshots/'+ idprod +'?key=0a526d3c3985430c9469d8d6951eb5cb&'
-        let respostaCapturas = await axios.get(url)
+    async function Conquistas() {
+        let url = 'https://api.rawg.io/api/games/'+ idprod +'/achievements?key=0a526d3c3985430c9469d8d6951eb5cb&&page_size=5'
+        let resposta = await axios.get(url)
 
 
-        setImagens(respostaCapturas.data.results.image)
+        setConquistas(resposta.data.results)
     }
 
-    // useEffect (() => {
-    //     Capturas()
-    // }, [])
+    useEffect (() => {
+        Conquistas()
+    }, [])
 
+    async function Capturas() {
+        let url = 'https://api.rawg.io/api/games/'+  idprod +'/screenshots?key=0a526d3c3985430c9469d8d6951eb5cb&&page_size=5'
+        let resposta = await axios.get(url)
 
+        setImagens(resposta.data.results)
+    }
+
+    useEffect(() => {
+        Capturas()
+    }, [])
+
+    async function Videos() {
+        let url = 'https://api.rawg.io/api/games/'+ idprod +'/movies?key=0a526d3c3985430c9469d8d6951eb5cb&&page_size=1'
+        let resposta = await axios.get(url)
+
+        setVideos(resposta.data.results)
+    }
+
+    useEffect(() => {
+        Videos()
+    }, [])
 
 
 
@@ -110,12 +131,7 @@ export default function Produto() {
 
                             </div>
                         </div>
-                    </section>
-                    {/* <div id="classificacao">
-                        <div className="classificado">
-                            <img src='' />
-                        </div>
-                    </div> */}
+                    </section>    
                 </section>    
                 
 
@@ -137,12 +153,22 @@ export default function Produto() {
                         <img src={imagem} />
                         </SwiperSlide>
                         
-                        {imagens.map( item =>
+                        {videos.map( item => 
+                            
+                            <SwiperSlide>
+                                <video src={item.play} />
+                            </SwiperSlide>  
+
+                        )} 
+                        
+                        {imagens.map( item => 
+                            
                             <SwiperSlide>
                                 <img src={item.image} />
-                            </SwiperSlide>    
-                        )}
+                            </SwiperSlide>  
 
+                        )}  
+                        
                     </Swiper>
     
                 </main>
@@ -194,6 +220,7 @@ export default function Produto() {
                     </div>
                     <p>{desc}</p>
                 </div>
+
                 <div className="status">
                     <h1>Estatisticas</h1>
                     <div className="cards">
@@ -225,6 +252,7 @@ export default function Produto() {
                     </div>
                     <div></div>
                 </div>
+
             </section>
 
             <section id='plataformas'>
@@ -240,115 +268,37 @@ export default function Produto() {
             </section>
             
             <section id='titles'>
-                <h1 className='tinf'>Os mais jogados</h1>
-                <div className='temas'>
-                    <p>Games</p>
-                    <p>Novos</p>
-                    <p>Bombando</p>
-                </div>
+                <h1 className='tinf'>Conquistas</h1>
+                <button>Ver mais conquistas</button>
             </section>
 
 
             <div id="produtos">  
+
+                {conquistas.map( item => 
+                
                 <section className='produto'>
                     <div className='imagem-produto'>
                         <div className='sombra'>
                             <div className='linha'></div>
                         </div>
                         <div className='produtoIMG'>
-                            <img src="/assets/images/teste/jogo.jpg" />
+                            <img src={item.image} alt='Conquista'/>
                         </div>
                     </div>
                     <div className='informacoes'>
                         <div className='dados'>
-                            <a href="http://localhost:3000/produto">The Texas Chain Saw Massacre</a>
-                            <p>Sumo Nottingham</p>
+                            <a href="">{item.name}</a>
+                            <p>{item.description}</p>
                         </div>
                         <div className='info'>
-                            <h3>Novidade</h3>
+                            <h3>{item.percent}</h3>
                         </div>
                     </div>
                 </section>
 
-                <section className='produto'>
-                    <div className='imagem-produto'>
-                        <div className='sombra'>
-                            <div className='linha'></div>
-                        </div>
-                        <div className='produtoIMG'>
-                            <img src="/assets/images/teste/uau.jpg" />
-                        </div>
-                    </div>
-                    <div className='informacoes'>
-                        <div className='dados'>
-                            <a href="http://localhost:3000/produto">The Texas Chain Saw Massacre</a>
-                            <p>Sumo Nottingham</p>
-                        </div>
-                        <div className='info'>
-                            <h3>Novidade</h3>
-                        </div>
-                    </div>
-                </section>
+                )}
 
-                <section className='produto'>
-                    <div className='imagem-produto'>
-                        <div className='sombra'>
-                            <div className='linha'></div>
-                        </div>
-                        <div className='produtoIMG'>
-                            <img src="/assets/images/teste/futzada.webp" />
-                        </div>
-                    </div>
-                    <div className='informacoes'>
-                        <div className='dados'>
-                            <a href="http://localhost:3000/produto">The Texas Chain Saw Massacre</a>
-                            <p>Sumo Nottingham</p>
-                        </div>
-                        <div className='info'>
-                            <h3>Novidade</h3>
-                        </div>
-                    </div>
-                </section>
-
-                <section className='produto'>
-                    <div className='imagem-produto'>
-                        <div className='sombra'>
-                            <div className='linha'></div>
-                        </div>
-                        <div className='produtoIMG'>
-                            <img src="/assets/images/teste/starfield.jpg" />
-                        </div>
-                    </div>
-                    <div className='informacoes'>
-                        <div className='dados'>
-                            <a href="http://localhost:3000/produto">The Texas Chain Saw Massacre</a>
-                            <p>Sumo Nottingham</p>
-                        </div>
-                        <div className='info'>
-                            <h3>Novidade</h3>
-                        </div>
-                    </div>
-                </section>
-
-                <section className='produto'>
-                    <div className='imagem-produto'>
-                        <div className='sombra'>
-                            <div className='linha'></div>
-                        </div>
-                        <div className='produtoIMG'>
-                            <img src="/assets/images/teste/dead-by-daylight.jpg" />
-                        </div>
-                    </div>
-                    <div className='informacoes'>
-                        <div className='dados'>
-                            <a href="http://localhost:3000/produto">The Texas Chain Saw Massacre</a>
-                            <p>Sumo Nottingham</p>
-                        </div>
-                        <div className='info'>
-                            <h3>Novidade</h3>
-                        </div>
-                    </div>
-                </section>
             </div>
             </>}
 
