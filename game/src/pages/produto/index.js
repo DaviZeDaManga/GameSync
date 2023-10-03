@@ -19,7 +19,8 @@ export default function Produto() {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const [mostdesc, setMostdesc] = useState (true)
     const [mostcoment, setMostcoment] = useState (false)
-    const [idprod, setIdprod] = useState ("Broforce")
+    const [mostcompl, setMostcompl] = useState (false)
+    const [idprod, setIdprod] = useState ("4345")
 
     const [nome, setNome] = useState ('')
     const [desc, setDesc] = useState ('')
@@ -33,16 +34,25 @@ export default function Produto() {
     const [videos, setVideos] = useState ([])
 
     const [conquistas, setConquistas] = useState ([])
+    const [complementos, setComplementos] = useState ([])
 
 
     function MostrarDescricao () {
         setMostdesc(true)
         setMostcoment(false)
+        setMostcompl(false)
     }
 
     function MostrarComentarios () {
         setMostdesc(false)
         setMostcoment(true)
+        setMostcompl(false)
+    }
+
+    function MostrarComplementos() {
+        setMostdesc(false)
+        setMostcoment(false)
+        setMostcompl(true)
     }
 
     
@@ -101,6 +111,17 @@ export default function Produto() {
 
     useEffect(() => {
         Videos()
+    }, [])
+
+    async function Complementos() {
+        let url = 'https://api.rawg.io/api/games/'+ idprod +'/additions?key=0a526d3c3985430c9469d8d6951eb5cb&&page_size=50'
+        let resposta = await axios.get(url)
+
+        setComplementos(resposta.data.results)
+    }
+
+    useEffect(()=> {
+        Complementos()
     }, [])
 
 
@@ -183,6 +204,10 @@ export default function Produto() {
                     <button id="b" onClick={MostrarComentarios}>
                         Comentarios
                     </button>
+                    {complementos != '' &&
+                    <button id="b" onClick={MostrarComplementos}>
+                        Complementos
+                    </button>}
                 </div>
             </nav>
 
@@ -267,10 +292,11 @@ export default function Produto() {
                 </section>
             </section>
             
+            {conquistas != '' &&
             <section id='titles'>
                 <h1 className='tinf'>Conquistas</h1>
-                <button>Ver mais conquistas</button>
-            </section>
+                <a href='http://localhost:3000/conquistas'><button>Ver mais conquistas</button></a>
+            </section>}
 
 
             <div id="produtos">  
@@ -422,6 +448,42 @@ Os visuais de "Aurora Eterna" são simplesmente deslumbrantes. Cada cenário é 
                     
                 </div>
             </section>}
+
+            {mostcompl == true &&
+            <section id='complementos'>
+                    <div className='title'>
+                        <h1>Complementos</h1>
+                    </div>
+                    <div id="produtos">  
+
+                        {complementos.map( item => 
+                        
+                        <section className='produto'>
+                            <div className='imagem-produto'>
+                                <div className='sombra'>
+                                    <div className='linha'></div>
+                                </div>
+                                <div className='produtoIMG'>
+                                    <img src={item.background_image} alt='Conquista'/>
+                                </div>
+                            </div>
+                            <div className='informacoes'>
+                                <div className='dados'>
+                                    <a href="">{item.name}</a>
+                                    <p>{item.description}</p>
+                                </div>
+                                <div className='info'>
+                                    <h3>{item.released}</h3>
+                                </div>
+                            </div>
+                        </section>
+
+                        )}
+
+                    </div>
+            </section>}
+
+
             <FooterPage/>
         </div>
     )

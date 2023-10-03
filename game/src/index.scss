@@ -86,6 +86,7 @@ body {
 
           img {
               height: 100%;
+              min-height: 290px;
           }
       }
   }
@@ -104,6 +105,10 @@ body {
   p {
       font-size: 15px;   
       color: #969696;
+      max-width: 30ch;
+      text-wrap: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
   }
 
   a {

@@ -209,46 +209,61 @@
         background-color: #242227;
         position: fixed;
         gap: 23px;
-        padding: 120px 20px 20px 20px;
+        padding: 120px 20px 70px 20px;
 
         overflow-x: auto;
 
-        .acoes {
+        #acoes {
             display: flex;
             flex-direction: row;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
 
             width: 100%;
-            padding: 10px 0px;
-            background-color: #1F1F1F;
+            padding: 10px 0px 10px 100px;
+            background-color: #121213d0;
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            z-index: 2;
 
-            button {
-                min-width: 250px;
-                height: 40px;
-                background-color: #161616;
-                color: white;
-                border-radius: 10px;
-                border: none;
-                cursor: pointer;
-            }
-
-            button:hover {
-                border: solid 1px white;
-            }
-
-            input {
-                width: 100px;
-                height: 40px;
-                border: solid 1px #161616;
-                border-radius: 10px;
-                background-color: #161616;
-                color: white;
-                margin-right: 10px;
-            }
-
-            input:focus {
-                outline: none;
+            .acoes {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+    
+                width: 1600px;
+                height: 100%;
+                padding: 0px 20px;
+    
+                button {
+                    min-width: 250px;
+                    height: 40px;
+                    background-color: #323232;
+                    color: white;
+                    border-radius: 10px;
+                    border: none;
+                    cursor: pointer;
+                }
+    
+                button:hover {
+                    border: solid 1px white;
+                }
+    
+                input {
+                    width: 100px;
+                    height: 40px;
+                    border: solid 1px #161616;
+                    border-radius: 10px;
+                    background-color: #161616;
+                    color: white;
+                    margin-right: 10px;
+                }
+    
+                input:focus {
+                    outline: none;
+                }
             }
         }
     }

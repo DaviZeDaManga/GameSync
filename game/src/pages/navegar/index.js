@@ -16,14 +16,18 @@ import 'swiper/css/pagination';
 import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/modules';
 
 export default function Navegar() {
-    const [tjogos, setTjogos] = useState ([])
+    const [tgames, setTgames] = useState ([])
 
-    async function TodosJogos() {
-        let url = 'https://api.rawg.io/api/games?key=0a526d3c3985430c9469d8d6951eb5cb'  
+    async function ProcurarGames () {
+        let url = 'https://api.rawg.io/api/games?key=0a526d3c3985430c9469d8d6951eb5cb&page_size=300'
+        let resposta = await axios.get(url)
 
-        Response = await axios.get(url)
-        setTjogos(Response.results)
+        setTgames(resposta.data.results)
     }
+
+    useEffect(()=> {
+        ProcurarGames()
+    }, [])
 
     
     
@@ -122,25 +126,29 @@ export default function Navegar() {
 
             <div id="produtos"> 
 
+                {tgames.map( item =>
+                    
                 <section className='produto'>
                     <div className='imagem-produto'>
                         <div className='sombra'>
                             <div className='linha'></div>
                         </div>
                         <div className='produtoIMG'>
-                            <img src="https://cdn.akamai.steamstatic.com/steam/apps/1433140/header.jpg?t=1692365618" />
+                            <img src={item.background_image} />
                         </div>
                     </div>
                     <div className='informacoes'>
                         <div className='dados'>
-                            <a href="http://localhost:3000/produto">The Texas Chain Saw Massacre</a>
+                            <a href="http://localhost:3000/produto">{item.name}</a>
                             <p>Sumo Nottingham</p>
                         </div>
                         <div className='info'>
                             <h3>Novidade</h3>
                         </div>
                     </div>
-                </section>
+                </section>    
+                    
+                )}
 
             </div>
 

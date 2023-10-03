@@ -116,13 +116,15 @@ export default function BarraDeCima (props) {
                     </section>    
                 )}
                
-                <nav className='acoes'>
-                    {pagina >= 2 &&
-                    <button onClick={AntPage}>Voltar página</button>}
-                    <div></div>
-                    <div>
-                        {/* <input type='number' placeholder='Numero da Pagina' onChange={() => (setPagina)} value={pagina}/> */}
-                        <button onClick={ProxPage}>Próxima página</button>
+                <nav id='acoes'>
+                    <div className='acoes'>
+                        {pagina >= 2 &&
+                        <button onClick={AntPage}>Voltar página</button>}
+                        <h1>Pagina {pagina}</h1>
+                        <div>
+                            {/* <input type='number' placeholder='Numero da Pagina' onChange={() => (setPagina)} value={pagina}/> */}
+                            <button onClick={ProxPage}>Próxima página</button>
+                        </div>
                     </div>
                 </nav>
 

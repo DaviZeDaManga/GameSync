@@ -8,19 +8,64 @@
         flex-direction: column;
         align-items: start;
         padding: 20px 0px;
+        position: relative;
 
-        .image-main{
+        .fundoinicial {
             display: flex;
-            align-items: start;
-            background-image:linear-gradient(rgba(0, 0, 0, 0.795) , rgba(0, 0, 0, 0.61) 95%);
-            background-size: cover;
-        
             flex-direction: column;
-        
+            align-items: center;
+            justify-content: space-between;
+
+            background: rgb(24, 24, 26);
+            background-size: cover;   
             height: 50rem;
             width: 100%;
             padding: 20px;
             border-radius: 20px;
+
+            .Procure {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                width: 200px;
+                height: 200px;
+                
+                > p {
+                    margin-top: 10px;
+                    color: #2d2d33;
+                    font-weight: 700;
+                }
+            }
+        }
+
+        .image-main{
+            display: flex;
+            align-items: start;
+            background-size: cover;
+            flex-direction: column;
+        
+            height: 50rem;
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+
+            > img {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                z-index: 1;
+            }
+
+            .fundo {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                z-index: 2;
+                background-image:linear-gradient(rgba(0, 0, 0, 0.267) , rgba(0, 0, 0, 0.767) 95%);
+            }
         }
         
         .search-bar{
@@ -28,11 +73,14 @@
             flex-direction: row;
             align-items: end;    
             width: 100%;
+            position: relative;
+            z-index: 3;
+            padding: 10px 20px;
         }
         
         .search-button {
             color: #ffffff;
-            background-color: #333333;
+            background-color: #2d2d33;
 
             outline: none;
             border: none;
@@ -62,7 +110,7 @@
                 padding: 20px;
                 margin-right: 20px;
 
-                background-color: #333333;
+                background-color: #2d2d33;
                 color: #ffffff;      
         }
         
@@ -89,19 +137,29 @@
         .text-conquistas{
             display: flex;
             flex-direction: column;
-            justify-content: end;
+            justify-content: center;
+            background-color: rgba(44, 42, 49, 0.699);
             
-            padding: 10px;
-            height: 100%;
-            width: 665px;
+            padding:20px;
+            height: auto;
+            width: auto;
+
+            border-top-right-radius: 10px;
+            bottom: 0;
+            position: absolute;
+            z-index: 3;
         }
         .text-conquistas h2 {
             font-size: 26px;
             margin-bottom: 5px;
+            max-width: 50ch;
         }
 
         .text-conquistas p {
             font-size: 16px;
+            max-width: 80ch;
+            max-height: 10ch;
+            color: #cccccc;
         }
     }
     .achivements {
@@ -202,7 +260,160 @@
                     width: 1100px;
                     gap: 33px;
 
+                    .conquista {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        align-items: center;
+                      
+                        width: 250px;
+                        height: 260px;
+                        background-color: #28262e;
+                        border-radius: 10px;
+                        transition: 0.3s;
+                        overflow: hidden;
+                      
+                        position: relative;
+                      
+                        .imagem-conquista {
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: center;
+                            align-items: center;
+                      
+                            width: 100%;
+                            height: 100%;
+                            background-color: #2e2e2e;
+                            border-top-right-radius: 10px;
+                            border-top-left-radius: 10px;
+                            
+                            z-index: 1;
+                            position: absolute;
+                      
+                            .sombra {
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: end;
+                                align-items: start;
+                      
+                                position: absolute;
+                                z-index: 1;
+                                width: 100%;
+                                height: 100%;
+                                border-top-right-radius: 10px;
+                                border-top-left-radius: 10px;
+                                background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(19, 19, 19, 0.658) 100%);
+                      
+                                .linha {
+                                    width: 100%;
+                                    height: 3px;
+                                    background-color: #131313;
+                                }
+                            }
+                      
+                            .produtoIMG {
+                                display: flex;
+                                flex-direction: row;
+                                justify-content: center;
+                                align-items: center;
+                      
+                                width: 100%;
+                                height: 100%;
+                                overflow: hidden;
+                                position: absolute;
+                      
+                                img {
+                                    height: 100%;
+                                    min-width: 250px;
+                                }
+                            }
+                        }
+                      
+                        h1 {
+                            font-size: 15px;   
+                            color: #c5c5c5;
+                        }
+                      
+                        h3 {
+                            font-size: 15px;   
+                            color: #cfcfcf;
+                            font-weight: 400;
+                        }
+                      
+                        p {
+                            font-size: 15px;   
+                            color: #969696;
+                            max-width: 30ch;
+                            text-wrap: nowrap;
+                            text-overflow: ellipsis;
+                            overflow: hidden;
+                        }
+                      
+                        a {
+                            text-decoration: none;
+                            font-size: 15px;   
+                            color: #c5c5c5;
+                            overflow-x: hidden;
+                            max-width: 30ch;
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
+                        }
+                      
+                        .informacoes {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: space-between;
+                      
+                            width: 100%;
+                            height: 100px;
+                            background-color: #28262ed8;
+                            bottom: -40px;
+                            transition: 0.3s;
+                      
+                            z-index: 1;
+                            position: absolute;
+                      
+                            .dados {
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: start;
+                                align-items: start;
+                        
+                                width: 100%;
+                                height: auto;
+                                padding: 10px 10px 10px 10px;
+                            }
+                        
+                            .info {
+                                display: flex;
+                                flex-direction: row;
+                                justify-content: start;
+                                align-items: center;
+                        
+                                width: 100%;
+                                padding: 0px 10px 10px 10px;
+                            }
+                        }
+                      }
+                      
+                      .conquista:hover {
+                        background-color: #3b3b3b;
+                        border: solid 1px white;
+                      }
+                      
+                      .conquista:hover > .informacoes {
+                        bottom: 0;
+                      }
+
                     .awards{ 
+                        background-color: #333333;
+                        border-radius: 10px;
+
+                        p {
+                            font-size: 15px;
+                            color: #d3d3d3;
+                        }
 
                         .awards-s1{
                             display: flex;
@@ -214,14 +425,24 @@
                             background-image:linear-gradient(rgba(86,42,42,0.7), rgba(69,38,38));
                             height: 230px;
                             width: 250px;
+                            overflow: hidden;
                         }
+
+                        .conq > img {
+                            height: 100%;
+                            width: 100%;
+                            opacity: 0.8;
+                        }
+
                         .awards-s2{
-                            background-color: #333333;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: start;
+                            align-items: start;
+
+                            padding: 5px 10px;
                             height: 70px;
                             width: 250px;
-                            position: relative;
-                            top: -10px;
-                            border-radius: 0px 0px 10px 10px;
                         }
                     }
                 }
@@ -229,15 +450,17 @@
         }
         
     }
-
-    
-
-
-
-
-
-
-
 }
 
 
+@keyframes conq {
+    20% {
+        background: rgb(29, 29, 29);
+    }
+    60% {
+        background: rgb(31, 31, 31);
+    }
+    100% {
+        background: rgb(37, 37, 37);
+    }
+}
