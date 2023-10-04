@@ -1,0 +1,83 @@
+#mae{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+
+    .all{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        
+        width: 18vw;
+        height: 100%;
+        padding: 30px;
+        background-color: #000;
+        border-radius: 5px;
+
+        z-index: 5;
+        position: fixed;
+        top: 0;
+        left: 0;
+        clip-path: polygon(0 5%, 100% 10%, 100% 100%, 0% 100%);
+        /*clip-path: polygon(0 6%, 100% 0, 100% calc(100% - 6%), 0% 100%);
+        /*clip-path: polygon(0 6%, 100% 0, 100% 100%, 0% 90%);*/
+
+        .title{
+            display: flex;
+            justify-content: center;
+            height: 9rem;
+
+            width: 21.3rem;
+            .title-conteudo{
+                display: flex;
+                justify-content: row;
+                align-items: center;
+                justify-content: center;
+
+                width: 12rem;
+                justify-content: space-evenly;
+            }
+            .title-conteudo > img{
+                width: 26%;
+            }
+        }
+        .opcoes{
+            display: flex;
+            flex-direction: column;
+            width: 20rem;
+            height: 50vh;
+            justify-content: space-evenly;
+   
+            margin: 30px;
+            .opcoes-z{
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                justify-content: space-around;
+                cursor:pointer;
+            }
+        }
+        .sair {
+            display: flex;
+            width: 20rem;
+            justify-content: space-around;
+
+          
+            .sair-msm {
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between; 
+              align-items: center;
+              cursor: pointer;
+            }
+            h1 {
+                margin-right: 20px; /* Ajuste conforme necessário */
+              }
+          }
+    }
+}
