@@ -1,6 +1,6 @@
 import './index.scss'
 import { useState, useRef, useEffect } from 'react'
-import { LoginAdm } from '../../../services/adminAPI'
+import { LoginAdm } from '../../../connection/adminAPI'
 import storage from 'local-storage';
 import { useNavigate } from 'react-router-dom';
 import LoadingBar from 'react-top-loading-bar'
