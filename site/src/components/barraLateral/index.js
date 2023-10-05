@@ -57,7 +57,7 @@ export default function BarraLateral(props) {
                         <a href="http://localhost:3000/">Descobrir</a>
                         <a href="http://localhost:3000/procurar">Procurar</a>
                         <a href="http://localhost:3000/planos">Planos</a>
-                        <a href="">Nuvem</a>
+                        <a href="">Noticias</a>
                         <a href="http://localhost:3000/conquistas">Sessao Conquista</a>
                         <a href="http://localhost:3000/sobregamesync">Sobre Nós</a>
 

@@ -20,7 +20,9 @@ export default function Produto() {
     const [mostdesc, setMostdesc] = useState (true)
     const [mostcoment, setMostcoment] = useState (false)
     const [mostcompl, setMostcompl] = useState (false)
-    const [idprod, setIdprod] = useState ("42645")
+    const [idprod, setIdprod] = useState ("654")
+
+    const [fodasi, setFodasi] = useState([4143, 264642, 742])
 
     const [nome, setNome] = useState ('')
     const [desc, setDesc] = useState ('')
@@ -35,6 +37,11 @@ export default function Produto() {
 
     const [conquistas, setConquistas] = useState ([])
     const [complementos, setComplementos] = useState ([])
+
+    const [comentarios, setComentarios] = useState ([])
+    const [comentando, setComentando] = useState (0)
+    const [estrelas, setEstrelas] = useState (0)
+    const [comentario, setComentario] = useState ('')
 
 
     function MostrarDescricao () {
@@ -103,7 +110,7 @@ export default function Produto() {
     }, [])
 
     async function Videos() {
-        let url = 'https://api.rawg.io/api/games/'+ idprod +'/movies?key=0a526d3c3985430c9469d8d6951eb5cb&&page_size=1'
+        let url = 'https://api.rawg.io/api/games/'+ idprod +'/movies?key=0a526d3c3985430c9469d8d6951eb5cb&'
         let resposta = await axios.get(url)
 
         setVideos(resposta.data.results)
@@ -123,6 +130,26 @@ export default function Produto() {
     useEffect(()=> {
         Complementos()
     }, [])
+
+
+
+    function Comentando() {
+        setComentando(comentando + 1)
+    }
+    function VolComentar() {
+        setComentando(comentando - 1)
+    }
+
+    function Comentar() {
+        const c = {
+            user: "Luis pinto",
+            desc: comentario,
+            estrelas: estrelas
+        }
+
+        setComentando(0)
+        setComentarios([...comentarios, c])
+    }
 
 
 
@@ -173,14 +200,15 @@ export default function Produto() {
                         <SwiperSlide>
                         <img src={imagem} />
                         </SwiperSlide>
-                        
+                                      
                         {videos.map( item => 
                             
                             <SwiperSlide>
-                                <video src={item.play} />
-                            </SwiperSlide>  
-
-                        )} 
+                                <video controls="true">  <source src={item.data.max} type="video/mp4" /></video>
+                            </SwiperSlide>    
+                            
+                        )}    
+                            
                         
                         {imagens.map( item => 
                             
@@ -376,77 +404,78 @@ export default function Produto() {
 
                         </div>
                     </div>
-                    <button>Adicionar comentario</button>
+                    <button onClick={Comentando}>Fazer comentario</button>
                 </div>
                 <div className="comentarios">
 
-                    <div className="comentario">
-                        <div className='conteudo'>
-                            <section className='c-user'>
-                                <div className='c-user-image'>
+                    
 
-                                </div>
-                                <h1>Davizin do Corre</h1>
+                    {comentarios.map( item => 
+                        
+                        <div className="comentario">
+                            <div className='conteudo'>
+                                <section className='c-user'>
+                                    <div className='c-user-image'>
+
+                                    </div>
+                                    <h1>{item.user}</h1>
+                                </section>
+                                <main id='comentario'>
+                                    <p>{item.desc}</p>
+                                </main>
+                            </div>
+                            <section className='estrelas'>
+                                <h1>Avaliado em <span>{item.estrelas} estrelas</span></h1>
                             </section>
-                            <main id='comentario'>
-                                <p>Sem dúvida, "Aurora Eterna" é uma obra-prima que mergulha os jogadores em um mundo de fantasia deslumbrante e imersivo. Desde o momento em que você inicia o jogo, é cativado por sua narrativa rica e envolvente, que tece uma teia de mistério e descoberta a cada passo.
-Os visuais de "Aurora Eterna" são simplesmente deslumbrantes. Cada cenário é meticulosamente projetado, repleto de detalhes que enriquecem a experiência. Desde as paisagens pitorescas até os interiores intricados, é evidente o cuidado colocado em cada pixel. A iluminação dinâmica e os efeitos visuais de tirar o fôlego transportam os jogadores para um mundo que parece ganhar vida.</p>
-                            </main>
                         </div>
-                        <section className='estrelas'>
-                            <img src="/assets/images/avaliacao/estrela.png" />
-                            <img src="/assets/images/avaliacao/estrela.png" />
-                            <img src="/assets/images/avaliacao/estrela.png" />
-                            <img src="/assets/images/avaliacao/estrela.png" />
-                            <img src="/assets/images/avaliacao/estrela.png" />
-                        </section>
-                    </div>
+                        
+                    )}
 
-                    <div className="comentario">
-                        <div className='conteudo'>
-                            <section className='c-user'>
-                                <div className='c-user-image'>
 
-                                </div>
-                                <h1>Luis misera</h1>
-                            </section>
-                            <main id='comentario'>
-                                <p>Sem dúvida, "Aurora Eterna" é uma obra-prima que mergulha os jogadores em um mundo de fantasia deslumbrante e imersivo. Desde o momento em que você inicia o jogo, é cativado por sua narrativa rica e envolvente, que tece uma teia de mistério e descoberta a cada passo.   
-                                </p>
-                            </main>
-                        </div>
-                        <section className='estrelas'>
-                            <img src="/assets/images/avaliacao/estrela.png" />
-                            <img src="/assets/images/avaliacao/estrela.png" />
-                            <img src="/assets/images/avaliacao/estrela.png" />
-                        </section>
-                    </div>
+                    {comentarios == '' &&
+                    <section className='NoComentarios'>
+                        <h1>Esse produto ainda nao tem nunhum comentario, no que tal ser o primeiro a comentar?</h1>
+                    </section>}
 
-                    <div className="comentario">
-                        <div className='conteudo'>
-                            <section className='c-user'>
-                                <div className='c-user-image'>
-
-                                </div>
-                                <h1>Davizin do Corre</h1>
-                            </section>
-                            <main id='comentario'>
-                                <p>Sem dúvida, "Aurora Eterna" é uma obra-prima que mergulha os jogadores em um mundo de fantasia deslumbrante e imersivo. Desde o momento em que você inicia o jogo, é cativado por sua narrativa rica e envolvente, que tece uma teia de mistério e descoberta a cada passo.
-                                Os visuais de "Aurora Eterna" são simplesmente deslumbrantes. Cada cenário é meticulosamente projetado, repleto de detalhes que enriquecem a experiência. Desde as paisagens pitorescas até os interiores intricados, é evidente o cuidado colocado em cada pixel. A iluminação dinâmica e os efeitos visuais de tirar o fôlego transportam os jogadores para um mundo que parece ganhar vida
-                                Os visuais de "Aurora Eterna" são simplesmente deslumbrantes. Cada cenário é meticulosamente projetado, repleto de detalhes que enriquecem a experiência. Desde as paisagens pitorescas até os interiores intricados, é evidente o cuidado colocado em cada pixel. A iluminação dinâmica e os efeitos visuais de tirar o fôlego transportam os jogadores para um mundo que parece ganhar vida
-                                </p>
-                            </main>
-                        </div>
-                        <section className='estrelas'>
-                            <img src="/assets/images/avaliacao/estrela.png" />
-                            <img src="/assets/images/avaliacao/estrela.png" />
-                            <img src="/assets/images/avaliacao/estrela.png" />
-                            <img src="/assets/images/avaliacao/estrela.png" />
-                            <img src="/assets/images/avaliacao/estrela.png" />
-                        </section>
-                    </div>  
+                      
                     
                 </div>
+
+
+                
+                {comentando >= 1 && 
+                <section id='FazerComentario'>
+
+                    {comentando == 1 &&
+                    <div className='Comentar'>
+                        <div className='title'>
+                            <button onClick={VolComentar}> c </button>
+                            <h1>Adicionar Comentario</h1>
+                        </div>
+                        <input type='text' onChange={e => setComentario (e.target.value)} value={comentario}/>
+                        <button onClick={Comentando} >Escolher estrelas</button>
+                    </div>}
+
+                    {comentando == 2 &&
+                    <div id='estrelas'>
+                        <div className='title'>
+                            <button onClick={VolComentar}> c </button>
+                            <h1>Escolha o numero de estrelas</h1>
+                            {estrelas >= 1 &&
+                            <h1 className='starstitle'>{estrelas} estrelas </h1>}
+                        </div>
+                        <div className='estrelas'>
+                            <button onClick={() => (setEstrelas(1))}><img src="/assets/images/avaliacao/estrela.png" /></button>
+                            <button onClick={() => (setEstrelas(2))}><img src="/assets/images/avaliacao/estrela.png" /></button>
+                            <button onClick={() => (setEstrelas(3))}><img src="/assets/images/avaliacao/estrela.png" /></button>
+                            <button onClick={() => (setEstrelas(4))}><img src="/assets/images/avaliacao/estrela.png" /></button>
+                            <button onClick={() => (setEstrelas(5))}><img src="/assets/images/avaliacao/estrela.png" /></button>
+                        </div>
+                        <button onClick={Comentar}>Comentar</button>
+                    </div>}
+                    
+                </section>}
+
             </section>}
 
             {mostcompl == true &&

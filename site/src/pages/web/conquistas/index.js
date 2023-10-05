@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react'
 export default function Conquistas(){
     const [mconquistas, setMconquistas] = useState (true)
 
-    const [idprod, setIdprod] = useState ('4345')
+    const [idprod, setIdprod] = useState ('654')
 
     const [nome, setNome] = useState ('')
     const [desc, setDesc] = useState ('')
