@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react'
 export default function Conquistas(){
     const [mconquistas, setMconquistas] = useState (true)
 
-    const [idprod, setIdprod] = useState ('654')
+    const [idprod, setIdprod] = useState ('524')
 
     const [nome, setNome] = useState ('')
     const [desc, setDesc] = useState ('')
@@ -52,7 +52,7 @@ return(
                     <button className='search-button'>
                         <a href="http://localhost:3000/procurar">Voltar</a>
                     </button>
-                    <input className='search-image-frame' type='text' placeholder='Pesquise por Jogos para Ver as Conquistas'>
+                    <input className='search-image-frame' type='text' placeholder='Pesquise por Jogos para Ver as Conquistas' onChange={e => setIdprod (e.target.value)} value={idprod}>
                     </input>
 
                     <div className='user-search-frame'>

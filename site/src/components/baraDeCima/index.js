@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import './index.scss'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
     
 export default function BarraDeCima (props) {
     const [games, setGames] = useState (false)
@@ -106,7 +107,7 @@ export default function BarraDeCima (props) {
                         </div>
                         <div className='informacoes'>
                             <div className='dados'>
-                                <a href="http://localhost:3000/produto">{item.name}</a>
+                                <Link to="/produto/3">{item.name}</Link>
                                 <p>Sumo Nottingham</p>
                             </div>
                             <div className='info'>

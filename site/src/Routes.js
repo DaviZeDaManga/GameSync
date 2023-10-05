@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import Descobrir from './pages/web/descobrir'
 import Produto from './pages/web/produto'
@@ -19,7 +19,7 @@ export default function Routess(){
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Descobrir/>} />
-                <Route path="/produto" element={<Produto/>} />
+                <Route path="/produto:id" element={<Produto/>} />
                 <Route path='/planos' element={<Planos/>} />
                 <Route path='/conquistas' element={<Conquistas/>} />
                 <Route path='/perfil' element={<MudarPerfil/>} />
