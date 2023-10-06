@@ -7,6 +7,7 @@ export default function BarraDeCima (props) {
     const [games, setGames] = useState (false)
     const [tgames, setTgames] = useState ([])
     const [pagina, setPagina] = useState (1)
+    const [idprod, setIdprod] = useState ('')
 
     async function ProcurarGames () {
         let url = 'https://api.rawg.io/api/games?key=0a526d3c3985430c9469d8d6951eb5cb&page=' + pagina
@@ -53,6 +54,13 @@ export default function BarraDeCima (props) {
         ProcurarGames()
     }, [games, pagina])
 
+
+
+
+
+
+
+
     return(
         <div id="BarraDeCima">
             <section className='BarraDeCima'>
@@ -61,7 +69,7 @@ export default function BarraDeCima (props) {
                         {games == true &&
                         <button onClick={()=> (setGames(false))}>Voltar</button>}
                         <div id="pesquisa">
-                            <input onClick={()=> (setGames(true))} type="text" placeholder="procurar na GameSync"/>
+                            <input onClick={()=> (setGames(true))} type="text" placeholder="procurar na GameSync" />
                             <a href="http://localhost:3000/">Descobrir</a>
                             <a href="http://localhost:3000/procurar">Procurar</a>
                             <a href="http://localhost:3000/planos">Planos</a>
@@ -96,25 +104,27 @@ export default function BarraDeCima (props) {
             <section id='produtos'>
 
                 {tgames.map(item => 
-                    <section className='produto'>
-                        <div className='imagem-produto'>
-                            <div className='sombra'>
-                                <div className='linha'></div>
+                    <Link to={'/produto/' + item.id}>
+                        <section className='produto'>
+                            <div className='imagem-produto'>
+                                <div className='sombra'>
+                                    <div className='linha'></div>
+                                </div>
+                                <div className='produtoIMG'>
+                                    <img src={item.background_image} />
+                                </div>
                             </div>
-                            <div className='produtoIMG'>
-                                <img src={item.background_image} />
+                            <div className='informacoes'>
+                                <div className='dados'>
+                                    <a>{item.name}</a>
+                                    <p>Sumo Nottingham</p>
+                                </div>
+                                <div className='info'>
+                                    <h3>Novidade</h3>
+                                </div>
                             </div>
-                        </div>
-                        <div className='informacoes'>
-                            <div className='dados'>
-                                <Link to="/produto/3">{item.name}</Link>
-                                <p>Sumo Nottingham</p>
-                            </div>
-                            <div className='info'>
-                                <h3>Novidade</h3>
-                            </div>
-                        </div>
-                    </section>    
+                        </section>  
+                    </Link>
                 )}
                
                 <nav id='acoes'>

@@ -3,12 +3,15 @@ import axios from 'axios'
 
 import BarraLateral from '../../../components/barraLateral'
 import { useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
 
 
 export default function Conquistas(){
+    const { id } = useParams()
+
     const [mconquistas, setMconquistas] = useState (true)
 
-    const [idprod, setIdprod] = useState ('524')
+    const [idprod, setIdprod] = useState (id)
 
     const [nome, setNome] = useState ('')
     const [desc, setDesc] = useState ('')
@@ -102,18 +105,18 @@ return(
             <div className='achivements-sections'>
                 <div className='section-left'>
                     <div className='title-achive'>
-                    <img src="assets/images/GameSync/trofeu.svg"/>
+                    <img src="/assets/images/GameSync/trofeu.svg"/>
                         <h1>Conquistas</h1>
                     </div>
                     
                     <div className='block-points'>
                         <div className='achivements-points'>
-                            <img className='points-img' src="assets/images/GameSync/pontos.svg"/>
+                            <img className='points-img' src="/assets/images/GameSync/pontos.svg"/>
                             <p>2500 pontos</p> 
                         </div>
                         <div className='line'></div>
                         <div className='achivements-feats'>
-                            <img className='feats-img' src="assets/images/GameSync/feitos.svg"/>
+                            <img className='feats-img' src="/assets/images/GameSync/feitos.svg"/>
                             <p>0 feitos</p>
                         </div>
                         
