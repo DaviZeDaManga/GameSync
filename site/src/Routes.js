@@ -12,6 +12,7 @@ import EscolherLogin from './pages/web/escolherconta'
 
 import CadastroAdmin from './pages/admin/authentication'
 import HomeAdmin from './pages/admin/home'
+import AddProduct from './pages/admin/AddProducts'
 
 import NotFound from './errors'
 export default function Routess(){
@@ -30,6 +31,7 @@ export default function Routess(){
 
                 <Route path='/admin/home' element={<HomeAdmin/>} />
                 <Route path='/admin' element={<CadastroAdmin/>} />
+                <Route path='/admin/addproduts' element={<AddProduct/> }/>
 
                 <Route path='*' element={<NotFound/>} />
             </Routes>
