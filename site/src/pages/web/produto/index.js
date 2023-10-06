@@ -14,13 +14,17 @@ import 'swiper/css/thumbs';
 
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 import { useEffect, useState } from 'react'
+import { useParams, Link } from 'react-router-dom'
 
 export default function Produto() {
+
+    const { id } = useParams();
+
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const [mostdesc, setMostdesc] = useState (true)
     const [mostcoment, setMostcoment] = useState (false)
     const [mostcompl, setMostcompl] = useState (false)
-    const [idprod, setIdprod] = useState ("654")
+    const [idprod, setIdprod] = useState (id)
 
     const [fodasi, setFodasi] = useState([4143, 264642, 742])
 
@@ -43,6 +47,11 @@ export default function Produto() {
     const [estrelas, setEstrelas] = useState (0)
     const [comentario, setComentario] = useState ('')
 
+    const [avaliacoes, setAvaliacoes] = useState (0)
+
+
+    
+
 
     function MostrarDescricao () {
         setMostdesc(true)
@@ -60,6 +69,14 @@ export default function Produto() {
         setMostdesc(false)
         setMostcoment(false)
         setMostcompl(true)
+    }
+
+
+
+
+
+    function naopode() {
+        alert('Escolha o número de estrelas')
     }
 
     
@@ -142,13 +159,16 @@ export default function Produto() {
 
     function Comentar() {
         const c = {
-            user: "Luis pinto",
+            user: "Luis Viado",
             desc: comentario,
             estrelas: estrelas
         }
 
         setComentando(0)
         setComentarios([...comentarios, c])
+        setComentario('')
+        setEstrelas(0)
+        setAvaliacoes(avaliacoes + 1)
     }
 
 
@@ -247,13 +267,10 @@ export default function Produto() {
                     <div className="detalhes">
 
                         <div className="detalhe">
-                            <h2>Desenvolvido por</h2>
-                            <div className='developers'>
-                                {developers.map( item =>
-                                    <p>{item.name}</p>
-                                )}
-                            </div>
-                            
+                            <h2>Desenvolvido por</h2>                          
+                            {developers.map( item =>
+                                <p>{item.name}</p>
+                            )}
                         </div>
                         <div className="detalhe">
                             <h2>Publicado por</h2>
@@ -323,7 +340,9 @@ export default function Produto() {
             {conquistas != '' &&
             <section id='titles'>
                 <h1 className='tinf'>Conquistas</h1>
-                <a href='http://localhost:3000/conquistas'><button>Ver mais conquistas</button></a>
+                <Link to={'/conquistas/' + id}>
+                    <button>Ver mais conquistas</button>
+                </Link>
             </section>}
 
 
@@ -362,7 +381,7 @@ export default function Produto() {
                     <div className="status">
                         <div className="resultado">
                             <h1>4.9</h1>
-                            <p>12.432 avaliações feitas</p>
+                            <p>{avaliacoes} avaliações feitas</p>
                         </div>
                         <div className='estatisticas'>
 
@@ -452,7 +471,8 @@ export default function Produto() {
                             <button onClick={VolComentar}> c </button>
                             <h1>Adicionar Comentario</h1>
                         </div>
-                        <input type='text' onChange={e => setComentario (e.target.value)} value={comentario}/>
+                        <textarea onChange={e => setComentario (e.target.value)} value={comentario}/>
+
                         <button onClick={Comentando} >Escolher estrelas</button>
                     </div>}
 
@@ -471,7 +491,10 @@ export default function Produto() {
                             <button onClick={() => (setEstrelas(4))}><img src="/assets/images/avaliacao/estrela.png" /></button>
                             <button onClick={() => (setEstrelas(5))}><img src="/assets/images/avaliacao/estrela.png" /></button>
                         </div>
-                        <button onClick={Comentar}>Comentar</button>
+                        {estrelas == '' &&
+                        <button onClick={naopode}>Escolha o numero de estrelas</button>}
+                        {estrelas != '' &&
+                        <button onClick={Comentar}>Comentar</button>}
                     </div>}
                     
                 </section>}
@@ -487,25 +510,29 @@ export default function Produto() {
 
                         {complementos.map( item => 
                         
-                        <section className='produto'>
-                            <div className='imagem-produto'>
-                                <div className='sombra'>
-                                    <div className='linha'></div>
-                                </div>
-                                <div className='produtoIMG'>
-                                    <img src={item.background_image} alt='Conquista'/>
-                                </div>
-                            </div>
-                            <div className='informacoes'>
-                                <div className='dados'>
-                                    <a href="">{item.name}</a>
-                                    <p>{item.description}</p>
-                                </div>
-                                <div className='info'>
-                                    <h3>{item.released}</h3>
-                                </div>
-                            </div>
-                        </section>
+                            <Link to={'/conquistas/' + {id}}>
+
+                                <section className='produto'>
+                                    <div className='imagem-produto'>
+                                        <div className='sombra'>
+                                            <div className='linha'></div>
+                                        </div>
+                                        <div className='produtoIMG'>
+                                            <img src={item.background_image} alt='Conquista'/>
+                                        </div>
+                                    </div>
+                                    <div className='informacoes'>
+                                        <div className='dados'>
+                                            <a>{item.name}</a>
+                                            <p>{item.description}</p>
+                                        </div>
+                                        <div className='info'>
+                                            <h3>{item.released}</h3>
+                                        </div>
+                                    </div>
+                                </section>
+
+                            </Link>
 
                         )}
 
