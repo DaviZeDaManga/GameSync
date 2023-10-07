@@ -97,7 +97,33 @@
     
                 width: auto;
                 height: 40px;
-    
+                
+                .neon-text {
+                    font-size: 15px;
+                    font-family: piriquito1;
+                    color: #fff; /* Cor do texto */
+                    text-align: center;
+                    text-transform: uppercase;
+                    letter-spacing: 2px;
+                    position: relative;
+                    animation: neon 1.5s ease-in-out infinite alternate;
+                    background-image: linear-gradient(45deg, rgb(4, 0, 255), #9f6);
+                    -webkit-background-clip: text;
+                    background-clip: text;
+                    border-style:outset;
+                  }
+                  
+                  @keyframes neon {
+                    0% {
+                      text-shadow: 0 0 10px rgb(0, 4, 255), 0 0 20px rgb(4, 0, 255), 0 0 30px rgb(4, 0, 255);
+                      box-shadow: 0 0 10px rgb(4, 0, 255), 0 0 20pxrgb(4, 0, 255), 0 0 30px rgb(4, 0, 255);
+                    }
+                    100% {
+                      text-shadow: 0 0 5px rgb(4, 0, 255), 0 0 10px #9f6, 0 0 15px rgb(4, 0, 255);
+                      box-shadow: 0 0 5px rgb(4, 0, 255), 0 0 10px #9f6, 0 0 15px rgb(4, 0, 255);
+                    }
+                  }
+
                 p {
                     font-size: 15px;
                     color: #efefef;

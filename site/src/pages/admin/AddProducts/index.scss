@@ -1,10 +1,207 @@
 #add-main-addproduct{
-
+    background-color:rgba(239, 239, 239, 1) !important;
+    width: 103.5rem;
+    margin-left: 30rem;
+    height: auto;
+   
     .all{
-        .porra{
-            background-color: white !important;
-            width: 100rem;
-            height: 100%;
+
+        .add{
+            display: flex;
+            flex-direction: row;
+            background-color: rgba(247, 247, 247, 1);
+            justify-content: flex-start;
+            align-items: center;
+            padding: 40px;
+            color: black;
+
+            input{
+                background-color: rgba(234, 234, 234, 1);
+                border: none;
+                box-shadow: none;
+                border-radius: 5px;
+                height: 40px;
+                text-indent: 1rem;
+            }
+
+            .add-part1{
+                display: flex;
+                flex-direction: column;
+             
+                width: 40rem;
+
+                .add-part1-nome{
+                    display: flex;
+                    flex-direction: column;
+                    padding: 0px 10px;
+                    justify-content: space-around;
+                    height: 5rem;
+                    margin-bottom: 30px;
+                }
+
+                .add-part1-valores{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    margin-bottom: 35px;
+
+                    .add-part1-valores-vl{
+                        display: flex;
+                        width: 60rem;
+                        justify-content: space-evenly;
+                        margin-top: 15px;
+                    }
+                }
+
+                .add-part1-negocio{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 0px 10px;
+                    height: 5rem;
+                    margin-bottom: 3rem;
+                    height: auto;
+
+                    .add-part1-negocio-checks{
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-evenly;
+                        width: 40rem;
+
+                        .add-part1-negocio-msm {
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-around;
+                            width: 7rem;
+                            padding: 5px; 
+                            background-color: rgba(234, 234, 234, 1);
+                            border-radius: 5px;
+                        }
+                        .add-part1-negocio-nr{
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                        }
+                        .add-part1-negocio-nr > input{
+                            width: 7rem;
+                        }
+                       
+                    }
+                }
+                .add-part1-negocio > h1{
+                    margin-bottom: 15px;
+                }
+                .texto-area > textarea{
+                    background-color: rgba(234, 234, 234, 1);
+                    width: 100%; 
+                    padding: 10px;
+                    font-size: 16px;
+                    border-radius: 5px; 
+                    resize: vertical; 
+
+                    &:focus {
+                        border-color: #007bff;
+                        outline: none; 
+                      }
+                      
+                      &::placeholder {
+                        color: #aaa; 
+                      }
+                }   
+            }
+            .add-part2{
+                display: flex;
+                flex-direction: column;
+                justify-content: start;
+                align-items: center;
+                width: 30rem;
+                height: auto;
+                justify-content: space-around;
+
+
+                .add-part2-imagem1{
+                    display: flex;
+                    
+                    height: 16rem;
+                    border-radius: 5px;
+                    margin-bottom: 20px;
+                    background-color: #007bff;
+                }
+
+                .add-part2-imagem2{
+                    display: flex;
+                    flex-direction: row;
+                   
+                    width: 17.5rem;
+                    justify-content: space-between;
+                    margin-bottom: 20px;
+                    background-color: #7873f5;
+                }
+                .add-part2-imagem2 > input{
+                    width: 8rem;
+                    height: 8rem;
+                }
+
+                .add-part2-imagem-selecionados{
+                  display: flex;
+                  flex-direction: row; 
+                  align-items: center; 
+                }
+                .add-part2-imagem-selecionados > img{
+                    width: 4rem;  
+                  }
+
+                .add-part2-imagem3{
+                    margin-bottom: 6rem;
+                }
+
+                .botao {
+                    display: flex;
+                    
+                    width: 50rem;
+                    text-align: center; 
+                    margin-top: 20px;
+                    
+                    button {
+                        padding: 10px 20px;
+                        border: none;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        position: relative;
+                        overflow: hidden;
+                        background: linear-gradient(90deg, #ff6ac1, #7873f5);
+                        background-size: 200% 200%;
+                        color: #fff;
+                        font-weight: bold;
+                        transition: background 0.3s ease, color 0.3s ease;
+                    
+                        &:before {
+                          content: "";
+                          position: absolute;
+                          top: 0;
+                          left: 0;
+                          width: 100%;
+                          height: 100%;
+                          background: linear-gradient(90deg, #ff6ac1, #7873f5);
+                          background-size: 200% 100%;
+                          opacity: 0;
+                          z-index: -1;
+                          transition: opacity 0.3s ease;
+                        }
+                    
+                        &:hover {
+                          background-position: right center;
+                          color: #fff;
+                    
+                          &:before {
+                            opacity: 1;
+                          }
+                        }
+                      }
+                  }
+            }
         }
     }
     

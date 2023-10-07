@@ -1,0 +1,39 @@
+.pesquisar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-around;
+    color: black;
+    padding: 40px 20px;
+    .pesquisar-barra{
+        display: block;
+        width: 30rem;
+    }
+    .pesquisar-barra > input{
+        background-image: url('../../../public/assets/images/adm/pesquisa-de-dados.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        width:30rem;
+        height: 40px;
+        text-indent: 4rem; 
+        border: none;
+        box-shadow: none;
+        border-radius: 10px;
+    }
+
+    .adm-logado{
+        display: flex;
+        color: rgba(123, 123, 123, 1);
+        width: 20rem;
+    }
+    .adm-logado > span{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 30px;
+        background-color: black;
+        color: aliceblue;
+        width: 30px;
+    }
+}
