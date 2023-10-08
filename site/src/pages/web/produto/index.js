@@ -349,27 +349,28 @@ export default function Produto() {
             <div id="produtos">  
 
                 {conquistas.map( item => 
-                
-                <section className='produto'>
-                    <div className='imagem-produto'>
-                        <div className='sombra'>
-                            <div className='linha'></div>
-                        </div>
-                        <div className='produtoIMG'>
-                            <img src={item.image} alt='Conquista'/>
-                        </div>
-                    </div>
-                    <div className='informacoes'>
-                        <div className='dados'>
-                            <a href="">{item.name}</a>
-                            <p>{item.description}</p>
-                        </div>
-                        <div className='info'>
-                            <h3>{item.percent}</h3>
-                        </div>
-                    </div>
-                </section>
 
+                <Link to={'/conquistas/' + id}>
+                    <section className='produto'>
+                        <div className='imagem-produto'>
+                            <div className='sombra'>
+                                <div className='linha'></div>
+                            </div>
+                            <div className='produtoIMG'>
+                                <img src={item.image} alt='Conquista'/>
+                            </div>
+                        </div>
+                        <div className='informacoes'>
+                            <div className='dados'>
+                                <a href="">{item.name}</a>
+                                <p>{item.description}</p>
+                            </div>
+                            <div className='info'>
+                                <h3>{item.percent}</h3>
+                            </div>
+                        </div>
+                    </section>
+                </Link>
                 )}
 
             </div>
@@ -508,9 +509,7 @@ export default function Produto() {
                     </div>
                     <div id="produtos">  
 
-                        {complementos.map( item => 
-                        
-                            <Link to={'/conquistas/' + {id}}>
+                        {complementos.map( item =>         
 
                                 <section className='produto'>
                                     <div className='imagem-produto'>
@@ -531,8 +530,6 @@ export default function Produto() {
                                         </div>
                                     </div>
                                 </section>
-
-                            </Link>
 
                         )}
 

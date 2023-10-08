@@ -17,7 +17,7 @@
     
         width: 100%;
         padding: 30px 0px;
-        background-color: #242227;
+        background-color: rgb(32, 32, 39);
 
         position: relative;
         z-index: 3;
@@ -40,10 +40,10 @@
                 > button {
                     width: 150px;
                     height: 100%;
-                    background-color: #323232;
-                    border: none;
+                    background-color: rgb(48, 48, 58);
+                    border: solid 2px rgb(61, 61, 77);
                     border-radius: 20px;
-                    color: white;
+                    color: rgb(223, 223, 223);;
                     margin-right: 20px;
                     transition: 0.3s;
                 }
@@ -206,12 +206,28 @@
         height: 100vh;
         top: 0;
         z-index: 1;
-        background-color: #242227;
+        background-color: rgb(32, 32, 39);
+        border-radius: 10px;
         position: fixed;
-        gap: 23px;
+        gap: 26px;
         padding: 120px 20px 70px 20px;
 
         overflow-x: auto;
+
+        #title {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+
+            width: 100%;
+            height: 40px;
+
+            > h1 {
+                font-size: 15px;
+                padding: 10px;
+            }
+        }
 
         #acoes {
             display: flex;
@@ -220,50 +236,25 @@
             align-items: center;
 
             width: 100%;
-            padding: 10px 0px 10px 100px;
-            background-color: #121213d0;
-            position: fixed;
+            background-color: rgba(61, 61, 61, 0);
+            position: relative;
             bottom: 0;
             right: 0;
             z-index: 2;
 
-            .acoes {
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-    
-                width: 1600px;
-                height: 100%;
-                padding: 0px 20px;
-    
-                button {
-                    min-width: 250px;
-                    height: 40px;
-                    background-color: #323232;
-                    color: white;
-                    border-radius: 10px;
-                    border: none;
-                    cursor: pointer;
-                }
-    
-                button:hover {
-                    border: solid 1px white;
-                }
-    
-                input {
-                    width: 100px;
-                    height: 40px;
-                    border: solid 1px #161616;
-                    border-radius: 10px;
-                    background-color: #161616;
-                    color: white;
-                    margin-right: 10px;
-                }
-    
-                input:focus {
-                    outline: none;
-                }
+            > button {
+                width: 100%;
+                height: 40px;
+                background-color: rgb(48, 48, 58);
+                border: solid 2px rgb(61, 61, 77);
+                border-radius: 20px;
+                color: rgb(223, 223, 223);;
+                margin-right: 20px;
+                transition: 0.3s;
+            }
+
+            > button:hover {
+                border: solid 1px white;
             }
         }
     }

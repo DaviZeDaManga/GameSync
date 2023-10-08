@@ -6,53 +6,24 @@ import { Link } from 'react-router-dom'
 export default function BarraDeCima (props) {
     const [games, setGames] = useState (false)
     const [tgames, setTgames] = useState ([])
-    const [pagina, setPagina] = useState (1)
+    const [lista, setLista] = useState (20)
     const [idprod, setIdprod] = useState ('')
 
     async function ProcurarGames () {
-        let url = 'https://api.rawg.io/api/games?key=0a526d3c3985430c9469d8d6951eb5cb&page=' + pagina
+        let url = 'https://api.rawg.io/api/games?key=0a526d3c3985430c9469d8d6951eb5cb&page_size=' + lista 
         let resposta = await axios.get(url)
 
         setTgames(resposta.data.results)
     }
-    
-    async function pokemonsAleatorios() {
-        let url = "https://pokeapi.co/api/v2/pokemon";
 
-        let response = await axios.get(url);
-
-        let listaPokemons = [];
-
-        for(let item of response.data.results) {
-            let pokemonResp = await axios.get(item.url);
-
-            let imagem = pokemonResp.data.sprites.other['official-artwork'].front_default;
-
-            let tipos = '';
-            for (let t of pokemonResp.data.types) {
-                tipos = tipos + t.type.name ;
-            }
-
-            listaPokemons.push({
-                nome: item.name,
-                imagem: imagem,
-                tipos: tipos
-            })
-        }
-        setTgames(listaPokemons)
+    function MaisGames() {
+        setLista(lista + 20)
     }
 
-    function ProxPage() {
-        setPagina(pagina + 1)
-    }
-
-    function AntPage() {
-        setPagina(pagina - 1)
-    }
 
     useEffect(() => {   
         ProcurarGames()
-    }, [games, pagina])
+    }, [games, lista])
 
 
 
@@ -103,6 +74,10 @@ export default function BarraDeCima (props) {
             {games == true &&
             <section id='produtos'>
 
+                <section id='title'>
+                    <h1>Todos os Jogos</h1>
+                </section>
+
                 {tgames.map(item => 
                     <Link to={'/produto/' + item.id}>
                         <section className='produto'>
@@ -128,18 +103,7 @@ export default function BarraDeCima (props) {
                 )}
                
                 <nav id='acoes'>
-                    <div className='acoes'>
-                        {pagina >= 2 &&
-                        <button onClick={AntPage}>Voltar página</button>}
-
-                        {pagina == 1 &&
-                        <button>Sair</button>}
-                        <h1>Pagina {pagina}</h1>
-                        <div>
-                            {/* <input type='number' placeholder='Numero da Pagina' onChange={() => (setPagina)} value={pagina}/> */}
-                            <button onClick={ProxPage}>Próxima página</button>
-                        </div>
-                    </div>
+                    <button onClick={MaisGames}>Procurar mais</button>
                 </nav>
 
             </section>}

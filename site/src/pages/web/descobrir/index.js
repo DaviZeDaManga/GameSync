@@ -23,7 +23,7 @@ export default function Descobrir () {
     const [indie, setIndie] = useState ([])
 
     async function ProcurarGames () {
-        let url = 'https://api.rawg.io/api/games?key=0a526d3c3985430c9469d8d6951eb5cb&page_size=3'
+        let url = 'https://api.rawg.io/api/games?key=0a526d3c3985430c9469d8d6951eb5cb&page_size=6'
         let resposta = await axios.get(url)
 
         setTgames(resposta.data.results)
