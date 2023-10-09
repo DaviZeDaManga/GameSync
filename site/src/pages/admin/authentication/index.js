@@ -5,6 +5,8 @@ import storage from 'local-storage';
 import { useNavigate } from 'react-router-dom';
 import LoadingBar from 'react-top-loading-bar'
 
+import 'animate.css';
+
 export default function CadastroAdmin(){
 
     const [email, setEmail] = useState('');
@@ -37,6 +39,7 @@ export default function CadastroAdmin(){
             }, 3000)
         }
         catch(err){
+            console.log(err);
             ref.current.complete();
             setCarregando(false);
 
@@ -54,28 +57,28 @@ export default function CadastroAdmin(){
                 <div className='n-creio'>
                     <span className='borda2'></span>
                 <form>
-                    <h1>Login Admin</h1>
+                    <h1 class="animate__animated animate__lightSpeedInLeft">Login Admin</h1>
                     <div className='formulario'>
                         <input type="text" required="required" value={email} onChange={e => setEmail(e.target.value)}/>
-                        <span>Email</span>
+                        <span class="animate__animated animate__fadeInTopLeft">Email</span>
                         <i></i>
                     </div>
 
                     <div className='formulario'>
                         <input type="password" required="required" value={senha} onChange={e => setSenha(e.target.value)}/>
-                        <span>Senha</span>
+                        <span class="animate__animated animate__fadeInTopRight">Senha</span>
                         <i></i>
                     </div>
 
                     <div className='formulario'>
                         <input type="text" required="required" value={codigo} onChange={e => setCodigo(e.target.value)}/>
-                        <span>Codigo</span>
+                        <span class="animate__animated animate__fadeInBottomLeft">Codigo</span>
                         <i></i>
                     </div>
 
                     <div className="botao">
-                        <button onClick={LogAdmin} disabled={carregando} >Entrar</button>
-                        <div>{erro}</div>
+                        <button class="animate__animated animate__rubberBand" onClick={LogAdmin} disabled={carregando} >Entrar</button>
+                        {erro && <div className="erro">{erro}</div>}
                     </div>
                 </form>
                 </div>

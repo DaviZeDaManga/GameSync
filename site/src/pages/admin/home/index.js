@@ -5,7 +5,8 @@ export default function HomeAdmin(){
 
     return(
         <div id='mae'>
-            <AdmBarraLateral/>
+            <AdmBarraLateral selecionado='home'/>
+
             <h1>OI</h1>
         </div>
     )

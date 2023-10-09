@@ -60,14 +60,29 @@
                 align-items: center;
                 justify-content: space-around;
                 cursor:pointer;
+
+                &.selecionado {
+                    background-image: linear-gradient(45deg, #ff6ac1, #7873f5);
+                    background-size: 200% 200%;
+                    background-position: right center;
+                    color: #000;
+                }
+            }
+            .opcoes-z:hover{
+                background-image: linear-gradient(45deg, #ff6ac1, #7873f5);
+                background-size: 200% 200%;
+                background-position: right center;
+                color: #000;
+            }
+            .opcoes-z > img:hover{
+                filter: invert(100%);
             }
         }
         .sair {
             display: flex;
             width: 20rem;
             justify-content: space-around;
-
-          
+    
             .sair-msm {
               display: flex;
               flex-direction: row;
@@ -75,9 +90,23 @@
               align-items: center;
               cursor: pointer;
             }
+            .sair-msm > img:hover{
+                filter: invert(100%);
+            }
+
             h1 {
                 margin-right: 20px; /* Ajuste conforme necessário */
               }
           }
+          .sair:hover{
+            background: linear-gradient(to bottom, #FF0000, #FF5733);
+                background-size: 200% 200%;
+                background-position: right center;
+                color: #000;
+          }
     }
+}
+a{
+    text-decoration: none;
+    color: white;
 }
