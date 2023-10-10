@@ -5,8 +5,6 @@ import storage from 'local-storage';
 import { useNavigate } from 'react-router-dom';
 import LoadingBar from 'react-top-loading-bar'
 
-import 'animate.css';
-
 export default function CadastroAdmin(){
 
     const [email, setEmail] = useState('');
