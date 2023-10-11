@@ -49,7 +49,7 @@ export default function BarraDeCima (props) {
                     </div>
 
                     <div id="perfil">
-                        <p className="neon-text">Ola, Davi Pinto</p>
+                        <p>Ola, Davi Pinto</p>
                         <div className="perfil">
                             <img src="/assets/images/GameSync/user.png" />
                             <div className='menu-perfil'>

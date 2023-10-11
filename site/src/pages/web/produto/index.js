@@ -41,6 +41,7 @@ export default function Produto() {
 
     const [conquistas, setConquistas] = useState ([])
     const [complementos, setComplementos] = useState ([])
+    const [qntdconq, setQntdconq] = useState(6)
 
     const [comentarios, setComentarios] = useState ([])
     const [comentando, setComentando] = useState (0)
@@ -104,7 +105,7 @@ export default function Produto() {
     }, [])
 
     async function Conquistas() {
-        let url = 'https://api.rawg.io/api/games/'+ idprod +'/achievements?key=0a526d3c3985430c9469d8d6951eb5cb&&page_size=5'
+        let url = 'https://api.rawg.io/api/games/'+ idprod +'/achievements?key=0a526d3c3985430c9469d8d6951eb5cb&&page_size=' + qntdconq
         let resposta = await axios.get(url)
 
 
@@ -445,7 +446,7 @@ export default function Produto() {
                                 </main>
                             </div>
                             <section className='estrelas'>
-                                <h1>Avaliado em <span>{item.estrelas} estrelas</span></h1>
+                                <h3>Avaliado em <span>{item.estrelas} estrelas</span></h3>
                             </section>
                         </div>
                         

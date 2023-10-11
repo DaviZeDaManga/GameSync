@@ -17,7 +17,7 @@
     
         width: 100%;
         padding: 30px 0px;
-        background-color: rgb(32, 32, 39);
+        background-color: rgb(32, 32, 32);
 
         position: relative;
         z-index: 3;
@@ -81,7 +81,7 @@
                     border: none;
                     border-radius: 20px;
                     padding: 0px 20px;
-                    background-color: #2d2d33;
+                    background-color: #313131;
                     transition: 0.3s;
                     color: #ffffff;
                     outline: none;
@@ -232,10 +232,10 @@
         height: 100vh;
         top: 0;
         z-index: 1;
-        background-color: rgb(32, 32, 39);
+        background-color: rgb(32, 32, 32);
         border-radius: 10px;
         position: fixed;
-        gap: 26px;
+        gap: 23px;
         padding: 120px 20px 70px 20px;
 
         overflow-x: auto;
