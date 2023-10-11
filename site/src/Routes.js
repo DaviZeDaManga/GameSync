@@ -7,7 +7,8 @@ import Conquistas from './pages/web/conquistas'
 import MudarPerfil from './pages/web/changes'
 import Navegar from './pages/web/navegar'
 import GameSync from './pages/web/GameSync'
-import Cadastro from './pages/web/cadastro'
+import CadastroUser from './pages/web/authentication'
+import LoginUser from './pages/web/log'
 import EscolherLogin from './pages/web/escolherconta'
 
 import CadastroAdmin from './pages/admin/authentication'
@@ -26,7 +27,8 @@ export default function Routess(){
                 <Route path='/perfil' element={<MudarPerfil/>} />
                 <Route path='/procurar' element={<Navegar/>} />
                 <Route path='/sobregamesync' element={<GameSync/>} />
-                <Route path='/login' element={<Cadastro/>} />
+                <Route path='/cadastro' element={<CadastroUser/>} />
+                <Route path='/login' element={<LoginUser/>} />
                 <Route path='/escolherlogin' element={<EscolherLogin/>} />
 
                 <Route path='/admin/home' element={<HomeAdmin/>} />
