@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import './index.scss'
-import { Link } from 'react-router-dom'
+import { Link, json } from 'react-router-dom'
 
 
 export default function BarraLateral(props) {
@@ -42,6 +42,48 @@ export default function BarraLateral(props) {
         setMenu(false)
         setAssis(false)
     }
+
+    //parte do bot
+    const [IQuestion, setIQuestion] = useState('');
+    const [Resposta, setResposta] = useState('');
+
+
+    function GPTbro() {
+        const OPENAI_API_KEY = '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';
+    
+        fetch('https://api.openai.com/v1/engines/text-davinci-003/completions', {
+
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + OPENAI_API_KEY,
+          },
+          body: JSON.stringify({
+            prompt: IQuestion,
+            max_tokens: 2048,
+            temperature: 0.5,
+          })
+        })
+        
+        .then((response) => response.json())
+        .then((json) => {
+          if (json.error?.message) {
+            setResposta(`Error: ${json.error.message}`);
+          } else if (json.choices?.[0].text) {
+            const text = json.choices[0].text || "Sem resposta";
+            setResposta(text);
+          }
+        })
+        .catch((error) => console.log('Error:', error));
+      }
+
+      async function Enter(event) {
+        if (event.key === "Enter") {
+            const resposta = await GPTbro();
+            setResposta(resposta)
+        }
+      }
 
     return(
         <div id="BarraLateral">
@@ -97,8 +139,9 @@ export default function BarraLateral(props) {
 
                     </div>
                     <nav className='enviar'>
-                        <input type='text' placeholder='Qual a sua duvida?'/>
-                        <button><img src="/assets/images/carrinho/enviar.png" /></button>
+                        <input onKeyDown={Enter} value={IQuestion}  onChange={(e) => setIQuestion(e.target.value)} type='text' placeholder='Qual a sua duvida?'/>
+                        <button onClick={GPTbro}><img src="/assets/images/carrinho/enviar.png"/></button>
+                        <textarea value={Resposta}  onChange={(e) => setResposta(e.target.value)} cols="100" rows="50"></textarea>
                     </nav>
                 </main>
             </section>}
@@ -108,7 +151,7 @@ export default function BarraLateral(props) {
                 <img onClick={MostrarMenu} className='logo' src="/assets/images/GameSync/giphy-unscreen.gif" />
                 <div className='botoes'>
                     <section onClick={MostrarAssistente} className='redirects assistente'>
-                        <img src="/assets/images/carrinho/assistente.png" />
+                        <img src="/assets/images/carrinho/bot.png" />
                     </section>
                     <section onClick={MostrarCarrin} className='redirects carrinho'>
                         <img src="/assets/images/carrinho/carrinho.png" />
@@ -168,4 +211,4 @@ export default function BarraLateral(props) {
             </section>}
         </div>
     )
-}
+}//
