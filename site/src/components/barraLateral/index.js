@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import './index.scss'
-import { Link, json } from 'react-router-dom'
-
+import { Link, json, useParams } from 'react-router-dom'
+import axios from 'axios'
+import Atropos from 'atropos'
 
 export default function BarraLateral(props) {
     const[menu, setMenu] = useState(false)
@@ -42,6 +43,34 @@ export default function BarraLateral(props) {
         setMenu(false)
         setAssis(false)
     }
+
+
+
+
+    //carrinho id
+    var {idProduto} = useParams();
+    const [nome, setNome] = useState('')
+    const [image, setImage] = useState('');
+    const [descricao, setDescricao] = useState('')
+
+    useEffect(() => {
+        async function DetalhesBuy(){
+            try{
+                const response = await axios.get('https://api.rawg.io/api/games/' + idProduto + '?key=0a526d3c3985430c9469d8d6951eb5cb&');
+                console.log(idProduto)
+                setNome(response.data.name)
+                setImage(response.data.background_image)
+                setDescricao(response.data.description_raw)
+            }
+            catch(error){
+                console.log('Infelizmente deu erro' + error)
+            }
+        }
+        DetalhesBuy();
+    }, [idProduto]);
+
+
+
 
     //parte do bot
     const [IQuestion, setIQuestion] = useState('');
@@ -175,12 +204,16 @@ export default function BarraLateral(props) {
                         <div className='produto'>
                             <div className='card'>
                                 <div className='verproduto'>
-                                    <img src="/assets/images/teste/jogo.jpg" />
+                            z
+                                <img src={image} />
+
+
                                     <button>Ver Produto</button>
                                 </div>
                                 <div className='info'>
-                                    <h1>The Texas Chain Saw Massacre</h1>
-                                    <p>O personagem Leatherface teve como inspiração o assassino serial Ed Gein, (1906-1984), que deu origem a outros vilões em outros livros e filmes, mas o caso real do assassino é bem mais monstruoso do que qualquer ficção. Sua primeira vítima foi seu irmão Henry, morto em 1944, embora nada tenha sido provado na época. No ano seguinte, a mãe dele morreu, e então Gein perdeu a razão e, eventualmente, começou a criar roupas e acessórios dos corpos de suas vítimas, das quais guardava os órgãos na sua casa.</p>
+                
+                                    <h1>{nome}</h1>
+                                    <p>{descricao}</p>
                                     <h1>R$109,90</h1>
                                 </div>
                             </div>

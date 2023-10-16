@@ -13,6 +13,7 @@ import 'swiper/css/pagination';
 
 import { EffectCube, Pagination } from 'swiper/modules';
 
+
 export default function GameSync() {
 
     return(

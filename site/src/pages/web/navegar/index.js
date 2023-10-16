@@ -28,8 +28,6 @@ export default function Navegar() {
     useEffect(()=> {
         ProcurarGames()
     }, [])
-
-    
     
     return(
         <div className='Navegar'>

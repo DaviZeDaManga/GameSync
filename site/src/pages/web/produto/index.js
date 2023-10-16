@@ -171,16 +171,15 @@ export default function Produto() {
         setEstrelas(0)
         setAvaliacoes(avaliacoes + 1)
     }
-
-
-
-
+    
+    
     return(
         <div className="Produto">
             <BarraLateral/>
             <BarraDeCima/>
 
             <section id="produto">
+                
 
                 <section id="info-produto">      
                     <div className="titulo">
@@ -192,12 +191,12 @@ export default function Produto() {
                             <h1>R$109,90</h1>
                         </div>
                         <div className='acoes'>
-                            <button>Comprar</button>
+                            <button><Link to={`/BarraLateral/${id}`}></Link>Comprar</button>//////////////////////////////////
                             <div className='paraconta carrin'>
-
+                                <p>D</p>
                             </div>
                             <div className='paraconta fav'>
-
+                                <p>F</p>
                             </div>
                         </div>
                     </section>    

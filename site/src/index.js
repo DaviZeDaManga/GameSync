@@ -11,6 +11,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import 'animate.css';
 
+import 'atropos/css'
+
+<link rel="stylesheet" href="path/to/atropos.css" />
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

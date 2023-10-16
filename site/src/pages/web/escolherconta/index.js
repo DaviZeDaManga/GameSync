@@ -4,6 +4,8 @@ import BarraLateral from '../../../components/barraLateral'
 import FooterPage from '../../../components/footerpage/index,'
 import { useState, useEffect, useRef } from 'react'
 import {Swiper, SwiperSlide } from 'swiper/react'
+import storage from 'local-storage';
+import { useNavigate } from 'react-router-dom';
 
 import 'swiper/css'
 import 'swiper/css/effect-cards';
@@ -11,6 +13,12 @@ import 'swiper/css/effect-cards';
 import { EffectCards } from 'swiper/modules';
 
 export default function EscolherLogin() {
+    const navigate = useNavigate()
+
+    function sairLogin(){
+        storage.remove('user-logado');
+        navigate('/')
+    }
 
     return(
         <div className='ELogin'>
@@ -23,15 +31,15 @@ export default function EscolherLogin() {
                 modules={[EffectCards]}
                 className="mySwiper"
             >
-                <SwiperSlide>Slide 1</SwiperSlide>
-                <SwiperSlide>Slide 2</SwiperSlide>
-                <SwiperSlide>Slide 3</SwiperSlide>
-                <SwiperSlide>Slide 4</SwiperSlide>
-                <SwiperSlide>Slide 5</SwiperSlide>
-                <SwiperSlide>Slide 6</SwiperSlide>
-                <SwiperSlide>Slide 7</SwiperSlide>
-                <SwiperSlide>Slide 8</SwiperSlide>
-                <SwiperSlide>Slide 9</SwiperSlide>
+                <SwiperSlide><button onClick={sairLogin} className='sair'>SAIR</button></SwiperSlide>
+                <SwiperSlide><button></button></SwiperSlide>
+                <SwiperSlide><button></button></SwiperSlide>
+                <SwiperSlide><button></button></SwiperSlide>
+                <SwiperSlide><button></button></SwiperSlide>
+                <SwiperSlide><button></button></SwiperSlide>
+                <SwiperSlide><button></button></SwiperSlide>
+                <SwiperSlide><button></button></SwiperSlide>
+                <SwiperSlide><button></button></SwiperSlide>
             </Swiper>
 
                 {/* <section className='contas'>

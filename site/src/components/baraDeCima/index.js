@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react'
 import './index.scss'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-    
+import storage, { set } from 'local-storage';
+
 export default function BarraDeCima (props) {
     const [games, setGames] = useState (false)
     const [tgames, setTgames] = useState ([])
@@ -25,9 +26,17 @@ export default function BarraDeCima (props) {
         ProcurarGames()
     }, [games, lista])
 
+    const [nome, setNome] = useState('')
 
-
-
+    useEffect(() => {
+        if(storage('user-logado')){
+            const nomeUser = storage('user-logado');
+            setNome(nomeUser.nome);
+        }
+        else{
+            setNome('anonymous')
+        }
+    }, [])
 
 
 
@@ -49,7 +58,7 @@ export default function BarraDeCima (props) {
                     </div>
 
                     <div id="perfil">
-                        <p>Ola, Davi Pinto</p>
+                        <p>Ola, {nome}</p>
                         <div className="perfil">
                             <img src="/assets/images/GameSync/user.png" />
                             <div className='menu-perfil'>
