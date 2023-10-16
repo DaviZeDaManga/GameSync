@@ -1034,6 +1034,8 @@
 
         #produto {
             width: 1100px;
+            height: 450px;
+
             #info-produto {
                 #Comprar {
                     padding: 0px 10px 10px 10px;
@@ -1048,6 +1050,7 @@
 
         #descEstatus {
             width: 1100px;
+            height: 350px;
 
             .status {
                 .cards {
@@ -1089,7 +1092,7 @@
             height: 730px;
             flex-direction: column-reverse;
             padding: 10px;
-            background-color: rgba(255, 0, 0, 0);
+            background-color: rgba(165, 34, 34, 0);
 
             #info-produto {
                 height: 300px;
