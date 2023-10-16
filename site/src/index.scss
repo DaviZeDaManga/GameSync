@@ -44,6 +44,21 @@ h3 {
     color: rgb(182, 182, 182);
 }
 
+@media (max-width: 1414px) {
+    h1 {
+        font-size: 22px;
+    }
+    p {
+        font-size: 12px;
+    }
+    h2 {
+        font-size: 12px;
+    }  
+    h3 {
+        font-size: 12px;
+    }
+}
+
 
 
 
