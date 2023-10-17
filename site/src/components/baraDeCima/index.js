@@ -2,12 +2,11 @@ import { useState, useEffect } from 'react'
 import './index.scss'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import storage, { set } from 'local-storage';
-
+    
 export default function BarraDeCima (props) {
     const [games, setGames] = useState (false)
     const [tgames, setTgames] = useState ([])
-    const [lista, setLista] = useState (20)
+    const [lista, setLista] = useState (230)
     const [idprod, setIdprod] = useState ('')
 
     async function ProcurarGames () {
@@ -26,17 +25,9 @@ export default function BarraDeCima (props) {
         ProcurarGames()
     }, [games, lista])
 
-    const [nome, setNome] = useState('')
 
-    useEffect(() => {
-        if(storage('user-logado')){
-            const nomeUser = storage('user-logado');
-            setNome(nomeUser.nome);
-        }
-        else{
-            setNome('anonymous')
-        }
-    }, [])
+
+
 
 
 
@@ -50,15 +41,11 @@ export default function BarraDeCima (props) {
                         <button onClick={()=> (setGames(false))}>Voltar</button>}
                         <div id="pesquisa">
                             <input onClick={()=> (setGames(true))} type="text" placeholder="procurar na GameSync" />
-                            <a href="http://localhost:3000/">Descobrir</a>
-                            <a href="http://localhost:3000/procurar">Procurar</a>
-                            <a href="http://localhost:3000/planos">Planos</a>
-                            <a href="">Noticias</a>
                         </div>
                     </div>
 
                     <div id="perfil">
-                        <p>Ola, {nome}</p>
+                        <p>Ola, Davi Pinto</p>
                         <div className="perfil">
                             <img src="/assets/images/GameSync/user.png" />
                             <div className='menu-perfil'>
@@ -83,10 +70,6 @@ export default function BarraDeCima (props) {
             {games == true &&
             <section id='produtos'>
 
-                <section id='title'>
-                    <h1>Todos os Jogos</h1>
-                </section>
-
                 {tgames.map(item => 
                     <Link to={'/produto/' + item.id}>
                         <section className='produto'>
@@ -101,7 +84,6 @@ export default function BarraDeCima (props) {
                             <div className='informacoes'>
                                 <div className='dados'>
                                     <a>{item.name}</a>
-                                    <p>Sumo Nottingham</p>
                                 </div>
                                 <div className='info'>
                                     <h3>Novidade</h3>

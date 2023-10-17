@@ -20,12 +20,12 @@ export default function Routess(){
     return(
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Descobrir/>} />
+                <Route path="/descobrir" element={<Descobrir/>} />
                 <Route path="/produto/:id" element={<Produto/>} />
                 <Route path='/planos' element={<Planos/>} />
                 <Route path='/conquistas/:id' element={<Conquistas/>} />
                 <Route path='/perfil' element={<MudarPerfil/>} />
-                <Route path='/procurar' element={<Navegar/>} />
+                <Route path='/' element={<Navegar/>} />
                 <Route path='/sobregamesync' element={<GameSync/>} />
                 <Route path='/cadastro' element={<CadastroUser/>} />
                 <Route path='/login' element={<LoginUser/>} />

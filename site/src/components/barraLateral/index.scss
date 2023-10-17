@@ -15,7 +15,7 @@
         width: 80px;
         height: 100vh;
         padding: 20px;
-        background-color: #161616;
+        background-color: #2f2f2fab;
 
         z-index: 10;
         position: fixed;
@@ -35,11 +35,11 @@
         .botoes {
             display: flex;
             flex-direction: column;
-            justify-content: end;
+            justify-content: start;
             align-items: center;
 
             width: 100%;
-            height: 80%;
+            height: 100%;
 
             .redirects {
                 display: flex;
@@ -50,27 +50,19 @@
                 width: 40px;
                 height: 40px;
                 padding: 10px;
-                border-radius: 10px;
-                background-color: #252525;
-                border: solid 2px #292929;
                 margin-top: 20px;
                 transition: 0.3s;
 
                 > img {
                     height: 100%;
+                    opacity: 0.5;
                 }
             }
-
-            .carrinho:hover {
-                background-color: rgb(189, 115, 45);
-            }
-
-            .fav:hover {
-                background-color: rgb(189, 45, 45);
-            }
-
-            .assistente:hover {
-                background-color: rgb(45, 112, 189);
+            .redirects:hover {
+                padding: 9px;
+                > img {
+                    opacity: 1;
+                }
             }
         }
     }
