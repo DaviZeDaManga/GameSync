@@ -33,6 +33,85 @@
         }
     }
 
+
+
+
+
+
+
+    .card {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        width: 100%;
+        height: 250px;
+        border-radius: 10px;
+        background-color: rgb(69, 69, 69);
+
+        position: relative;
+        overflow: hidden;
+
+        .conteudo {
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            align-items: start;
+    
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            background: linear-gradient(90deg, rgba(0, 0, 0, 0.578), rgba(19, 19, 19, 0.049));
+    
+            position: absolute;
+    
+            > h1 {
+                font-size: 15px;
+                color: white;
+            }
+            > p {
+                text-align: start;
+                color: #ededed;
+                max-width: 55ch;
+            }
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            -moz-transition: all 0.5s;
+            -webkit-transition: all 0.5s;
+            transition: all 0.5s;
+        }
+
+        p {
+            max-height: 8ch;
+            overflow: hidden;
+        }
+    }
+    
+
+
+
+
+    .borda:hover { 
+        border: solid 2px rgb(201, 200, 200);
+        animation: bordauser 3s infinite;
+    }
+    img:hover { 
+        -moz-transform: scale(1.2);
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
+    }
+
+
+
+
+
+
     #navegacao {
         display: flex;
         flex-direction: row;
@@ -75,14 +154,14 @@
                     flex-direction: column;
                     justify-content: end;
                     align-items: start;
-
+            
                     width: 100%;
                     height: 100%;
                     padding: 20px;
                     background: linear-gradient(90deg, rgba(0, 0, 0, 0.578), rgba(19, 19, 19, 0.049));
-
+            
                     position: absolute;
-
+            
                     > h1 {
                         font-size: 15px;
                         color: white;
@@ -92,12 +171,25 @@
                         color: #ededed;
                         max-width: 55ch;
                     }
+                    button {
+                        width: 200px;
+                        height: 40px;
+                        border: none;
+                        border-radius: 10px;
+                        background-color: #fff;
+                        color: #181818;
+                        margin-top: 10px;
+                        transition: 0.3s;
+                        cursor: pointer;
+                    }
+                    button:hover {
+                        color: white;
+                        background-color: rgba(0, 0, 0, 0);
+                        border: solid 3px white;
+                    }
                 }
               }
-              .swiper-slide:hover { 
-                border: solid 2px rgb(201, 200, 200);
-                animation: bordauser 3s infinite;
-            }
+              
               
               .swiper-slide img {
                 display: block;
@@ -115,18 +207,6 @@
 
             height: 100%;
             gap: 10px;
-
-            .card {
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
-                align-items: center;
-
-                width: 100%;
-                height: 250px;
-                border-radius: 10px;
-                background-color: rgb(69, 69, 69);
-            }
         }
     }
 
