@@ -85,6 +85,30 @@ export default function BarraLateral(props) {
         }
       }
 
+
+          //carrinho id
+    // var {idProduto} = useParams();
+    // const [nome, setNome] = useState('')
+    // const [image, setImage] = useState('');
+    // const [descricao, setDescricao] = useState('')
+
+    // useEffect(() => {
+    //     async function DetalhesBuy(){
+    //         try{
+    //             const response = await axios.get('https://api.rawg.io/api/games/' + idProduto + '?key=0a526d3c3985430c9469d8d6951eb5cb&');
+    //             console.log(idProduto)
+    //             setNome(response.data.name)
+    //             setImage(response.data.background_image)
+    //             setDescricao(response.data.description_raw)
+    //         }
+    //         catch(error){
+    //             console.log('Infelizmente deu erro' + error)
+    //         }
+    //     }
+    //     DetalhesBuy();
+    // }, [idProduto]);
+
+
     return(
         <div id="BarraLateral">
             {fundo == true &&
