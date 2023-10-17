@@ -28,21 +28,36 @@ export default function AddProduct(){
     const { idParam } = useParams();
 
     async function SalveClik(){
+
         try{
-            if(!imagem)
-                throw new Error('Imagem não selecionada!');
+            const usuarioLogado = storage('admin-logado');
+            console.log(usuarioLogado)
+            if (usuarioLogado) {
 
-            const admin = storage('usuario-logado').IDadmin;
+                const admin = usuarioLogado.IDadmin;
+        
+                if (admin === 0) {
 
-            if(IDadmin === 0){
-                const jogo = await CadastrarProduto(nome, preco, precoPro, destaque, promocao, disponivel, qtd, details, categoria, admin);
+                    if(!imagem)
+                    throw new Error('Imagem não selecionada!');
 
-                const EnviarIMG = await EnviarImagens(jogo.IDadmin, imagem);
-                setIDadmin(jogo.IDadmin);
+                    if(IDadmin === 0){
+                        const jogo = await CadastrarProduto(nome, preco, precoPro, destaque, promocao, disponivel, qtd, details, categoria, admin);
 
-                toast.success('Produto Gamer adicionado com SUCESSO!');
-            }
+                        const EnviarIMG = await EnviarImagens(jogo.IDadmin, imagem);
+                        setIDadmin(jogo.IDadmin);
 
+                        toast.success('Produto Gamer adicionado com SUCESSO!');
+                    }
+                }
+                 
+                else{
+                toast.warning('Usuário logado não é um administrador.');
+              }
+            } 
+            else{
+                toast.error('Usuário não está logado.');
+            }        
         }
         catch (err) {
             if (err.response) {
@@ -134,21 +149,19 @@ export default function AddProduct(){
                             imagem && 
                             <img id='imagem-capa' src={mostarImagem()} alt="" />
                             }
-                            <input type="file" onChange={e => setImagem(e.target.files[0])}/>
+                            <input type="file" id="file" onChange={e => setImagem(e.target.files[0])}/>
 
                         </div>
 
                         <div className="add-part2-imagem2" onClick={EscolherImagemDIV}>
                             {!imagem && 
-                                <img src="/assets/images/adm/photo.png" alt="" />
+                                <img src="/assets/images/adm/video.png" alt="" />
                             }
                             {
                             imagem && 
                             <img id='imagem-capa' src={mostarImagem()} alt="" />
                             }
-                            <input type="file" onChange={e => setImagem(e.target.files[0])}/>
-                            <input type="file" onClick={EscolherImagemDIV}/>
-                            <input type="file" onClick={EscolherImagemDIV}/>
+                            
                         </div>
 
                         <div className="add-part2-imagem-selecionados">
@@ -157,17 +170,9 @@ export default function AddProduct(){
                         </div>
 
                         <div className="add-part2-imagem3">
-                            <div>
-
-                            </div>
-
-                            <div>
-
-                            </div>
-
-                            <div>
-
-                            </div>
+                            <input type="file" id="file" onChange={e => setImagem(e.target.files[0])}/>
+                            <input type="file" onClick={mostarImagem}/>
+                            <input type="file" onClick={mostarImagem}/>
                         </div>
 
                     <section className='botao'>
