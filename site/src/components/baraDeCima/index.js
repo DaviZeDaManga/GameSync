@@ -9,21 +9,18 @@ export default function BarraDeCima (props) {
     const [lista, setLista] = useState (230)
     const [idprod, setIdprod] = useState ('')
 
-    async function ProcurarGames () {
-        let url = 'https://api.rawg.io/api/games?key=0a526d3c3985430c9469d8d6951eb5cb&page_size=' + lista 
-        let resposta = await axios.get(url)
+    // async function ProcurarGames () {
+    //     let url = 'https://api.rawg.io/api/games?key=0a526d3c3985430c9469d8d6951eb5cb&page_size=' + lista 
+    //     let resposta = await axios.get(url)
 
-        setTgames(resposta.data.results)
-    }
+    //     setTgames(resposta.data.results)
+    // }
 
     function MaisGames() {
         setLista(lista + 20)
     }
 
 
-    useEffect(() => {   
-        ProcurarGames()
-    }, [games, lista])
 
 
 
@@ -70,7 +67,7 @@ export default function BarraDeCima (props) {
             {games == true &&
             <section id='produtos'>
 
-                {tgames.map(item => 
+                {/* {tgames.map(item => 
                     <Link to={'/produto/' + item.id}>
                         <section className='produto'>
                             <div className='imagem-produto'>
@@ -91,7 +88,7 @@ export default function BarraDeCima (props) {
                             </div>
                         </section>  
                     </Link>
-                )}
+                )} */}
                
                 <nav id='acoes'>
                     <button onClick={MaisGames}>Procurar mais</button>

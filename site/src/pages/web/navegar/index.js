@@ -19,36 +19,36 @@ import { Link } from 'react-router-dom'
 export default function Navegar() {
     const [gamesN, setGamesN] = useState ([])
 
-    async function ProcurarGames () {
-        let url = 'https://api.rawg.io/api/games?key=0a526d3c3985430c9469d8d6951eb5cb&page_size=3'
-        let resposta = await axios.get(url)
+    // async function ProcurarGames () {
+    //     let url = 'https://api.rawg.io/api/games?key=0a526d3c3985430c9469d8d6951eb5cb&page_size=3'
+    //     let resposta = await axios.get(url)
 
-        setGamesN(resposta.data.results)
-    }
+    //     setGamesN(resposta.data.results)
+    // }
 
-    useEffect(()=> {
-        ProcurarGames()
-    }, [])
-
-
+    // useEffect(()=> {
+    //     ProcurarGames()
+    // }, [])
 
 
 
 
-    const [novos, setNovos] = useState ([])
-    async function NovosGames() {
-        let url = 'https://api.rawg.io/api/games?key=0a526d3c3985430c9469d8d6951eb5cb&page_size=6'
-        let resposta = await axios.get(url)
 
-        setNovos(resposta.data.results)
-    }
 
-    useEffect(() => {
-        NovosGames()
-    }, [])
+    // const [novos, setNovos] = useState ([])
+    // async function NovosGames() {
+    //     let url = 'https://api.rawg.io/api/games?key=0a526d3c3985430c9469d8d6951eb5cb&page_size=6'
+    //     let resposta = await axios.get(url)
 
-    
-    
+    //     setNovos(resposta.data.results)
+    // }
+
+    // useEffect(() => {
+    //     NovosGames()
+    // }, [])
+
+
+
     return(
         <div className='Navegar'>
             <BarraDeCima/>
@@ -70,18 +70,15 @@ export default function Navegar() {
                         modules={[Keyboard, Pagination, Navigation]}
                         className="mySwiper"
                     >
-                        {gamesN.map( item => 
-                            
                             <SwiperSlide>
-                                <img src={item.background_image} />
+                                <img src='https://imgs.search.brave.com/1HQFJlR_FMBWAsD3OlDyfJ4M8zqTzrNr6BHqESYc44E/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9zMi10/ZWNodHVkby5nbGJp/bWcuY29tL0FRTzR5/Rl9IUVdBYUtoZVE3/cnA2azBqbDFmTT0v/MHgwOjY5NXgzOTAv/OTg0eDAvc21hcnQv/ZmlsdGVyczpzdHJp/cF9pY2MoKS9pLnMz/LmdsYmltZy5jb20v/djEvQVVUSF8wOGZi/ZjQ4YmMwNTI0ODc3/OTQzZmU4NmU0MzA4/N2U3YS9pbnRlcm5h/bF9waG90b3MvYnMv/MjAyMS9uL3MvY3NC/NEJlVHZ5cGtSN2xS/WmFhSUEvdGhlLWVs/ZGVyLXNjcm9sbHMt/b25saW5lLW1tb3Jw/Zy10dWRvLXNvYnJl/LWhpc3RvcmlhLWdh/bWVwbGF5LW11bmRv/LWFiZXJ0by5qcGc' />
                                 <div className='conteudo'>
-                                    <h1>{item.name}</h1>
+                                    <h1>The Elder Scrolls</h1>
                                     <p>The Elder Scrolls V: Skyrim acontece em Skyrim, uma região que vem sendo ameaçada por uma guerra civil, seguida pelo retorno dos dragões e de Alduin, o deus da destruição e antagonista da história. Skyrim fica no extremo norte do continente de Tamriel.</p>
                                 </div>
                             </SwiperSlide>
-                        
-                        )}
-                        
+
+
                     </Swiper>
                 </section>
                 <section className='now-2'>
@@ -122,13 +119,13 @@ export default function Navegar() {
                 <div className='title'>
                     <div></div>
                     <h1>Novos Jogos</h1>
-                </div>    
+                </div>
             </main>
 
 
 
             <section id='produtos'>
-            {novos.map( item => 
+            {/* {novos.map( item =>
 
                 <Link to={'/produto/' + item.id}>
                     <section className='produto'>
@@ -151,7 +148,7 @@ export default function Navegar() {
                         </div>
                     </section>
                 </Link>
-                )}
+                )} */}
             </section>
 
 
@@ -160,7 +157,7 @@ export default function Navegar() {
 
 
 
-            {/* <section id='Navegar'> 
+            {/* <section id='Navegar'>
 
                 <Swiper
                     cssMode={true}
@@ -177,7 +174,7 @@ export default function Navegar() {
                                 <h1>Terror</h1>
                             </div>
                             <div className='tema'>
-                                <img src="/assets/images/navegarTemas/terror.jpg" /> 
+                                <img src="/assets/images/navegarTemas/terror.jpg" />
                             </div>
                         </section>
                         <section className='card-temas'>
@@ -219,12 +216,12 @@ export default function Navegar() {
                                     <h1>Terror</h1>
                                 </div>
                                 <div className='tema'>
-                                    <img src="/assets/images/navegarTemas/terror.jpg" /> 
+                                    <img src="/assets/images/navegarTemas/terror.jpg" />
                                 </div>
                             </section>
                     </SwiperSlide>
                 </Swiper>
-                
+
             </section>
 
             <article className='procurar'>
@@ -248,10 +245,10 @@ export default function Navegar() {
                 </div>
             </article>
 
-            <div id="produtos"> 
+            <div id="produtos">
 
                 {tgames.map( item =>
-                    
+
                 <section className='produto'>
                     <div className='imagem-produto'>
                         <div className='sombra'>
@@ -270,13 +267,13 @@ export default function Navegar() {
                             <h3>Novidade</h3>
                         </div>
                     </div>
-                </section>    
-                    
+                </section>
+
                 )}
 
             </div> */}
 
-           
+
 
             <FooterPage/>
         </div>
