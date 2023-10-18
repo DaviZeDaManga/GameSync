@@ -46,6 +46,7 @@
                     color: rgb(223, 223, 223);;
                     margin-right: 20px;
                     transition: 0.3s;
+                    cursor: pointer;
                 }
     
                 > button:hover {
@@ -61,6 +62,7 @@
         
                 width: 750px;
                 height: 40px;
+                gap: 10px;
     
                 > input {
                     width: 100%;
@@ -73,6 +75,31 @@
                     color: #ffffff;
                     outline: none;
                     border: none;
+                }
+
+                .redirects {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+    
+                    width: 40px;
+                    height: 40px;
+                    padding: 9px;
+                    transition: 0.3s;
+                    background-color: #313131;
+                    border-radius: 10px;
+    
+                    > img {
+                        height: 100%;
+                        opacity: 0.6;
+                    }
+                }
+                .redirects:hover {
+                    padding: 8px;
+                    > img {
+                        opacity: 1;
+                    }
                 }
             }
     

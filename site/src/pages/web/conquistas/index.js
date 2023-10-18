@@ -9,7 +9,7 @@ import { Link, useParams } from 'react-router-dom'
 export default function Conquistas(){
     const { id } = useParams()
 
-    const [mconquistas, setMconquistas] = useState (true)
+    const [mconquistas, setMconquistas] = useState (false)
 
     const [idprod, setIdprod] = useState (id)
 
@@ -18,29 +18,29 @@ export default function Conquistas(){
     const [conquista, setConquista] = useState ([])
     const [image, setImage] = useState ('')
 
-    async function Conquista() {
-        let url = 'https://api.rawg.io/api/games/'+ idprod +'/achievements?key=0a526d3c3985430c9469d8d6951eb5cb&&page_size=100'
-        let resposta = await axios.get(url)
+    // async function Conquista() {
+    //     let url = 'https://api.rawg.io/api/games/'+ idprod +'/achievements?key=0a526d3c3985430c9469d8d6951eb5cb&&page_size=100'
+    //     let resposta = await axios.get(url)
 
-        setConquista(resposta.data.results)
-    }
+    //     setConquista(resposta.data.results)
+    // }
 
-    useState(() => {
-        Conquista()
-    }, [])
+    // useState(() => {
+    //     Conquista()
+    // }, [])
 
-    async function game () {
-        let url = 'https://api.rawg.io/api/games/' + idprod + '?key=0a526d3c3985430c9469d8d6951eb5cb&'
-        let resposta = await axios.get(url)
+    // async function game () {
+    //     let url = 'https://api.rawg.io/api/games/' + idprod + '?key=0a526d3c3985430c9469d8d6951eb5cb&'
+    //     let resposta = await axios.get(url)
 
-        setImage(resposta.data.background_image)
-        setNome(resposta.data.name)
-        setDesc(resposta.data.description)
-    }
+    //     setImage(resposta.data.background_image)
+    //     setNome(resposta.data.name)
+    //     setDesc(resposta.data.description)
+    // }
 
-    useEffect(() => {
-        game()
-    }, [])
+    // useEffect(() => {
+    //     game()
+    // }, [])
 
 return(
 
@@ -53,9 +53,9 @@ return(
                 <div className='search-bar'>
 
                     <button className='search-button'>
-                        <a href="http://localhost:3000/procurar">Voltar</a>
+                        <a href="http://localhost:3000/">Voltar</a>
                     </button>
-                    <input className='search-image-frame' type='text' placeholder='Pesquise por Jogos para Ver as Conquistas' onChange={e => setIdprod (e.target.value)} value={idprod}>
+                    <input className='search-image-frame' type='text' placeholder='Pesquise por Jogos para Ver as Conquistas'>
                     </input>
 
                     <div className='user-search-frame'>
@@ -66,7 +66,7 @@ return(
 
                 <section className='Procure'>
                     <img src="/assets/images/conquistas/cadeado grey.png" />
-                    <p>Procure por algum jogo!</p>
+                    {/* <p>Procure por algum jogo!</p> */}
                 </section>
 
                 <div></div>
@@ -132,7 +132,7 @@ return(
                     <div className='achive-unlock'>
                         <div className='awards'>
                             <div className='awards-s1'>
-                                <img src="assets/images/GameSync/AchivementsVetor.png"/>
+                                <img src="/assets/images/conquistas/cadeadored.png"/>
                             </div>
                             <div className='awards-s2'>
 
@@ -141,7 +141,7 @@ return(
 
                         <div className='awards'>
                             <div className='awards-s1'>
-                                <img src="assets/images/GameSync/AchivementsVetor.png"/>
+                                <img src="/assets/images/conquistas/cadeadored.png"/>
                             </div>
                             <div className='awards-s2'>
 
@@ -150,7 +150,7 @@ return(
 
                         <div className='awards'>
                             <div className='awards-s1'>
-                                <img src="assets/images/GameSync/AchivementsVetor.png"/>
+                                <img src="/assets/images/conquistas/cadeadored.png"/>
                             </div>
                             <div className='awards-s2'>
 
@@ -159,7 +159,7 @@ return(
 
                         <div className='awards'>
                             <div className='awards-s1'>
-                                <img src="assets/images/GameSync/AchivementsVetor.png"/>
+                                <img src="/assets/images/conquistas/cadeadored.png"/>
                             </div>
                             <div className='awards-s2'>
 

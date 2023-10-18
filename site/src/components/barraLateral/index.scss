@@ -35,7 +35,7 @@
         .botoes {
             display: flex;
             flex-direction: column;
-            justify-content: start;
+            justify-content: end;
             align-items: center;
 
             width: 100%;
@@ -82,13 +82,19 @@
         z-index: 9;
         position: fixed;
         top: 20px;
-        left: 110px;
+        left: 90px;
 
-        > .linha {
+        > .linhabot {
             width: 3px;
             height: 100%;
-            animation: rgb infinite 4s;
+            animation: linhabot infinite 4s;
             background-color: #0e8aa0;
+        }
+        > .linhaassis {
+            width: 3px;
+            height: 100%;
+            animation: linhaassis infinite 4s;
+            background-color: #650ea0;
         }
 
         .assis {
@@ -100,6 +106,7 @@
             width: 100%;
             height: 100%;
             padding: 20px;
+            gap: 20px;
 
             .assisOUbot {
                 display: flex;
@@ -124,10 +131,16 @@
                     transition: 0.3s;
                 }
 
+                .a {
+                    background-color: #3dcf75;
+                }
+                .b {
+                    background-color: #753dcf;
+                }
+
                 > .bot:hover {
                     background-color: #3dcf75;
                 }
-
                 > .assistente:hover {
                     background-color: #753dcf;
                 }
@@ -140,26 +153,18 @@
                 align-items: start;
 
                 width: 100%;
-                height: 85%;
-                padding: 10px;
+                height: 100%;
                 border-radius: 10px;
-                background-color: rgb(56, 56, 56);
 
-                .mensagem {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: start;
-                    align-items: start;
-
-                    max-width: 200px;
-                    padding: 10px;
+                textarea {
+                    width: 100%;
+                    height: 100%;
+                    background-color: #2c2c2c;
+                    border: solid 3px #1e1e20;
                     border-radius: 10px;
-                    background-color: #323232;
-                    margin-bottom: 10px;
-
-                    > p {
-                        color: #D3D3D3;
-                    }
+                    color: #e6e6e6;
+                    padding: 10px;
+                    resize: none;
                 }
             }
 
@@ -192,7 +197,6 @@
                     height: 60px;
                     padding: 18px;
                     transition: 0.3s;
-                    background: linear-gradient(180deg, rgb(95, 206, 81), rgb(25, 156, 134));
                     animation: rgb infinite 5s;
 
                     > img {
@@ -200,8 +204,17 @@
                     }
                 }
 
+                .envbot {
+                    background: linear-gradient(180deg, rgb(95, 206, 81), rgb(25, 156, 134));
+                }
+                .envassis {
+                    background: linear-gradient(180deg, rgb(158, 81, 206),rgb(131, 37, 168));
+                }
+
                 button:hover {
                     padding: 15px;
+                    background: #00000000;
+                    border: solid 3px white;
                 }
             }
         }
@@ -525,7 +538,7 @@
     }
 }
 
-@keyframes rgb {
+@keyframes linhabot {
     20% {
         background-color: #3dcf75;
     }
@@ -540,6 +553,24 @@
     }
     100% {
         background-color: #0e8aa0;
+    }
+}
+
+@keyframes linhaassis {
+    20% {
+        background-color: #654bb3;
+    }
+    40% {
+        background-color: #853ebc;
+    }
+    60% {
+        background-color: #ae3fab;
+    }
+    80% {
+        background-color: #8026a9;
+    }
+    100% {
+        background-color: #9437b3;
     }
 }
 

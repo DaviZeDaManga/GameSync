@@ -8,6 +8,7 @@ export default function BarraLateral(props) {
     const[carrin, setCarrin] = useState(false)
     const[fundo, setFundo] = useState(false)
     const[assis, setAssis] = useState(false)
+    const[bot, setBot] = useState(true)
 
     function Fundo() {
         if(carrin == true || menu == true || assis == true) {
@@ -41,6 +42,10 @@ export default function BarraLateral(props) {
         setCarrin(false)
         setMenu(false)
         setAssis(false)
+    }
+
+    function botOUassis() {
+        setBot(!bot)
     }
 
     //parte do bot
@@ -145,27 +150,50 @@ export default function BarraLateral(props) {
 
             {assis == true &&
             <section id='assistente'> 
-                <div className='linha'></div>
+
+                {bot == true &&
+                <div className='linhabot'></div>}
+                {bot == false &&
+                <div className='linhaassis'></div>}
+
                 <main className='assis'>
                     <section className='assisOUbot'>
-                        <button className='botao bot'>
+
+                        {bot == true &&
+                        <>
+                        <button className='botao bot a'>
                             Bot
                         </button>
-                        <button className='botao assistente'>
+                        <button onClick={botOUassis} className='botao assistente'>
                             Assistente
                         </button>
+                        </>
+                        }
+
+                        {bot == false &&
+                        <>
+                        <button onClick={botOUassis} className='botao bot'>
+                            Bot
+                        </button>
+                        <button className='botao assistente b'>
+                            Assistente
+                        </button>
+                        </>
+                        }
+
                     </section>
                     <div className='mensagens'>
 
-                        <section className='mensagem empresa'>
-                            <p>Ola, precisa de alguma ajuda? se sim, digite 1</p>
-                        </section>
+                        <textarea value={Resposta}  onChange={(e) => setResposta(e.target.value)} cols="100" rows="50"></textarea>
 
                     </div>
                     <nav className='enviar'>
                         <input onKeyDown={Enter} value={IQuestion}  onChange={(e) => setIQuestion(e.target.value)} type='text' placeholder='Qual a sua duvida?'/>
-                        <button onClick={GPTbro}><img src="/assets/images/carrinho/enviar.png"/></button>
-                        <textarea value={Resposta}  onChange={(e) => setResposta(e.target.value)} cols="100" rows="50"></textarea>
+                       {bot == true &&
+                        <button onClick={GPTbro} className='envbot'><img src="/assets/images/carrinho/enviar.png"/></button>}
+
+                        {bot == false &&
+                        <button className='envassis'><img src="/assets/images/carrinho/enviar.png"/></button>}
                     </nav>
                 </main>
             </section>}
@@ -174,17 +202,6 @@ export default function BarraLateral(props) {
             <div className="BarraLateral">
                 <img onClick={MostrarMenu} className='logo' src="/assets/images/GameSync/giphy-unscreen.gif" />
                 <div className='botoes'>
-
-                    <Link to={'/'} >
-                        <section className='redirects'>
-                            <img src="/assets/images/barralateral/bolsa-de-compras.png" />
-                        </section>
-                    </Link>
-                    <Link to={'/planos'} >
-                        <section className='redirects'>
-                            <img src="/assets/images/barralateral/controle-de-video-game.png" />
-                        </section>
-                    </Link>
 
 
                     <section onClick={MostrarAssistente} className='redirects'>

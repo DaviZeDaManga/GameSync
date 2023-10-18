@@ -1,5 +1,19 @@
 
 
+@keyframes fundoinicial {
+    30% {
+        background-color: rgb(166, 48, 192);
+    }
+    60% {
+        background-color: rgb(103, 48, 192);
+    }
+    100% {
+        background-color: rgb(48, 108, 192);
+    }
+}
+
+
+
 #Conquista {
     width: 1600px;
     
@@ -16,7 +30,8 @@
             align-items: center;
             justify-content: space-between;
 
-            background: rgb(24, 24, 26);
+            background-color: rgb(48, 108, 192);
+            animation: fundoinicial infinite 5s;
             background-size: cover;   
             height: 50rem;
             width: 100%;
@@ -34,7 +49,7 @@
                 
                 > p {
                     margin-top: 10px;
-                    color: #2d2d33;
+                    color: #dddddd;
                     font-weight: 700;
                 }
             }
@@ -426,6 +441,10 @@
                             height: 230px;
                             width: 250px;
                             overflow: hidden;
+
+                            > img {
+                                opacity: 0.3;
+                            }
                         }
 
                         .conq > img {
