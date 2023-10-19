@@ -51,6 +51,20 @@ export default function BarraDeCima (props) {
                         <button onClick={()=> (setGames(false))}>Voltar</button>}
                         <div id="pesquisa">
                             <input onClick={()=> (setGames(true))} type="text" placeholder="procurar na GameSync" />
+
+                            <Link to={'/'} >
+                                <section className='redirects'>
+                                    <img src="/assets/images/barralateral/bolsa-de-compras.png" />
+                                    <p>Home</p>
+                                </section>
+                            </Link>
+                            <Link to={'/planos'} >
+                                <section className='redirects'>
+                                    <img src="/assets/images/barralateral/controle-de-video-game.png" />
+                                    <p>Planos</p>
+                                </section>
+                            </Link>
+                            
                         </div>
                     </div>
 
