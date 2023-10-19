@@ -212,3 +212,113 @@
     }
     
 }
+
+@media (max-width: 768px) {
+    #add-main-addproduct {
+        width: auto; /* Remova a margem à esquerda */
+      }
+    
+      .all {
+        flex-direction: column; /* Altere para uma pilha vertical */
+        align-items: center; /* Centralize os elementos verticalmente */
+      }
+    
+      .add {
+        margin-right: 0; /* Remova a margem à direita */
+      }
+    
+      .add-part1 {
+        width: 100%; /* Expanda para preencher a largura da tela */
+        margin-right: 0; /* Remova a margem à direita */
+      }
+      
+      .add-part2 {
+        width: 100%; /* Expanda para preencher a largura da tela */
+        margin-right: 0; /* Remova a margem à direita */
+      }
+
+      @media screen and (min-width: 2560px) and (min-height: 1440px){
+        #add-main-addproduct{
+          
+
+          .all{
+            .add{
+              background-color: rgb(251, 255, 0);
+              }
+        }
+      }
+      }
+
+      @media screen and (min-width: 1920px) and (min-height: 1080px){
+        #add-main-addproduct{
+          
+
+          .all{
+            .add{
+              background-color: rgb(17, 255, 0);
+              }
+        }
+      }
+      }
+
+      @media screen and (min-width: 1680px) and (min-height: 1050px){
+        #add-main-addproduct{
+          
+
+          .all{
+            .add{
+              background-color: rgb(0, 255, 255);
+              }
+        }
+      }
+      }
+
+
+        @media screen and (min-width: 1440px) and (min-height: 900px) {
+          #add-main-addproduct{
+          
+
+            .all{
+              .add{
+                background-color: rgb(0, 13, 255);
+                }
+          }
+        }
+      }
+
+      @media screen and (min-width: 1024px) and (min-height: 768px){
+          #add-main-addproduct{
+          
+
+            .all{
+              .add{
+                background-color: rgb(170, 0, 255);
+                }
+          }
+        }
+      }
+
+      @media screen and (min-width: 375px) and (min-height: 667px) {
+        #add-main-addproduct{
+        
+
+          .all{
+            .add{
+              background-color: rgb(255, 0, 157);
+              }
+        }
+      }
+    }
+
+//     @media screen and (min-width: 320px) and (min-height: 568px){
+//       #add-main-addproduct{
+      
+
+//         .all{
+//           .add{
+//             background-color: rgb(255, 0, 0);
+//             }
+//     }
+//   }
+// }
+}
