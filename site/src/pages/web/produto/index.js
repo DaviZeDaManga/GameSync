@@ -182,8 +182,8 @@ export default function Produto() {
 
                 <section id="info-produto">      
                     <div className="titulo">
-                        <h1 class='animate__animated animate__rubberBand'>{nome}</h1>
-                        <p>'{desc}'</p>
+                        <h1>{nome}</h1>
+                        <p>{desc}</p>
                     </div>
                     <section id='Comprar'>
                         <div className='info'>

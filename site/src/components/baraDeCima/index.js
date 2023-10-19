@@ -55,11 +55,13 @@ export default function BarraDeCima (props) {
                             <Link to={'/'} >
                                 <section className='redirects'>
                                     <img src="/assets/images/barralateral/bolsa-de-compras.png" />
+                                    <p>Home</p>
                                 </section>
                             </Link>
                             <Link to={'/planos'} >
                                 <section className='redirects'>
                                     <img src="/assets/images/barralateral/controle-de-video-game.png" />
+                                    <p>Planos</p>
                                 </section>
                             </Link>
                             
