@@ -71,7 +71,7 @@ export default function Navegar() {
                         className="mySwiper"
                     >
                             <SwiperSlide>
-                                <img src='https://imgs.search.brave.com/1HQFJlR_FMBWAsD3OlDyfJ4M8zqTzrNr6BHqESYc44E/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9zMi10/ZWNodHVkby5nbGJp/bWcuY29tL0FRTzR5/Rl9IUVdBYUtoZVE3/cnA2azBqbDFmTT0v/MHgwOjY5NXgzOTAv/OTg0eDAvc21hcnQv/ZmlsdGVyczpzdHJp/cF9pY2MoKS9pLnMz/LmdsYmltZy5jb20v/djEvQVVUSF8wOGZi/ZjQ4YmMwNTI0ODc3/OTQzZmU4NmU0MzA4/N2U3YS9pbnRlcm5h/bF9waG90b3MvYnMv/MjAyMS9uL3MvY3NC/NEJlVHZ5cGtSN2xS/WmFhSUEvdGhlLWVs/ZGVyLXNjcm9sbHMt/b25saW5lLW1tb3Jw/Zy10dWRvLXNvYnJl/LWhpc3RvcmlhLWdh/bWVwbGF5LW11bmRv/LWFiZXJ0by5qcGc' />
+                                <img src='https://pixelz.cc/wp-content/uploads/2019/03/the-elder-scrolls-online-wqhd-1440p-wallpaper.jpg' />
                                 <div className='conteudo borda'>
                                     <h1>The Elder Scrolls</h1>
                                     <p>The Elder Scrolls V: Skyrim acontece em Skyrim, uma região que vem sendo ameaçada por uma guerra civil, seguida pelo retorno dos dragões e de Alduin, o deus da destruição e antagonista da história. Skyrim fica no extremo norte do continente de Tamriel.</p>
@@ -79,7 +79,7 @@ export default function Navegar() {
                                 </div>
                             </SwiperSlide>
                             <SwiperSlide>
-                                <img src='https://imgs.search.brave.com/iUFg584I9zb0E3QX6zfMz6aQtWnV_9fzZsruETWF7Ow/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9nYW1l/cy5vbGFuZXJkLmNv/bS93cC1jb250ZW50/L3VwbG9hZHMvMjAy/Mi8xMC8xNjY2MDI1/MzI3Xzc3MF9IaXN0/b3JpYS1kZS1EYXJr/LVNvdWxzLUd3eW4t/bHV0YS1kZS1jaGVm/ZS1lLW11aXRvLmpw/Zw' />
+                                <img src='https://images5.alphacoders.com/609/609173.jpg' />
                                 <div className='conteudo borda'>
                                     <h1>DarkSouls</h1>
                                     <p>Dark Souls conta a história de uma terra que no começo, na tida Era dos Anciões (Age of Ancients), o mundo era desforme, incompleto, e envolto por névoas. Esse período era dominado pelos Dragões Imortais (Everlasting Dragons), uma terra formada por cinzas e árvores gigantes.</p>
