@@ -46,7 +46,6 @@ export default function Login(){
         }
 
         else{
-            navigate('/')
             toast.error('Usuario não logado, tente novamente');
         }
 
@@ -85,6 +84,7 @@ export default function Login(){
                             </p>
                         </form>
                     </div>
+                    {erro && <div className='erro'>{erro}</div>}
                 </figure>
             </main>
         </div>

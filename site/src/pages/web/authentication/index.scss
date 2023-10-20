@@ -11,7 +11,7 @@
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-position:center;
-
+    
     .card{
       #cadastro{
         display: flex;
@@ -124,54 +124,43 @@
   }
   
   @media screen and (min-width: 1680px) and (min-height: 1050px) {
-        display: none !important;
-
-        img{
-          display: none;
-          height: 100%;
-          width: 100%;
-          }
-
+    #CadastroUser{
+      width: 1px;
+      height: 90rem;
+      margin-right: 100px;
+      background-color: red; 
+    }
+      
   }
 
   @media screen and (min-width: 1440px) and (min-height: 900px) {
-    display: none !important;
 
-    img{
-      display: none;
-      height: 100%;
-      width: 100%;
-      }
+    #CadastroUser{
+      width: 1px;
+      height: 90rem;
+      margin-right: 100px;
+      background-color: red; 
+    }
+      
+
   }
 
   @media screen and (min-width: 1024px) and (min-height: 768px) {
-    display: none !important;
-
-    img{
-      display: none;
-      height: 100%;
-      width: 100%;
-      }
+    #CadastroUser{
+      width: 1px;
+      height: 90rem;
+      margin-right: 100px;
+      background-color: red; 
+    }
+      
   }
 
   @media screen and (min-width: 375px) and (min-height: 667px) {
-  display: none !important;
   
-    img{
-     display: none;
-     height: 100%;
-     width: 100%;
-    }
 
   }
 
   @media screen and (min-width: 320px) and (min-height: 568px) {
-    display: none !important;
 
-    img{
-      display: none;
-      height: 100%;
-      width: 100%;
-      }
   }
 }

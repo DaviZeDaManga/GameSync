@@ -25,7 +25,6 @@ export default function AddProduct(){
     let [categoria, setCategoria ] = useState(0);
     var [IDadmin, setIDadmin] = useState(0);
 
-   
     console.log(IDadmin)
     async function SalveClik(){
 
@@ -61,9 +60,9 @@ export default function AddProduct(){
                     };
         
                     const jogo = await CadastrarProduto(produto);
-
-                        await EnviarImagens(jogo.IDadmin, imagem);
-                        setIDadmin(jogo.IDadmin);
+                    console.log(jogo);
+                        await EnviarImagens(jogo.id, imagem);
+                       // setIDadmin(jogo.IDadmin);
 
                         toast.success('Produto Gamer adicionado com SUCESSO!');
                     
