@@ -14,9 +14,9 @@ export default function AddProduct(){
     const [nome, setNome] = useState('');
     const [preco, setPreco] = useState(0);
     const [precoPro, setprecoPro] = useState(0);
-    const [destaque, setDestaque] = useState(false);
-    const [promocao, setPromocao] = useState(false);
-    const [disponivel, setDisponivel] = useState(false);
+    const [destaque, setDestaque] = useState(false);//falso
+    const [promocao, setPromocao] = useState(false);//falso
+    const [disponivel, setDisponivel] = useState(false);//falso
     var [qtd, setQtd] = useState(0);
     const [details, setDetails] = useState("");
 
@@ -25,30 +25,47 @@ export default function AddProduct(){
     let [categoria, setCategoria ] = useState(0);
     var [IDadmin, setIDadmin] = useState(0);
 
-    const { idParam } = useParams();
-
+    console.log(IDadmin)
     async function SalveClik(){
 
         try{
             const usuarioLogado = storage('admin-logado');
-            console.log(usuarioLogado)
-            if (usuarioLogado) {
+            
+            if (usuarioLogado && usuarioLogado.id) {
 
-                const admin = usuarioLogado.IDadmin;
+                IDadmin = usuarioLogado.id;
         
-                if (admin === 0) {
+                if (IDadmin) {
 
-                    if(!imagem)
+                    if(!imagem){
                     throw new Error('Imagem não selecionada!');
+                    }
 
-                    if(IDadmin === 0){
-                        const jogo = await CadastrarProduto(nome, preco, precoPro, destaque, promocao, disponivel, qtd, details, categoria, admin);
+                    // Verifica se o preço é maior que zero
+                    if (preco <= 0) {
+                        throw new Error('Preço do jogo inserido é obrigatório. Certifique-se de que o preço seja maior que zero.');
+                    }
 
-                        const EnviarIMG = await EnviarImagens(jogo.IDadmin, imagem);
-                        setIDadmin(jogo.IDadmin);
+                    const produto = {
+                        nome,
+                        preco,
+                        precoPro,
+                        destaque: destaque ? 1 : 0,
+                        promocao: promocao ? 1 : 0,
+                        disponivel: disponivel ? 1 : 0,
+                        qtd,
+                        details,
+                        categoria,
+                        admin: IDadmin
+                    };
+        
+                    const jogo = await CadastrarProduto(produto);
+                    console.log(jogo);
+                        await EnviarImagens(jogo.id, imagem);
+                       // setIDadmin(jogo.IDadmin);
 
                         toast.success('Produto Gamer adicionado com SUCESSO!');
-                    }
+                    
                 }
                  
                 else{
@@ -62,8 +79,10 @@ export default function AddProduct(){
         catch (err) {
             if (err.response) {
               toast.error(err.response.data.erro);
+              console.log(err.response.data.erro)
             } else {
               toast.error(err.message);
+              console.log()
             }
           }
     }
@@ -80,7 +99,7 @@ export default function AddProduct(){
             return BuscarJodoID(imagem)
         }
     }
-
+    console.log(preco)
     return(
         <div id='add-main-addproduct'>
             <AdmBarraLateral selecionado='addproduts'/>
@@ -113,17 +132,17 @@ export default function AddProduct(){
                             </div>
 
                             <div className="add-part1-negocio-msm">
-                                <input type="radio" value={promocao} onChange={e => setPromocao(e.target.value)}/>
+                                <input type="radio" value={1} onChange={e => setPromocao(parseInt(e.target.value))}/>
                                 <p>Promoção?</p>
                             </div>
 
                             <div className="add-part1-negocio-msm">
-                                <input type="radio" value={disponivel} onChange={e => setDisponivel(e.target.value)}/>
+                                <input type="radio" value={1} onChange={e => setDisponivel(parseInt(e.target.value))}/>
                                 <p>Disponivel?</p>
                             </div>
 
                             <div className="add-part1-negocio-msm">
-                                <input type="radio" value={destaque} onChange={e => setDestaque(e.target.value)}/>
+                                <input type="radio" value={1} onChange={e => setDestaque(parseInt(e.target.value))}/>
                                 <p>Destaque?</p>
                             </div>
 
@@ -184,4 +203,4 @@ export default function AddProduct(){
             </main>
         </div>
     )
-}
+} 

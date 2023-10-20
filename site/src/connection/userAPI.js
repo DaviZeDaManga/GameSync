@@ -17,3 +17,20 @@ export async function LoginUser(email, senha){
         throw err
     }
 }
+
+export async function CadastroUsuario(nome, telefone, cpf, email, senha){
+    try{
+        const r = await api.post('/usuario/cadastrar', {
+            nome: nome,
+            telefone: telefone,
+            cpf: cpf,
+            email: email,
+            senha: senha
+        });
+        return r.data
+    }
+    catch(err){
+        console.log(err);
+        throw err
+    }
+}

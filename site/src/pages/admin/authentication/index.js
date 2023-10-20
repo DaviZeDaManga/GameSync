@@ -48,7 +48,7 @@ export default function CadastroAdmin(){
     }
 
     return(
-        <div id='mae'>
+        <div id='CadastroAdmin'>
             <LoadingBar color='#f11946' ref={ref} /> 
 
             <figure className='mae-formulario'>
