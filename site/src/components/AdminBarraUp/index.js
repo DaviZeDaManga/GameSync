@@ -23,6 +23,8 @@ export default function AdmBarraUp(props){
         }
     }, [])
 
+    
+
     // Verifica se Admin está definido antes de usá-lo
     const primeiraLetra = Admin ? Admin[0].toUpperCase() : '';
 

@@ -58,6 +58,13 @@ export default function AdmBarraLateral(props){
                             <img src="/assets/images/adm/newspaper.png" alt="" />
                         </div>
                     </Link>
+
+                    <Link to='/admin/MudarProduto' className={`opcoes-z ${props.selecionado === 'MudarProduto' ? 'selecionado' : ''}`}>
+                        <div className="opcoes-z">
+                            <h1>CHANGE</h1>
+                            <img src="/assets/images/adm/mudar.png" alt="MudarProduto" />
+                        </div>
+                    </Link>
                 </section>
 
                 <footer className="sair">
