@@ -10,6 +10,7 @@ import GameSync from './pages/web/GameSync'
 import CadastroUser from './pages/web/authentication'
 import LoginUser from './pages/web/log'
 import EscolherLogin from './pages/web/escolherconta'
+import Cadaster from './pages/web/cadaster'
 
 import CadastroAdmin from './pages/admin/authentication'
 import HomeAdmin from './pages/admin/home'
@@ -30,6 +31,7 @@ export default function Routess(){
                 <Route path='/cadastro' element={<CadastroUser/>} />
                 <Route path='/login' element={<LoginUser/>} />
                 <Route path='/escolherlogin' element={<EscolherLogin/>} />
+                <Route path="/cadaster" element={<Cadaster/>} />
 
                 <Route path='/admin/home' element={<HomeAdmin/>} />
                 <Route path='/admin' element={<CadastroAdmin/>} />
