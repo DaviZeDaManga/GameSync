@@ -35,11 +35,30 @@ export function BuscarJodoID(imagem){
     // http://localhost:5000/tools\\capasFilmes\\07824752478hh0yfbfy3uhyhyfuh
 }
 
-export  async function BuscarJogoNome(nome){
-    const resposta = await api.get('') 
+export async function BuscarJogoNome(nome) {
+    try {
+        const resposta = await axios.get(`/produto/buscar?nome=${nome}`);
+        return resposta.data;
+    } 
+    catch (error) {
+        if (error.response && error.response.status === 404) {
+            // Tratar a situação em que nenhum resultado foi encontrado.
+            return [];
+        } else {
+            // Tratar outros erros, como erros na solicitação ou no servidor.
+            throw error;
+        }
+    }
 }
+
 
 export async function ListarTodosJogos(){
     const resposta = await api.get('/produtos');
     return resposta.data
 }
+
+export async function ExcluirProduto(id){
+    const resposta = await api.delete(`/produto/${id}`);
+    return resposta.status
+}
+

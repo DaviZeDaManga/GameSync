@@ -3,7 +3,7 @@ export default function Cadaster(){
 
     return(
     
-
+        <main id="Cadaster">
           <div class="box">
         <div class="img-box">
         <img src="assets/images/Cadastro/logoadm branc (1).png" alt="" />
@@ -44,6 +44,6 @@ export default function Cadaster(){
             </form>
         </div>
     </div>
-     
+    </main>
     )
   }

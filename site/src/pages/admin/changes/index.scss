@@ -13,7 +13,26 @@
         flex-grow: 1;
     }
 
+    .pesquisa{
+        width: 30rem;
+        position: relative;
+        border: none;
+        bottom: 80px;
+        left: 180px;
+        background-color: rgb(234, 234, 234);;
+    }
 
+    .pesquisa > input{
+        background-image: url('../../../../public/assets/images/adm/pesquisa-de-dados.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        width:30rem;
+        height: 40px;
+        text-indent: 4rem; 
+        border: none;
+        box-shadow: none;
+        border-radius: 10px;
+    }
 
     .conteudo {
         display: flex;
