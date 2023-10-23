@@ -58,6 +58,7 @@ export async function ListarTodosJogos(){
 }
 
 export async function ExcluirProduto(id){
+    console.log(id)
     const resposta = await api.delete(`/produto/${id}`);
     return resposta.status
 }

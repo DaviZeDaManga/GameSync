@@ -52,6 +52,7 @@ export default function EditarExcluir(){
                         await ExcluirProduto(id, nome);
                         if (filtro === "") {
                             CarregarTodosJogos();
+                            
                         } else {
                             CarregarTodosJogos();
                             toast.dark("Jogo Removido💀");
@@ -64,7 +65,7 @@ export default function EditarExcluir(){
             ]
         });
     }
-    
+    console.log(RemoverJogo);
 
     return(
         <main id='EditarExcluir'>
