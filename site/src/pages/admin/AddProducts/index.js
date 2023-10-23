@@ -3,7 +3,7 @@ import AdmBarraLateral from '../../../components/AdminBarraL';
 import AdmBarraUp from '../../../components/AdminBarraUp';
 
 import storage from 'local-storage';
-import { CadastrarProduto, EnviarImagens, BuscarJodoID } from '../../../connection/productAPI';
+import { CadastrarProduto, EnviarImagens, BuscarJodoID, InserirCategoriaProduto } from '../../../connection/productAPI';
 
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -23,9 +23,9 @@ export default function AddProduct(){
     const [imagem, setImagem] = useState();
 
     let [categoria, setCategoria ] = useState(0);
-    var [IDadmin, setIDadmin] = useState(0);
+    var [IDadmin, setIDadmin] = useState();
 
-    console.log(IDadmin)
+    //console.log(IDadmin)
     async function SalveClik(){
 
         try{
@@ -48,21 +48,32 @@ export default function AddProduct(){
 
                     const produto = {
                         nome,
-                        preco,
-                        precoPro,
+                        preco: parseFloat(preco),
+                        precoPro: parseFloat(precoPro),
                         destaque: destaque ? 1 : 0,
                         promocao: promocao ? 1 : 0,
                         disponivel: disponivel ? 1 : 0,
-                        qtd,
+                        qtd: parseInt(qtd, 10),
                         details,
-                        categoria,
+                        categoria: parseInt(qtd, 10),
                         admin: IDadmin
                     };
         
                     const jogo = await CadastrarProduto(produto);
-                    console.log(jogo);
+                    //console.log(jogo);
+
+                    const tabela = {
+                        categoria: categoria,
+                        produto: jogo.id
+                    }
+
+                    await InserirCategoriaProduto(tabela);
+                    //console(tabela)
+
                         await EnviarImagens(jogo.id, imagem);
                        // setIDadmin(jogo.IDadmin);
+
+                    
 
                         toast.success('Produto Gamer adicionado com SUCESSO!');
                     
@@ -99,7 +110,7 @@ export default function AddProduct(){
             return BuscarJodoID(imagem)
         }
     }
-    console.log(preco)
+    //console.log(preco)
     return(
         <div id='add-main-addproduct'>
             <AdmBarraLateral selecionado='addproduts'/>

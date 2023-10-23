@@ -7,6 +7,8 @@ export default function AdmBarraUp(props){
 
     const [Admin, setAdmin] = useState('');
     const [nome, setNome] = useState('');
+    let [pesquisar, setPesquisar] = useState('')
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -23,13 +25,22 @@ export default function AdmBarraUp(props){
         }
     }, [])
 
+    async function Enter(event) {
+        if (event.key === "Enter") {
+            if (navigate && navigate('/admin/MudarProduto')) {
+                // Redirecionar apenas se não estiver na página /admin/MudarProduto
+                navigate('/admin/MudarProduto');
+            }
+        }
+    }    
+
     // Verifica se Admin está definido antes de usá-lo
     const primeiraLetra = Admin ? Admin[0].toUpperCase() : '';
 
     return(
         <article className="pesquisar">
             <div className="pesquisar-barra">
-                <input type="text"/>
+                <input type="text" placeholder='Pesquise o nome do Jogo' value={pesquisar} onChange={e => setPesquisar(e.target.value)} onKeyDown={Enter}/>
             </div>
 
             <div className="adm-logado">

@@ -12,12 +12,13 @@ export default function AdmBarraLateral(props){
         navigate('/admin')
     }
 
-    function SessionSelect(opcoes) {
-        if(opcoes === props.selecionado)
-        return 'selecionado'
-
-        else return '';
-    }
+    function SessionSelect(props) {
+        if (props.opcoes === props.selecionado) {
+            return 'selecionado';
+        } else {
+            return '';
+        }
+    }    
 
     return(
         <div id='mae'>
@@ -38,12 +39,13 @@ export default function AdmBarraLateral(props){
                         </div>
                     </Link>
                     {/* Se a prop 'selecionado' for 'home', a classe 'selecionado' será aplicada */}
-                    <Link to='/admin/addproduts' className={`opcoes-z ${props.selecionado === 'addproduts' ? 'selecionado' : ''}`}>                    
+                    <Link to='/admin/addproduts' className={`opcoes-z ${SessionSelect({ opcoes: 'addproduts', selecionado: props.selecionado })}`}>
                         <div className="opcoes-z">
                             <h1>ADD PRODUCTS</h1>
                             <img src="/assets/images/adm/add 2.png" alt="addproduts" />
                         </div>
                     </Link>
+
 
                    <Link to='' className={`opcoes-z ${props.selecionado === '' ? 'selecionado' : ''}`}>
                     <div className="opcoes-z">
@@ -56,6 +58,13 @@ export default function AdmBarraLateral(props){
                         <div className="opcoes-z">
                             <h1>NEWS</h1>
                             <img src="/assets/images/adm/newspaper.png" alt="" />
+                        </div>
+                    </Link>
+
+                    <Link to='/admin/MudarProduto' className={`opcoes-z ${SessionSelect({ opcoes: 'MudarProduto', selecionado: props.selecionado })}`}>
+                        <div className="opcoes-z">
+                            <h1>CHANGES</h1>
+                            <img src="/assets/images/adm/mudar.png" alt="MudarProduto" />
                         </div>
                     </Link>
                 </section>
