@@ -76,22 +76,12 @@ export default function BarraDeCima (props) {
 
                     <div id="perfil">
                     <p>Ola, {nome}</p>
-                        <div className="perfil">
+                        <div className="perfil botao">
                             <img src="/assets/images/GameSync/user.png" />
-                            <div className='menu-perfil'>
-                                <div></div>
-                                <section className='card'>
-                                    <div>
-                                    <a href="http://localhost:3000/perfil">Minha conta</a>
-                                    <a href="http://localhost:3000/perfil">Favoritos</a>
-                                    <a href="http://localhost:3000/perfil">Meus pedidos</a>
-                                    <a href="http://localhost:3000/perfil">Atendimento</a>
-                                    <a href="http://localhost:3000/perfil">Devoluções</a>
-                                    </div>
-                                    <a href="http://localhost:3000/escolherlogin"><button>Trocar conta</button></a>
-                                </section>
-                            </div>
                         </div>
+                        <section className='config botao'>
+                            <img src="/assets/images/barradecima/configuracoes.png" />
+                        </section>
                     </div>
                 </div>
             </section>

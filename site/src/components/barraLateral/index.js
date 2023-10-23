@@ -24,18 +24,19 @@ export default function BarraLateral(props) {
     }, [carrin, menu, assis])
 
     function MostrarAssistente() {
-        setAssis(!assis)
+        setAssis(true)
+        setCarrin(false)
         Fundo()
     }
 
     function MostrarCarrin() {
-        setCarrin(!carrin)
+        setAssis(false)
+        setCarrin(true)
         Fundo()
     }
 
-    function MostrarMenu() {
-        setMenu(!menu)
-        Fundo()
+    function RecarregarPage() {
+        window.location.reload()
     }
     
     function Sair() {
@@ -118,35 +119,6 @@ export default function BarraLateral(props) {
         <div id="BarraLateral">
             {fundo == true &&
             <div onClick={Sair} className='fundo'></div>}
-            
-            {menu == true &&
-            <section className='Menu'>
-                <main className='geral'>
-                    <section className='pages'>
-                        <h1 className='none'>Paginas</h1>
-                        <div className='linha'></div>
-                        <a href="http://localhost:3000/">Descobrir</a>
-                        <a href="http://localhost:3000/procurar">Procurar</a>
-                        <a href="http://localhost:3000/planos">Planos</a>
-                        <a href="">Noticias</a>
-                        <a href="http://localhost:3000/conquistas">Sessao Conquista</a>
-                        <a href="http://localhost:3000/sobregamesync">Sobre Nós</a>
-
-                        <h1 >Menu</h1>
-                        <div className='linha'></div>
-                        <a href="">Configurações</a>
-                        <a href="">Usuario</a>
-                        <a href="">Privacidade</a>
-                        <a href="">Gerenciar pagamento</a>
-
-                        <h1 >Eu</h1>
-                        <div className='linha'></div>
-                        <a href="">Minha Conta</a>
-                        <a href="">Favoritos</a>
-                        <a href="">Compras</a>
-                    </section>
-                </main>
-            </section>}
 
             {assis == true &&
             <section id='assistente'> 
@@ -200,7 +172,7 @@ export default function BarraLateral(props) {
 
 
             <div className="BarraLateral">
-                <img onClick={MostrarMenu} className='logo' src="/assets/images/GameSync/giphy-unscreen.gif" />
+                <img onClick={RecarregarPage} className='logo' src="/assets/images/GameSync/giphy-unscreen.gif" />
                 <div className='botoes'>
 
 
@@ -224,12 +196,13 @@ export default function BarraLateral(props) {
                 </div>
 
                 <main className='prodEsub'>
-                    <section className='produtos'>
+                    <section className='produtos-car'>
 
-                        <div className='produto'>
+                        <Link to={'/produto/54'}>
+                        <div className='produto-car'>
                             <div className='card'>
                                 <div className='verproduto'>
-                                    <img src="/assets/images/teste/jogo.jpg" />
+                                    <img src="https://imgs.search.brave.com/A5BOTpwf5ubCH_k3uDrxVORUzgN7nf0oOIAEPZT4n4Y/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZS5hcGkucGxheXN0/YXRpb24uY29tL3Z1/bGNhbi9pbWcvcm5k/LzIwMjAxMC8xNTIw/L3lQbWxQTmU5ZXh0/VDJBVnN2OTBoT0tt/bi5wbmc" />
                                     <button>Ver Produto</button>
                                 </div>
                                 <div className='info'>
@@ -238,19 +211,45 @@ export default function BarraLateral(props) {
                                     <h1>R$109,90</h1>
                                 </div>
                             </div>
+
                             <div className='acoes'>
                                 <div className='buton apagar'>
-                                    <img src="/assets/images/carrinho/lixeira.png" />
+                                    <img src="/assets/images/barralateral/carrinho/lixo.png" />
                                 </div>
                                 <div className='buton qnt'>
                                     
                                 </div>
                             </div>
                         </div>
+                        </Link>
 
-                        
+                       <Link to={'/produto/23'}>
+                       <div className='produto-car'>
+                            <div className='card'>
+                                <div className='verproduto'>
+                                    <img src="https://imgs.search.brave.com/TBlZEjcbJciqDQgy_SeMfc5EKiISv9VuTkDjOdVDca0/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMubmludGVuZG8u/Y29tL2ltYWdlL3Vw/bG9hZC9hcl8xNjo5/LGNfbHBhZCx3XzEy/NDAvYl93aGl0ZS9m/X2F1dG8vcV9hdXRv/L25jb20vc29mdHdh/cmUvc3dpdGNoLzcw/MDEwMDAwMDAwOTY0/LzgxMTQ2MWI4ZDFj/YWNmMWYyZGE3OTFi/NDc4ZGNjZmUyYTU1/NDU3NzgwMzY0YzNk/NWE5NWZiZmNkZDRj/MzA4NmY.jpeg" />
+                                    <button>Ver Produto</button>
+                                </div>
+                                <div className='info'>
+                                    <h1>Minecraft Bedrock Edition</h1>
+                                    <p>Minecraft é um jogo eletrônico sandbox de sobrevivência criado pelo desenvolvedor sueco Markus "Notch" Persson e posteriormente desenvolvido e publicado pela Mojang Studios, cuja propriedade intelectual foi obtida pela Microsoft em 2014. Lançado inicialmente em maio de 2009 como um projeto em desenvolvimento, seu lançamento completo ocorreu em novembro de 2011 para Microsoft Windows, macOS, Linux e alguns dispositivos móveis, sendo posteriormente relançado para uma ampla variedade de plataformas.</p>
+                                    <h1>R$79,90</h1>
+                                </div>
+                            </div>
+
+                            <div className='acoes'>
+                                <div className='buton apagar'>
+                                    <img src="/assets/images/barralateral/carrinho/lixo.png" />
+                                </div>
+                                <div className='buton qnt'>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                       </Link>
 
                     </section>
+
                     <section className='subtotal'>
                         <div className='dados'>
 

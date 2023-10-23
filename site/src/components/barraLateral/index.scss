@@ -75,16 +75,14 @@
         justify-content: space-between;
         align-items: start;
 
-        width: 420px;
-        height: 95vh;
+        width: 520px;
+        height: 100vh;
         background-color: #3d3d3d;
-        border-top-right-radius: 20px;
-        border-bottom-right-radius: 20px;
 
         z-index: 9;
         position: fixed;
-        top: 20px;
-        left: 90px;
+        top: 0;
+        left: 80px;
 
         > .linhabot {
             width: 3px;
@@ -222,60 +220,7 @@
         }
     }
 
-    .Menu {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: start;
 
-        width: 220px;
-        height: 450px;
-        background-color: #3d3d3d;
-        border-radius: 10px;
-        border: solid 1px #a8a8a8;
-
-        z-index: 9;
-        position: fixed;
-        top: 20px;
-        left: 110px;
-
-        .geral {
-            display: flex;
-            flex-direction: column;
-            justify-content: start;
-            align-items: center;
-
-            width: 100%;
-            padding: 20px;
-
-            .none {
-                margin: 0px 0px 10px 0px;
-            }
-
-            h1 {
-                margin: 20px 0px 10px 0px;
-            }
-
-            a {
-                text-decoration: none;
-                color: rgb(197, 197, 197);
-                transition: 0.3s;
-            }
-
-            a:hover {
-                color: #CF833D;
-            }
-
-            .pages {
-                display: flex;
-                flex-direction: column;
-                justify-content: start;
-                align-items: start;
-
-                width: 100%;
-            }
-        }
-    }
 
     .fundo {
         display: flex;
@@ -308,7 +253,7 @@
         z-index: 9;
         position: fixed;
         top: 0;
-        right: 0;
+        left: 80px;
 
         .Resumo {
             display: flex;
@@ -337,34 +282,35 @@
             height: 100%;
             padding: 20px;
 
-            .produtos {
+            .produtos-car {
                 display: flex;
                 flex-direction: column;
                 justify-content: start;
                 align-items: center;
     
                 width: 100%;
-                height: 100%;
+                height: 800px;
+                gap: 20px;
+                overflow: auto;
 
-                .produto {
+                .produto-car {
                     display: flex;
                     flex-direction: row;
                     justify-content: space-between;
                     align-items: center;
 
                     width: 100%;
-                    height: 180px;
+                    min-height: 180px;
                     gap: 10px;
-                    margin-bottom: 20px;
 
-                    .card {
+                    > .card {
                         display: flex;
                         flex-direction: row;
                         justify-content: space-between;
                         align-items: center;
 
                         width: 100%;
-                        height: 100%;
+                        height: 180px;
                         padding: 10px;
                         border-radius: 10px;
                         gap: 10px;
@@ -381,15 +327,16 @@
                             > img {
                                 height: 100%;
                                 width: 160px;
-                                border-radius: 10px;
+                                border-top-right-radius: 10px;
+                                border-top-left-radius: 10px;
                                 background: cover;
                             }
 
                             > button {
-                                margin-top: 10px;
+                                border-bottom-left-radius: 10px;
+                                border-bottom-right-radius: 10px;
                                 width: 100%;
                                 height: 30px;
-                                border-radius: 10px;
                                 border: none;
                                 background-color: #212121;
                                 color: white;
@@ -397,7 +344,7 @@
                             }
 
                             > button:hover {
-                                background-color: #CF833D;
+                                border: solid 2px white;
                             }
                         }
 
@@ -417,8 +364,6 @@
 
                             > p {
                                 overflow-x: hidden;
-                                font-size: 15px;   
-                                color: #cfcfcf;
                                 font-weight: 400;
                                 max-height: 10ch;
                             }
@@ -445,7 +390,7 @@
                         align-items: center;
 
                         width: 100px;
-                        height: 100%;
+                        height: 180px;
                         border-radius: 10px;
                         padding: 10px;
                         background-color: #3B3B3B;
@@ -458,22 +403,27 @@
 
                             width: 100%;
                             height: 65px;
-                            padding: 17px;
+                            padding: 18px;
                             background-color: #333333;
                             border-radius: 10px;
                             transition: 0.3s;
 
                             > img {
+                                opacity: 0.6;
                                 height: 100%;
                             }
                         }
 
                         .buton:hover {
-                            padding: 15px;
+                            padding: 17px;
+                            > img {
+                                opacity: 1;
+                            }
                         }
 
                         .apagar:hover {
                             background-color: rgb(172, 38, 38);
+                            border: solid 2px rgb(48, 1, 1);
                         }
                         .qnt:hover {
                             background-color: rgb(70, 70, 70);
