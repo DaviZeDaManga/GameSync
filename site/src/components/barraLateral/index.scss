@@ -262,8 +262,7 @@
             align-items: center;
 
             width: 100%;
-            height: 60px;
-            padding: 0px 20px;
+            padding: 20px;
             background-color: #212121;
 
             > h1 {
@@ -281,6 +280,7 @@
             width: 100%;
             height: 100%;
             padding: 20px;
+            position: relative;
 
             .produtos-car {
                 display: flex;
@@ -289,7 +289,6 @@
                 align-items: center;
     
                 width: 100%;
-                height: 800px;
                 gap: 20px;
                 overflow: auto;
 
@@ -439,7 +438,7 @@
                 align-items: center;
     
                 width: 100%;
-                height: 400px;
+                height: auto;
                 gap: 20px;
 
                 .dados {
@@ -449,15 +448,15 @@
                     align-items: center;
 
                     width: 100%;
-                    height: 100%;
+                    height: auto;
+                    padding: 20px;
                     border-radius: 10px;
                     background-color: #212121;
                 }
 
                 > button {
                     width: 100%;
-                    height: 60px;
-                    padding: 0px 20px;
+                    padding: 20px;
                     background-color: #CF833D;
                     border: none;
                     border-radius: 10px;
@@ -470,8 +469,7 @@
 
         > button {
             width: 100%;
-            height: 60px;
-            padding: 0px 20px;
+            padding: 20px;
             background-color: #212121;
             border: none;
             color: #D3D3D3;

@@ -108,21 +108,14 @@ export default function Navegar() {
                 </section>
             </main>
             <section id='procurar'>
-                    <section id='acessar'>
-                        <div className='acessar'>
-                            <div className='botao borda'>
-                                {/* <img src='/assets/images/navegar/certificado.png' /> */}
-                            </div>
-                            <Link to={'/conquistas/432'} >
-                                <div className='botao borda'>
-                                    {/* <img src='/assets/images/GameSync/trofeu.svg' /> */}
-                                </div>
-                            </Link>
-                        </div>
-                        <div className='acessar dev borda'>
 
-                        </div>
-                    </section>
+                    <div className='card borda'>
+                        <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzrEXo8FcflttiEn1kJ_nqeXr8n9soemwx4Q&usqp=CAU' />
+                            <div className='conteudo '>
+                                <h1>Noticia</h1>
+                                <p>Um dos maiores games da Rockstar tinha duas sequências planejadas, mas que não saíram do papel</p>
+                            </div>
+                    </div>
                     <div className='card borda'>
                         <img src='https://imgs.search.brave.com/XiqHB2N0NKYCeh9puVVBxDk1MQ85PRwKjK9aDwsnXWU/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9zbS5p/Z24uY29tL3QvaWdu/X2JyL3NjcmVlbnNo/b3QvaC9oMzExLWJ1/bGx5L2gzMTEtYnVs/bHloM2Rpc2JhcnJl/ZC1hdHRvcm5leS1h/bmQtdmlkZW8tZ2Ft/ZS1pbmR1c3RyeS1w/ZXN0X2E5MmEuMjgw/LmpwZw' />
                             <div className='conteudo '>
@@ -141,10 +134,15 @@ export default function Navegar() {
 
 
             <main id='title'>
-                <div className='title'>
-                    <div></div>
+                <div className='title'> 
                     <h1>Novos Jogos</h1>
                 </div>
+
+                <section className='nav-title'>
+                    <p>Novidades</p>
+                    <p>Pre-lançamento</p>
+                    <button>Ver mais</button>
+                </section>
             </main>
 
 

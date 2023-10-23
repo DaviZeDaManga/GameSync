@@ -24,14 +24,14 @@ export default function BarraLateral(props) {
     }, [carrin, menu, assis])
 
     function MostrarAssistente() {
-        setAssis(true)
+        setAssis(!assis)
         setCarrin(false)
         Fundo()
     }
 
     function MostrarCarrin() {
         setAssis(false)
-        setCarrin(true)
+        setCarrin(!carrin)
         Fundo()
     }
 
@@ -222,6 +222,7 @@ export default function BarraLateral(props) {
                             </div>
                         </div>
                         </Link>
+                        
 
                        <Link to={'/produto/23'}>
                        <div className='produto-car'>
@@ -247,6 +248,8 @@ export default function BarraLateral(props) {
                             </div>
                         </div>
                        </Link>
+
+                       
 
                     </section>
 

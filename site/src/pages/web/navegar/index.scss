@@ -18,17 +18,43 @@
 
             width: auto;
             height: 100%;
+            padding: 0px 10px;
             gap: 10px;
-
-            > div {
-                width: 30px;
-                height: 30px;
-                border-radius: 100%;
-                background-color: rgb(199, 199, 199)
-            }
+            border-radius: 10px;
+            border: solid 2px rgb(82, 84, 200);
 
             h1 {
                 font-size: 15px;
+            }
+        }
+
+        .nav-title {
+            display: flex;
+            flex-direction: row;
+            justify-content: end;
+            align-items: center;
+
+            width: auto;
+            height: 100%;
+            gap: 10px;
+
+            > p {
+                border-radius: 5px;
+                padding: 5px 10px;
+                border: solid 2px rgb(126, 126, 126);
+                background-color: #e8e8e835;
+            }
+
+            > button {
+                height: 100%;
+                padding: 0px 20px;
+                border: none;
+                border-radius: 10px;
+                background-color: #252525;
+                color: white;
+            }
+            > button:hover {
+                border: solid 2px white;
             }
         }
     }
@@ -100,7 +126,8 @@
     .borda:hover { 
         -moz-transform: scale(1.1);
         -webkit-transform: scale(1.1);
-        transform: scale(1.02);
+        transform: scale(1.03);
+        z-index: 4;
         > img {
             -moz-transform: scale(1.1);
             -webkit-transform: scale(1.1);
