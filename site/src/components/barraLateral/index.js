@@ -171,6 +171,11 @@ export default function BarraLateral(props) {
             </section>}
 
 
+            <section className='configs'>
+                            
+            </section>
+
+
             <div className="BarraLateral">
                 <img onClick={RecarregarPage} className='logo' src="/assets/images/GameSync/giphy-unscreen.gif" />
                 <div className='botoes'>
