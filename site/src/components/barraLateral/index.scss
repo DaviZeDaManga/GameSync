@@ -69,6 +69,23 @@
         }
     }
 
+    .configs {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+
+        width: 500px;
+        height: 100vh;
+        background-color: red;
+
+        position: fixed;
+        left: -500px;
+        top: 0;
+
+        z-index: 3;
+    }
+
     #assistente {
         display: flex;
         flex-direction: row;
