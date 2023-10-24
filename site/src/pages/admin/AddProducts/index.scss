@@ -1,5 +1,4 @@
 #add-main-addproduct{
-    background-color:rgba(239, 239, 239, 1) !important;
     width: 103.5rem;
     margin-left: 30rem;
     height: auto;
@@ -9,7 +8,6 @@
         .add{
             display: flex;
             flex-direction: row;
-            background-color: rgba(247, 247, 247, 1);
             justify-content: flex-start; 
             padding: 40px;
             color: black;
@@ -213,103 +211,117 @@
     
 }
 
-@media (max-width: 768px) {
-    #add-main-addproduct {
-        width: auto; /* Remova a margem à esquerda */
-      }
-    
-      .all {
-        flex-direction: column; /* Altere para uma pilha vertical */
-        align-items: center; /* Centralize os elementos verticalmente */
-      }
-    
-      .add {
-        margin-right: 0; /* Remova a margem à direita */
-      }
-    
-      .add-part1 {
-        width: 100%; /* Expanda para preencher a largura da tela */
-        margin-right: 0; /* Remova a margem à direita */
-      }
-      
-      .add-part2 {
-        width: 100%; /* Expanda para preencher a largura da tela */
-        margin-right: 0; /* Remova a margem à direita */
-      }
+@media(max-width: 2480px){
+  #add-main-addproduct{
+    width: 104rem;
+    margin-left: 19rem;
 
-      @media screen and (min-width: 2560px) and (min-height: 1440px){
-        #add-main-addproduct{
-          
-
-          .all{
-            .add{
-              background-color: rgb(251, 255, 0);
-              }
-        }
-      }
-      }
-
-      @media screen and (min-width: 1920px) and (min-height: 1080px){
-        #add-main-addproduct{
-          
-
-          .all{
-            .add{
-              background-color: rgb(17, 255, 0);
-              }
-        }
-      }
-      }
-
-      @media screen and (min-width: 1680px) and (min-height: 1050px){
-        #add-main-addproduct{
-          
-
-          .all{
-            .add{
-              background-color: rgb(0, 255, 255);
-              }
-        }
-      }
-      }
-
-
-        @media screen and (min-width: 1440px) and (min-height: 900px) {
-          #add-main-addproduct{
-          
-
-            .all{
-              .add{
-                background-color: rgb(0, 13, 255);
-                }
-          }
-        }
-      }
-
-      @media screen and (min-width: 1024px) and (min-height: 768px){
-          #add-main-addproduct{
-          
-
-            .all{
-              .add{
-                background-color: rgb(170, 0, 255);
-                }
-          }
-        }
-      }
-
-      @media screen and (min-width: 375px) and (min-height: 667px) {
-        #add-main-addproduct{
+    .all{
+      .add{
+        background-color: rgb(255, 0, 0);
+        padding: 40px;
         
-
-          .all{
-            .add{
-              background-color: rgb(255, 0, 157);
-              }
-        }
+        input{
+          border-radius: 5px;
+          height: 55px;
+          text-indent: 1rem;
       }
-    }
 
+      .add-part1{
+        width: 60rem;
+        margin-right: 100px;
+        }
+  }
+}
+}
+}
+
+@media (max-width: 1714px) {
+  #add-main-addproduct{
+    width: 92rem;
+    margin-left: 16rem;
+
+    .all{
+      .add{
+        background-color: rgb(0, 255, 21);
+
+        input{
+          height: 50px;
+      }
+
+      .add-part1{
+        width: 55rem;
+        margin-right: 100px;
+        }
+        }
+  }
+}
+}
+
+
+@media (max-width: 1414px) {
+  #add-main-addproduct{
+    width: 66rem;
+    margin-left: 11rem;
+
+    .all{
+      .add{
+        background-color: rgb(251, 255, 0);
+        padding: 40px;
+        
+        input{
+          height: 55px;
+          text-indent: 1rem;
+      }
+
+      .add-part1{
+        width: 33rem;
+        margin-right: 1px;
+
+        .add-part1-negocio{
+          .add-part1-negocio-checks{
+              width: 35rem;
+
+              .add-part1-negocio-nr > input{
+                width: 6rem;
+            }
+        }
+  }
+}}}}}
+
+@media (max-width: 1209px) {
+  #add-main-addproduct{
+
+    .all{
+      .add{
+        background-color: rgb(4, 0, 255);
+        }
+  }
+}
+}
+
+
+
+
+@media (max-width: 375px){
+  #add-main-addproduct{
+  
+
+    .all{
+      .add{
+        background-color: rgb(255, 0, 157);
+        }
+  }
+}
+}
+
+
+  
+      
+
+
+
+    
 //     @media screen and (min-width: 320px) and (min-height: 568px){
 //       #add-main-addproduct{
       
@@ -321,4 +333,3 @@
 //     }
 //   }
 // }
-}

@@ -1,4 +1,4 @@
-#mae{
+#AdmBarraLateral {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -12,17 +12,18 @@
         justify-content: space-between;
         align-items: center;
         
-        width: 18vw;
-        height: 100%;
+        width: 350px;
+        height: 100vh;
         padding: 30px;
         background-color: #000;
         border-radius: 5px;
 
         z-index: 5;
         position: fixed;
+        
         top: 0;
         left: 0;
-        clip-path: polygon(0 3%, 100% 3%, 100% 99%, 0% 100%);
+        // clip-path: polygon(0 50%, 100% 3%, 100% 99%, 0% 100%);
         /*clip-path: polygon(0 6%, 100% 0, 100% calc(100% - 6%), 0% 100%);
         /*clip-path: polygon(0 6%, 100% 0, 100% 100%, 0% 90%);*/
 

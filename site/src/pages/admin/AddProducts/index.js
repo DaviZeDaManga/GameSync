@@ -201,8 +201,7 @@ export default function AddProduct(){
 
                         <div className="add-part2-imagem3">
                             <input type="file" id="file" onChange={e => setImagem(e.target.files[0])}/>
-                            <input type="file" onClick={mostarImagem}/>
-                            <input type="file" onClick={mostarImagem}/>
+                            
                         </div>
 
                     <section className='botao'>

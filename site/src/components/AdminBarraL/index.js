@@ -21,7 +21,7 @@ export default function AdmBarraLateral(props){
     }    
 
     return(
-        <div id='mae'>
+        <div id='AdmBarraLateral'>
             <nav className="all">
                 <header className="title">
                     <div className="title-conteudo">
