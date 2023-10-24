@@ -1,9 +1,16 @@
 import './index.scss'
-import { useState } from 'react'
 
 import BarraLateral from '../../../components/barraLateral'
 import BarraDeCima from '../../../components/baraDeCima'
 import FooterPage from '../../../components/footerpage/index,'
+
+import React, { useRef, useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+import 'swiper/css';
+import 'swiper/css/pagination';
+
+import { Pagination } from 'swiper/modules';
 
 export default function Planos(){
     const [perguntaum, setPerguntaum] = useState(false)
@@ -39,10 +46,71 @@ export default function Planos(){
         setPerguntaquatro(!perguntaquatro)
     }
 
+
+
+
+
+    const [engine, setEngine] = useState(false)
+
+    function Engine() {
+        setEngine(!engine)
+    }
+
     return(
         <div id='Plano'>
             <BarraLateral/>
             <BarraDeCima/>
+
+            {engine == true &&
+            <div onClick={Engine} className='fundo'>
+
+                <section className='engine'>
+                    <button onClick={Engine}><img src="/assets/images/acoes/remover.png" /></button>
+
+                    <Swiper
+                        className="mySwiper swiper-h"
+                        spaceBetween={0}
+                        pagination={{
+                        clickable: true,
+                        }}
+                        modules={[Pagination]}
+                    >
+                        <SwiperSlide>
+                            
+                        </SwiperSlide>
+                        <SwiperSlide>
+
+                            <Swiper
+                                className="mySwiper2 swiper-v"
+                                direction={'vertical'}
+                                spaceBetween={0}
+                                pagination={{
+                                clickable: true,
+                                }}
+                                modules={[Pagination]}
+                            >
+                                <SwiperSlide>
+                                    
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    
+                                </SwiperSlide>
+                            </Swiper>
+
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            
+                        </SwiperSlide>
+                    </Swiper>
+                </section>
+
+            </div>}
 
             <header className='explain'>
                 <section className='explain-1'>
@@ -73,7 +141,7 @@ export default function Planos(){
                     </div>
                 </section>
 
-                <section className='explain-3'>
+                <section onClick={Engine} className='explain-3'>
                     <div className='explain-3-tools'>
                         <p>Nossa engine</p>
                     </div>

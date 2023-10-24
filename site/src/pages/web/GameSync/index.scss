@@ -104,8 +104,8 @@
         .card {
             display: flex;
             flex-direction: column;
-            justify-content: start;
-            align-items: start;
+            justify-content: center;
+            align-items: center;
 
             width: 100%;
             max-width: 380px;
@@ -150,11 +150,11 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: start;
+            align-items: center;
 
-            width: 100%;
+            width: 1200px;
             height: 600px;
-            padding: 0px 60px;
+            padding: 0px;
             background-color: rgb(44, 44, 44);
             border-radius: 10px;
             border: solid 1px rgb(167, 48, 167);
@@ -163,6 +163,35 @@
             p {
                 margin: 10px 0px 0px 0px ;
             }
+
+            .swiper {
+                width: 100%;
+                height: 100%;
+                background: #2a2a2a;
+              }
+              
+              .swiper-slide {
+                font-size: 18px;
+                color: #fff;
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+                padding: 40px 60px;
+              }
+              
+              .parallax-bg {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 130%;
+                height: 100%;
+                -webkit-background-size: cover;
+                background-size: cover;
+                background-position: center;
+              }
+              
+              .swiper-slide .text {
+                max-width: 50ch;
+              }
         }
 
         .card-2 {

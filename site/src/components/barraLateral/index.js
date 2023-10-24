@@ -9,9 +9,12 @@ export default function BarraLateral(props) {
     const[fundo, setFundo] = useState(false)
     const[assis, setAssis] = useState(false)
     const[bot, setBot] = useState(true)
+    const[configs, setConfigs] = useState(false)
+
+    const [Barra, setBarra] = useState(document.getElementById('barra'))
 
     function Fundo() {
-        if(carrin == true || menu == true || assis == true) {
+        if(carrin == true || menu == true || assis == true || configs == true) {
             setFundo(true)
         }
         else {
@@ -26,12 +29,21 @@ export default function BarraLateral(props) {
     function MostrarAssistente() {
         setAssis(!assis)
         setCarrin(false)
+        setConfigs(false)
         Fundo()
     }
 
     function MostrarCarrin() {
         setAssis(false)
         setCarrin(!carrin)
+        setConfigs(false)
+        Fundo()
+    }
+
+    function Configs() {
+        setAssis(false)
+        setCarrin(false)
+        setConfigs(!configs)
         Fundo()
     }
 
@@ -177,7 +189,7 @@ export default function BarraLateral(props) {
 
 
             <div className="BarraLateral">
-                <img onClick={RecarregarPage} className='logo' src="/assets/images/GameSync/giphy-unscreen.gif" />
+                <img onClick={Configs} className='logo' src="/assets/images/GameSync/giphy-unscreen.gif" />
                 <div className='botoes'>
 
 
