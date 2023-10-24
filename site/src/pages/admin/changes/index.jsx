@@ -3,14 +3,14 @@ import AdmBarraLateral from '../../../components/AdminBarraL';
 import AdmBarraUp from '../../../components/AdminBarraUp';
 
 import storage from 'local-storage';
-import { ListarTodosJogos, ExcluirProduto, BuscarJogoNome } from '../../../connection/productAPI';
-
+import { ListarTodosJogos, ExcluirProduto, BuscarJogoNome, AlterarProduto } from '../../../connection/productAPI';
+import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { confirmAlert } from 'react-confirm-alert';
 
 export default function EditarExcluir(){
-    
+    const navigate = useNavigate()
     let [filtro, setFiltro] = useState('');
     var [jogos, setJogos] = useState([]);
 
@@ -67,6 +67,14 @@ export default function EditarExcluir(){
     }
     console.log(RemoverJogo);
 
+    function EditarJogo(id){
+        navigate(`/admin/alterar${id}`)
+    }
+
+    // function Abrirdetalhes(id) {
+    //     navigate(`/admin/detalhe${id}`)
+    // }
+
     return(
         <main id='EditarExcluir'>
         
@@ -87,7 +95,7 @@ export default function EditarExcluir(){
                         <div className='card' key={item.id} >{/*onclik para abrir detalhes depois/*/}
                             <div className='acoes'>
 
-                                <img src='/assets/images/adm/pencil.png' alt='editar' />
+                                <img src='/assets/images/adm/pencil.png' alt='editar' onClick={e => {e.stopPropagation(); EditarJogo(item.id)}}/>
                                 
                                 <img src='/assets/images/adm/trash.png' alt='remover' onClick={e => {e.stopPropagation(); RemoverJogo(item.id, item.nome)}}/>
                                 
