@@ -9,8 +9,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
-import { Pagination } from 'swiper/modules';
+import { Mousewheel, Pagination, Navigation } from 'swiper/modules';
 
 export default function Planos(){
     const [perguntaum, setPerguntaum] = useState(false)
@@ -62,51 +63,54 @@ export default function Planos(){
             <BarraDeCima/>
 
             {engine == true &&
-            <div onClick={Engine} className='fundo'>
+            <div id='engine'>
 
                 <section className='engine'>
                     <button onClick={Engine}><img src="/assets/images/acoes/remover.png" /></button>
 
                     <Swiper
-                        className="mySwiper swiper-h"
-                        spaceBetween={0}
                         pagination={{
-                        clickable: true,
+                        type: 'progressbar',
                         }}
-                        modules={[Pagination]}
+                        navigation={true}
+                        modules={[Pagination, Navigation]}
+                        className="mySwiper"
                     >
                         <SwiperSlide>
-                            
+                            <section id='exEngine'>
+                                <h1>GameSync Engine</h1>
+                                <p>A GameMaker Engine é uma ferramenta de desenvolvimento de jogos que opera com base em eventos e ações. Ela oferece uma linguagem de programação chamada GML e suporta a criação de jogos 2D e 3D. Além disso, fornece recursos para design de níveis e permite exportar jogos para várias plataformas, tornando-a uma escolha popular para desenvolvedores de jogos de todos os níveis de habilidade.</p>
+                            </section>
                         </SwiperSlide>
                         <SwiperSlide>
-
+                            <div className='sobrevideos'>
                             <Swiper
-                                className="mySwiper2 swiper-v"
                                 direction={'vertical'}
+                                slidesPerView={1}
                                 spaceBetween={0}
+                                mousewheel={true}
                                 pagination={{
                                 clickable: true,
                                 }}
-                                modules={[Pagination]}
+                                modules={[Mousewheel, Pagination]}
+                                className="mySwiper"
                             >
                                 <SwiperSlide>
                                     
                                 </SwiperSlide>
                                 <SwiperSlide>
-                                    
+                                    <video>
+                                        <source></source>
+                                    </video>
                                 </SwiperSlide>
-                                <SwiperSlide>
-                                    
-                                </SwiperSlide>
+                                <SwiperSlide>Slide 3</SwiperSlide>
+                                <SwiperSlide>Slide 4</SwiperSlide>
+                        
                             </Swiper>
-
+                            </div>
                         </SwiperSlide>
-                        <SwiperSlide>
-                            
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            
-                        </SwiperSlide>
+                        <SwiperSlide>Slide 3</SwiperSlide>
+                        <SwiperSlide>Slide 4</SwiperSlide>
                     </Swiper>
                 </section>
 

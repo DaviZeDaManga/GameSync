@@ -10,17 +10,6 @@ export default function BarraDeCima (props) {
     const [lista, setLista] = useState (230)
     const [idprod, setIdprod] = useState ('')
 
-    // async function ProcurarGames () {
-    //     let url = 'https://api.rawg.io/api/games?key=0a526d3c3985430c9469d8d6951eb5cb&page_size=' + lista 
-    //     let resposta = await axios.get(url)
-
-    //    setTgames(resposta.data.results)
-    // }
-
-    // useEffect (() => {
-    //     ProcurarGames()
-    // }, [])
-
     function MaisGames() {
         setLista(lista + 20)
     }
@@ -79,9 +68,6 @@ export default function BarraDeCima (props) {
                         <div className="perfil botao">
                             <img src="/assets/images/GameSync/user.png" />
                         </div>
-                        <section className='config botao'>
-                            <img src="/assets/images/barradecima/configuracoes.png" />
-                        </section>
                     </div>
                 </div>
             </section>
