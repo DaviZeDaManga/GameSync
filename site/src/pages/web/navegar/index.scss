@@ -45,15 +45,14 @@
                 background-color: #e8e8e835;
             }
 
-            > button {
-                height: 100%;
-                padding: 0px 20px;
+            button {
+                padding: 10px 20px;
                 border: none;
                 border-radius: 10px;
                 background-color: #252525;
                 color: white;
             }
-            > button:hover {
+            button:hover {
                 border: solid 2px white;
             }
         }
@@ -71,13 +70,14 @@
         justify-content: center;
         align-items: center;
 
-        width: 100%;
+        width: 520px;
         height: 250px;
         border-radius: 10px;
         background-color: rgb(69, 69, 69);
 
         position: relative;
         overflow: hidden;
+        z-index: 2;
 
         .conteudo {
             display: flex;
@@ -124,10 +124,6 @@
         animation: bordauser 3s infinite;
     }
     .borda:hover { 
-        -moz-transform: scale(1.1);
-        -webkit-transform: scale(1.1);
-        transform: scale(1.03);
-        z-index: 4;
         > img {
             -moz-transform: scale(1.1);
             -webkit-transform: scale(1.1);

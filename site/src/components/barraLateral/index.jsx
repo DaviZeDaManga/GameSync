@@ -4,7 +4,6 @@ import { Link, json } from 'react-router-dom'
 
 import { motion } from "framer-motion"
 
-
 export default function BarraLateral(props) {
     const[menu, setMenu] = useState(false)
     const[carrin, setCarrin] = useState(false)
@@ -27,12 +26,6 @@ export default function BarraLateral(props) {
     useEffect( ()=> {
         Fundo()
     }, [carrin, menu, assis, configs])
-
-    function MostrarAssistente() {
-        setAssis(!assis)
-        setCarrin(false)
-        Fundo()
-    }
 
     function MostrarCarrin() {
         setAssis(false)
@@ -131,6 +124,34 @@ export default function BarraLateral(props) {
 
 
 
+    const[xbot, setXbot] = useState (0)
+    const[ybot, setYbot] = useState (0)
+    const[rotatebot, setRotatebot] = useState (0)
+
+    function MostrarAssistente() {
+        setAssis(!assis)
+    }
+
+    function Mbot() {
+        if (assis == true) {
+            setXbot(500)
+            setAssis(true)
+            Fundo()
+        }
+        else {
+            setXbot(0)
+        }
+    }
+
+    useEffect(() => {
+        Mbot()
+    }, [assis])
+
+
+
+
+
+
     return(
         <div id="BarraLateral">
 
@@ -158,8 +179,13 @@ export default function BarraLateral(props) {
                     </div>
 
                     {assis == true &&
-                        <section id='assistente'> 
+                        <motion.div
+                        className='animation-BarraBot'
+                        animate={{ xbot, ybot, rotatebot}}
+                        transition={{ type: "spring"}}
+                        >
 
+                        <section id='assistente'> 
                             {bot == true &&
                             <div className='linhabot'></div>}
                             {bot == false &&
@@ -205,7 +231,10 @@ export default function BarraLateral(props) {
                                     <button className='envassis'><img src="/assets/images/carrinho/enviar.png"/></button>}
                                 </nav>
                             </main>
-                    </section>}
+                        </section>
+
+                        </motion.div>
+                    }
 
 
 
@@ -295,17 +324,8 @@ export default function BarraLateral(props) {
 
 
             
-
-
-
-
-
             {fundo == true &&
-            <div onClick={Sair} className='fundo'></div>}
-
-
-
-            
+            <div onClick={Sair} className='fundo'>   </div>}            
         </div>
     )
 }

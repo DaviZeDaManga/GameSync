@@ -16,37 +16,10 @@ import 'swiper/css/navigation';
 import { Keyboard, Pagination, Navigation } from 'swiper/modules';
 import { Link } from 'react-router-dom'
 
+import { motion } from 'framer-motion'
+
 export default function Navegar() {
     const [gamesN, setGamesN] = useState ([])
-
-    // async function ProcurarGames () {
-    //     let url = 'https://api.rawg.io/api/games?key=0a526d3c3985430c9469d8d6951eb5cb&page_size=3'
-    //     let resposta = await axios.get(url)
-
-    //     setGamesN(resposta.data.results)
-    // }
-
-    // useEffect(()=> {
-    //     ProcurarGames()
-    // }, [])
-
-
-
-
-
-
-    // const [novos, setNovos] = useState ([])
-    // async function NovosGames() {
-    //     let url = 'https://api.rawg.io/api/games?key=0a526d3c3985430c9469d8d6951eb5cb&page_size=6'
-    //     let resposta = await axios.get(url)
-
-    //     setNovos(resposta.data.results)
-    // }
-
-    // useEffect(() => {
-    //     NovosGames()
-    // }, [])
-
 
 
     return(
@@ -91,6 +64,12 @@ export default function Navegar() {
                     </Swiper>
                 </section>
                 <section className='now-2'>
+                    
+                    <motion.div
+                    whileHover={{ scale: 1.03}}
+                    whileTap={{ scale: 0.95}}
+                    >
+
                     <div className='card borda'>
                         <img src='https://imgs.search.brave.com/iUFg584I9zb0E3QX6zfMz6aQtWnV_9fzZsruETWF7Ow/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9nYW1l/cy5vbGFuZXJkLmNv/bS93cC1jb250ZW50/L3VwbG9hZHMvMjAy/Mi8xMC8xNjY2MDI1/MzI3Xzc3MF9IaXN0/b3JpYS1kZS1EYXJr/LVNvdWxzLUd3eW4t/bHV0YS1kZS1jaGVm/ZS1lLW11aXRvLmpw/Zw' />
                             <div className='conteudo'>
@@ -98,6 +77,9 @@ export default function Navegar() {
                                 <p>Dark Souls conta a história de uma terra que no começo, na tida Era dos Anciões (Age of Ancients), o mundo era desforme, incompleto, e envolto por névoas. Esse período era dominado pelos Dragões Imortais (Everlasting Dragons), uma terra formada por cinzas e árvores gigantes.</p>
                             </div>
                     </div>
+
+                    </motion.div>
+
                     <div className='card borda'>
                         <img src='https://imgs.search.brave.com/Cx8HcIgyCmzwmAXupgBIYv0IMtr4_9ZvnKpzYVUfj1k/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9wMi50/cnJzZi5jb20vaW1h/Z2UvZmdldC9jZi83/NzQvMC9pbWFnZXMu/dGVycmEuY29tLzIw/MjEvMTAvMTEvMjA1/NzQ1ODA2MC1hLWNy/b25vbG9naWEtZGUt/ZG9vbS1zYWliYS1h/LW9yZGVtLWRvcy1q/b2dvcy1jYXBhLnBu/Zw' />
                             <div className='conteudo'>
@@ -112,22 +94,19 @@ export default function Navegar() {
                     <div className='card borda'>
                         <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzrEXo8FcflttiEn1kJ_nqeXr8n9soemwx4Q&usqp=CAU' />
                             <div className='conteudo '>
-                                <h1>Noticia</h1>
-                                <p>Um dos maiores games da Rockstar tinha duas sequências planejadas, mas que não saíram do papel</p>
+                               
                             </div>
                     </div>
                     <div className='card borda'>
                         <img src='https://imgs.search.brave.com/XiqHB2N0NKYCeh9puVVBxDk1MQ85PRwKjK9aDwsnXWU/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9zbS5p/Z24uY29tL3QvaWdu/X2JyL3NjcmVlbnNo/b3QvaC9oMzExLWJ1/bGx5L2gzMTEtYnVs/bHloM2Rpc2JhcnJl/ZC1hdHRvcm5leS1h/bmQtdmlkZW8tZ2Ft/ZS1pbmR1c3RyeS1w/ZXN0X2E5MmEuMjgw/LmpwZw' />
                             <div className='conteudo '>
-                                <h1>Noticia</h1>
-                                <p>Um dos maiores games da Rockstar tinha duas sequências planejadas, mas que não saíram do papel</p>
+                                
                             </div>
                     </div>
                     <div className='card borda'>
                         <img src='https://imgs.search.brave.com/H5yqlPP58dhrJX6MG27IrYKTNEXkF7c5QKLM9382A_s/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9zbS5p/Z24uY29tL3QvaWdu/X2JyL25ld3MvYy9j/YXN0bGV2YW5pL2Nh/c3RsZXZhbmlhLXJl/c3VycmVjdGlvbi1h/LWNhbmNlbGxlZC1k/cmVhbWNhc3QtZ2Ft/ZS1zZWVtaW5nbF90/MWtkLjI4MC5qcGc' />
                             <div className='conteudo'>
-                                <h1>Tão comentando</h1>
-                                <p>Suposta demo do jogo cancelado do DreamCast é encontrada</p>
+                                
                             </div>
                     </div>
             </section>
@@ -141,7 +120,9 @@ export default function Navegar() {
                 <section className='nav-title'>
                     <p>Novidades</p>
                     <p>Pre-lançamento</p>
-                    <button>Ver mais</button>
+                    <Link to={'/gamegrupos/1'}>
+                        <button>Ver mais</button>
+                    </Link>
                 </section>
             </main>
 

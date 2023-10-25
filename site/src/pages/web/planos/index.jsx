@@ -13,6 +13,8 @@ import 'swiper/css/navigation';
 
 import { Mousewheel, Pagination, Navigation } from 'swiper/modules';
 
+import { motion, Variants } from 'framer-motion';
+
 export default function Planos(){
     const [perguntaum, setPerguntaum] = useState(false)
     const [perguntadois, setPerguntadois] = useState(false)
@@ -84,33 +86,45 @@ export default function Planos(){
                         </SwiperSlide>
                         <SwiperSlide>
                             <div className='sobrevideos'>
-                            <Swiper
-                                direction={'vertical'}
-                                slidesPerView={1}
-                                spaceBetween={0}
-                                mousewheel={true}
-                                pagination={{
-                                clickable: true,
-                                }}
-                                modules={[Mousewheel, Pagination]}
-                                className="mySwiper"
-                            >
-                                <SwiperSlide>
-                                    
-                                </SwiperSlide>
-                                <SwiperSlide>
-                                    <video>
-                                        <source></source>
-                                    </video>
-                                </SwiperSlide>
-                                <SwiperSlide>Slide 3</SwiperSlide>
-                                <SwiperSlide>Slide 4</SwiperSlide>
-                        
-                            </Swiper>
+                                <Swiper
+                                    direction={'vertical'}
+                                    slidesPerView={1}
+                                    spaceBetween={0}
+                                    mousewheel={true}
+                                    pagination={{
+                                    clickable: true,
+                                    }}
+                                    modules={[Mousewheel, Pagination]}
+                                    className="mySwiper"
+                                >
+                                    <SwiperSlide>
+                                        
+                                    </SwiperSlide>
+                                    <SwiperSlide>
+                                        <video controls="true">  <source src='https://www.youtube.com/watch?v=oi1mis3DGZE&pp=ygUSZ2FtZSBtYWtlciBhbnVuY2lv' type="video/mp4" /></video>
+                                    </SwiperSlide>
+                                    <SwiperSlide>Slide 3</SwiperSlide>
+                                    <SwiperSlide>Slide 4</SwiperSlide>
+                            
+                                </Swiper>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide>Slide 3</SwiperSlide>
-                        <SwiperSlide>Slide 4</SwiperSlide>
+                        <SwiperSlide>
+                            <div className='comecar'>
+                                <motion.div
+                                className='botaocomecar'
+                                whileHover={{ scale: 1.1}}
+                                whileTap={{ scale: 0.8}}
+                                >
+
+                                <div>
+                                    <p>Começar</p>
+                                </div>
+
+                                </motion.div>
+                            </div>
+                        </SwiperSlide>
                     </Swiper>
                 </section>
 

@@ -1,92 +1,24 @@
-import { useState, useEffect } from 'react'
 import './index.scss'
-import axios from 'axios'
+
+import BarraDeCima from '../../../components/baraDeCima'
+import BarraLateral from '../../../components/barraLateral'
+
 import { Link } from 'react-router-dom'
-import storage, { set } from 'local-storage';
 import { motion } from 'framer-motion';
-    
-export default function BarraDeCima (props) {
-    const [games, setGames] = useState (false)
-    const [tgames, setTgames] = useState ([])
-    const [lista, setLista] = useState (230)
-    const [idprod, setIdprod] = useState ('')
 
-    function MaisGames() {
-        setLista(lista + 20)
-    }
+export default function Grupos() {
 
-    const [nome, setNome] = useState('')
+    return (
+        <section id='Grupos'>
+            <BarraDeCima/>
+            <BarraLateral/>
 
-
-    useEffect(() => {
-        if(storage('user-logado')){
-            const nomeUser = storage('user-logado');
-            setNome(nomeUser.nome);
-        }
-        else{
-            setNome('anonymous')
-        }
-    }, [])
-
-
-    const [x, setX] = useState(0);
-    const [y, setY] = useState(0);
-    const [rotate, setRotate] = useState(0);
-
-
-    return(
-        <div id="BarraDeCima">
-            <section className='BarraDeCima'>
-                <div className="conteudo">
-                    <div className='animation-pesquisa'>
-
-                        <motion.div
-                        className='pesquisa'
-                        animate={{ x, y, rotate}}
-                        transition={{ type: "spring"}}
-                        >
-                            <button onClick={()=> (setGames(false), setX(0))}>Voltar</button>
-                            <input onClick={()=> (setGames(true), setX(160))} type="text" placeholder="procurar na GameSync" />
-
-                            <Link to={'/'} >
-                                <section className='redirects'>
-                                    <img src="/assets/images/barradecima/bolsa-de-compras.png" />
-                                    <p>Home</p>
-                                </section>
-                            </Link>
-                            <Link to={'/planos'} >
-                                <section className='redirects'>
-                                    <img src="/assets/images/barradecima/controle-de-video-game.png" />
-                                    <p>Planos</p>
-                                </section>
-                            </Link>
-                            <Link to={'/noticias'} >
-                                <section className='redirects'>
-                                    <img src="/assets/images/barradecima/balao-de-fala.png" />
-                                    <p>Noticias</p>
-                                </section>
-                            </Link>
-                            
-                        </motion.div>
-                        
-                    </div>
-
-                    <div id="perfil">
-                    <p>Ola, {nome}</p>
-                        <Link to={'/perfil'}>
-                        <div className="perfil botao">
-                            <img src="/assets/images/GameSync/user.png" />
-                        </div>
-                        </Link>
-                    </div>
-                </div>
+            <section className='name-grupo'>
+                <h1>Jogos Novos</h1>
             </section>
 
-            
-            {games == true &&
-            <section id='pesquisar'>
-                <main className='pesquisa'>
-                    <div className='resultados'>
+
+                    <div className='grupo'>
                         <section id='produtos'>
 
                         <motion.div
@@ -602,21 +534,10 @@ export default function BarraDeCima (props) {
                             </section>  
                         </Link>
 
-                        <nav id='acoes'>
-                            <button onClick={MaisGames}>Procurar mais</button>
-                        </nav>
 
                     </section>
-                    
-
                     </div>
-                    <section className='filtros'>
-                        <h1>Filtragem</h1>
-                    </section>
-                </main>
-            </section>
-            }
-            
-        </div>
+
+        </section>
     )
 }

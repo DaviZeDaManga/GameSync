@@ -16,6 +16,8 @@ import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 
+import storage, { set } from 'local-storage';
+
 export default function Produto() {
 
     const { id } = useParams();
@@ -157,9 +159,21 @@ export default function Produto() {
         setComentando(comentando - 1)
     }
 
+    const [user, setUser] = useState('')
+
+    useEffect(() => {
+        if(storage('user-logado')) {
+            const nomeUser = storage('user-logado')
+            setUser(nomeUser.nome)
+        }
+        else {
+            setUser('anonymous')
+        }
+    })
+
     function Comentar() {
         const c = {
-            user: "Luis Viado",
+            user: user,
             desc: comentario,
             estrelas: estrelas
         }

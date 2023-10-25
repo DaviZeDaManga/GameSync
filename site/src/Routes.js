@@ -12,6 +12,7 @@ import LoginUser from './pages/web/log'
 import EscolherLogin from './pages/web/escolherconta'
 import Cadaster from './pages/web/cadaster'
 import Noticias from './pages/web/noticias'
+import Grupos from './pages/web/grupos'
 
 import CadastroAdmin from './pages/admin/authentication'
 import HomeAdmin from './pages/admin/home'
@@ -35,6 +36,7 @@ export default function Routess(){
                 <Route path='/escolherlogin' element={<EscolherLogin/>} />
                 <Route path="/cadaster" element={<Cadaster/>} />
                 <Route path="/noticias" element={<Noticias/>} />
+                <Route path='/gamegrupos/:id' element={<Grupos/>} />
 
                 <Route path='/admin/home' element={<HomeAdmin/>} />
                 <Route path='/admin' element={<CadastroAdmin/>} />
