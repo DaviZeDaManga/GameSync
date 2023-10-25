@@ -63,3 +63,18 @@ export async function ExcluirProduto(id){
     return resposta.status
 }
 
+export async function AlterarProduto(id, nome, preco, precoPro, destaque, promocao, disponivel, qtd, details, categoria, admin ){
+    const resposta = await api.put(`/produto/${id}`, {
+        nome: nome,
+        preco: preco,
+        precoPro: precoPro,
+        destaque: destaque,
+        promocao: promocao,
+        disponivel: disponivel,
+        qtd: qtd,
+        details: details,
+        categoria: categoria,
+        admin: admin
+    }) 
+    return resposta.data 
+}
