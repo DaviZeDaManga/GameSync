@@ -80,6 +80,11 @@ export default function Navegar() {
 
                     </motion.div>
 
+                    <motion.div
+                    whileHover={{ scale: 1.03}}
+                    whileTap={{ scale: 0.95}}
+                    >
+
                     <div className='card borda'>
                         <img src='https://imgs.search.brave.com/Cx8HcIgyCmzwmAXupgBIYv0IMtr4_9ZvnKpzYVUfj1k/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9wMi50/cnJzZi5jb20vaW1h/Z2UvZmdldC9jZi83/NzQvMC9pbWFnZXMu/dGVycmEuY29tLzIw/MjEvMTAvMTEvMjA1/NzQ1ODA2MC1hLWNy/b25vbG9naWEtZGUt/ZG9vbS1zYWliYS1h/LW9yZGVtLWRvcy1q/b2dvcy1jYXBhLnBu/Zw' />
                             <div className='conteudo'>
@@ -87,28 +92,48 @@ export default function Navegar() {
                                 <p> Doom (comercializado como DOOM) é um jogo de computador lançado em 1994 pela id Software e um dos títulos que geraram o gênero tiro em primeira pessoa. Combinando gráficos 3D com violência gráfica e personagens 2D, ele tornou-se tão controverso quanto imensamente popular, com um lançamento em versão shareware que estima-se ter sido jogada por 15 milhões de pessoas.</p>
                             </div>
                     </div>
+
+                    </motion.div>
                 </section>
             </main>
             <section id='procurar'>
 
+                    <motion.div
+                    whileHover={{ scale: 1.03}}
+                    whileTap={{ scale: 0.95}}
+                    >
                     <div className='card borda'>
                         <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzrEXo8FcflttiEn1kJ_nqeXr8n9soemwx4Q&usqp=CAU' />
                             <div className='conteudo '>
                                
                             </div>
                     </div>
+                    </motion.div>
+
+                    <motion.div
+                    whileHover={{ scale: 1.03}}
+                    whileTap={{ scale: 0.95}}
+                    >
                     <div className='card borda'>
                         <img src='https://imgs.search.brave.com/XiqHB2N0NKYCeh9puVVBxDk1MQ85PRwKjK9aDwsnXWU/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9zbS5p/Z24uY29tL3QvaWdu/X2JyL3NjcmVlbnNo/b3QvaC9oMzExLWJ1/bGx5L2gzMTEtYnVs/bHloM2Rpc2JhcnJl/ZC1hdHRvcm5leS1h/bmQtdmlkZW8tZ2Ft/ZS1pbmR1c3RyeS1w/ZXN0X2E5MmEuMjgw/LmpwZw' />
                             <div className='conteudo '>
                                 
                             </div>
                     </div>
+                    </motion.div>
+
+                    <motion.div
+                    whileHover={{ scale: 1.03}}
+                    whileTap={{ scale: 0.95}}
+                    >
                     <div className='card borda'>
                         <img src='https://imgs.search.brave.com/H5yqlPP58dhrJX6MG27IrYKTNEXkF7c5QKLM9382A_s/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9zbS5p/Z24uY29tL3QvaWdu/X2JyL25ld3MvYy9j/YXN0bGV2YW5pL2Nh/c3RsZXZhbmlhLXJl/c3VycmVjdGlvbi1h/LWNhbmNlbGxlZC1k/cmVhbWNhc3QtZ2Ft/ZS1zZWVtaW5nbF90/MWtkLjI4MC5qcGc' />
                             <div className='conteudo'>
                                 
                             </div>
                     </div>
+                    </motion.div>
+
             </section>
 
 

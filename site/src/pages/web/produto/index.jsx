@@ -23,11 +23,12 @@ export default function Produto() {
     const { id } = useParams();
 
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
     const [mostdesc, setMostdesc] = useState (true)
     const [mostcoment, setMostcoment] = useState (false)
     const [mostcompl, setMostcompl] = useState (false)
+    
     const [idprod, setIdprod] = useState (id)
-
     const [nome, setNome] = useState ('Minecraft Bedrock Edition')
     const [desc, setDesc] = useState ('Minecraft é um jogo eletrônico sandbox de sobrevivência criado pelo desenvolvedor sueco Markus "Notch" Persson e posteriormente desenvolvido e publicado pela Mojang Studios, cuja propriedade intelectual foi obtida pela Microsoft em 2014. Lançado inicialmente em maio de 2009 como um projeto em desenvolvimento, seu lançamento completo ocorreu em novembro de 2011 para Microsoft Windows, macOS, Linux e alguns dispositivos móveis, sendo posteriormente relançado para uma ampla variedade de plataformas.')
     const [lancamento, setLancamento] = useState ('09/10/2009')

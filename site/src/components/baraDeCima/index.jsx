@@ -10,6 +10,7 @@ export default function BarraDeCima (props) {
     const [tgames, setTgames] = useState ([])
     const [lista, setLista] = useState (230)
     const [idprod, setIdprod] = useState ('')
+    const [imguser, setImguser] = useState("")
 
     function MaisGames() {
         setLista(lista + 20)
@@ -25,6 +26,16 @@ export default function BarraDeCima (props) {
         }
         else{
             setNome('anonymous')
+        }
+    }, [])
+
+    useEffect(() => {
+        if(storage('user-logado')) {
+            const imguser = storage('user-logado')
+            setImguser(imguser.img)
+        }
+        else {
+            setImguser('/assets/images/GameSync/user.png')
         }
     }, [])
 
@@ -75,7 +86,7 @@ export default function BarraDeCima (props) {
                     <p>Ola, {nome}</p>
                         <Link to={'/perfil'}>
                         <div className="perfil botao">
-                            <img src="/assets/images/GameSync/user.png" />
+                            <img src={imguser} />
                         </div>
                         </Link>
                     </div>

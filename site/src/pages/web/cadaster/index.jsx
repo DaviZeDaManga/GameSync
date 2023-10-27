@@ -24,7 +24,7 @@ export default function Cadaster(){
 
                     <div class="input-group">
                         <label for="telefone">Telefone</label>
-                        <input type="tel" id="telefone" placeholder="Digite o seu telefone" required/>
+                        <input type="tel" maxLength={15} id="telefone" placeholder="Digite o seu telefone" required/>
                     </div>
 
                     <div class="input-group w50">
@@ -34,7 +34,7 @@ export default function Cadaster(){
 
                     <div class="input-group w50">
                         <label for="Confirmarsenha">Confirmar Senha</label>
-                        <input type="password" id="Confirmarsenha" placeholder="Confirme a senha" required/>
+                        <input type="password" minLength={8} id="Confirmarsenha" placeholder="Confirme a senha" required/>
                     </div>
 
                     <div class="input-group">

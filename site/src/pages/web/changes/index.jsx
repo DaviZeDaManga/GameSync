@@ -8,6 +8,8 @@ import BarraDeCima from '../../../components/baraDeCima'
 import LinksPerfil from '../../../components/perfil_mudar_links'
 
 export default function MudarPerfil(){
+    const [nameuser, setNameuser] = useState('Davi Matinho')
+
     const [backgroundColor, setBackgroundColor] = useState('linear-gradient(to bottom, rgba(206, 165, 60, 1), rgba(175, 64, 49, 1))');
 
     const MudarCor = (NovaCor) => {
@@ -25,7 +27,7 @@ export default function MudarPerfil(){
                 </div>
 
                 <div className='Change-fundo-n'>
-                    <p><strong>piriquitão</strong></p>
+                    <p><strong>{nameuser}</strong></p>
                 </div>
             </nav>
 
