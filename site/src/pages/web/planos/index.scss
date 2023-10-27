@@ -3,67 +3,44 @@
 
     #engine {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
 
       width: 100%;
       height: 100vh;
       filter: blur(5);
-      background-color: #000000a6;
+      background-color: #000000bb;
 
       position: fixed;
       top: 0;
       right: 0;
       z-index: 22;
 
-      .engine {
+      .beneficios-engine {
         display: flex;
         flex-direction: row;
-        justify-content: center;
+        justify-content: start;
         align-items: center;
 
-        width: 1000px;
-        height: 600px;
-        background-color: rgb(50, 108, 162);
-        border-radius: 10px;
+        min-width: 90vw;
+        height: 60vh;
+        position: fixed;
+        left: 100px;
+        gap: 20px;
+        overflow: hidden;
 
-        position: relative;
-
-        .swiper {
-          width: 100%;
-          height: 100%;
-          position: absolute;
-        }
-        
-        .swiper-slide {
-          text-align: center;
-          font-size: 18px;
-          background: linear-gradient(90deg, rgb(66, 66, 184), rgb(52, 86, 165));
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          border-bottom-left-radius: 10px;
-          border-bottom-right-radius: 10px;
-          overflow: hidden;
-
-          img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-          }
-
-          #exEngine {
+        .bene {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
 
-            width: 100%;
+            width: 1200px;
             height: 100%;
             padding: 80px;
             gap: 10px;
+            border-radius: 10px;
             background: linear-gradient(90deg, rgb(127, 52, 165), rgb(66, 66, 184));
 
             > p {
@@ -74,19 +51,6 @@
               border: solid 3px rgb(132, 71, 190);
               border-radius: 10px;
             }
-          }
-
-          .sobrevideos {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-
-            width: 90%;
-            height: 90%;
-            position: relative;
-            background-color:  rgb(52, 91, 181);
-            border-radius: 10px;
 
             .swiper {
               width: 100%;
@@ -96,7 +60,7 @@
             .swiper-slide {
               text-align: center;
               font-size: 18px;
-              background: #ffffff00;
+              background: #70161600;
               display: flex;
               justify-content: center;
               align-items: center;
@@ -108,67 +72,36 @@
                 object-fit: cover;
               }
             }
-          }
+        }   
+      }
+    }
 
-          .comecar {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+    .navegacao-swiper {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
 
-            width: 100%;
-            height: 100%;
+      width: 100vw;
+      height: 100px;
+      gap: 20px;
 
-            > div {
-              display: flex;
-              flex-direction: row;
-              justify-content: center;
-              align-items: center;
+      position: fixed;
+      left: 0;
+      bottom: 0;
 
-              width: 350px;
-              height: 100px;
-              border-radius: 50px;
-              background-color: rgb(244, 244, 244);
-              transition: 0.3s;
+      button {
+        width: 200px;
+        height: 40px;
+        background-color: rgb(231, 231, 231);
+        border: none;
+        border-radius: 10px;
+        transition: 0.3s;
 
-              p {
-                color: rgb(203, 203, 203);
-                font-size: 30px;
-                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-              }
-            }
-            > div:active {
-              background-color: rgb(59, 111, 184);
-            }
-            > div:active > p {
-              color: rgb(68, 68, 183);
-            }
-          }
-        }
-
-        button {
-          display: flex;
-          flex-direction: row;
-          justify-content: center;
-          align-items: center;
-
-          position: absolute;
-          width: 50px;
-          height: 50px;
-          background-color: #63097a00;
-          border: none;
-          top: -50px;
-          padding: 5px;
-          right: 0;
-          transition: 0.3s;
-          cursor: pointer;
-
-          > img {
-            height: 100%;
-          }
-        }
-        button:hover {
-          padding: 0px;
+        &:hover {
+          background-color: #00000000;
+          border: solid 2px white;
+          color: white;
         }
       }
     }

@@ -59,6 +59,22 @@ export default function Planos(){
         setEngine(!engine)
     }
 
+
+
+
+
+    const [swiperRef, setSwiperRef] = useState(null);
+
+    let appendNumber = 4;
+    let prependNumber = 1;
+
+
+
+
+    const [x, setX] = useState(0)
+    const [y, setY] = useState(0)
+    const [rotate, setRotate] = useState(0)
+ 
     return(
         <div id='Plano'>
             <BarraLateral/>
@@ -67,24 +83,17 @@ export default function Planos(){
             {engine == true &&
             <div id='engine'>
 
-                <section className='engine'>
-                    <button onClick={Engine}><img src="/assets/images/acoes/remover.png" /></button>
-
-                    <Swiper
-                        pagination={{
-                        type: 'progressbar',
-                        }}
-                        navigation={true}
-                        modules={[Pagination, Navigation]}
-                        className="mySwiper"
-                    >
-                        <SwiperSlide>
-                            <section id='exEngine'>
-                                <h1>GameSync Engine</h1>
-                                <p>A GameMaker Engine é uma ferramenta de desenvolvimento de jogos que opera com base em eventos e ações. Ela oferece uma linguagem de programação chamada GML e suporta a criação de jogos 2D e 3D. Além disso, fornece recursos para design de níveis e permite exportar jogos para várias plataformas, tornando-a uma escolha popular para desenvolvedores de jogos de todos os níveis de habilidade.</p>
-                            </section>
-                        </SwiperSlide>
-                        <SwiperSlide>
+                <motion.div
+                className="beneficios-engine"
+                animate={{ x, y, rotate }}
+                transition={{ type: "spring" }}
+                >
+                    <section className='bene'>
+                        <h1>GameSync Engine</h1>
+                        <p>A GameMaker Engine é uma ferramenta de desenvolvimento de jogos que opera com base em eventos e ações. Ela oferece uma linguagem de programação chamada GML e suporta a criação de jogos 2D e 3D. Além disso, fornece recursos para design de níveis e permite exportar jogos para várias plataformas, tornando-a uma escolha popular para desenvolvedores de jogos de todos os níveis de habilidade.</p>
+                    </section>
+                    <section className='bene'>
+                        <SwiperSlide >
                             <div className='sobrevideos'>
                                 <Swiper
                                     direction={'vertical'}
@@ -103,32 +112,46 @@ export default function Planos(){
                                     <SwiperSlide>
                                         <video controls="true">  <source src='https://www.youtube.com/watch?v=oi1mis3DGZE&pp=ygUSZ2FtZSBtYWtlciBhbnVuY2lv' type="video/mp4" /></video>
                                     </SwiperSlide>
-                                    <SwiperSlide>Slide 3</SwiperSlide>
-                                    <SwiperSlide>Slide 4</SwiperSlide>
                             
                                 </Swiper>
                             </div>
                         </SwiperSlide>
-                        <SwiperSlide>Slide 3</SwiperSlide>
-                        <SwiperSlide>
-                            <div className='comecar'>
-                                <motion.div
-                                className='botaocomecar'
-                                whileHover={{ scale: 1.1}}
-                                whileTap={{ scale: 0.8}}
-                                >
+                    </section>
+                    <section className='bene'>
 
-                                <div>
-                                    <p>Começar</p>
-                                </div>
+                    </section>
+                    <section className='bene'>
 
-                                </motion.div>
-                            </div>
-                        </SwiperSlide>
-                    </Swiper>
+                    </section>
+                </motion.div>
+
+                <section className='navegacao-swiper'>
+                    
+                    {x == 0 &&
+                    <button onClick={() => ( setX(-900))}>
+                        Proximo
+                    </button>}   
+
+                    {x == -900 &&
+                    <>
+                    <button onClick={() => ( setX(0))}>
+                        Voltar
+                    </button>
+                    <button onClick={() => ( setX(-2200))}>
+                        Proximo
+                    </button>
+                    </>
+                    }
+
                 </section>
-
             </div>}
+
+
+
+
+
+
+
 
             <header className='explain'>
                 <section className='explain-1'>
@@ -159,11 +182,16 @@ export default function Planos(){
                     </div>
                 </section>
 
+                <motion.div
+                whileHover={{scale: 1.03}}
+                >
                 <section onClick={Engine} className='explain-3'>
                     <div className='explain-3-tools'>
                         <p>Nossa engine</p>
                     </div>
                 </section>
+                </motion.div>
+
             </header>
 
             <main className='planos1'>
@@ -239,9 +267,14 @@ export default function Planos(){
                             <p><strong>R$34,99</strong></p>
                         </div>
 
+                        <motion.div
+                        whileHover={{scale: 1.04}}
+                        whileTap={{scale: 0.95}}
+                        >
                         <div className='preco1-acao1-second'>
                             <button className='botao'>Assinar</button>
                         </div>
+                        </motion.div>
                     </div>
 
                     <div className='preco1-acao2'>
@@ -249,9 +282,14 @@ export default function Planos(){
                             <p><strong>R$24,99</strong></p>
                         </div>
 
+                        <motion.div
+                        whileHover={{scale: 1.04}}
+                        whileTap={{scale: 0.95}}
+                        >
                         <div className='preco1-acao1-fourth'>
                             <button className='botao'>Assinar</button>
                         </div>
+                        </motion.div>
                     </div>
 
                 </article>
@@ -306,10 +344,14 @@ export default function Planos(){
                         <div className='preco2-acao1-first'>
                             <p><strong>R$14,99</strong></p>
                         </div>
-
+                        <motion.div
+                        whileHover={{scale: 1.04}}
+                        whileTap={{scale: 0.95}}
+                        >
                         <div className='preco2-acao1-second'>
                             <button className='botao'>Assinar</button>
                         </div>
+                        </motion.div>
                     </div>
                 </article>
 
