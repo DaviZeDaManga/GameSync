@@ -11,7 +11,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-import { Keyboard, Navigation } from 'swiper/modules';
+import { Keyboard, Navigation, Pagination } from 'swiper/modules';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
@@ -152,19 +152,33 @@ export default function Home() {
 
 
 
-            <section id='procurar'>
+            <section className='noticias'>
+            <Swiper
+                slidesPerView={3}
+                spaceBetween={30}
+                pagination={{
+                clickable: true,
+                }}
+                Navigation={true}
+                modules={[Pagination, Navigation]}
+                className="mySwiper"
+            >
+                <SwiperSlide>
+                    <img src='https://pixelz.cc/wp-content/uploads/2019/03/the-elder-scrolls-online-wqhd-1440p-wallpaper.jpg' />
+                    <Nav>
+                        <div className='conteudo borda'>
+                            <h1>The Elder Scrolls</h1>
+                        </div>
+                        <section className='info'>
 
-                    <motion.div
-                    whileHover={{ scale: 1.03}}
-                    whileTap={{ scale: 0.95}}
-                    >
-                    <div className='card-proc borda'>
-                        
-                    </div>
-                    </motion.div>
-
-                    
-
+                        </section>
+                    </Nav>
+                </SwiperSlide>
+                <SwiperSlide>Slide 2</SwiperSlide>
+                <SwiperSlide>Slide 3</SwiperSlide>
+                <SwiperSlide>Slide 4</SwiperSlide>
+                
+            </Swiper>
             </section>
 
 

@@ -150,10 +150,10 @@
       .explain{
         display: flex;
         flex-direction: row;
-        justify-content: flex-start;
+        justify-content: start;
         align-items: start;
         
-        width: 100%;
+        width: 100vw;
         height: 33rem; 
         padding: 20px 20px 20px 100px;
 
@@ -251,9 +251,9 @@
         justify-content: flex-start;
         align-items: start;
         
-        width: 100rem;
+        width: 100vw;
         height: 24rem; //
-        padding: 20px 20px;
+        padding: 20px 20px 20px 100px;
 
         .planos1-title{
           display: block;
@@ -348,8 +348,8 @@
         justify-content: space-between;
         align-items: start;
        
-        width: 100rem;
-        padding: 20px 20px;
+        width: 100vw;
+        padding: 20px 20px 20px 100px;
 
         .preco1-mes{
           display: flex;
@@ -427,12 +427,12 @@
       .planos2{
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
+        justify-content: start;
         align-items: start;
        
-        width: 67rem;
+        width: 100vw;
         height: 24rem; //
-        padding: 20px 20px;
+        padding: 20px 20px 20px 100px;
 
         .planos2-title{
           display: block;
@@ -442,10 +442,11 @@
         .planos2-gamers{
           display: flex;
           flex-direction: row;
-          justify-content: space-between;
+          justify-content: start;
          
           width: 100%;
           height: auto;
+          gap: 40px;
           
           .planos2-gamers-Recursos > h1{
             height: 60px;
@@ -500,19 +501,19 @@
      .preco2{
       display: flex;
       flex-direction: row;
-      justify-content: flex-start;
-      justify-content: space-between;
+      justify-content: start;
       align-items: start;
     
-      width: 67rem;
-      padding: 20px 20px;
+      width: 100vw;
+      gap: 40px;
+      padding: 20px 20px 20px 100px;
 
       .preco2-mes{
         display: flex;
         align-items: center;
         border-radius: 10px;
         background-color: rgba(43, 43, 43, 1);
-        width:31rem;
+        width: 31rem;
         height: 4rem;
         padding: 20px;
       }
@@ -556,7 +557,7 @@
       align-items: flex-start;
 
       width: 100%;
-      padding: 20px 20px;
+      padding: 20px 20px 20px 100px;
       margin-top: 50px;
 
       .perguntas-title {
