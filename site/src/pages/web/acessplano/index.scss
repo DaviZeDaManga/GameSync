@@ -3,6 +3,128 @@
     right: 0;
     position: absolute;
 
+    .cardprod {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        width: 100%;
+        height: 100vh;
+        background-color: #00000085;
+
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 20;
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+
+            width: 600px;
+            height: 600px;
+            background-color: #313131;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+
+            .voltar {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+
+                width: 40px;
+                height: 40px;
+                background-color: #313131;
+                border-radius: 10px;
+
+                position: absolute;
+                top: 10px;
+                right: 10px;
+
+                &:hover {
+                    border: solid 2px white;
+                }
+            }
+
+            .conteudo {
+                display: flex;
+                flex-direction: column;
+                justify-content: start;
+                align-items: start;
+        
+                width: 100%;
+                height: 100%;
+                padding: 20px;
+                position: relative;
+        
+                > h1 {
+                    font-size: 15px;
+                    color: white;
+                }
+                > p {
+                    text-align: start;
+                    color: #ededed;
+                    max-width: 55ch;
+                }
+                .buttons {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    width: 100%;
+                    height: 40px; 
+                    padding: 0px 20px;
+                    position: absolute;
+
+                    left: 0;
+                    bottom: 20px;
+                    gap: 10px;
+
+                    button {
+                        width: 100%;
+                        height: 40px;
+                        border: none;
+                        border-radius: 10px;
+                        background-color: #fff;
+                        color: #181818;
+                        margin-top: 10px;
+                        transition: 0.3s;
+                        cursor: pointer;
+                    }
+                    button:hover {
+                        color: white;
+                        background-color: rgba(0, 0, 0, 0);
+                        border: solid 3px white;
+                    }
+                }
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     .news {
         display: flex;
         flex-direction: row;
@@ -105,6 +227,13 @@
 
 
 
+
+
+
+
+
+
+
     .beneficios {
         display: flex;
         flex-direction: row;
@@ -130,6 +259,50 @@
             }
         }
     }
+
+
+
+
+
+
+
+
+
+
+    #procurar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        width: 100vw;
+        height: auto;
+        padding: 20px 20px 20px 100px;
+        gap: 10px;
+
+        
+        .card-proc {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+
+            width: 100%;
+            height: 250px;
+            border-radius: 10px;
+            gap: 10px;
+            background-color: rgb(205, 42, 42);
+        }
+    }
+
+
+
+
+
+
+
+
+
 
     #produtos {
         display: flex;

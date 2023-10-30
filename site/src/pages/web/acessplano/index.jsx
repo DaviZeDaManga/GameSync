@@ -13,6 +13,7 @@ import 'swiper/css/pagination';
 
 import { Keyboard, Navigation } from 'swiper/modules';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 
 
@@ -20,7 +21,7 @@ import { Link } from 'react-router-dom';
 
 
 
-export default function AcessPlano() {
+export default function Home() {
 
     function Nav({ children }) {
         const ref = useRef(null);
@@ -41,10 +42,57 @@ export default function AcessPlano() {
         );
     }
 
+    function Card({ children }) {
+        const ref = useRef(null);
+        const isInView = useInView(ref, { once: true });
+      
+        return (
+          <nav ref={ref}>
+            <span
+              style={{
+                transform: isInView ? "none" : "translateX(-200px)",
+                opacity: isInView ? 1 : 0,
+                transition: "all 0.5s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s"
+              }}
+            >
+              {children}
+            </span>
+          </nav>
+        );
+    }
+
+    const [cardprod, setCardprod] = useState(false)
+    function CardProd() {
+        setCardprod(!cardprod)
+    }
+
     return(
         <div id='Plano'>
             <BarraDeCima/>
             <BarraLateral/>
+
+            {cardprod == true &&
+            <section className='cardprod'>
+                <Card>
+                    <section className='card'>
+                        <div onClick={CardProd} className='voltar'>
+                            <img src='/assets/images/acoes/remover.png' />
+                        </div>
+
+                        <img src='https://pixelz.cc/wp-content/uploads/2019/03/the-elder-scrolls-online-wqhd-1440p-wallpaper.jpg' />
+                        <div className='conteudo borda'>
+                            <h1>The Elder Scrolls</h1>
+                            <p>The Elder Scrolls V: Skyrim acontece em Skyrim, uma região que vem sendo ameaçada por uma guerra civil, seguida pelo retorno dos dragões e de Alduin, o deus da destruição e antagonista da história. Skyrim fica no extremo norte do continente de Tamriel.</p>
+
+                            <Link to={'/produto/43'}>
+                            <nav className='buttons'>
+                                <button>Ver game</button>
+                            </nav>
+                            </Link>
+                        </div>
+                    </section>
+                </Card>
+            </section>}
 
             <section className='news'>
             <Swiper
@@ -61,7 +109,7 @@ export default function AcessPlano() {
                 modules={[Keyboard, Navigation]}
                 className="mySwiper"
             >
-                <SwiperSlide>
+                <SwiperSlide onClick={CardProd}>
                     <img src='https://pixelz.cc/wp-content/uploads/2019/03/the-elder-scrolls-online-wqhd-1440p-wallpaper.jpg' />
                     <Nav>
                         <div className='conteudo borda'>
@@ -98,6 +146,26 @@ export default function AcessPlano() {
                 <button>Jogos</button>
                 <button>Engine</button>
             </nav>
+
+
+
+
+
+
+            <section id='procurar'>
+
+                    <motion.div
+                    whileHover={{ scale: 1.03}}
+                    whileTap={{ scale: 0.95}}
+                    >
+                    <div className='card-proc borda'>
+                        
+                    </div>
+                    </motion.div>
+
+                    
+
+            </section>
 
 
 
