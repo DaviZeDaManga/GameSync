@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react'
 import './index.scss'
 import { Link, json } from 'react-router-dom'
+import storage, { set } from 'local-storage';
 
 import { motion } from "framer-motion"
 
 export default function BarraLateral(props) {
+    const[nameuser, setNameuser] = useState("")
+    const{imguser, setImguser} = useState('/assets/images/GameSync/user.png')
+
     const[menu, setMenu] = useState(false)
     const[carrin, setCarrin] = useState(false)
     const[fundo, setFundo] = useState(false)
@@ -40,6 +44,20 @@ export default function BarraLateral(props) {
         setConfigs(false)
         setX(0)
     }
+
+
+
+
+
+    useEffect(() => {
+        if(storage('user-logado')){
+            const nomeUser = storage('user-logado');
+            setNameuser(nomeUser.nome);
+        }
+        else{
+            setNameuser('anonymous')
+        }
+    }, [])
 
 
 
@@ -109,7 +127,7 @@ export default function BarraLateral(props) {
     }
     function Mconfigs() {
         if (configs == true) {
-            setX(360)
+            setX(420)
             setConfigs(true)
             Fundo()
         }
@@ -163,6 +181,42 @@ export default function BarraLateral(props) {
                 >
 
                 <div className="BarraLateral">
+
+                    <main className='menu'>
+                        <main className='namemenu'>
+                            {/* <h1>GameMenu</h1> */}
+                        </main>
+                        <section className='categorias'>
+
+                            <Link to={'/'}>
+                            <div className='categoria'>
+                                <img src="/assets/images/barradecima/bolsa-de-compras.png" />
+                                <p>Home</p>
+                            </div>
+                            </Link>
+                            <Link to={'/planos'}>
+                            <div className='categoria'>
+                                <img src="/assets/images/barradecima/controle-de-video-game.png" />
+                                <p>Planos</p>
+                            </div>
+                            </Link>
+                            <Link to={'/noticias'}>
+                            <div className='categoria'>
+                                <img src="/assets/images/barradecima/balao-de-fala.png" />
+                                <p>Noticias</p>
+                            </div>
+                            </Link>
+                            
+
+
+                        </section>
+                        <footer className='accout'>
+                            <section className='card'>
+
+                            </section>
+                        </footer>
+                    </main>
+
                     <img onClick={Configs} className='logo' src="/assets/images/GameSync/giphy-unscreen.gif" />
                     <div className='botoes'>
 

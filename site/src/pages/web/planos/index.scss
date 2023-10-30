@@ -1,5 +1,4 @@
-#Plano{
-    width: 1600px;
+#Planos{
 
     #engine {
       display: flex;
@@ -90,6 +89,29 @@
       left: 0;
       bottom: 0;
 
+      .sair {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        width: 40px;
+        height: 40px;
+        padding: 6px;
+        background-color: rgba(231, 231, 231, 0);
+        border-radius: 10px;
+        transition: 0.3s;
+        border: solid 2px white;
+
+        > img {
+          height: 100%;
+        }
+
+        &:hover {
+          padding: 2px;
+        }
+      }
+
       button {
         width: 200px;
         height: 40px;
@@ -131,18 +153,17 @@
         justify-content: flex-start;
         align-items: start;
         
-
-        width: 100rem;
-        height: 33rem; //
-        padding: 20px 20px;
+        width: 100%;
+        height: 33rem; 
+        padding: 20px 20px 20px 100px;
 
         .explain-1{
           display: flex;
           flex-wrap: wrap;
           flex-direction: row;
        
-          width: 30rem;
-          height: 28rem;
+          width: 500px;
+          height: 500px;
           justify-content: space-around;
           margin: 0;
           padding: 0; 
@@ -187,7 +208,7 @@
         }
         .explain-2{
           display: flex;
-          width: 35rem;
+          width: 100%;
           height:28rem;
           align-items: center;
           justify-content: center;
@@ -198,8 +219,8 @@
 
         .explain-3{
           display: flex;
-          width: 32rem;
-          height: 28rem;
+          width: 500px;
+          height: 500px;
           
           .explain-3-tools{
             display: flex;

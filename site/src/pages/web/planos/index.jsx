@@ -53,11 +53,7 @@ export default function Planos(){
 
 
 
-    const [engine, setEngine] = useState(false)
-
-    function Engine() {
-        setEngine(!engine)
-    }
+    
 
 
 
@@ -74,9 +70,16 @@ export default function Planos(){
     const [x, setX] = useState(0)
     const [y, setY] = useState(0)
     const [rotate, setRotate] = useState(0)
+
+    const [engine, setEngine] = useState(false)
+
+    function Engine() {
+        setEngine(!engine)
+        setX(0)
+    }
  
     return(
-        <div id='Plano'>
+        <div id='Planos'>
             <BarraLateral/>
             <BarraDeCima/>
 
@@ -127,12 +130,17 @@ export default function Planos(){
 
                 <section className='navegacao-swiper'>
                     
-                    {x == 0 &&
-                    <button onClick={() => ( setX(-900))}>
-                        Proximo
-                    </button>}   
+                    <button onClick={Engine} className='sair'>
+                        <img src='/assets/images/acoes/remover.png' />
+                    </button>
 
-                    {x == -900 &&
+                    {x == 0 &&
+                    <button onClick={() => ( setX(-950))}>
+                        Proximo
+                    </button>
+                    }   
+
+                    {x == -950 &&
                     <>
                     <button onClick={() => ( setX(0))}>
                         Voltar
@@ -142,6 +150,28 @@ export default function Planos(){
                     </button>
                     </>
                     }
+
+                    {x == -2200 &&
+                    <>
+                    <button onClick={() => ( setX(-950))}>
+                        Voltar
+                    </button>
+                    <button onClick={() => ( setX(-3200))}>
+                        Proximo
+                    </button>
+                    </>
+                    }
+
+                    {x == -3200 &&
+                    <>
+                    <button onClick={() => ( setX(-2200))}>
+                        Voltar
+                    </button>
+                    <button onClick={() => ( setX(-3200))}>
+                        Proximo
+                    </button>
+                    </>
+                    }                   
 
                 </section>
             </div>}
