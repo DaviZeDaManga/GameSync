@@ -1,0 +1,336 @@
+#Plano {
+    width: 100vw;
+    right: 0;
+    position: absolute;
+
+    .cardprod {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        width: 100%;
+        height: 100vh;
+        background-color: #00000085;
+
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 20;
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+
+            width: 600px;
+            height: 600px;
+            background-color: #313131;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            border: solid 2px rgb(65, 65, 65);
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+
+            .voltar {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+
+                width: 40px;
+                height: 40px;
+                background-color: #313131;
+                border-radius: 10px;
+
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                transition: 0.3s;
+
+                cursor: pointer;
+
+                &:hover {
+                    padding: 3px;
+                    border: solid 2px white;
+                }
+            }
+        }
+    }
+
+    .conteudo {
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        align-items: start;
+
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        background: linear-gradient(90deg, rgba(0, 0, 0, 0.578), rgba(19, 19, 19, 0.049));
+
+        position: absolute;
+        bottom: 0;
+        left: 0;
+
+        > h1 {
+            font-size: 15px;
+            color: white;
+        }
+        > p {
+            text-align: start;
+            color: #ededed;
+            max-width: 55ch;
+        }
+        button {
+            width: 200px;
+            height: 40px;
+            border: none;
+            border-radius: 10px;
+            background-color: #fff;
+            color: #181818;
+            margin-top: 10px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        button:hover {
+            color: white;
+            background-color: rgba(0, 0, 0, 0);
+            border: solid 3px white;
+        }
+    }
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    .news {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        max-width: 1;
+        height: 550px;
+        padding: 20px 0px 20px 100px;
+
+        .swiper {
+            width: 100%;
+            height: 100%;
+            position: relative;
+          }
+
+          &:hover {
+            cursor: pointer;
+            .swiper-slide:active  {
+                cursor: grabbing;
+            }
+        }
+          
+          .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #393939;
+          
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 1200px;
+
+            .info {
+                display: flex;
+                flex-direction: column;
+                justify-content: start;
+                align-items: start;
+
+                width: 100px;
+                height: 200px;
+                background-color: red;
+
+                position: absolute;
+                bottom: 0px;
+                left: 0;
+            }
+
+            img {
+                display: block;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                -moz-transition: all 0.5s;
+                -webkit-transition: all 0.5s;
+            }
+
+            &:hover {
+                border: solid 2px white;
+
+                > img {
+                    -moz-transform: scale(1.1);
+                    -webkit-transform: scale(1.1);
+                    transform: scale(1.05);
+                }
+            }
+          }
+          
+          .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+          
+          
+    }
+
+
+
+
+
+
+
+
+
+
+    .beneficios {
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        align-items: center;
+
+        width: 100%;
+        height: 80px;
+        background-color: rgb(35, 35, 35);
+        gap: 20px;
+        padding: 0px 20px 0px 100px;
+
+        > button {
+            height: 40px;
+            width: 100px;
+            background-color: #313131;
+            border-radius: 10px;
+            color: rgb(218, 218, 218);
+            border: none;
+
+            &:hover {
+                border: solid 2px white;
+            }
+        }
+    }
+
+
+
+
+
+
+    .noticias {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        width: 100vw;
+        height: 320px;
+        padding: 20px 20px 20px 100px;
+
+        .swiper {
+            width: 100%;
+            height: 100%;
+          }
+
+          .swiper-slide:hover {
+            cursor: grab;
+            &:active {
+                cursor: grabbing;
+            }
+          }
+          
+          .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #2c2c2c;
+
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          
+          .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+
+
+
+
+
+
+
+    #procurar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        width: 100vw;
+        height: auto;
+        padding: 20px 20px 20px 100px;
+        gap: 10px;
+
+        
+        .card-proc {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+
+            width: 100%;
+            height: 250px;
+            border-radius: 10px;
+            gap: 10px;
+            background-color: rgb(205, 42, 42);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+    #produtos {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        width: 100%;
+        height: auto;
+        padding: 20px 20px 0px 100px;
+    }
+
+
+}

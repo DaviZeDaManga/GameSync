@@ -1,69 +1,45 @@
-#Plano{
-    width: 1600px;
+#Planos{
 
     #engine {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
 
       width: 100%;
       height: 100vh;
       filter: blur(5);
-      background-color: #000000a6;
+      background-color: #000000bb;
 
       position: fixed;
       top: 0;
       right: 0;
       z-index: 22;
 
-      .engine {
+      .beneficios-engine {
         display: flex;
         flex-direction: row;
-        justify-content: center;
+        justify-content: start;
         align-items: center;
 
-        width: 1000px;
-        height: 600px;
-        background-color: rgb(50, 108, 162);
-        border-radius: 10px;
+        min-width: 90vw;
+        height: 60vh;
+        position: fixed;
+        left: 100px;
+        gap: 20px;
+        overflow: hidden;
 
-        position: relative;
-
-        .swiper {
-          width: 100%;
-          height: 100%;
-          position: absolute;
-        }
-        
-        .swiper-slide {
-          text-align: center;
-          font-size: 18px;
-          background: linear-gradient(90deg, rgb(66, 66, 184), rgb(52, 86, 165));
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          border-bottom-left-radius: 10px;
-          border-bottom-right-radius: 10px;
-          overflow: hidden;
-
-          img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-          }
-
-          #exEngine {
+        .bene {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
 
-            width: 100%;
+            width: 1200px;
             height: 100%;
             padding: 80px;
             gap: 10px;
+            border-radius: 10px;
             background: linear-gradient(90deg, rgb(127, 52, 165), rgb(66, 66, 184));
 
             > p {
@@ -74,19 +50,6 @@
               border: solid 3px rgb(132, 71, 190);
               border-radius: 10px;
             }
-          }
-
-          .sobrevideos {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-
-            width: 90%;
-            height: 90%;
-            position: relative;
-            background-color:  rgb(52, 91, 181);
-            border-radius: 10px;
 
             .swiper {
               width: 100%;
@@ -96,7 +59,7 @@
             .swiper-slide {
               text-align: center;
               font-size: 18px;
-              background: #ffffff00;
+              background: #70161600;
               display: flex;
               justify-content: center;
               align-items: center;
@@ -108,67 +71,59 @@
                 object-fit: cover;
               }
             }
-          }
+        }   
+      }
+    }
 
-          .comecar {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+    .navegacao-swiper {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
 
-            width: 100%;
-            height: 100%;
+      width: 100vw;
+      height: 100px;
+      gap: 20px;
 
-            > div {
-              display: flex;
-              flex-direction: row;
-              justify-content: center;
-              align-items: center;
+      position: fixed;
+      left: 0;
+      bottom: 0;
 
-              width: 350px;
-              height: 100px;
-              border-radius: 50px;
-              background-color: rgb(244, 244, 244);
-              transition: 0.3s;
+      .sair {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
 
-              p {
-                color: rgb(203, 203, 203);
-                font-size: 30px;
-                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-              }
-            }
-            > div:active {
-              background-color: rgb(59, 111, 184);
-            }
-            > div:active > p {
-              color: rgb(68, 68, 183);
-            }
-          }
+        width: 40px;
+        height: 40px;
+        padding: 6px;
+        background-color: rgba(231, 231, 231, 0);
+        border-radius: 10px;
+        transition: 0.3s;
+        border: solid 2px white;
+
+        > img {
+          height: 100%;
         }
 
-        button {
-          display: flex;
-          flex-direction: row;
-          justify-content: center;
-          align-items: center;
-
-          position: absolute;
-          width: 50px;
-          height: 50px;
-          background-color: #63097a00;
-          border: none;
-          top: -50px;
-          padding: 5px;
-          right: 0;
-          transition: 0.3s;
-          cursor: pointer;
-
-          > img {
-            height: 100%;
-          }
+        &:hover {
+          padding: 2px;
         }
-        button:hover {
-          padding: 0px;
+      }
+
+      button {
+        width: 200px;
+        height: 40px;
+        background-color: rgb(231, 231, 231);
+        border: none;
+        border-radius: 10px;
+        transition: 0.3s;
+
+        &:hover {
+          background-color: #00000000;
+          border: solid 2px white;
+          color: white;
         }
       }
     }
@@ -195,21 +150,20 @@
       .explain{
         display: flex;
         flex-direction: row;
-        justify-content: flex-start;
+        justify-content: start;
         align-items: start;
         
-
-        width: 100rem;
-        height: 33rem; //
-        padding: 20px 20px;
+        width: 100vw;
+        height: 33rem; 
+        padding: 20px 20px 20px 100px;
 
         .explain-1{
           display: flex;
           flex-wrap: wrap;
           flex-direction: row;
        
-          width: 30rem;
-          height: 28rem;
+          width: 500px;
+          height: 500px;
           justify-content: space-around;
           margin: 0;
           padding: 0; 
@@ -254,7 +208,7 @@
         }
         .explain-2{
           display: flex;
-          width: 35rem;
+          width: 100%;
           height:28rem;
           align-items: center;
           justify-content: center;
@@ -265,8 +219,8 @@
 
         .explain-3{
           display: flex;
-          width: 32rem;
-          height: 28rem;
+          width: 500px;
+          height: 500px;
           
           .explain-3-tools{
             display: flex;
@@ -297,9 +251,9 @@
         justify-content: flex-start;
         align-items: start;
         
-        width: 100rem;
+        width: 100vw;
         height: 24rem; //
-        padding: 20px 20px;
+        padding: 20px 20px 20px 100px;
 
         .planos1-title{
           display: block;
@@ -394,8 +348,8 @@
         justify-content: space-between;
         align-items: start;
        
-        width: 100rem;
-        padding: 20px 20px;
+        width: 100vw;
+        padding: 20px 20px 20px 100px;
 
         .preco1-mes{
           display: flex;
@@ -473,12 +427,12 @@
       .planos2{
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
+        justify-content: start;
         align-items: start;
        
-        width: 67rem;
+        width: 100vw;
         height: 24rem; //
-        padding: 20px 20px;
+        padding: 20px 20px 20px 100px;
 
         .planos2-title{
           display: block;
@@ -488,10 +442,11 @@
         .planos2-gamers{
           display: flex;
           flex-direction: row;
-          justify-content: space-between;
+          justify-content: start;
          
           width: 100%;
           height: auto;
+          gap: 40px;
           
           .planos2-gamers-Recursos > h1{
             height: 60px;
@@ -546,19 +501,19 @@
      .preco2{
       display: flex;
       flex-direction: row;
-      justify-content: flex-start;
-      justify-content: space-between;
+      justify-content: start;
       align-items: start;
     
-      width: 67rem;
-      padding: 20px 20px;
+      width: 100vw;
+      gap: 40px;
+      padding: 20px 20px 20px 100px;
 
       .preco2-mes{
         display: flex;
         align-items: center;
         border-radius: 10px;
         background-color: rgba(43, 43, 43, 1);
-        width:31rem;
+        width: 31rem;
         height: 4rem;
         padding: 20px;
       }
@@ -602,7 +557,7 @@
       align-items: flex-start;
 
       width: 100%;
-      padding: 20px 20px;
+      padding: 20px 20px 20px 100px;
       margin-top: 50px;
 
       .perguntas-title {
