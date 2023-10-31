@@ -128,7 +128,8 @@ export default function Planos(){
                     </Swiper>
                 </section>
 
-            </div>}
+            </div>
+            }
 
             <header className='explain'>
                 <section className='explain-1'>
