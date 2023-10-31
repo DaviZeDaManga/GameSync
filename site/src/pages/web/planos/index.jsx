@@ -174,13 +174,7 @@ export default function Planos(){
                     }                   
 
                 </section>
-<<<<<<< HEAD
-
-            </div>
-            }
-=======
             </div>}
->>>>>>> 35df5aef1e0ef8f4b56137bba56506a5aa05fea0
 
 
 
