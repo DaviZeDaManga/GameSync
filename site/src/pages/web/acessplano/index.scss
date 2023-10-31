@@ -37,6 +37,38 @@
                 height: 100%;
             }
 
+            .conteudoC {
+                display: flex;
+                flex-direction: column;
+                justify-content: start;
+                align-items: start;
+        
+                width: 100%;
+                height: 100%;
+                padding: 20px;
+                background: #2c2c2c;
+
+                button {
+                    width: 560px;
+                    height: 40px;
+                    border: none;
+                    border-radius: 10px;
+                    background-color: #fff;
+                    color: #181818;
+                    margin-top: 10px;
+                    transition: 0.3s;
+                    position: absolute;
+                    bottom: 20px;
+                    left: 20px;
+                    cursor: pointer;
+                }
+                button:hover {
+                    color: white;
+                    background-color: rgba(0, 0, 0, 0);
+                    border: solid 3px white;
+                }
+            }
+
             .voltar {
                 display: flex;
                 flex-direction: row;
@@ -63,6 +95,11 @@
         }
     }
 
+    .conteudo:hover > .info {
+        bottom: 0;
+        background-color: #00000089;
+    }
+
     .conteudo {
         display: flex;
         flex-direction: column;
@@ -75,8 +112,45 @@
         background: linear-gradient(90deg, rgba(0, 0, 0, 0.578), rgba(19, 19, 19, 0.049));
 
         position: absolute;
-        bottom: 0;
+        bottom: 0px;
         left: 0;
+
+        .info {
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: start;
+
+            width: 100%;
+            height: 200px;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0);
+
+            position: absolute;
+            bottom: -140px;
+            left: 0;
+            transition: 0.3s;
+
+            h1, p {
+                font-size: 15px;
+                text-align: start;
+            }
+            
+            .sobre {
+                display: flex;
+                flex-direction: column;
+                justify-content: start;
+                align-items: start;
+
+                width: 100%;
+                height: 70%;
+                padding: 0px 20px;
+
+                position: absolute;
+                bottom: 0;
+                left: 0;
+            }
+        }
 
         > h1 {
             font-size: 15px;
@@ -127,7 +201,8 @@
 
         max-width: 1;
         height: 550px;
-        padding: 20px 0px 20px 100px;
+        margin-top: 30px;
+        padding: 0px 0px 20px 120px;
 
         .swiper {
             width: 100%;
@@ -152,21 +227,7 @@
             justify-content: center;
             align-items: center;
             width: 1200px;
-
-            .info {
-                display: flex;
-                flex-direction: column;
-                justify-content: start;
-                align-items: start;
-
-                width: 100px;
-                height: 200px;
-                background-color: red;
-
-                position: absolute;
-                bottom: 0px;
-                left: 0;
-            }
+            overflow: hidden;
 
             img {
                 display: block;
@@ -214,10 +275,11 @@
         align-items: center;
 
         width: 100%;
-        height: 80px;
+        height: 100px;
         background-color: rgb(35, 35, 35);
         gap: 20px;
-        padding: 0px 20px 0px 100px;
+        padding: 0px 20px 0px 120px;
+        margin: 20px 0px 20px;
 
         > button {
             height: 40px;
@@ -246,7 +308,7 @@
 
         width: 100vw;
         height: 320px;
-        padding: 20px 20px 20px 100px;
+        padding: 20px 20px 20px 120px;
 
         .swiper {
             width: 100%;
@@ -269,6 +331,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
           }
           
           .swiper-slide img {

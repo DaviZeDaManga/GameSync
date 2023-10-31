@@ -5,6 +5,8 @@ import storage, { set } from 'local-storage';
 
 import { motion } from "framer-motion"
 
+import BarraDeCima from '../baraDeCima';
+
 export default function BarraLateral(props) {
     const[nameuser, setNameuser] = useState("")
     const{imguser, setImguser} = useState('/assets/images/GameSync/user.png')
@@ -114,6 +116,10 @@ export default function BarraLateral(props) {
 
 
 
+    function pesquisar() {
+        Configs()
+    }
+
 
 
 
@@ -188,6 +194,10 @@ export default function BarraLateral(props) {
                         </main>
                         <section className='categorias'>
 
+                            <div onClick={pesquisar} className='categoria'>
+                                <img src="/assets/images/barralateral/navegar/lupa.png" />
+                                <p>Pesquisar</p>
+                            </div>
                             <Link to={'/'}>
                             <div className='categoria'>
                                 <img src="/assets/images/barradecima/bolsa-de-compras.png" />

@@ -1,329 +1,168 @@
-#BarraDeCima {
+.BarraDeCima {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
 
-    width: 100%;
-    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(26, 26, 26);
+    position: fixed;
     top: 0;
     z-index: 3;
-    padding: 0px 0px 0px 100px;
+    padding: 30px 20px 20px 120px;
 
-    .BarraDeCima {
+    .pesquisa {
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        align-items: center;
+
+        width: 100%;
+        height: 40px;
+        gap: 10px;
+
+        > button {
+            width: 150px;
+            height: 100%;
+            background-color: rgb(53, 53, 53);
+            border: solid 2px rgb(50, 50, 50);
+            border-radius: 20px;
+            color: rgb(223, 223, 223);;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        > button:hover {
+            border: solid 1px white;
+        }
+
+        > input {
+            width: 600px;
+            height: 40px;
+            border: none;
+            border-radius: 20px;
+            padding: 0px 20px;
+            background-color: #313131;
+            transition: 0.3s;
+            color: #ffffff;
+            outline: none;
+            border: none;
+        }
+
+        .redirects {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+
+            width: auto;
+            height: 40px;
+            gap: 10px;
+            padding: 10px;
+            transition: 0.5s;
+            background-color: #313131;
+            border-radius: 10px;
+
+            > img {
+                height: 100%;
+                opacity: 0.6;
+            }
+
+            > p {
+                display: none;
+                transition: 0.3s;
+            }
+        }
+        .redirects:hover {
+            padding: 9px;
+            > img {
+                opacity: 1;
+            }
+            > p {
+                display: flex;
+            }
+        }
+    }
+
+
+
+
+
+    #pesquisar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        width: 100%;
+        height: 100%;
+        padding: 20px 0px;
+        
+        .pGames {
+            display: flex;
+            flex-direction: row;
+            justify-content: start;
+            align-items: start;
+            flex-wrap: wrap;
+
+            gap: 20px;
+            width: 100%;
+            min-width: 1100px;
+            height: 100%;
+            padding: 0px 20px 20px 0px;
+
+            overflow: auto;
+        }
+        .filtragem {
+            display: flex;
+            flex-direction: row;
+            justify-content: start;
+            align-items: start;
+
+            width: 100%;
+            height: 100%;
+            border-top-right-radius: 10px;
+            border-top-left-radius: 10px;
+            background-color: rgb(38, 38, 38);
+        }
+    }
+}
+
+.perfil {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    width: auto;
+    padding: 0px 20px;
+    height: 60px;
+    background-color: rgb(26, 26, 26);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+
+    position: fixed;
+    top: 20px;
+    right: 0px;
+    gap: 20px;
+    z-index: 4;
+
+    .imgcard {
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
-    
-        width: 100%;
-        padding: 30px 0px;
-        background: #18181800;
+
+        width: 40px;
+        height: 40px;
+        border-radius: 100%;
+        background-color: aliceblue;
+        overflow: hidden;
+        border: solid 1px rgb(16, 16, 16);
         
-        position: relative;
-        z-index: 3;
-
-        .conteudo {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-    
-            width: 100%;
-            height: 40px;
-            padding: 0px 20px;
-    
-            .animation-pesquisa {
-                display: flex;
-                flex-direction: row;
-                height: 100%;
-                width: 100%;
-                overflow: hidden;
-                position: relative;
-
-                .pesquisa {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: start;
-                    align-items: center;
-            
-                    width: 100%;
-                    height: 40px;
-                    gap: 10px;
-                    position: absolute;
-                    left: -155px;
-    
-                    > button {
-                        width: 150px;
-                        height: 100%;
-                        background-color: rgb(53, 53, 53);
-                        border: solid 2px rgb(50, 50, 50);
-                        border-radius: 20px;
-                        color: rgb(223, 223, 223);;
-                        transition: 0.3s;
-                        cursor: pointer;
-                    }
-        
-                    > button:hover {
-                        border: solid 1px white;
-                    }
-        
-                    > input {
-                        width: 600px;
-                        height: 40px;
-                        border: none;
-                        border-radius: 20px;
-                        padding: 0px 20px;
-                        background-color: #313131;
-                        transition: 0.3s;
-                        color: #ffffff;
-                        outline: none;
-                        border: none;
-                    }
-    
-                    .redirects {
-                        display: flex;
-                        flex-direction: row;
-                        justify-content: center;
-                        align-items: center;
-        
-                        width: auto;
-                        height: 40px;
-                        gap: 10px;
-                        padding: 10px;
-                        transition: 0.5s;
-                        background-color: #313131;
-                        border-radius: 10px;
-        
-                        > img {
-                            height: 100%;
-                            opacity: 0.6;
-                        }
-    
-                        > p {
-                            display: none;
-                            transition: 0.3s;
-                        }
-                    }
-                    .redirects:hover {
-                        padding: 9px;
-                        > img {
-                            opacity: 1;
-                        }
-                        > p {
-                            display: flex;
-                        }
-                    }
-                }
-            }
-    
-            
-    
-            #perfil {
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-    
-                width: auto;
-                height: 40px;
-                gap: 10px;
-                
-                .neon-text {
-                    font-size: 15px;
-                    font-family: piriquito1;
-                    color: #fff; 
-                    text-align: center;
-                    text-transform: uppercase;
-                    letter-spacing: 2px;
-                    position: relative;
-                    animation: neon 1.5s ease-in-out infinite alternate;
-                    background-image: linear-gradient(45deg, rgb(4, 0, 255), #9f6);
-                    -webkit-background-clip: text;
-                    background-clip: text;
-                    border-style:outset;
-                  }
-                  
-                  @keyframes neon {
-                    0% {
-                      text-shadow: 0 0 10px rgb(0, 4, 255), 0 0 20px rgb(4, 0, 255), 0 0 30px rgb(4, 0, 255);
-                      box-shadow: 0 0 10px rgb(4, 0, 255), 0 0 20pxrgb(4, 0, 255), 0 0 30px rgb(4, 0, 255);
-                    }
-                    100% {
-                      text-shadow: 0 0 5px rgb(4, 0, 255), 0 0 10px #9f6, 0 0 15px rgb(4, 0, 255);
-                      box-shadow: 0 0 5px rgb(4, 0, 255), 0 0 10px #9f6, 0 0 15px rgb(4, 0, 255);
-                    }
-                  }
-
-                p {
-                    text-wrap: nowrap;
-                    transition: 0.3s;
-                }
-    
-                .lista:hover {
-                    background-color: #b928a6;
-                }
-    
-                .carrin:hover {
-                    background-color: #b93228;
-                }
-    
-                .botao {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: center;
-                    align-items: center;
-    
-                    width: 40px;
-                    height: 40px;
-                    padding: 10px;
-                    border-radius: 100px;
-                    position: relative;  
-                    transition: 0.3s;
-                    
-                    > img {
-                        height: 100%;
-                        transition: 0.3s;
-                    }
-                }
-
-                .config {
-                    background-color: #3c3c3c;
-
-                    > img {
-                        opacity: 0.8;
-                    }
-                }
-
-                .perfil {
-                    background-color: #D9D9D9;
-                }
-    
-                .botao:hover {
-                    border: solid 1px rgb(174, 174, 174);
-                    > img {
-                        opacity: 1;
-                    }
-                }
-
-                
-            }
-        }
-    }
-
-    #pesquisar {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-
-        width: 1600px;
-        height: 100vh;
-        background: #181818;
-
-        position: fixed;
-        top: 0;
-
-        .pesquisa {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-
-            width: 100%;
+        img {
             height: 100%;
-            padding: 100px 0px 0px 0px;
-
-            .resultados {
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                align-items: center;
-
-                width: 100%;
-                height: 100%;
-
-                #produtos {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: start;
-                    align-items: start;
-                    flex-wrap: wrap;
-            
-                    width: 100%;
-                    height: 100%;
-                    overflow: auto;
-                    gap: 20px;
-
-                    #acoes {
-                        display: flex;
-                        flex-direction: row;
-                        justify-content: center;
-                        align-items: center;
-            
-                        width: 100%;
-                        padding: 10px 70px 0px 0px ;
-                        background-color: rgba(35, 139, 35, 0);
-            
-                        > button {
-                            width: 100%;
-                            height: 40px;
-                            background-color: rgb(48, 48, 58);
-                            border: solid 2px rgb(61, 61, 77); 
-                            border-radius: 20px;
-                            color: rgb(223, 223, 223);
-                            transition: 0.3s;
-                        }
-            
-                        > button:hover {
-                            border: solid 1px white;
-                        }
-                    }
-                }
-            }
-            .filtros {
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                align-items: center;
-
-                width: 650px;
-                height: 100%;
-                background-color: rgb(40, 40, 40);
-
-                > h1 {
-                    font-size: 15px;
-                    background-color: rgba(54, 54, 54, 0.55);
-                    width: 100%;
-                    padding: 10px 0px;
-                    text-align: center;
-                    border: solid 2px white;
-                }
-            }
-        }
-    }
-    
-}
-
-@media (max-width: 1414px) {
-    #BarraDeCima {
-        .BarraDeCima {
-            .conteudo {
-                #pesquisa {
-                    width: 680px;
-
-                    > input {
-                        height: 35px;
-                    }
-                }
-                #perfil {
-                    height: 35px;
-
-                    .perfil {
-                        width: 35px;
-                    }
-                }
-            }
         }
     }
 }
