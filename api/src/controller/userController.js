@@ -44,7 +44,7 @@ server.post(`/admin/login`, async (req, resp) => {
         const resposta = await loginAdmin(email, senha, codigo);
 
         if (!resposta){
-            throw new Error('Credenciais invalidas');
+            throw new Error('Credenciais invalidas')
         }
 
         resp.send(resposta)
