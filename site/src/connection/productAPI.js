@@ -4,16 +4,24 @@ const api = axios.create({
     baseURL: 'http://localhost:5000'   
 });
 
-export async function CadastrarProduto(produto){
-    //console.log(produto);
-    const resposta = await api.post('/produto', produto)
-    return resposta.data
+export async function CadastrarProduto(produto) {
+    const resposta = await api.post('/produto', produto);
+    if (resposta.status === 200) {
+        console.log("Resposta do servidor:", resposta.data);
+        // Certifique-se de que a resposta inclui o ID do produto
+        if (resposta.data.id) {
+            return resposta.data.id; // Retorna o ID do produto
+        } else {
+            throw new Error('O servidor não retornou o ID do produto.');
+        }
+    } else {
+        throw new Error('Erro ao cadastrar o produto.');
+    }
 }
 
 export async function InserirCategoriaProduto(tabela){
     const resposta = await api.post('/produto/categoria', tabela)
     return resposta.data
-    console.log(tabela)
 }
 
 export async function EnviarImagens(id, imagem){

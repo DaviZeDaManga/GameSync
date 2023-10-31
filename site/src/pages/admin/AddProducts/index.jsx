@@ -18,7 +18,12 @@ export default function AddProduct(){
     const [promocao, setPromocao] = useState(false);//falso
     const [disponivel, setDisponivel] = useState(false);//falso
     var [qtd, setQtd] = useState(0);
-    const [details, setDetails] = useState("");
+    const [descricao, setdescricao] = useState("");
+    let [classificacao, setClassificacao] = useState("");
+    let [lancamento, setLancamento] = useState("");
+    let [tamanho, setTamanho] = useState("");
+    let [empresa, setempresa] = useState("");
+    let [desenvolvedor, setdesenvlovedor] = useState('')
 
     const [imagem, setImagem] = useState();
 
@@ -46,37 +51,39 @@ export default function AddProduct(){
                         throw new Error('Preço do jogo inserido é obrigatório. Certifique-se de que o preço seja maior que zero.');
                     }
 
-                    const produto = {
-                        nome,
-                        preco: parseFloat(preco),
-                        precoPro: parseFloat(precoPro),
-                        destaque: destaque ? 1 : 0,
-                        promocao: promocao ? 1 : 0,
-                        disponivel: disponivel ? 1 : 0,
-                        qtd: parseInt(qtd, 10),
-                        details,
-                        categoria: parseInt(qtd, 10),
-                        admin: IDadmin
-                    };
-        
-                    const jogo = await CadastrarProduto(produto);
-                    //console.log(jogo);
+                        const produto = {
+                            nome,
+                            preco: parseFloat(preco),
+                            precoPro: parseFloat(precoPro),
+                            destaque: destaque ? 1 : 0,
+                            promocao: promocao ? 1 : 0,
+                            disponivel: disponivel ? 1 : 0,
+                            qtd: parseInt(qtd, 10),
+                            descricao,
+                            categoria: parseInt(categoria, 10),
+                            classificacao,
+                            lancamento,
+                            tamanho,
+                            empresa,
+                            desenvolvedor,
+                            admin: IDadmin
+                        };
+            
+                        const jogo = await CadastrarProduto(produto);
+                        console.log(jogo.id);
 
-                    const tabela = {
-                        categoria: categoria,
-                        produto: jogo.id
-                    }
+                        const tb_categoria_produto = {
+                            categoria: categoria,
+                            produto: jogo.id
+                        }
 
-                    await InserirCategoriaProduto(tabela);
-                    //console(tabela)
+                        await InserirCategoriaProduto(tb_categoria_produto);
+                        console(tb_categoria_produto)
 
                         await EnviarImagens(jogo.id, imagem);
-                       // setIDadmin(jogo.IDadmin);
+                        // setIDadmin(jogo.IDadmin);
 
-                    
-
-                        toast.success('Produto Gamer adicionado com SUCESSO!');
-                    
+                        toast.success('Produto Gamer adicionado com SUCESSO!'); 
                 }
                  
                 else{
@@ -90,7 +97,7 @@ export default function AddProduct(){
         catch (err) {
             if (err.response) {
               toast.error(err.response.data.erro);
-              console.log(err.response.data.erro)
+              console.log(err.response.data.erro) //////////aqui
             } else {
               toast.error(err.message);
               console.log()
@@ -161,11 +168,31 @@ export default function AddProduct(){
                                 <input type="number" placeholder='Estoque?' value={qtd} onChange={e => setQtd(e.target.value)}/>
                             </div>
 
+                            <div className="add-part1-negocio-nr">
+                                <input type="text" placeholder='classificação?' value={classificacao} onChange={e => setClassificacao(e.target.value)}/>
+                            </div>
+
+                            <div className="add-part1-negocio-nr">
+                                <input type="date" placeholder='Data de lançamento' value={lancamento} onChange={e => setLancamento(e.target.value)}/>
+                            </div>
+                            
+                            <div className="add-part1-negocio-nr">
+                                <input type="text" placeholder='Em GB ou MB?' value={tamanho} onChange={e => setTamanho(e.target.value)}/>
+                            </div>
+
+                            <div className="add-part1-negocio-nr">
+                                <input type="text" placeholder='Empresa que publico?' value={empresa} onChange={e => setempresa(e.target.value)}/>
+                            </div>
+
+                            <div className="add-part1-negocio-nr">
+                                <input type="text" placeholder='desenvolvedor?' value={desenvolvedor} onChange={e => setdesenvlovedor(e.target.value)}/>
+                            </div>
+
                             </section>
                         </div>
 
                         <div className='texto-area'>
-                          <textarea cols="40" rows="4" value={details} onChange={e => setDetails(e.target.value)} placeholder='Descrição do produto'></textarea>
+                          <textarea cols="40" rows="4" value={descricao} onChange={e => setdescricao(e.target.value)} placeholder='Descrição do produto'></textarea>
                         </div>
                     </figure>
 

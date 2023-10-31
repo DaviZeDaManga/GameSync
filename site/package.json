@@ -10,6 +10,7 @@
     "animate.css": "^4.1.1",
     "atropos": "^2.0.2",
     "axios": "^1.5.1",
+    "framer-motion": "^10.16.4",
     "framer-motion-3d": "^10.16.4",
     "local-storage": "^2.0.0",
     "openai": "^4.0.0",
