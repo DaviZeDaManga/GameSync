@@ -5,16 +5,12 @@ import { Link } from 'react-router-dom'
 import storage, { set } from 'local-storage';
 import { motion } from 'framer-motion';
     
-export default function BarraDeCima (props) {
+export default function BarraDeCima ({barra}) {
     const [games, setGames] = useState (true)
     const [tgames, setTgames] = useState ([])
     const [lista, setLista] = useState (230)
     const [idprod, setIdprod] = useState ('')
     const [imguser, setImguser] = useState("")
-
-    function MaisGames() {
-        setLista(lista + 20)
-    }
 
     const [nome, setNome] = useState('')
 
@@ -74,7 +70,7 @@ export default function BarraDeCima (props) {
     })
 
     useEffect(() => {
-        if(props.barra == 1) {
+        if(barra == 1) {
             setX(0)
             setGames(true)
             setPesquisa(true)
@@ -84,11 +80,14 @@ export default function BarraDeCima (props) {
 
     return(
         <>
+
         <section className='perfil'>
             <p>{nome}</p>
-            <div className='imgcard'>
-                <img src={imguser} />
-            </div>
+            <Link to={`/perfil`}>
+                <div className='imgcard'>
+                    <img src={imguser} />
+                </div>
+            </Link>
         </section>
 
         {pesquisa == true &&

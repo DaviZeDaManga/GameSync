@@ -12,14 +12,14 @@
         justify-content: end;
         align-items: end;
 
-        width: 500px;
+        width: 400px;
         height: 100vh;
         background-color: #2f2f2f;
 
         z-index: 10;
         position: fixed;
         top: 0;
-        left: -420px;
+        left: -320px;
 
         .BarraLateral {
             display: flex;
@@ -32,13 +32,66 @@
             padding: 20px;
             background-color: #2f2f2f;   
 
-            > .menu {
+            .pesquisa {
+                display: flex;
+                flex-direction: column;
+                justify-content: start;
+                align-items: center;
+
+                width: 300px;
+                height: 100vh;
+                padding: 20px;
+                background-color: rgba(22, 22, 22, 0.541);
+
+                position: absolute;
+                top: 0;
+                left: -300px;
+
+                .titulo-pesquisa {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    width: 100%;
+                    height: 40px;
+                    padding: 0px 20px;
+                    background-color: #1e1e20;
+                    border-radius: 10px;
+
+                    > h1 {
+                        font-size: 15px;
+                    }
+
+                    .sair {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                        align-items: center;
+
+                        width: 40px;
+                        height: 40px;
+                        padding: 5px;
+                        transition: 0.3s;
+
+                        &:hover {
+                            padding: 2px;
+                        }
+
+                        img {
+                            height: 100%;
+                        }
+                    }
+                }
+            }
+
+            .menu {
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
                 align-items: start;
 
-                width: 420px;
+                width: 320px;
                 height: 100vh;
                 background-color: rgb(40, 40, 40);
 
@@ -76,12 +129,25 @@
                         justify-content: start;
                         align-items: center;
 
-                        width: 380px;
+                        width: 280px;
                         height: 45px;
                         gap: 5px;
                         padding: 10px 20px;
-                        background-color: #353535;
+                        background-color: #35353500;
                         border-radius: 10px;
+                        cursor: pointer;
+
+                        &.p {
+                            background-color: #1e1e20;
+
+                            &:hover {
+                                border: none;
+                            }
+                        }
+
+                        &.selecionado {
+                            border: solid 2px rgb(94, 94, 94);
+                        }
 
                         img {
                             height: 20px;
@@ -112,7 +178,7 @@
     
                         width: 100%;
                         height: 100%;
-                        background-color: #2d2d2d;
+                        background-color: #2d2d2d00;
                         border-radius: 10px;
                     }
                 }

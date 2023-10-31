@@ -1,4 +1,7 @@
 #Planos{
+    width: 100vw;
+    right: 0;
+    position: absolute;
 
     #engine {
       display: flex;
@@ -155,7 +158,7 @@
         
         width: 100vw;
         height: 33rem; 
-        padding: 20px 20px 20px 100px;
+        padding: 30px 20px 20px 120px;
 
         .explain-1{
           display: flex;
@@ -253,7 +256,7 @@
         
         width: 100vw;
         height: 24rem; //
-        padding: 20px 20px 20px 100px;
+        padding: 20px 20px 20px 120px;
 
         .planos1-title{
           display: block;
@@ -349,7 +352,7 @@
         align-items: start;
        
         width: 100vw;
-        padding: 20px 20px 20px 100px;
+        padding: 20px 20px 20px 120px;
 
         .preco1-mes{
           display: flex;
@@ -432,7 +435,7 @@
        
         width: 100vw;
         height: 24rem; //
-        padding: 20px 20px 20px 100px;
+        padding: 20px 20px 20px 120px;
 
         .planos2-title{
           display: block;
@@ -506,7 +509,7 @@
     
       width: 100vw;
       gap: 40px;
-      padding: 20px 20px 20px 100px;
+      padding: 20px 20px 20px 120px;
 
       .preco2-mes{
         display: flex;
