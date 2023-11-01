@@ -148,7 +148,7 @@ export default function BarraLateral(props) {
 
 
 
-    const[xbot, setXbot] = useState (0)
+    const[xbot, setXbot] = useState (-500)
     const[ybot, setYbot] = useState (0)
     const[rotatebot, setRotatebot] = useState (0)
 
@@ -158,7 +158,6 @@ export default function BarraLateral(props) {
 
     function Mbot() {
         if (assis == true) {
-            setXbot(500)
             setAssis(true)
             Fundo()
         }
@@ -174,10 +173,52 @@ export default function BarraLateral(props) {
 
 
 
+
+
+
+
+    const [namepbarra, setNamepbarra] = useState('')
+    const [pesqB, setPesqB] = useState(false)
+    const [notiB, setNotiB] = useState(false)
+
+    function SairSegundaBarra() {
+        setX(320)
+        setPesqB(false)
+        setNotiB(false)
+        setNamepbarra('tchau')
+        setCateb(0)
+    }
+
+    function PesquisaBarra() {
+        setX(620)
+        setNamepbarra('Jogos')
+        setCateb(1)
+
+        if(notiB == true) {
+            setNotiB(false)
+            setPesqB(true)
+        }
+        else{
+            setPesqB(true)
+        }
+    }
+    function PesquisaNoti() {
+        setX(620)
+        setNamepbarra('Notificações')
+        setCateb(2)
+
+        if(pesqB == true) {
+            setPesqB(false)
+            setNotiB(true)
+        }
+        else {
+            setNotiB(true)
+        }
+    }
+
+
+    const [cateb, setCateb] = useState(0)
     const [sessao, setSessao] = useState(1)
-
-
-
 
     return(
         <div id="BarraLateral">
@@ -217,9 +258,16 @@ export default function BarraLateral(props) {
                                 <p>Noticias</p>
                             </div>
                             </Link>
-                            <div onClick={()=> (setSessao(4), setX(620))} className={`categoria ${sessao == 4 && 'selecionado'}`}>
+
+                            <div className='linhaBarra'></div>
+                        
+                            <div onClick={PesquisaBarra} className={`categoria ${cateb == 1 &&'selecionado'}`}>
                                 <img src="/assets/images/barralateral/navegar/lupa.png" />
                                 <p>Jogos</p>
+                            </div>
+                            <div onClick={PesquisaNoti} className={`categoria ${cateb == 2 && 'selecionado'}`}>
+                                <img src="/assets/images/barralateral/navegar/envelope.png" />
+                                <p>Notificações</p>
                             </div>
                             
 
@@ -234,12 +282,82 @@ export default function BarraLateral(props) {
 
 
                     <section className='pesquisa'>
+                        
+                        
                         <div className='titulo-pesquisa'>
-                            <h1>Jogos</h1>
-                            <div onClick={()=> (setX(320))} className='sair'>
+                            <div onClick={SairSegundaBarra} className='sair'>
                                 <img src='/assets/images/acoes/remover.png' />
                             </div>
+
+                            <h1>{namepbarra}</h1>
                         </div>
+
+                        {pesqB == true &&
+                        <>
+                        <Link to={'/produto/2'}>
+                        <section className='categoria'>
+                            <p>Terror</p>
+                        </section>
+                        </Link>
+
+                        <Link to={'/produto/2'}>
+                        <section className='categoria'>
+                            <p>RPG</p>
+                        </section>
+                        </Link>
+
+                        <Link to={'/produto/2'}>
+                        <section className='categoria'>
+                            <p>Aventura</p>
+                        </section>
+                        </Link>
+
+                        <Link to={'/produto/2'}>
+                        <section className='categoria'>
+                            <p>Ação</p>
+                        </section>
+                        </Link>
+
+                        <Link to={'/produto/2'}>
+                        <section className='categoria'>
+                            <p>Souls Like</p>
+                        </section>
+                        </Link>
+
+                        <Link to={'/produto/2'}>
+                        <section className='categoria'>
+                            <p>Família</p>
+                        </section>
+                        </Link>
+
+                        <Link to={'/produto/2'}>
+                        <section className='categoria'>
+                            <p>Luta</p>
+                        </section>
+                        </Link>
+
+                        <Link to={'/produto/2'}>
+                        <section className='categoria'>
+                            <p>Tiro</p>
+                        </section>
+                        </Link>
+                        </>}
+
+                        {notiB == true &&
+                        <>
+                        <section className='cardnoti'>
+                            <h1>Você recebeu um código!</h1>
+                            <p>Parabéns! Você acaba de ter a sorte de ganhar um código que pode ser usado na GameSync, quando estiver finalizando sua compra. 10% de desconto</p>
+                            <button>Ver código</button>
+                        </section>
+
+                        <section className='cardnoti'>
+                            <h1>Você recebeu um código!</h1>
+                            <p>Parabéns! Você acaba de ter 20% de taxa!</p>
+                            <button>Ver código</button>
+                        </section>
+                        </>
+                        }
                     </section>
 
                     <img onClick={Configs} className='logo' src="/assets/images/GameSync/giphy-unscreen.gif" />
@@ -260,7 +378,12 @@ export default function BarraLateral(props) {
                     {assis == true &&
                         <motion.div
                         className='animation-BarraBot'
-                        animate={{ xbot, ybot, rotatebot}}
+                        animate={{ 
+                            x: xbot,
+                            y: ybot,
+                            scale: 1,
+                            rotate: rotatebot,
+                        }}
                         transition={{ type: "spring"}}
                         >
 
