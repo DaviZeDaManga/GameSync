@@ -34,3 +34,19 @@ export async function CadastroUsuario(nome, telefone, cpf, email, senha){
         throw err
     }
 }
+
+export async function MudarDadosUser(nome, email, senha, telefone, id){
+    try{
+        const r = await api.put(`/usuario/New/${id}`, {
+            nome: nome,
+            email: email,
+            senha: senha,
+            telefone: telefone
+        })
+        return r.data // ou status?
+    }
+    catch(err){
+        console.log(err)
+        throw err
+    }
+}

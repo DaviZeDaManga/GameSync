@@ -45,9 +45,25 @@ export function BuscarJodoID(imagem){
 
 export async function BuscarJogoNome(nome) {
     try {
-        const resposta = await axios.get(`/produto/buscar?nome=${nome}`);
+        const resposta = await api.get(`/produto/buscar?nome=${nome}`);
         return resposta.data;
     } 
+    catch (error) {
+        if (error.response && error.response.status === 404) {
+            // Tratar a situação em que nenhum resultado foi encontrado.
+            return [];
+        } else {
+            // Tratar outros erros, como erros na solicitação ou no servidor.
+            throw error;
+        }
+    }
+}
+
+export async function BuscarJogoID(id){
+    try{
+        const resposta = await api.get(`/produto/buscar/${id}`);
+        return resposta.data;
+    }   
     catch (error) {
         if (error.response && error.response.status === 404) {
             // Tratar a situação em que nenhum resultado foi encontrado.
@@ -85,4 +101,10 @@ export async function AlterarProduto(id, nome, preco, precoPro, destaque, promoc
         admin: admin
     }) 
     return resposta.data 
+}
+
+///novo
+export async function InserirVideo(video){
+    const resposta = await api.post('/produto/video/url', video);
+    return resposta
 }
