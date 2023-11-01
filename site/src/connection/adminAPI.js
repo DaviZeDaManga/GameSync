@@ -18,3 +18,17 @@ export async function LoginAdm(email, senha, codigo){
         throw err; // Lança o erro para que ele possa ser tratado fora desta função
     }
 }
+
+///new
+export async function MudarSenha(id, senha){
+    try{
+        const r = await api.put(`/admin/NewSenha/${id}`, {
+            senha: senha
+        });
+        return r.data // ou status???
+    }
+    catch(err){
+        console.log(err)
+        throw(err)
+    }
+}
