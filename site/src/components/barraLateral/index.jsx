@@ -133,7 +133,7 @@ export default function BarraLateral(props) {
     }
     function Mconfigs() {
         if (configs == true) {
-            setX(420)
+            setX(320)
             setConfigs(true)
             Fundo()
         }
@@ -174,6 +174,9 @@ export default function BarraLateral(props) {
 
 
 
+    const [sessao, setSessao] = useState(1)
+
+
 
 
     return(
@@ -189,33 +192,35 @@ export default function BarraLateral(props) {
                 <div className="BarraLateral">
 
                     <main className='menu'>
-                        <main className='namemenu'>
-                            {/* <h1>GameMenu</h1> */}
-                        </main>
+                        
                         <section className='categorias'>
 
-                            <div onClick={pesquisar} className='categoria'>
+                            <div onClick={pesquisar} className={`categoria p`}>
                                 <img src="/assets/images/barralateral/navegar/lupa.png" />
                                 <p>Pesquisar</p>
                             </div>
                             <Link to={'/'}>
-                            <div className='categoria'>
+                            <div onClick={() => (setSessao(1))} className={`categoria ${sessao == 1 && 'selecionado'}`} >
                                 <img src="/assets/images/barradecima/bolsa-de-compras.png" />
                                 <p>Home</p>
                             </div>
                             </Link>
                             <Link to={'/planos'}>
-                            <div className='categoria'>
+                            <div onClick={()=> (setSessao(2))} className={`categoria ${sessao == 2 && 'selecionado'}`}>
                                 <img src="/assets/images/barradecima/controle-de-video-game.png" />
                                 <p>Planos</p>
                             </div>
                             </Link>
                             <Link to={'/noticias'}>
-                            <div className='categoria'>
+                            <div onClick={()=> (setSessao(3))} className={`categoria ${sessao == 3 && 'selecionado'}`}>
                                 <img src="/assets/images/barradecima/balao-de-fala.png" />
                                 <p>Noticias</p>
                             </div>
                             </Link>
+                            <div onClick={()=> (setSessao(4), setX(620))} className={`categoria ${sessao == 4 && 'selecionado'}`}>
+                                <img src="/assets/images/barralateral/navegar/lupa.png" />
+                                <p>Jogos</p>
+                            </div>
                             
 
 
@@ -226,6 +231,16 @@ export default function BarraLateral(props) {
                             </section>
                         </footer>
                     </main>
+
+
+                    <section className='pesquisa'>
+                        <div className='titulo-pesquisa'>
+                            <h1>Jogos</h1>
+                            <div onClick={()=> (setX(320))} className='sair'>
+                                <img src='/assets/images/acoes/remover.png' />
+                            </div>
+                        </div>
+                    </section>
 
                     <img onClick={Configs} className='logo' src="/assets/images/GameSync/giphy-unscreen.gif" />
                     <div className='botoes'>

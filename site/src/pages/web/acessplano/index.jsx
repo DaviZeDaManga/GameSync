@@ -34,7 +34,7 @@ export default function Home() {
                 transform: isInView ? "none" : "translateX(-200px)",
                 opacity: isInView ? 1 : 0,
                 background: isInView ? "linear-gradient(90deg, rgba(0, 0, 0, 0.578), rgba(19, 19, 19, 0.049))" : "linear-gradient(90deg, black, black);",
-                transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s"
+                transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
               }}
             >
               {children}
@@ -108,6 +108,7 @@ export default function Home() {
                         </div>
                     
                 </SwiperSlide>
+                
                 <SwiperSlide>
 
                     <img src='https://images5.alphacoders.com/609/609173.jpg' />
@@ -119,6 +120,8 @@ export default function Home() {
                         </div>
                     </Nav>
                 </SwiperSlide>
+                
+
                 <SwiperSlide>
                     <img src='https://pixelz.cc/wp-content/uploads/2019/03/the-elder-scrolls-online-wqhd-1440p-wallpaper.jpg' />
                     <Nav>
