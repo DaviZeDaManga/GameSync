@@ -7,7 +7,7 @@ const api = axios.create({
 export async function CadastrarProduto(produto) {
     const resposta = await api.post('/produto', produto);
     if (resposta.status === 200) {
-        console.log("Resposta do servidor:", resposta.data);
+        //console.log("Resposta do servidor:", resposta.data);
         // Certifique-se de que a resposta inclui o ID do produto
         if (resposta.data.id) {
             return resposta.data.id; // Retorna o ID do produto
@@ -82,9 +82,15 @@ export async function ListarTodosJogos(){
 }
 
 export async function ExcluirProduto(id){
-    console.log(id)
-    const resposta = await api.delete(`/produto/${id}`);
-    return resposta.status
+    try {
+        console.log(`Tentando excluir produto com ID: ${id}`);
+        const resposta = await api.delete(`/produto/${id}`);
+        console.log(`Resposta da exclusão: ${resposta.status}`);
+        return resposta.status;
+    } catch (erro) {
+        console.error(`Erro ao excluir produto: ${erro}`);
+        throw erro;
+    }
 }
 
 export async function AlterarProduto(id, nome, preco, precoPro, destaque, promocao, disponivel, qtd, details, categoria, admin ){
@@ -104,7 +110,15 @@ export async function AlterarProduto(id, nome, preco, precoPro, destaque, promoc
 }
 
 ///novo
-export async function InserirVideo(video){
-    const resposta = await api.post('/produto/video/url', video);
-    return resposta
+export async function InserirVideo(produto, url) {
+    try {
+        const resposta = await api.post('/produto/video/url', {
+            produto: produto,
+            url: url
+        });
+        // Trate os dados específicos da resposta aqui, se necessário.
+        return resposta.data; // Retorne apenas os dados da resposta.
+    } catch (erro) {
+        throw erro; // Rejeite a promessa em caso de erro.
+    }
 }

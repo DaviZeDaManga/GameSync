@@ -52,6 +52,7 @@
         }, [])
 
         async function RemoverJogo(id, nome) {
+            console.log("ID do Jogo a ser removido:", id); // Adicione esta linha
             confirmAlert({
                 title: 'Remover Jogo',
                 message: `Você tem certeza que quer fazer isso? Excluir o jogo ${nome}.`,
@@ -59,10 +60,10 @@
                     {
                         label: 'Sim!',
                         onClick: async () => {
-                            await ExcluirProduto(id, nome);
+                            console.log("ID dentro da função de remoção:", id); // Adicione esta linha
+                            await ExcluirProduto(id);
                             if (filtro === "") {
                                 CarregarTodosJogos();
-                                
                             } else {
                                 CarregarTodosJogos();
                                 toast.dark("Jogo Removido💀");
@@ -75,7 +76,8 @@
                 ]
             });
         }
-
+        
+        console.log(RemoverJogo)
         function EditarJogo(id){
             navigate(`/admin/alterar${id}`)
         }
@@ -89,7 +91,7 @@
             setJogoSelecionado(null);
         }
         console.log(jogoSelecionado); // Adicione esta linha para depurar
-
+        
         return (
             <main id='EditarExcluir'>
                 {jogoSelecionado && (
@@ -144,11 +146,11 @@
                             {jogos.map(item => (
                                 <div className='comp-card' key={item.id}>
 
-                                    <div className='card' onClick={() => SelecionarJogo(item.id)}>
+                                    <div className='card' onClick={() => SelecionarJogo(item.id_produto)}>
 
                                         <div className='acoes'>
                                             <img src='/assets/images/adm/pencil.png' alt='editar' onClick={e => { e.stopPropagation(); EditarJogo(item.id) }} />
-                                            <img src='/assets/images/adm/trash.png' alt='remover' onClick={e => { e.stopPropagation(); RemoverJogo(item.id, item.nome) }} />
+                                            <img src='/assets/images/adm/trash.png' alt='remover' onClick={e => { e.stopPropagation(); RemoverJogo(item.id_produto, item.nome) }} />
                                         </div>
 
                                         <div>
