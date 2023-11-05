@@ -4,8 +4,9 @@
 }
 
 .Produto {
-    width: 1600px; 
-    transition: 0.5s;
+    width: 100vw;
+    right: 0;
+    position: absolute;
     
     #titles {
         display: flex;
@@ -63,255 +64,266 @@
 
 
     
-    #produto {
+    #produto-card {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
         
-        width: 1600px;
-        height: 550px;
-        padding: 20px 20px;
-        border-radius: 10px;
-        background-color: #313131;
-        overflow: hidden;
-        gap: 10px;
-        position: relative;
+        width: 100%;
+        height: 580px;
+        padding: 20px 40px 20px 140px;
 
-        #info-produto {
+        #produto {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             justify-content: space-between;
             align-items: center;
-
+            
             width: 100%;
             height: 100%;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #313131;
+            overflow: hidden;
+            gap: 10px;
             position: relative;
-
-            .titulo {
+    
+            #info-produto {
                 display: flex;
                 flex-direction: column;
-                justify-self: start;
-                align-items: start; 
-
+                justify-content: space-between;
+                align-items: center;
+    
                 width: 100%;
-                height: auto;
-                position: sticky;
-                top: 0;
-
-                > p {
-                    overflow-y: hidden;
-                    max-width: 80ch;
-                    max-height: 20ch;
-                    text-overflow: ellipsis;
+                height: 100%;
+                position: relative;
+    
+                .titulo {
+                    display: flex;
+                    flex-direction: column;
+                    justify-self: start;
+                    align-items: start; 
+    
+                    width: 100%;
+                    height: auto;
+                    position: sticky;
+                    top: 0;
+    
+                    > p {
+                        overflow-y: hidden;
+                        max-width: 80ch;
+                        max-height: 20ch;
+                        text-overflow: ellipsis;
+                    }
+                }
+    
+                #Comprar {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+    
+                    width: 100%;
+                    height: auto;
+                    background: rgb(56, 56, 56);
+                    border-radius: 10px;
+                    padding: 0px 20px 20px 20px;
+    
+                    .info {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: start;
+                        align-items: center;
+    
+                        width: 100%;
+                        height: 100%;
+    
+                        > h1 {
+                            padding: 10px 0px;
+                        }  
+                    }
+    
+                    .acoes {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        align-items: center;
+    
+                        width: 100%;
+                        height: 100%;
+                        gap: 10px;
+    
+                        > button {
+                            width: 100%;
+                            height: 40px;
+                            background-color: #2d2d2d;
+                            border: none;
+                            border-radius: 10px;
+                            color: white;
+                            transition: 0.3s;
+                        }
+    
+                        > button:hover {
+                            border: solid 1px white;
+                        }
+    
+                        .paraconta {
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: center;
+                            align-items: center;
+                            width: 40px;
+                            height: 40px;
+                            padding: 20px;
+                            background-color: #2D2D2D;
+                            border-radius: 100%;
+                            transition: 0.3s;
+    
+                            > img {
+                                width: 100%;
+                            }
+                        }
+    
+                        .paraconta:hover {
+                            background-color: #828282;
+                        }
+                    }
                 }
             }
-
-            #Comprar {
+    
+            #produto-images {
                 display: flex;
                 flex-direction: column;
-                justify-content: center;
+                justify-content: space-between;
                 align-items: center;
-
+    
                 width: 100%;
-                height: auto;
-                background: rgb(56, 56, 56);
-                border-radius: 10px;
-                padding: 0px 20px 20px 20px;
-
-                .info {
+                min-width: 770px;
+                height: 100%;
+                position: relative;
+    
+                .swiper {
+                    width: 100%;
+                    height: 100%;
+                    cursor:grab;
+                  }
+                  .swiper:active {
+                    cursor: grabbing;
+                  }
+                  
+                  .swiper-slide {
+                    text-align: center;
+                    font-size: 18px;
+                    background: #2c2c2c;
+                    border-radius: 10px;
+                  
+                    /* Center slide text vertically */
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  }
+                  
+                  .swiper-slide img, video {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                  }
+                  
+                  .swiper {
+                    width: 100%;
+                    height: 100%;
+                    margin-left: auto;
+                    margin-right: auto;
+                  }
+                  
+                  .swiper-slide {
+                    background-size: cover;
+                    background-position: center;
+                  }
+                  
+                  .mySwiper2 {
+                    height: 100%;
+                    width: 100%;
+                  }
+                  
+                  .mySwiper {
+                    height: 20%;
+                    box-sizing: border-box;
+                    padding: 10px 0;
+                  }
+                  
+                  .mySwiper .swiper-slide {
+                    width: 25%;
+                    height: 100%;
+                    opacity: 0.4;
+                  }
+                  
+                  .mySwiper .swiper-slide-thumb-active {
+                    opacity: 1;
+                  }
+                  
+                  .swiper-slide img {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                  }
+    
+    
+    
+    
+    
+    
+                img, video {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 10px;
+                    transition: 0.3s;
+                }
+    
+                .outrosimg {
                     display: flex;
                     flex-direction: row;
                     justify-content: start;
-                    align-items: center;
-
+                    align-items: start;
+    
                     width: 100%;
-                    height: 100%;
-
-                    > h1 {
-                        padding: 10px 0px;
-                    }  
-                }
-
-                .acoes {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: space-between;
-                    align-items: center;
-
-                    width: 100%;
-                    height: 100%;
+                    height: 200px;
+                    padding: 10px 0px 0px 0px;
                     gap: 10px;
-
-                    > button {
-                        width: 100%;
-                        height: 40px;
-                        background-color: #2D2D2D;
-                        border: none;
-                        border-radius: 10px;
-                        color: white;
-                        transition: 0.3s;
-                    }
-
-                    > button:hover {
-                        border: solid 1px white;
-                    }
-
-                    .paraconta {
+    
+                    overflow-x: auto;
+    
+                    .imagem {
                         display: flex;
                         flex-direction: row;
                         justify-content: center;
                         align-items: center;
-                        width: 40px;
-                        height: 40px;
-                        padding: 20px;
-                        background-color: #2D2D2D;
-                        border-radius: 100%;
-                        transition: 0.3s;
-
-                        > img {
-                            width: 100%;
-                        }
-                    }
-
-                    .paraconta:hover {
-                        background-color: #828282;
+    
+                        min-width: 280px;
+                        height: 90%;
+                        border-radius: 10px;
+                        background-color: rgb(24, 24, 24);
                     }
                 }
-            }
-        }
-
-        #produto-images {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-
-            width: 100%;
-            min-width: 770px;
-            height: 100%;
-            position: relative;
-
-            .swiper {
-                width: 100%;
-                height: 100%;
-                cursor:grab;
-              }
-              .swiper:active {
-                cursor: grabbing;
-              }
-              
-              .swiper-slide {
-                text-align: center;
-                font-size: 18px;
-                background: #2c2c2c;
-                border-radius: 10px;
-              
-                /* Center slide text vertically */
-                display: flex;
-                justify-content: center;
-                align-items: center;
-              }
-              
-              .swiper-slide img, video {
-                display: block;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-              }
-              
-              .swiper {
-                width: 100%;
-                height: 100%;
-                margin-left: auto;
-                margin-right: auto;
-              }
-              
-              .swiper-slide {
-                background-size: cover;
-                background-position: center;
-              }
-              
-              .mySwiper2 {
-                height: 100%;
-                width: 100%;
-              }
-              
-              .mySwiper {
-                height: 20%;
-                box-sizing: border-box;
-                padding: 10px 0;
-              }
-              
-              .mySwiper .swiper-slide {
-                width: 25%;
-                height: 100%;
-                opacity: 0.4;
-              }
-              
-              .mySwiper .swiper-slide-thumb-active {
-                opacity: 1;
-              }
-              
-              .swiper-slide img {
-                display: block;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-              }
-
-
-
-
-
-
-            img, video {
-                width: 100%;
-                height: 100%;
-                border-radius: 10px;
-                transition: 0.3s;
-            }
-
-            .outrosimg {
-                display: flex;
-                flex-direction: row;
-                justify-content: start;
-                align-items: start;
-
-                width: 100%;
-                height: 200px;
-                padding: 10px 0px 0px 0px;
-                gap: 10px;
-
-                overflow-x: auto;
-
-                .imagem {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: center;
-                    align-items: center;
-
-                    min-width: 280px;
-                    height: 90%;
-                    border-radius: 10px;
-                    background-color: rgb(24, 24, 24);
+    
+                ::-webkit-scrollbar {
+                    width: 10px;
+                    height: 5px;
                 }
+                  
+                ::-webkit-scrollbar-track {
+                    background-color: transparent;
+                }
+                
+                ::-webkit-scrollbar-thumb {
+                    background-color: #333333;
+                    border-radius: 20px;
+                }
+                
             }
-
-            ::-webkit-scrollbar {
-                width: 10px;
-                height: 5px;
-            }
-              
-            ::-webkit-scrollbar-track {
-                background-color: transparent;
-            }
-            
-            ::-webkit-scrollbar-thumb {
-                background-color: #333333;
-                border-radius: 20px;
-            }
-            
         }
     }
 
@@ -323,6 +335,7 @@
 
         width: 100%;
         padding: 0px 20px;
+        padding: 0px 0px 0px 120px;
 
         .selecionar {
             display: flex;
@@ -331,19 +344,24 @@
             align-items: center;
 
             width: auto;
-            height: 50px;
+            height: 40px;
 
             > button {
                 height: 100%;
-                background-color: #24222700;
+                background-color: #37373700;
                 color: #828282;
                 border: none;
                 padding: 0px 20px;
                 transition: 0.3s;
-            }
+                cursor: pointer;
 
-            > button:hover{
-                color: white;
+                &.selecionado {
+                    color: white;
+                }
+
+                &:hover{
+                    color: white;
+                }
             }
         }
 
@@ -355,9 +373,9 @@
         justify-content: center;
         align-items: center;
         
-        width: 1600px;
+        width: 100%;
         height: 400px;
-        padding: 20px 20px; 
+        padding: 20px 40px 20px 140px;
 
         p {
             max-height: 20ch;
@@ -468,7 +486,7 @@
 
         width: 100%;
         border-radius: 10px;
-        padding: 20px;
+        padding: 20px 20px 20px 120px;
 
         .plataformas {
             display: flex;
@@ -523,8 +541,8 @@
         justify-content: center;
         align-items: start;
         
-        width: 1600px;
-        padding: 20px 20px;
+        width: 100%;
+        padding: 20px 40px 20px 140px;
         gap: 20px;
 
         h1 {
@@ -665,7 +683,7 @@
                 max-height: 400px;
                 padding: 20px;
                 background-color: #2D2D2D;
-                border-radius: 20px;
+                border-radius: 10px;
                 margin-bottom: 20px;
 
                 .conteudo {
@@ -842,10 +860,10 @@
                     color: #e6e6e6;
                     padding: 10px;
                     resize: none;
-                }
 
-                > input:focus {
-                    outline: 0;
+                    &:focus {
+                        outline: 0;
+                    }
                 }
 
                 > button {
@@ -856,10 +874,11 @@
                     background-color: #2c2c2c;
                     border: solid 3px #1e1e20;
                     color: white;
-                }
+                    cursor: pointer;
 
-                > button:hover {
-                    border: solid 1px white;
+                    &:hover {
+                        border: solid 1px white;
+                    }
                 }
             }
 
@@ -892,6 +911,7 @@
                         border: solid 3px #1e1e20;
                         border-radius: 10px;
                         color: rgb(228, 228, 228);
+                        cursor: pointer;
                     }
 
                     > button:hover {
@@ -935,14 +955,19 @@
                         border: none;
                         background-color: #03030300;
                         transition: 0.3s;
+                        cursor: pointer;
+
+                        &:hover {
+                            height: 100%;
+                        }
+
+                        &.selecionado {
+                            height: 100%;
+                        }
 
                         > img {
                             height: 100%;
                         }
-                    }
-
-                    > button:hover {
-                        height: 100%;
                     }
                 }
 
@@ -954,6 +979,7 @@
                     background-color: #2c2c2c;
                     border: solid 3px #1e1e20;
                     color: white;
+                    cursor: pointer;
                 }
 
                 > button:hover {
@@ -971,7 +997,7 @@
 
         width: 1600px;
         height: auto;
-        padding: 20px 0px;
+        padding: 20px 20px 20px 120px;
 
         > .title {
             display: flex;
@@ -1002,169 +1028,206 @@
     }
 }
 
-@media (max-width: 1714px) {
-    .Produto {
-        width: 1300px;
 
-        #produto {
-            width: 1300px;
-        }
 
-        #descEstatus {
-            width: 1300px;
 
-            .status {
-                .cards {
-                    .card {
-                        width: 120px;
-                        height: 120px;
-                    }
-                }
-            }
-        }
-        #produtos {
-            gap: 15px;
-        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// @media (max-width: 1714px) {
+//     .Produto {
+//         width: 1300px;
+
+//         #produto {
+//             width: 1300px;
+//         }
+
+//         #descEstatus {
+//             width: 1300px;
+
+//             .status {
+//                 .cards {
+//                     .card {
+//                         width: 120px;
+//                         height: 120px;
+//                     }
+//                 }
+//             }
+//         }
+//         #produtos {
+//             gap: 15px;
+//         }
         
-        #comentarios {
-            width: 1300px;
-            #status {
-                width: 30%;
-            }
-            .comentarios {
-                .comentario {
+//         #comentarios {
+//             width: 1300px;
+//             #status {
+//                 width: 30%;
+//             }
+//             .comentarios {
+//                 .comentario {
                     
-                }
-            }
-        }
+//                 }
+//             }
+//         }
 
-        #complementos {
-            width: 1300px;
-        }
-    }
-}
+//         #complementos {
+//             width: 1300px;
+//         }
+//     }
+// }
 
-@media (max-width: 1414px) {
-    .Produto {
-        width: 1100px;
+// @media (max-width: 1414px) {
+//     .Produto {
+//         width: 1100px;
 
-        #produto {
-            width: 1100px;
-            height: 450px;
+//         #produto {
+//             width: 1100px;
+//             height: 450px;
 
-            #info-produto {
-                #Comprar {
-                    padding: 0px 10px 10px 10px;
-                    .acoes {
-                        .paraconta {
-                            display: none;
-                        }
-                    }
-                }
-            }
-        }
+//             #info-produto {
+//                 #Comprar {
+//                     padding: 0px 10px 10px 10px;
+//                     .acoes {
+//                         .paraconta {
+//                             display: none;
+//                         }
+//                     }
+//                 }
+//             }
+//         }
 
-        #descEstatus {
-            width: 1100px;
-            height: 350px;
+//         #descEstatus {
+//             width: 1100px;
+//             height: 350px;
 
-            .status {
-                .cards {
-                    .card {
-                        width: 100px;
-                        height: 100px;
-                        > h2 {
-                            display: none;
-                        }
-                    }
-                }
-            }
-        }
+//             .status {
+//                 .cards {
+//                     .card {
+//                         width: 100px;
+//                         height: 100px;
+//                         > h2 {
+//                             display: none;
+//                         }
+//                     }
+//                 }
+//             }
+//         }
         
-        #comentarios {
-            width: 1100px;
-            #status {
-                width: 30%;
-            }
-            .comentarios {
-                .comentario {
+//         #comentarios {
+//             width: 1100px;
+//             #status {
+//                 width: 30%;
+//             }
+//             .comentarios {
+//                 .comentario {
                     
-                }
-            }
-        }
+//                 }
+//             }
+//         }
 
-        #complementos {
-            width: 1100px;
-        }
-    }
-}
+//         #complementos {
+//             width: 1100px;
+//         }
+//     }
+// }
 
-@media (max-width: 1209px) {
-    .Produto {
-        width: 1000px;
+// @media (max-width: 1209px) {
+//     .Produto {
+//         width: 1000px;
 
-        #produto {
-            width: 1000px;
-            height: 730px;
-            flex-direction: column-reverse;
-            padding: 10px;
-            background-color: rgba(165, 34, 34, 0);
+//         #produto {
+//             width: 1000px;
+//             height: 730px;
+//             flex-direction: column-reverse;
+//             padding: 10px;
+//             background-color: rgba(165, 34, 34, 0);
 
-            #info-produto {
-                height: 300px;
-                padding: 0;
-                position: relative;
+//             #info-produto {
+//                 height: 300px;
+//                 padding: 0;
+//                 position: relative;
 
-                .titulo {
-                    padding: 10px 0px;
+//                 .titulo {
+//                     padding: 10px 0px;
 
-                    > p {
-                        max-width: 120ch;
-                        max-height: 10ch;
-                    }
-                }
+//                     > p {
+//                         max-width: 120ch;
+//                         max-height: 10ch;
+//                     }
+//                 }
 
-                #Comprar {
-                    position: absolute;
-                    bottom: 0;
-                }
-            }
+//                 #Comprar {
+//                     position: absolute;
+//                     bottom: 0;
+//                 }
+//             }
 
-            #produto-images {
-                height: 450px;
-            }
-        }
+//             #produto-images {
+//                 height: 450px;
+//             }
+//         }
 
-        #descEstatus {
-            width: 1000px;
-            padding: 10px;
-            height: 520px;
+//         #descEstatus {
+//             width: 1000px;
+//             padding: 10px;
+//             height: 520px;
 
-            p {
-                max-height: 50ch;
-            }
+//             p {
+//                 max-height: 50ch;
+//             }
 
-            .status {
-                width: 200px;
+//             .status {
+//                 width: 200px;
 
-                .cards {
-                    flex-direction: column;
-                }
-            }
-        }
+//                 .cards {
+//                     flex-direction: column;
+//                 }
+//             }
+//         }
         
-        #comentarios {
-            width: 1000px;
-            flex-direction: column;
-            padding: 10px;
-            #status {
-                width: 100%;
-                flex-direction: column; 
-            }
-        }
+//         #comentarios {
+//             width: 1000px;
+//             flex-direction: column;
+//             padding: 10px;
+//             #status {
+//                 width: 100%;
+//                 flex-direction: column; 
+//             }
+//         }
 
-        #complementos {
-            width: 1000px;
-        }
-    }
-}
+//         #complementos {
+//             width: 1000px;
+//         }
+//     }
+// }

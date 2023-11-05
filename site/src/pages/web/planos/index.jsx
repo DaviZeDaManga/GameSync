@@ -213,13 +213,12 @@ export default function Planos(){
                 </section>
 
                 <motion.div
+                className='explain-3'
                 whileHover={{scale: 1.03}}
                 >
-                <section onClick={Engine} className='explain-3'>
-                    <div className='explain-3-tools'>
-                        <p>Nossa engine</p>
-                    </div>
-                </section>
+                <div onClick={Engine} className='explain-3-tools'>
+                    <p>Nossa engine</p>
+                </div>
                 </motion.div>
 
             </header>
@@ -300,10 +299,9 @@ export default function Planos(){
                         <motion.div
                         whileHover={{scale: 1.04}}
                         whileTap={{scale: 0.95}}
+                        className='preco1-acao1-second'
                         >
-                        <div className='preco1-acao1-second'>
-                            <button className='botao'>Assinar</button>
-                        </div>
+                        <button className='botao'>Assinar</button>
                         </motion.div>
                     </div>
 
@@ -315,10 +313,9 @@ export default function Planos(){
                         <motion.div
                         whileHover={{scale: 1.04}}
                         whileTap={{scale: 0.95}}
+                        className='preco1-acao1-fourth'
                         >
-                        <div className='preco1-acao1-fourth'>
-                            <button className='botao'>Assinar</button>
-                        </div>
+                        <button className='botao'>Assinar</button>
                         </motion.div>
                     </div>
 
@@ -362,6 +359,8 @@ export default function Planos(){
                             <div className='kkkk'></div>
                             </div>
                         </div>
+
+                        <div className='none'></div>
                     </section>
                 </main>
 
@@ -377,12 +376,13 @@ export default function Planos(){
                         <motion.div
                         whileHover={{scale: 1.04}}
                         whileTap={{scale: 0.95}}
+                        className='preco2-acao1-second'
                         >
-                        <div className='preco2-acao1-second'>
-                            <button className='botao'>Assinar</button>
-                        </div>
+                        <button className='botao'>Assinar</button>
                         </motion.div>
                     </div>
+
+                    <div className='none'></div>
                 </article>
 
                 <footer className='perguntas'>

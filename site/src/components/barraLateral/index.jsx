@@ -14,24 +14,9 @@ export default function BarraLateral(props) {
     const[menu, setMenu] = useState(false)
     const[carrin, setCarrin] = useState(false)
     const[fundo, setFundo] = useState(false)
-    const[assis, setAssis] = useState(false)
-    const[bot, setBot] = useState(true)
     const[configs, setConfigs] = useState(false)
 
     const [Barra, setBarra] = useState(document.getElementById('barra'))
-
-    function Fundo() {
-        if(carrin == true || menu == true || assis == true || configs == true ) {
-            setFundo(true)
-        }
-        else {
-            setFundo(false)
-        }
-    }
-
-    useEffect( ()=> {
-        Fundo()
-    }, [carrin, menu, assis, configs])
 
     function MostrarCarrin() {
         setAssis(false)
@@ -67,9 +52,6 @@ export default function BarraLateral(props) {
 
 
     
-    function botOUassis() {
-        setBot(!bot)
-    }
 
     //parte do bot
     const [IQuestion, setIQuestion] = useState('');
@@ -148,27 +130,33 @@ export default function BarraLateral(props) {
 
 
 
-    const[xbot, setXbot] = useState (-500)
-    const[ybot, setYbot] = useState (0)
-    const[rotatebot, setRotatebot] = useState (0)
 
-    function MostrarAssistente() {
+
+    
+    const [assis, setAssis] = useState(false)
+    const [xbot, setXbot] = useState(-520)
+    const [ybot, setYbot] = useState(0)
+
+    const [bot, setBot] = useState(true)
+
+    function Massistente() {
         setAssis(!assis)
     }
 
-    function Mbot() {
-        if (assis == true) {
-            setAssis(true)
-            Fundo()
+    useEffect(()=> {
+        if(assis ==true) {
+            setYbot(0)
         }
         else {
             setXbot(0)
         }
+    })
+
+    function botOUassis() {
+        setBot(!bot)
     }
 
-    useEffect(() => {
-        Mbot()
-    }, [assis])
+
 
 
 
@@ -220,6 +208,24 @@ export default function BarraLateral(props) {
     const [cateb, setCateb] = useState(0)
     const [sessao, setSessao] = useState(1)
 
+
+
+
+
+
+    function Fundo() {
+        if(carrin == true || menu == true || assis == true || configs == true ) {
+            setFundo(true)
+        }
+        else {
+            setFundo(false)
+        }
+    }
+
+    useEffect( ()=> {
+        Fundo()
+    }, [carrin, menu, assis, configs])
+
     return(
         <div id="BarraLateral">
 
@@ -270,6 +276,12 @@ export default function BarraLateral(props) {
                                 <p>Notificações</p>
                             </div>
                             
+                            <div className='linhaBarra'></div>
+
+                            <div className={`categoria ${cateb == 3 && 'selecionado'}`}>
+                                <img src="/assets/images/barralateral/navegar/configuracoes.png" />
+                                <p>Configurações</p>
+                            </div>
 
 
                         </section>
@@ -364,7 +376,7 @@ export default function BarraLateral(props) {
                     <div className='botoes'>
 
 
-                        <section onClick={MostrarAssistente} className='redirects'>
+                        <section onClick={Massistente} className='redirects'>
                             <img src="/assets/images/carrinho/bot.png" />
                         </section>
                         <section onClick={MostrarCarrin} className='redirects'>
@@ -382,7 +394,6 @@ export default function BarraLateral(props) {
                             x: xbot,
                             y: ybot,
                             scale: 1,
-                            rotate: rotatebot,
                         }}
                         transition={{ type: "spring"}}
                         >

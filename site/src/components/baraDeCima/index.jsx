@@ -78,17 +78,51 @@ export default function BarraDeCima ({barra}) {
     })
 
 
+
+
+
+
+
+
+
+    const [configcard, setConfigcard] = useState(0)
+
     return(
         <>
 
         <section className='perfil'>
             <p>{nome}</p>
             <Link to={`/perfil`}>
-                <div className='imgcard'>
+                <div className='card'>
                     <img src={imguser} />
                 </div>
             </Link>
+            {configcard == 0 &&
+            <div onClick={()=> (setConfigcard(-200))} className='card p'>
+                <img src='/assets/images/acoes/pontos.png' />
+            </div>}
+            {configcard == -200 &&
+            <div onClick={()=> (setConfigcard(0))} className='card p selecionado'>
+                <img src='/assets/images/acoes/pontos.png' />
+            </div>}
+
+            <motion.div
+            className='configconta'
+            animate={{
+                x: configcard
+            }}
+            >   
+            <button>
+                Meu Perfil
+            </button>
+
+            </motion.div>
         </section>
+
+
+
+
+        
 
         {pesquisa == true &&
         <motion.div
@@ -98,26 +132,7 @@ export default function BarraDeCima ({barra}) {
         >
         <section className='pesquisa'>
             <button onClick={Timer}>Voltar</button>
-            <input onClick={()=> (setGames(true), setX(160))} type="text" placeholder="procurar na GameSync" />
-
-            <Link to={'/'} >
-                <section className='redirects'>
-                    <img src="/assets/images/barradecima/bolsa-de-compras.png" />
-                    <p>Home</p>
-                </section>
-            </Link>
-            <Link to={'/planos'} >
-                <section className='redirects'>
-                    <img src="/assets/images/barradecima/controle-de-video-game.png" />
-                    <p>Planos</p>
-                </section>
-            </Link>
-                <Link to={'/noticias'} >
-                <section className='redirects'>
-                    <img src="/assets/images/barradecima/balao-de-fala.png" />
-                    <p>Noticias</p>
-                </section>
-            </Link>
+            <input type="text" placeholder="procurar na GameSync" />
         </section>
 
         {games == true &&

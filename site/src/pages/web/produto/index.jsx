@@ -17,6 +17,7 @@ import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 
 import storage, { set } from 'local-storage';
+import Title from '../../../components/title'
 
 export default function Produto() {
 
@@ -60,18 +61,21 @@ export default function Produto() {
         setMostdesc(true)
         setMostcoment(false)
         setMostcompl(false)
+        setSelectsection(1)
     }
 
     function MostrarComentarios () {
         setMostdesc(false)
         setMostcoment(true)
         setMostcompl(false)
+        setSelectsection(2)
     }
 
     function MostrarComplementos() {
         setMostdesc(false)
         setMostcoment(false)
         setMostcompl(true)
+        setSelectsection(3)
     }
 
 
@@ -186,88 +190,88 @@ export default function Produto() {
         setAvaliacoes(avaliacoes + 1)
     }
     
+
+
+
+    const [selectsection, setSelectsection] = useState (1)
     
     return(
         <div className="Produto">
             <BarraLateral/>
             <BarraDeCima/>
 
-            <section id="produto">
+            <section id="produto-card">
                 
-
-                <section id="info-produto">      
-                    <div className="titulo">
-                        <h1>{nome}</h1>
-                        <p>{desc}</p>
-                    </div>
-                    <section id='Comprar'>
-                        <div className='info'>
-                            <h1>R${preco}</h1>
+                <section id='produto'>
+                    <section id="info-produto">      
+                        <div className="titulo">
+                            <h1>{nome}</h1>
+                            <p>{desc}</p>
                         </div>
-                        <div className='acoes'>
-                            <button><Link to={`/BarraLateral/${id}`}></Link>Comprar</button>
-                            <div className='paraconta carrin'>
-                                <p>D</p>
+                        <section id='Comprar'>
+                            <div className='info'>
+                                <h1>R${preco}</h1>
                             </div>
-                            <div className='paraconta fav'>
-                                <p>F</p>
+                            <div className='acoes'>
+                                <button><Link to={`/BarraLateral/${id}`}></Link>Comprar</button>
+                                
                             </div>
-                        </div>
+                        </section>    
                     </section>    
-                </section>    
-                
+                    
 
-                <main id="produto-images">
-                
-                    <Swiper
-                        style={{
-                        '--swiper-navigation-color': '#fff',
-                        '--swiper-pagination-color': '#fff',
-                        }}
-                        loop={true}
-                        spaceBetween={10}
-                        navigation={true}
-                        thumbs={{ swiper: thumbsSwiper }}
-                        modules={[FreeMode, Navigation, Thumbs]}
-                        className="mySwiper2"
-                    >
-                        <SwiperSlide>
-                        <img src={imagem} />
-                        </SwiperSlide>
-                                      
-                        {/* {videos.map( item => 
-                            
+                    <main id="produto-images">
+                    
+                        <Swiper
+                            style={{
+                            '--swiper-navigation-color': '#fff',
+                            '--swiper-pagination-color': '#fff',
+                            }}
+                            loop={true}
+                            spaceBetween={10}
+                            navigation={true}
+                            thumbs={{ swiper: thumbsSwiper }}
+                            modules={[FreeMode, Navigation, Thumbs]}
+                            className="mySwiper2"
+                        >
                             <SwiperSlide>
-                                <video controls="true">  <source src={item.data.max} type="video/mp4" /></video>
-                            </SwiperSlide>    
+                            <img src={imagem} />
+                            </SwiperSlide>
+                                        
+                            {/* {videos.map( item => 
+                                
+                                <SwiperSlide>
+                                    <video controls="true">  <source src={item.data.max} type="video/mp4" /></video>
+                                </SwiperSlide>    
+                                
+                            )}     */}
+                                
                             
-                        )}     */}
-                            
-                        
-                        {/* {imagens.map( item => 
-                            
-                            <SwiperSlide>
-                                <img src={item.image} />
-                            </SwiperSlide>  
+                            {/* {imagens.map( item => 
+                                
+                                <SwiperSlide>
+                                    <img src={item.image} />
+                                </SwiperSlide>  
 
-                        )}   */}
-                        
-                    </Swiper>
-    
-                </main>
+                            )}   */}
+                            
+                        </Swiper>
+        
+                    </main>
+                </section> 
 
             </section>
 
             <nav id="descOUcoment">
                 <div className="selecionar">
-                    <button id="a" onClick={MostrarDescricao}>
+                    <button className={`${selectsection == 1 && 'selecionado'}`} onClick={MostrarDescricao}>
                         Detalhes
                     </button>
-                    <button id="b" onClick={MostrarComentarios}>
+                    <button className={`${selectsection == 2 && 'selecionado'}`} onClick={MostrarComentarios}>
                         Comentarios
                     </button>
                     {complementos != '' &&
-                    <button id="b" onClick={MostrarComplementos}>
+                    <button className={`${selectsection == 3 && 'selecionado'}`} onClick={MostrarComplementos}>
                         Complementos
                     </button>}
                 </div>
@@ -339,17 +343,17 @@ export default function Produto() {
 
             </section>
 
-            <section id='plataformas'>
+            {/* <section id='plataformas'>
                 <section className='plataformas'>
 
-                    {/* {plataformas.map( item =>
+                    {plataformas.map( item =>
                         <div className='plataforma'>
                             <p>{item.platform.name}</p>
                         </div>    
-                    )} */}
+                    )}
 
                 </section>
-            </section>
+            </section> */}
             
             {conquistas != '' &&
             <section id='titles'>
@@ -500,11 +504,11 @@ export default function Produto() {
                             <h1 className='starstitle'>{estrelas} estrelas </h1>}
                         </div>
                         <div className='estrelas'>
-                            <button onClick={() => (setEstrelas(1))}><img src="/assets/images/avaliacao/estrela.png" /></button>
-                            <button onClick={() => (setEstrelas(2))}><img src="/assets/images/avaliacao/estrela.png" /></button>
-                            <button onClick={() => (setEstrelas(3))}><img src="/assets/images/avaliacao/estrela.png" /></button>
-                            <button onClick={() => (setEstrelas(4))}><img src="/assets/images/avaliacao/estrela.png" /></button>
-                            <button onClick={() => (setEstrelas(5))}><img src="/assets/images/avaliacao/estrela.png" /></button>
+                            <button className={`${estrelas == 1 && 'selecionado' }`} onClick={() => (setEstrelas(1))}><img src="/assets/images/avaliacao/estrela.png" /></button>
+                            <button className={`${estrelas == 2 && 'selecionado' }`} onClick={() => (setEstrelas(2))}><img src="/assets/images/avaliacao/estrela.png" /></button>
+                            <button className={`${estrelas == 3 && 'selecionado' }`} onClick={() => (setEstrelas(3))}><img src="/assets/images/avaliacao/estrela.png" /></button>
+                            <button className={`${estrelas == 4 && 'selecionado' }`} onClick={() => (setEstrelas(4))}><img src="/assets/images/avaliacao/estrela.png" /></button>
+                            <button className={`${estrelas == 5 && 'selecionado' }`} onClick={() => (setEstrelas(5))}><img src="/assets/images/avaliacao/estrela.png" /></button>
                         </div>
                         {estrelas == '' &&
                         <button onClick={naopode}>Escolha o numero de estrelas</button>}
