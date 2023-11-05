@@ -44,7 +44,6 @@ export default function Routess(){
                 <Route path='/admin' element={<CadastroAdmin/>} />
                 <Route path='/admin/addproduts' element={<AddProduct/> }/>
                 <Route path='/admin/MudarProduto' element={<EditarExcluir/>} />
-                
                 <Route path='*' element={<NotFound/>} />
             </Routes>
         </BrowserRouter>

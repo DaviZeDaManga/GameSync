@@ -37,6 +37,20 @@ export async function EnviarImagens(id, imagem){
     return resposta.status //não tem conteudo ele retorna 204
 }
 
+export async function InserirVideo(produto, url) {
+    try {
+        const resposta = await api.post('/produto/video/url', {
+            produto: produto,
+            url: url
+        });
+        return resposta.data; // Retorne apenas os dados da resposta.
+    } catch (erro) {
+        throw erro; // Rejeite a promessa em caso de erro.
+    }
+}
+
+///                           buscar
+
 export function BuscarJodoID(imagem){
     console.log(api.getUri())
     return `${api.getUri()}/${imagem}`
@@ -81,6 +95,9 @@ export async function ListarTodosJogos(){
     return resposta.data
 }
 
+
+/////                      alterar
+
 export async function ExcluirProduto(id){
     try {
         console.log(`Tentando excluir produto com ID: ${id}`);
@@ -93,7 +110,7 @@ export async function ExcluirProduto(id){
     }
 }
 
-export async function AlterarProduto(id, nome, preco, precoPro, destaque, promocao, disponivel, qtd, details, categoria, admin ){
+export async function AlterarProduto(id, nome, preco, precoPro, destaque, promocao, disponivel, qtd, descricao, classificacao, lancamento, tamanho, empresa, desenvolvedor, categoria, admin ){
     const resposta = await api.put(`/produto/${id}`, {
         nome: nome,
         preco: preco,
@@ -102,23 +119,50 @@ export async function AlterarProduto(id, nome, preco, precoPro, destaque, promoc
         promocao: promocao,
         disponivel: disponivel,
         qtd: qtd,
-        details: details,
+        descricao: descricao,
+        classificacao: classificacao,
+        lancamento: lancamento,
+        tamanho: tamanho,
+        empresa: empresa,
+        desenvolvedor: desenvolvedor,
         categoria: categoria,
         admin: admin
     }) 
     return resposta.data 
 }
 
-///novo
-export async function InserirVideo(produto, url) {
-    try {
-        const resposta = await api.post('/produto/video/url', {
-            produto: produto,
-            url: url
-        });
-        // Trate os dados específicos da resposta aqui, se necessário.
-        return resposta.data; // Retorne apenas os dados da resposta.
-    } catch (erro) {
-        throw erro; // Rejeite a promessa em caso de erro.
-    }
+export async function AlterarVideo(id, url){
+    const resposta = await api.put(`/produto/${id}/url`, {
+        url: url
+    })
+    return resposta.status
 }
+
+export async function AlterarCategoriaEmP(id, idcategoria){
+    const resposta = await api.put(`/produto/${id}/P`, {
+        idcategoria: idcategoria
+    })
+    return resposta.status
+}
+
+export async function AlterarCategoriaEmCP(id, idcategoria){
+    const resposta = await api.put(`/produto/${id}/CP`, {
+        idcategoria: idcategoria
+    })
+    return resposta.status
+}
+
+export async function AlterarImage(id, image){
+    const formData = new FormData();
+    formData.append('imagens', image);
+
+    const linhas = await api.put(`/mudar/${id}/imagens`, formData,{
+        headers:{
+            "Content-Type": "multipart/form-data", 
+        },
+    });
+    return linhas.status
+}
+
+
+

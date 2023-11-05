@@ -3,7 +3,7 @@
     import AdmBarraUp from '../../../components/AdminBarraUp';
 
     import storage from 'local-storage';
-    import { ListarTodosJogos, ExcluirProduto, BuscarJogoNome, AlterarProduto } from '../../../connection/productAPI';
+    import { ListarTodosJogos, ExcluirProduto, BuscarJogoNome, AlterarProduto, EnviarImagens, InserirCategoriaProduto, InserirVideo } from '../../../connection/productAPI';
     import { useNavigate } from 'react-router-dom';
     import { useState, useEffect } from 'react';
     import { toast } from 'react-toastify';
@@ -23,6 +23,7 @@
         let [filtro, setFiltro] = useState('');
         var [jogos, setJogos] = useState([]);
         let [jogoSelecionado, setJogoSelecionado] = useState(null);
+        const [adm, setAdm] = useState()
 
         async function filtrar(){  
             const resposta = await BuscarJogoNome(filtro);
@@ -52,7 +53,7 @@
         }, [])
 
         async function RemoverJogo(id, nome) {
-            console.log("ID do Jogo a ser removido:", id); // Adicione esta linha
+            console.log("ID do Jogo a ser removido:", id);
             confirmAlert({
                 title: 'Remover Jogo',
                 message: `Você tem certeza que quer fazer isso? Excluir o jogo ${nome}.`,
@@ -60,7 +61,7 @@
                     {
                         label: 'Sim!',
                         onClick: async () => {
-                            console.log("ID dentro da função de remoção:", id); // Adicione esta linha
+                            console.log("ID dentro da função de remoção:", id);
                             await ExcluirProduto(id);
                             if (filtro === "") {
                                 CarregarTodosJogos();
@@ -92,6 +93,29 @@
         }
         console.log(jogoSelecionado); // Adicione esta linha para depurar
         
+        console.log(jogos[1])
+        
+        async function EditarJogo(id, nome, valor, promocao, destaque, Empromocao, disponivel, qtd, descricao, classificacao, lancamento, tamanho, empresa, desenvolvedor, categoria, imagem, video){
+            try{
+                if (id !== 0) {
+                    const idAdm = storage('admin-logado');
+                    setAdm(idAdm.id)
+                    await AlterarProduto(nome, valor, promocao, destaque, Empromocao, disponivel, qtd, descricao, classificacao, lancamento, tamanho, empresa, desenvolvedor, categoria, adm);
+
+                    await InserirCategoriaProduto 
+
+                    if (typeof(imagem) == 'object')
+                        await EnviarImagens(adm, imagem);
+
+                    ///mudar o comando de colsilta no banco para os campos para poder editar
+                    ///fazer um comando de update para cada um imagem, video,  categorablalala
+                }
+            }
+            catch{
+
+            }
+        }
+
         return (
             <main id='EditarExcluir'>
                 {jogoSelecionado && (
@@ -132,6 +156,8 @@
                         </section>
                     </main>
                 )}
+
+
     
                 <div className='container'>
                     <AdmBarraUp jogos={jogos} setJogos={setJogos} />
@@ -149,7 +175,9 @@
                                     <div className='card' onClick={() => SelecionarJogo(item.id_produto)}>
 
                                         <div className='acoes'>
-                                            <img src='/assets/images/adm/pencil.png' alt='editar' onClick={e => { e.stopPropagation(); EditarJogo(item.id) }} />
+                                            <img src='/assets/images/adm/pencil.png' alt='editar' onClick={e => { e.stopPropagation(); EditarJogo(item.id_produto,item.nome,item.valor,
+                                            item.promocao,item.destaque,item.EmPromocao,item.disponivel,item.estoque, item.descricao, item.classificacao, item.lancamento, item.tamanho, item.empresa,
+                                            item.desenvolvedor,item.categoria, item.imagem, item.video ) }} />
                                             <img src='/assets/images/adm/trash.png' alt='remover' onClick={e => { e.stopPropagation(); RemoverJogo(item.id_produto, item.nome) }} />
                                         </div>
 
