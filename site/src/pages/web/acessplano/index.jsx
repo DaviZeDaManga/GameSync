@@ -101,10 +101,10 @@ export default function Home() {
                 <SwiperSlide onClick={CardProd}>
                         <img src='https://pixelz.cc/wp-content/uploads/2019/03/the-elder-scrolls-online-wqhd-1440p-wallpaper.jpg' />
 
-                    
                         <div className='conteudo borda'>
                             <h1>The Elder Scrolls</h1>
-                            <p>The Elder Scrolls V: Skyrim acontece em Skyrim, uma região que vem sendo ameaçada por uma guerra civil, seguida pelo retorno dos dragões e de Alduin, o deus da destruição e antagonista da história. Skyrim fica no extremo norte do continente de Tamriel.</p>                      </div>
+                            <p>The Elder Scrolls V: Skyrim acontece em Skyrim, uma região que vem sendo ameaçada por uma guerra civil, seguida pelo retorno dos dragões e de Alduin, o deus da destruição e antagonista da história. Skyrim fica no extremo norte do continente de Tamriel.</p>                     
+                        </div>
                     
                 </SwiperSlide>
                 
@@ -143,16 +143,50 @@ export default function Home() {
 
 
 
-
-            
-            
-
             {/* <section id='title'>
                 <div className='title'>
-                    <h1>Mais jogados</h1>
+                    <h1>Noticias Recentes</h1>
                 </div>
                 <button>Ver Mais</button>
             </section> */}
+
+            <section className='new-noticias'>
+                <section className='noticia'>
+                    <img src='https://cdn2.unrealengine.com/fortnite-chapter-4-og-overview-page-key-art-bg-1920x1080-1fbc3a1c0297.jpg' />
+
+                    <div className='conteudo borda'>
+                        <h1>The Elder Scrolls</h1>
+      
+                    </div>
+                </section>
+                <section className='noticia'>
+                    <img src='https://i0.wp.com/manolinhogeek.com.br/wp-content/uploads/2023/04/super-mario-bros-o-filme-bg.jpg?fit=1920%2C1025&ssl=1' />
+
+                    <div className='conteudo borda'>
+                        <h1>The Elder Scrolls</h1>
+
+                    </div>
+                </section>
+                <section className='noticia'>
+                    <img src='https://pixelz.cc/wp-content/uploads/2019/03/the-elder-scrolls-online-wqhd-1440p-wallpaper.jpg' />
+
+                    <div className='conteudo borda'>
+                        <h1>The Elder Scrolls</h1>
+                  
+                    </div>
+                </section>
+
+            </section>
+
+
+
+
+
+
+            
+            
+
+            
 
             {/* <section id='produtos'>
                 <Link to={'/produto/6'}>

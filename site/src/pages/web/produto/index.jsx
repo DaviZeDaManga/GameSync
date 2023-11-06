@@ -19,6 +19,8 @@ import { useParams, Link } from 'react-router-dom'
 import storage, { set } from 'local-storage';
 import Title from '../../../components/title'
 
+import EmojiPicker from 'emoji-picker-react';
+
 export default function Produto() {
 
     const { id } = useParams();
@@ -194,6 +196,13 @@ export default function Produto() {
 
 
     const [selectsection, setSelectsection] = useState (1)
+
+
+
+
+
+
+    const [emojiselect, setEmojiselect ] = useState(false)
     
     return(
         <div className="Produto">
@@ -492,7 +501,18 @@ export default function Produto() {
                         </div>
                         <textarea onChange={e => setComentario (e.target.value)} value={comentario}/>
 
-                        <button onClick={Comentando} >Escolher estrelas</button>
+                        
+                        <div className='buttons'>
+                            <div onClick={()=> (setEmojiselect(!emojiselect))} className={`emojis ${emojiselect == true && 'selecionado'}`}>
+                                <img src='/assets/images/acoes/feliz.png' />
+                            </div>
+                            <button onClick={Comentando} >Escolher estrelas</button>
+                        </div>
+
+                        {emojiselect == true &&
+                        <div className='emoji'>
+                            <EmojiPicker height={500}/>
+                        </div>}
                     </div>}
 
                     {comentando == 2 &&
