@@ -1,0 +1,60 @@
+#jogosparecidos {
+    width: 100vw;
+    right: 0;
+    position: absolute;
+
+    #produto {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        width: 100vw;
+        height: 500px;
+        padding: 20px 30px 20px 110px;
+
+        .produtocard {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+    
+            width: 100%;
+            height: 100%;
+            gap: 20px;
+
+            .conteudo {
+                display: flex;
+                flex-direction: column;
+                justify-content: start;
+                align-items: start;
+
+                width: 100%;
+                height: 100%;
+                padding: 20px;
+                background-color: rgb(36, 36, 36);
+                border-radius: 10px;
+            }
+
+            .img {
+                display: flex;
+                flex-direction: column;
+                justify-content: start;
+                align-items: start;
+
+                width: 100%;
+                height: 100%;
+                background-color: rgb(28, 28, 28);
+                border-radius: 10px;
+                overflow: hidden;
+
+                img, video {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 10px;
+                    transition: 0.3s;
+                }
+            }
+        }
+    }
+}

@@ -4,9 +4,34 @@
     justify-content: start;
     align-items: center;
 
-    width: 100%;
+    width: 100vw;
     height: 90px;
-    padding: 20px 20px 20px 120px;
+    gap: 10px;
+    padding: 20px 30px 10px 110px;
+
+    .voltar {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        background-color: rgb(53, 53, 53);
+        width: 60px;
+        height: 100%;
+        padding: 20px;
+        border-radius: 10px;
+        transition: 0.3s;
+        cursor: pointer;
+
+        &:hover {
+            padding: 15px;
+            border: solid 2px white;
+        }
+
+        img {
+            height: 100%;
+        }
+    }
 
     .title {
         display: flex;

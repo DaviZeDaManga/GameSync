@@ -161,6 +161,7 @@ export default function Produto() {
 
     function Comentando() {
         setComentando(comentando + 1)
+        setEmojiselect(false)
     }
     function VolComentar() {
         setComentando(comentando - 1)
@@ -208,6 +209,10 @@ export default function Produto() {
         <div className="Produto">
             <BarraLateral/>
             <BarraDeCima/>
+            <Title
+            nome={"Details"}
+            voltar={true}
+            />
 
             <section id="produto-card">
                 
@@ -221,9 +226,19 @@ export default function Produto() {
                             <div className='info'>
                                 <h1>R${preco}</h1>
                             </div>
+                            <div className='comprar'>
+                                <button><Link to={`/BarraLateral/${id}`}></Link>Comprar</button>       
+                            </div>
                             <div className='acoes'>
-                                <button><Link to={`/BarraLateral/${id}`}></Link>Comprar</button>
-                                
+                                <div className='acao'>
+                                    <p>Compartilhar</p>
+                                </div>
+                                <div className='acao'>
+                                    <p>Favoritar</p>
+                                </div>
+                                <div className='acao'>
+                                    <p>Reportar</p>
+                                </div>
                             </div>
                         </section>    
                     </section>    
@@ -511,7 +526,10 @@ export default function Produto() {
 
                         {emojiselect == true &&
                         <div className='emoji'>
-                            <EmojiPicker height={500}/>
+                            <EmojiPicker
+                            height={500}
+                            theme='dark'
+                            />
                         </div>}
                     </div>}
 
@@ -549,25 +567,25 @@ export default function Produto() {
 
                         {complementos.map( item =>         
 
-                                <section className='produto'>
-                                    <div className='imagem-produto'>
-                                        <div className='sombra'>
-                                            <div className='linha'></div>
-                                        </div>
-                                        <div className='produtoIMG'>
-                                            <img src={item.background_image} alt='Conquista'/>
-                                        </div>
+                            <section className='produto'>
+                                <div className='imagem-produto'>
+                                    <div className='sombra'>
+                                        <div className='linha'></div>
                                     </div>
-                                    <div className='informacoes'>
-                                        <div className='dados'>
-                                            <a>{item.name}</a>
-                                            <p>{item.description}</p>
-                                        </div>
-                                        <div className='info'>
-                                            <h3>{item.released}</h3>
-                                        </div>
+                                    <div className='produtoIMG'>
+                                        <img src={item.background_image} alt='Conquista'/>
                                     </div>
-                                </section>
+                                </div>
+                                <div className='informacoes'>
+                                    <div className='dados'>
+                                        <a>{item.name}</a>
+                                        <p>{item.description}</p>
+                                    </div>
+                                    <div className='info'>
+                                        <h3>{item.released}</h3>
+                                    </div>
+                                </div>
+                            </section>
 
                         )}
 

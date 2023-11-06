@@ -13,7 +13,8 @@ import EscolherLogin from './pages/web/escolherconta'
 import Cadaster from './pages/web/cadaster'
 import Noticias from './pages/web/noticias'
 import Grupos from './pages/web/grupos'
-import Home from './pages/web/acessplano'
+import Home from './pages/web/Home'
+import JogosParecidos from './pages/web/jogosparecidos'
 
 import CadastroAdmin from './pages/admin/authentication'
 import HomeAdmin from './pages/admin/home'
@@ -38,6 +39,7 @@ export default function Routess(){
                 <Route path="/cadaster" element={<Cadaster/>} />
                 <Route path="/noticias" element={<Noticias/>} />
                 <Route path='/gamegrupos/:id' element={<Grupos/>} />
+                <Route path='/produto/:id/jogosparecidos' element={<JogosParecidos/>} />
                 <Route path='/' element={<Home/>} />
 
                 <Route path='/admin/home' element={<HomeAdmin/>} />

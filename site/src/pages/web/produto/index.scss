@@ -5,7 +5,7 @@
 
 .Produto {
     width: 100vw;
-    right: 0;
+    left: 0;
     position: absolute;
     
     #titles {
@@ -72,7 +72,7 @@
         
         width: 100%;
         height: 580px;
-        padding: 20px 40px 20px 140px;
+        padding: 20px 30px 20px 110px;
 
         #produto {
             display: flex;
@@ -84,7 +84,7 @@
             height: 100%;
             padding: 20px;
             border-radius: 10px;
-            background-color: #313131;
+            background-color: #252525;
             overflow: hidden;
             gap: 10px;
             position: relative;
@@ -126,38 +126,38 @@
     
                     width: 100%;
                     height: auto;
-                    background: rgb(56, 56, 56);
+                    background: rgba(154, 34, 34, 0);
                     border-radius: 10px;
-                    padding: 0px 20px 20px 20px;
+                    padding: 0px ;
     
                     .info {
                         display: flex;
                         flex-direction: row;
                         justify-content: start;
-                        align-items: center;
+                        align-items: start;
     
                         width: 100%;
-                        height: 100%;
+                        height: 50px;
     
                         > h1 {
                             padding: 10px 0px;
                         }  
                     }
     
-                    .acoes {
+                    .comprar {
                         display: flex;
                         flex-direction: row;
                         justify-content: space-between;
                         align-items: center;
     
                         width: 100%;
-                        height: 100%;
+                        height: 40px;
                         gap: 10px;
     
                         > button {
                             width: 100%;
                             height: 40px;
-                            background-color: #2d2d2d;
+                            background-color: #343434;
                             border: none;
                             border-radius: 10px;
                             color: white;
@@ -167,26 +167,31 @@
                         > button:hover {
                             border: solid 1px white;
                         }
+                    }
+
+                    .acoes {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        align-items: end;
     
-                        .paraconta {
+                        width: 100%;
+                        height: 50px;
+                        gap: 10px;
+                        padding: 10px 0px 0px 0px ;
+                        background-color: rgba(106, 0, 255, 0);
+
+                        .acao {
                             display: flex;
                             flex-direction: row;
-                            justify-content: center;
+                            justify-content: space-around;
                             align-items: center;
-                            width: 40px;
-                            height: 40px;
-                            padding: 20px;
-                            background-color: #2D2D2D;
-                            border-radius: 100%;
-                            transition: 0.3s;
-    
-                            > img {
-                                width: 100%;
-                            }
-                        }
-    
-                        .paraconta:hover {
-                            background-color: #828282;
+        
+                            width: 100%;
+                            height: 100%;
+                            gap: 10px;
+                            background-color: #343434;
+                            border-radius: 10px;
                         }
                     }
                 }
@@ -334,7 +339,6 @@
         align-items: center;
 
         width: 100%;
-        padding: 0px 20px;
         padding: 0px 0px 0px 120px;
 
         .selecionar {
@@ -375,7 +379,7 @@
         
         width: 100%;
         height: 400px;
-        padding: 20px 40px 20px 140px;
+        padding: 20px 30px 20px 110px;
 
         p {
             max-height: 20ch;
