@@ -94,19 +94,7 @@ export default function Produto() {
 
     
     
-    // async function ProdutoInfo () {
-    //     let url = 'https://api.rawg.io/api/games/' + idprod + '?key=0a526d3c3985430c9469d8d6951eb5cb&'
-    //     let resposta = await axios.get(url)
-
-
-    //     setNome(resposta.data.name)
-    //     setDesc(resposta.data.description_raw)
-    //     setLancamento(resposta.data.released)
-    //     setImagem(resposta.data.background_image)
-    //     setPlataformas(resposta.data.parent_platforms)
-    //     setDevelopers(resposta.data.developers)
-    //     setPublicador(resposta.data.publishers)
-    // }
+    
 
     // useEffect (() => {
     //     ProdutoInfo()
@@ -229,7 +217,7 @@ export default function Produto() {
                             <div className='comprar'>
                                 <button><Link to={`/BarraLateral/${id}`}></Link>Comprar</button>       
                             </div>
-                            <div className='acoes'>
+                            {/* <div className='acoes'>
                                 <div className='acao'>
                                     <p>Compartilhar</p>
                                 </div>
@@ -239,7 +227,7 @@ export default function Produto() {
                                 <div className='acao'>
                                     <p>Reportar</p>
                                 </div>
-                            </div>
+                            </div> */}
                         </section>    
                     </section>    
                     

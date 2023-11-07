@@ -1,6 +1,6 @@
 #jogosparecidos {
     width: 100vw;
-    right: 0;
+    left: 0;
     position: absolute;
 
     #produto {
@@ -56,5 +56,57 @@
                 }
             }
         }
+    }
+
+    .filtragem {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        width: 100vw;
+        height: auto;
+        padding: 20px 30px 20px 110px;
+
+        .mostrar {
+            display: flex;
+            flex-direction: row;
+            justify-content: start;
+            align-items: center;
+    
+            width: auto;
+            height: 40px;
+            padding: 0px 20px;
+            gap: 10px;
+            background-color: rgb(53, 53, 53);
+            border-radius: 10px;
+            cursor: pointer;
+
+            &:hover {
+                border: solid 2px white;
+                img {
+                    opacity: 1;
+                }
+            }
+
+            img {
+                height: 20px;
+                transform: rotate(270deg);
+                opacity: 0.6;
+            }
+        }
+    }
+
+    .jogos {
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        align-items: start;
+        flex-wrap: wrap;
+
+        width: 100vw;
+        height: auto;
+        gap: 8px;
+        padding: 0px 30px 20px 110px;
     }
 }

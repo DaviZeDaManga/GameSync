@@ -1,5 +1,7 @@
 #Grupos {
-    width: 1600px;
+    width: 100vw;
+    position: absolute;
+    left: 0;
     
     .name-grupo{
         display: flex;
@@ -8,32 +10,61 @@
         align-items: center;
 
         width: 100%;
-        height: 250px;
+        margin-top: 20px;
+        height: 300px;
         padding: 20px;
-        border-radius: 10px;
         background: linear-gradient(220deg, rgb(75, 48, 183), rgb(113, 30, 158));
+    }
+
+    .filtragem {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        width: 100vw;
+        height: auto;
+        padding: 20px 30px 20px 110px;
+
+        .mostrar {
+            display: flex;
+            flex-direction: row;
+            justify-content: start;
+            align-items: center;
+    
+            width: auto;
+            height: 40px;
+            padding: 0px 20px;
+            gap: 10px;
+            background-color: rgb(53, 53, 53);
+            border-radius: 10px;
+            cursor: pointer;
+
+            &:hover {
+                border: solid 2px white;
+                img {
+                    opacity: 1;
+                }
+            }
+
+            img {
+                height: 20px;
+                transform: rotate(270deg);
+                opacity: 0.6;
+            }
+        }
     }
 
     .grupo {
         display: flex;
         flex-direction: row;
-        justify-content: center;
-        align-items: center;
+        justify-content: start;
+        align-items: start;
+        flex-wrap: wrap;
 
-        width: 100%;
+        width: 100vw;
         height: auto;
-
-        #produtos {
-            display: flex;
-            flex-direction: row;
-            justify-content: start;
-            align-items: start;
-
-            width: 100%;
-            height: auto;
-            flex-wrap: wrap;
-            gap: 20px;
-            padding: 20px 0px;
-        }
+        gap: 15px;
+        padding: 0px 30px 20px 110px;
     }
 }
