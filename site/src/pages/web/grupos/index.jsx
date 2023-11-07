@@ -7,8 +7,10 @@ import ProdutoCard from '../../../components/produto'
 
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion';
+import { useState } from 'react'
 
 export default function Grupos() {
+    const [titulo, setTitulo] = useState("GameGrupos")
 
     return (
         <section id='Grupos'>
@@ -19,7 +21,7 @@ export default function Grupos() {
             />
 
             <section className='name-grupo'>
-                <h1>Jogos Novos</h1>
+                <h1>{titulo}</h1>
             </section>
 
             <section className='filtragem'>
