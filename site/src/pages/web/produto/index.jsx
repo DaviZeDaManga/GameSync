@@ -20,6 +20,7 @@ import storage, { set } from 'local-storage';
 import Title from '../../../components/title'
 
 import EmojiPicker from 'emoji-picker-react';
+import ProdutoCard from '../../../components/produto'
 
 export default function Produto() {
 
@@ -32,15 +33,15 @@ export default function Produto() {
     const [mostcompl, setMostcompl] = useState (false)
     
     const [idprod, setIdprod] = useState (id)
-    const [nome, setNome] = useState ('Minecraft Bedrock Edition')
-    const [desc, setDesc] = useState ('Minecraft é um jogo eletrônico sandbox de sobrevivência criado pelo desenvolvedor sueco Markus "Notch" Persson e posteriormente desenvolvido e publicado pela Mojang Studios, cuja propriedade intelectual foi obtida pela Microsoft em 2014. Lançado inicialmente em maio de 2009 como um projeto em desenvolvimento, seu lançamento completo ocorreu em novembro de 2011 para Microsoft Windows, macOS, Linux e alguns dispositivos móveis, sendo posteriormente relançado para uma ampla variedade de plataformas.')
-    const [lancamento, setLancamento] = useState ('09/10/2009')
+    const [nome, setNome] = useState ('')
+    const [desc, setDesc] = useState ('')
+    const [lancamento, setLancamento] = useState ('')
     // const [plataformas, setPlataformas] = useState (["Xbox", "PS4"," Android", "IOS", "PS3", ])
-    const [developers, setDevelopers] = useState (["Mojang"])
-    const [publicador, setPublicador] = useState (["Mojang"])
+    const [developers, setDevelopers] = useState ([""])
+    const [publicador, setPublicador] = useState ([""])
     const [preco, setPreco] = useState (79.99)
 
-    const [imagem, setImagem] = useState ('https://imgs.search.brave.com/F-akkk9WgONHprNR_K-jNOtLt1TvV4ElecXgduldH-0/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9maWxl/cy50ZWNub2Jsb2cu/bmV0L3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDIwLzEyL2NvbW8t/am9nYXItbWluZWNy/YWZ0LXZpYS1oYW1h/Y2hpLTM0MHgxOTEu/anBn')
+    const [imagem, setImagem] = useState ('')
     const [imagens, setImagens] = useState ([])
     const [videos, setVideos] = useState ([])
 
@@ -94,56 +95,69 @@ export default function Produto() {
 
     
     
-    
+    async function ProdutoInfo() {
+        let url = 'https://api.rawg.io/api/games/'+  idprod +'?key=c03e618a39f9447e9e212b29e03b8707'
+        let resposta = await axios.get(url)
 
-    // useEffect (() => {
-    //     ProdutoInfo()
-    // }, [])
+        setNome(resposta.data.name)
+        setImagem(resposta.data.background_image)
+        setDesc(resposta.data.description)
+        setLancamento(resposta.data.released)
+    }
 
-    // async function Conquistas() {
-    //     let url = 'https://api.rawg.io/api/games/'+ idprod +'/achievements?key=0a526d3c3985430c9469d8d6951eb5cb&&page_size=' + qntdconq
-    //     let resposta = await axios.get(url)
+    useEffect (() => {
+        ProdutoInfo()
+    }, [])
+
+    async function Conquistas() {
+        let url = 'https://api.rawg.io/api/games/'+ idprod +'/achievements?key=c03e618a39f9447e9e212b29e03b8707&page_size=' + qntdconq
+        let resposta = await axios.get(url)
 
 
-    //     setConquistas(resposta.data.results)
-    // }
+        setConquistas(resposta.data.results)
+    }
 
-    // useEffect (() => {
-    //     Conquistas()
-    // }, [])
+    useEffect (() => {
+        Conquistas()
+    }, [])
 
-    // async function Capturas() {
-    //     let url = 'https://api.rawg.io/api/games/'+  idprod +'/screenshots?key=0a526d3c3985430c9469d8d6951eb5cb&&page_size=5'
-    //     let resposta = await axios.get(url)
+    async function Capturas() {
+        let url = 'https://api.rawg.io/api/games/'+  idprod +'/screenshots?key=c03e618a39f9447e9e212b29e03b8707&page_size=5'
+        let resposta = await axios.get(url)
 
-    //     setImagens(resposta.data.results)
-    // }
+        setImagens(resposta.data.results)
+    }
 
-    // useEffect(() => {
-    //     Capturas()
-    // }, [])
+    useEffect(() => {
+        Capturas()
+    }, [])
 
-    // async function Videos() {
-    //     let url = 'https://api.rawg.io/api/games/'+ idprod +'/movies?key=0a526d3c3985430c9469d8d6951eb5cb&'
-    //     let resposta = await axios.get(url)
+    async function Videos() {
+        let url = 'https://api.rawg.io/api/games/'+ idprod +'/movies?key=c03e618a39f9447e9e212b29e03b8707'
+        let resposta = await axios.get(url)
 
-    //     setVideos(resposta.data.results)
-    // }
+        setVideos(resposta.data.results)
+    }
 
-    // useEffect(() => {
-    //     Videos()
-    // }, [])
+    useEffect(() => {
+        Videos()
+    }, [])
 
-    // async function Complementos() {
-    //     let url = 'https://api.rawg.io/api/games/'+ idprod +'/additions?key=0a526d3c3985430c9469d8d6951eb5cb&&page_size=50'
-    //     let resposta = await axios.get(url)
+    async function Complementos() {
+        let url = 'https://api.rawg.io/api/games/'+ idprod +'/additions?key=c03e618a39f9447e9e212b29e03b8707&page_size=50'
+        let resposta = await axios.get(url)
 
-    //     setComplementos(resposta.data.results)
-    // }
+        setComplementos(resposta.data.results)
+    }
 
-    // useEffect(()=> {
-    //     Complementos()
-    // }, [])
+    useEffect(()=> {
+        Complementos()
+    }, [])
+
+
+
+
+
 
 
 
@@ -196,7 +210,6 @@ export default function Produto() {
     return(
         <div className="Produto">
             <BarraLateral/>
-            <BarraDeCima/>
             <Title
             nome={"Details"}
             voltar={true}
@@ -250,22 +263,22 @@ export default function Produto() {
                             <img src={imagem} />
                             </SwiperSlide>
                                         
-                            {/* {videos.map( item => 
+                            {videos.map( item => 
                                 
                                 <SwiperSlide>
                                     <video controls="true">  <source src={item.data.max} type="video/mp4" /></video>
                                 </SwiperSlide>    
                                 
-                            )}     */}
+                            )}    
                                 
                             
-                            {/* {imagens.map( item => 
+                            {imagens.map( item => 
                                 
                                 <SwiperSlide>
                                     <img src={item.image} />
                                 </SwiperSlide>  
 
-                            )}   */}
+                            )}  
                             
                         </Swiper>
         
@@ -380,27 +393,14 @@ export default function Produto() {
 
                 {conquistas.map( item => 
 
-                <Link to={'/conquistas/' + id}>
-                    <section className='produto'>
-                        <div className='imagem-produto'>
-                            <div className='sombra'>
-                                <div className='linha'></div>
-                            </div>
-                            <div className='produtoIMG'>
-                                <img src={item.image} alt='Conquista'/>
-                            </div>
-                        </div>
-                        <div className='informacoes'>
-                            <div className='dados'>
-                                <a href="">{item.name}</a>
-                                <p>{item.description}</p>
-                            </div>
-                            <div className='info'>
-                                <h3>{item.percent}</h3>
-                            </div>
-                        </div>
-                    </section>
-                </Link>
+                <ProdutoCard
+                id={id}
+                nome={item.name}
+                lancamento={item.parcent}
+                imagem={item.image}
+                tipo={'conquista'}
+                />
+
                 )}
 
             </div>
@@ -553,27 +553,35 @@ export default function Produto() {
                     </div>
                     <div id="produtos">  
 
-                        {complementos.map( item =>         
+                        {complementos.map( item =>       
+                        
+                            <ProdutoCard
+                            id={id}
+                            nome={item.name}
+                            imagem={item.background_image}
+                            lancamento={item.released}
+                            tipo={'complemento'}
+                            />
 
-                            <section className='produto'>
-                                <div className='imagem-produto'>
-                                    <div className='sombra'>
-                                        <div className='linha'></div>
-                                    </div>
-                                    <div className='produtoIMG'>
-                                        <img src={item.background_image} alt='Conquista'/>
-                                    </div>
-                                </div>
-                                <div className='informacoes'>
-                                    <div className='dados'>
-                                        <a>{item.name}</a>
-                                        <p>{item.description}</p>
-                                    </div>
-                                    <div className='info'>
-                                        <h3>{item.released}</h3>
-                                    </div>
-                                </div>
-                            </section>
+                            // <section className='produto'>
+                            //     <div className='imagem-produto'>
+                            //         <div className='sombra'>
+                            //             <div className='linha'></div>
+                            //         </div>
+                            //         <div className='produtoIMG'>
+                            //             <img src={item.background_image} alt='Conquista'/>
+                            //         </div>
+                            //     </div>
+                            //     <div className='informacoes'>
+                            //         <div className='dados'>
+                            //             <a>{item.name}</a>
+                            //             <p>{item.description}</p>
+                            //         </div>
+                            //         <div className='info'>
+                            //             <h3>{item.released}</h3>
+                            //         </div>
+                            //     </div>
+                            // </section>
 
                         )}
 

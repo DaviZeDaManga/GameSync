@@ -12,7 +12,6 @@ export default function Grupos() {
 
     return (
         <section id='Grupos'>
-            <BarraDeCima/>
             <BarraLateral/>
             <Title
             voltar={true}

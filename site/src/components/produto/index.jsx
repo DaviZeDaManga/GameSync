@@ -1,10 +1,23 @@
+import { useEffect, useState } from 'react'
 import './index.scss'
 import { Link } from 'react-router-dom'
 
-export default function ProdutoCard({imagem, nome, produtora, estado}) {
+export default function ProdutoCard({id, imagem, nome, produtora, lancamento, tipo}) {
+    const [tipoprodurl, setTipoprodurl] = useState('/produto/')
+    const [tipoprod, setTipoprod] = useState('Jogo')
+
+    useEffect(()=> {
+        if(tipo == 'conquista') {
+            setTipoprodurl('/conquistas/')
+            setTipoprod("Conquista")
+        }
+        else if (tipo == 'complemento') {
+            setTipoprod("Complemento")
+        }
+    })
 
     return(
-        <Link to={'/produto/3242'}>
+        <Link to={tipoprodurl + id}>
             <section className='produto'>
                 <div className='imagem-produto'>
                     <div className='sombra'>
@@ -17,10 +30,10 @@ export default function ProdutoCard({imagem, nome, produtora, estado}) {
                 <div className='informacoes'>
                     <div className='dados'>
                         <a>{nome}</a>
-                        <p>{produtora}</p>
+                        <p>{tipoprod}</p>
                     </div>
                     <div className='info'>
-                        <h3>{estado}</h3>
+                        <h3>{lancamento}</h3>
                     </div>
                 </div>
             </section>  

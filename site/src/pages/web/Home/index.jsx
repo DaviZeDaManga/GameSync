@@ -51,8 +51,9 @@ export default function Home() {
 
     return(
         <div id='Plano'>
-            <BarraDeCima/>
-            <BarraLateral/>
+            <BarraLateral
+            home={true}
+            />
 
             {cardprod == true &&
             <section className='cardprod'>
@@ -73,6 +74,7 @@ export default function Home() {
                                 </nav>
                             </Link>
                         </div>
+
                     </section>
                 </Nav>
             </section>}

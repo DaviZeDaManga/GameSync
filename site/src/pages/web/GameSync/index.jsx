@@ -18,7 +18,6 @@ export default function GameSync() {
 
     return(
         <div className='GameSync'>
-            <BarraDeCima/>
             <BarraLateral/>
             <main id='vinheta'>
                 <img src="./assets/images/GameSync/giphy-unscreen.gif" />

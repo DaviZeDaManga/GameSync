@@ -18,8 +18,9 @@ export default function Noticias() {
 
         
         <main id="noticias" >
-            <BarraDeCima/>
-            <BarraLateral/>
+            <BarraLateral
+            noticias={true}
+            />
 
             <section id='now'>
             <Swiper navigation={true} modules={[Navigation]} className="mySwiper">

@@ -18,7 +18,6 @@ export default function JogosParecidos() {
 
     return(
         <div id='jogosparecidos'>
-            <BarraDeCima/>
             <BarraLateral/>
             <Title
             nome={"Jogos Parecidos com"}

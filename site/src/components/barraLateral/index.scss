@@ -256,8 +256,45 @@
                 cursor: pointer;
                 transition: 0.3s;
             }
+
+            .redirects {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+
+                width: 40px;
+                height: 40px;
+                background-color: rgba(54, 54, 54, 0);
+                border-radius: 10px;
+                padding: 10px;
+                margin-top: 20px;
+                transition: 0.3s;
+                cursor: pointer;
+
+                > img {
+                    height: 100%;
+                    opacity: 0.3;
+                }
+            }
+            .redirects:hover {
+                padding: 9px;
+                > img {
+                    opacity: 1;
+                }
+            }
+
+            .botoesup {
+                display: flex;
+                flex-direction: column;
+                justify-content: start;
+                align-items: end;
     
-            .botoes {
+                width: 100%;
+                height: 100%;
+            }
+    
+            .botoesdown {
                 display: flex;
                 flex-direction: column;
                 justify-content: end;
@@ -265,32 +302,6 @@
     
                 width: 100%;
                 height: 100%;
-    
-                .redirects {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: center;
-                    align-items: center;
-    
-                    width: 40px;
-                    height: 40px;
-                    background-color: rgb(54, 54, 54);
-                    border-radius: 10px;
-                    padding: 10px;
-                    margin-top: 20px;
-                    transition: 0.3s;
-    
-                    > img {
-                        height: 100%;
-                        opacity: 0.5;
-                    }
-                }
-                .redirects:hover {
-                    padding: 9px;
-                    > img {
-                        opacity: 1;
-                    }
-                }
             }
 
 

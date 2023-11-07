@@ -80,8 +80,9 @@ export default function Planos(){
  
     return(
         <div id='Planos'>
-            <BarraLateral/>
-            <BarraDeCima/>
+            <BarraLateral
+            planos={true}
+            />
 
             {engine == true &&
             <div id='engine'>

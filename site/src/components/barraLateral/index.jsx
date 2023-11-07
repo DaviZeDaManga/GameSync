@@ -7,7 +7,7 @@ import { motion } from "framer-motion"
 
 import BarraDeCima from '../baraDeCima';
 
-export default function BarraLateral(props) {
+export default function BarraLateral({home, planos, noticias, pesquisa}) {
     const[nameuser, setNameuser] = useState("")
     const{imguser, setImguser} = useState('/assets/images/GameSync/user.png')
 
@@ -15,8 +15,6 @@ export default function BarraLateral(props) {
     const[carrin, setCarrin] = useState(false)
     const[fundo, setFundo] = useState(false)
     const[configs, setConfigs] = useState(false)
-
-    const [Barra, setBarra] = useState(document.getElementById('barra'))
 
     function MostrarCarrin() {
         setAssis(false)
@@ -206,7 +204,7 @@ export default function BarraLateral(props) {
 
 
     const [cateb, setCateb] = useState(0)
-    const [sessao, setSessao] = useState(1)
+
 
 
 
@@ -226,8 +224,27 @@ export default function BarraLateral(props) {
         Fundo()
     }, [carrin, menu, assis, configs])
 
+
+
+
+
+
+
+
+
+    const [barra, setBarra] = useState(false)
+
+    useEffect(()=> {
+        if(pesquisa == false) {
+            setBarra(false)
+        }
+    })
+
     return(
         <div id="BarraLateral">
+            <BarraDeCima
+            barra={barra}
+            />
 
             <div>
                 <motion.div
@@ -247,19 +264,19 @@ export default function BarraLateral(props) {
                                 <p>Pesquisar</p>
                             </div>
                             <Link to={'/'}>
-                            <div onClick={() => (setSessao(1))} className={`categoria ${sessao == 1 && 'selecionado'}`} >
+                            <div className={`categoria ${home == true && 'selecionado'}`} >
                                 <img src="/assets/images/barradecima/bolsa-de-compras.png" />
                                 <p>Home</p>
                             </div>
                             </Link>
                             <Link to={'/planos'}>
-                            <div onClick={()=> (setSessao(2))} className={`categoria ${sessao == 2 && 'selecionado'}`}>
+                            <div className={`categoria ${planos == true && 'selecionado'}`}>
                                 <img src="/assets/images/barradecima/controle-de-video-game.png" />
                                 <p>Planos</p>
                             </div>
                             </Link>
                             <Link to={'/noticias'}>
-                            <div onClick={()=> (setSessao(3))} className={`categoria ${sessao == 3 && 'selecionado'}`}>
+                            <div className={`categoria ${noticias == true && 'selecionado'}`}>
                                 <img src="/assets/images/barradecima/balao-de-fala.png" />
                                 <p>Noticias</p>
                             </div>
@@ -373,9 +390,13 @@ export default function BarraLateral(props) {
                     </section>
 
                     <img onClick={Configs} className='logo' src="/assets/images/GameSync/giphy-unscreen.gif" />
-                    <div className='botoes'>
+                    <div className='botoesup'>
+                        <section onClick={()=> (setBarra(!barra))} className='redirects'>
+                            <img src="/assets/images/carrinho/bot.png" />
+                        </section>
+                    </div>
 
-
+                    <div className='botoesdown'>
                         <section onClick={Massistente} className='redirects'>
                             <img src="/assets/images/carrinho/bot.png" />
                         </section>
