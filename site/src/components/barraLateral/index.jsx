@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import './index.scss'
 import { Link, json } from 'react-router-dom'
 import storage, { set } from 'local-storage';
-
+import axios from 'axios';
 import { motion } from "framer-motion"
 
 import BarraDeCima from '../baraDeCima';
@@ -96,9 +96,7 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
 
 
 
-    function pesquisar() {
-        Configs()
-    }
+   
 
 
 
@@ -234,11 +232,31 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
 
     const [barra, setBarra] = useState(false)
 
+    function pesquisar() {
+        setConfigs(false)
+        setBarra(true)
+    }
+
     useEffect(()=> {
         if(pesquisa == false) {
             setBarra(false)
         }
     })
+
+
+
+    const [categorias, setCategorias] = useState([])
+
+    async function Categorias() {
+        let url = 'https://api.rawg.io/api/genres?key=c03e618a39f9447e9e212b29e03b8707'
+        let resposta = await axios.get(url)
+
+        setCategorias(resposta.data.results)
+    }
+
+    useEffect(()=> {
+        Categorias()
+    }, [])
 
     return(
         <div id="BarraLateral">
@@ -259,7 +277,7 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
                         
                         <section className='categorias'>
 
-                            <div onClick={pesquisar} className={`categoria p`}>
+                            <div onClick={(pesquisar)} className={`categoria p`}>
                                 <img src="/assets/images/barralateral/navegar/lupa.png" />
                                 <p>Pesquisar</p>
                             </div>
@@ -323,53 +341,15 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
 
                         {pesqB == true &&
                         <>
-                        <Link to={'/produto/2'}>
-                        <section className='categoria'>
-                            <p>Terror</p>
-                        </section>
-                        </Link>
 
-                        <Link to={'/produto/2'}>
-                        <section className='categoria'>
-                            <p>RPG</p>
-                        </section>
-                        </Link>
+                        {categorias.map( item =>
+                            <Link to={'/gamegrupos/' + item.id}>
+                            <section className='categoria'>
+                                <p>{item.name}</p>
+                            </section>
+                            </Link>
+                        )}
 
-                        <Link to={'/produto/2'}>
-                        <section className='categoria'>
-                            <p>Aventura</p>
-                        </section>
-                        </Link>
-
-                        <Link to={'/produto/2'}>
-                        <section className='categoria'>
-                            <p>Ação</p>
-                        </section>
-                        </Link>
-
-                        <Link to={'/produto/2'}>
-                        <section className='categoria'>
-                            <p>Souls Like</p>
-                        </section>
-                        </Link>
-
-                        <Link to={'/produto/2'}>
-                        <section className='categoria'>
-                            <p>Família</p>
-                        </section>
-                        </Link>
-
-                        <Link to={'/produto/2'}>
-                        <section className='categoria'>
-                            <p>Luta</p>
-                        </section>
-                        </Link>
-
-                        <Link to={'/produto/2'}>
-                        <section className='categoria'>
-                            <p>Tiro</p>
-                        </section>
-                        </Link>
                         </>}
 
                         {notiB == true &&
