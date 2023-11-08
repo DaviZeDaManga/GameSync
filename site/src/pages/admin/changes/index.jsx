@@ -2,8 +2,8 @@
     import AdmBarraLateral from '../../../components/AdminBarraL';
     import AdmBarraUp from '../../../components/AdminBarraUp';
 
-    import storage from 'local-storage';
-    import { ListarTodosJogos, ExcluirProduto, BuscarJogoNome, AlterarProduto, EnviarImagens, InserirCategoriaProduto, InserirVideo } from '../../../connection/productAPI';
+    import storage, { set } from 'local-storage';
+    import { ListarTodosJogos, ExcluirProduto, BuscarJogoNome, AlterarProduto, AlterarVideo, AlterarCategoriaEmP, AlterarCategoriaEmCP, AlterarImage} from '../../../connection/productAPI';
     import { useNavigate } from 'react-router-dom';
     import { useState, useEffect } from 'react';
     import { toast } from 'react-toastify';
@@ -17,13 +17,15 @@
 
     import { Mousewheel, Pagination, Navigation } from 'swiper/modules';
 
+    import { motion, Variants } from 'framer-motion';
 
     export default function EditarExcluir(){
-        const navigate = useNavigate()
+        const navigate = useNavigate();
         let [filtro, setFiltro] = useState('');
         var [jogos, setJogos] = useState([]);
         let [jogoSelecionado, setJogoSelecionado] = useState(null);
-        const [adm, setAdm] = useState()
+        const [adm, setAdm] = useState();
+        let [editar, setEditar] = useState(null);
 
         async function filtrar(){  
             const resposta = await BuscarJogoNome(filtro);
@@ -79,85 +81,153 @@
         }
         
         console.log(RemoverJogo)
-        function EditarJogo(id){
-            navigate(`/admin/alterar${id}`)
-        }
-
 
         function SelecionarJogo(id) {
             setJogoSelecionado(id);
         }
     
-        function FecharDetalhes() {
+        function Fechar() {
             setJogoSelecionado(null);
+            setEditar(null)
+            setX(0)
         }
-        console.log(jogoSelecionado); // Adicione esta linha para depurar
+
+        console.log(jogoSelecionado); 
         
         console.log(jogos[1])
+
+        let [x, setX] = useState(0)
+        var y = 0
+        var rotate = 0
         
-        async function EditarJogo(id, nome, valor, promocao, destaque, Empromocao, disponivel, qtd, descricao, classificacao, lancamento, tamanho, empresa, desenvolvedor, categoria, imagem, video){
+        async function EditarJogo(id, nome, valor, promocao, destaque, Empromocao, disponivel, qtd, descricao, classificacao, lancamento, tamanho, empresa, desenvolvedor, categoria, imagem, video, ){
+            setEditar(id)
             try{
                 if (id !== 0) {
                     const idAdm = storage('admin-logado');
                     setAdm(idAdm.id)
                     await AlterarProduto(nome, valor, promocao, destaque, Empromocao, disponivel, qtd, descricao, classificacao, lancamento, tamanho, empresa, desenvolvedor, categoria, adm);
 
-                    await InserirCategoriaProduto 
+                    await AlterarVideo(id,video )
+
+                    await AlterarCategoriaEmP(id,categoria )
+
+                    await AlterarCategoriaEmCP(id, categoria)
 
                     if (typeof(imagem) == 'object')
-                        await EnviarImagens(adm, imagem);
+                        await AlterarImage(id, imagem);
 
-                    ///mudar o comando de colsilta no banco para os campos para poder editar
+                    ///mudar o comando de consulta no banco para os campos para poder editar
                     ///fazer um comando de update para cada um imagem, video,  categorablalala
                 }
             }
-            catch{
+            catch(err){
 
             }
         }
 
         return (
             <main id='EditarExcluir'>
-                {jogoSelecionado && (
+                {jogoSelecionado && (   
                     <main id='mais'>
-                        <section className='mais'>
-                            <button onClick={FecharDetalhes}><img src="/assets/images/acoes/remover.png" /></button>
 
-                            <Swiper 
-                            pagination={{
-                                type: 'progressbar',
-                            }}
-                            navigation={true}
-                            modules={[Pagination, Navigation]}
-                            direction={'vertical'}
-                            className='mySwiper'
-                            >
+                        <motion.div className='sobre'
+                        animate={{x, y, rotate}}
+                        transition={{ type: "spring" }}>
 
+                            <section className='secao-1'>
                                 <SwiperSlide>
-                                <article id='slide1'>
-                                            <figure className='barraLateral'>
-                                                <div>
-                                                    <h1>Categoria</h1>
-                                                     <h1><strong>{jogoSelecionado.nome}</strong></h1>
-                                                    
-                                                </div>
-                                                
-                                            </figure>
-                                    </article>
-                                </SwiperSlide>
+                                    <figure className='jogo-1'>
+                                        <Swiper
+                                            direction={'vertical'}
+                                            slidesPerView={1}
+                                            spaceBetween={0}
+                                            mousewheel={true}
+                                            pagination={{
+                                            clickable: true,
+                                            }}
+                                            modules={[Mousewheel, Pagination]}
+                                            className="mySwiper"
+                                        >
 
-                            </Swiper>
-                            
-                            {/* Renderizar o jogo selecionado */}
-                            <div className='detalhes'>
-                                {/* Conteúdo do jogo selecionado */}
-                                {/* Você pode adicionar aqui as informações do jogo selecionado */}
-                            </div>
+                                            <SwiperSlide>
+                                              <div className='jogo-1-um'>
+                                                   <img src={jogoSelecionado.imagem_produto} alt="" />
+                                                    
+                                              </div>
+                                            </SwiperSlide>
+
+                                        </Swiper>
+
+                                    </figure>
+                                </SwiperSlide>
+                            </section>
+
+                            <section className='bene'>
+
+                            </section>
+                            <section className='bene'>
+
+                            </section>
+
+                        </motion.div>
+                        
+                        <section className='navegacao-swiper'>
+                    
+                            <button onClick={Fechar} className='sair'>
+                                <img src='/assets/images/acoes/remover.png' />
+                            </button>
+
+                            {x == 0 &&
+                            <button onClick={() => ( setX(-950))}>
+                                Proximo
+                            </button>
+                            }   
+
+                            {x == -950 &&
+                            <>
+                            <button onClick={() => ( setX(0))}>
+                                Voltar
+                            </button>
+                            <button onClick={() => ( setX(-2200))}>
+                                Proximo
+                            </button>
+                            </>
+                            }
+
+                            {x == -2200 &&
+                            <>
+                            <button onClick={() => ( setX(-950))}>
+                                Voltar
+                            </button>
+                            <button onClick={() => ( setX(-3200))}>
+                                Proximo
+                            </button>
+                            </>
+                            }
+
+                            {x == -3200 &&
+                            <>
+                            <button onClick={() => ( setX(-2200))}>
+                                Voltar
+                            </button>
+                            <button onClick={() => ( setX(-3200))}>
+                                Proximo
+                            </button>
+                            </>
+                            }                   
                         </section>
                     </main>
                 )}
 
-
+                {editar &&(
+                    <main id='editar'>
+                        <h1>luis</h1>
+                        <button onClick={Fechar} className='sair'>
+                            <img src='/assets/images/acoes/remover.png' />
+                        </button>
+                    </main>
+                )}
     
                 <div className='container'>
                     <AdmBarraUp jogos={jogos} setJogos={setJogos} />
@@ -172,13 +242,14 @@
                             {jogos.map(item => (
                                 <div className='comp-card' key={item.id}>
 
-                                    <div className='card' onClick={() => SelecionarJogo(item.id_produto)}>
+                                    <div className='card' onClick={() => SelecionarJogo(item.produto_id)}>
 
                                         <div className='acoes'>
-                                            <img src='/assets/images/adm/pencil.png' alt='editar' onClick={e => { e.stopPropagation(); EditarJogo(item.id_produto,item.nome,item.valor,
+                                            <img src='/assets/images/adm/pencil.png' alt='editar' onClick={e => { e.stopPropagation(); EditarJogo(item.produto_id,item.nome,item.valor,
                                             item.promocao,item.destaque,item.EmPromocao,item.disponivel,item.estoque, item.descricao, item.classificacao, item.lancamento, item.tamanho, item.empresa,
-                                            item.desenvolvedor,item.categoria, item.imagem, item.video ) }} />
-                                            <img src='/assets/images/adm/trash.png' alt='remover' onClick={e => { e.stopPropagation(); RemoverJogo(item.id_produto, item.nome) }} />
+                                            item.desenvolvedor,item.categoria_id, item.imagem_produto, item.video_url ) }} />
+
+                                            <img src='/assets/images/adm/trash.png' alt='remover' onClick={e => { e.stopPropagation(); RemoverJogo(item.produto_id, item.nome) }} />
                                         </div>
 
                                         <div>
