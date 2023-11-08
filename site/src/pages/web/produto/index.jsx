@@ -22,6 +22,8 @@ import Title from '../../../components/title'
 import EmojiPicker from 'emoji-picker-react';
 import ProdutoCard from '../../../components/produto'
 
+import { BuscarJodoID } from '../../../connection/productAPI'
+
 export default function Produto() {
 
     const { id } = useParams();
@@ -96,63 +98,53 @@ export default function Produto() {
     
     
     async function ProdutoInfo() {
-        let url = 'https://api.rawg.io/api/games/'+  idprod +'?key=c03e618a39f9447e9e212b29e03b8707'
-        let resposta = await axios.get(url)
-
-        setNome(resposta.data.name)
-        setImagem(resposta.data.background_image)
-        setDesc(resposta.data.description)
-        setLancamento(resposta.data.released)
+        const resposta = await BuscarJodoID(id)
     }
 
-    useEffect (() => {
-        ProdutoInfo()
-    }, [])
-
-    async function Conquistas() {
-        let url = 'https://api.rawg.io/api/games/'+ idprod +'/achievements?key=c03e618a39f9447e9e212b29e03b8707&page_size=' + qntdconq
-        let resposta = await axios.get(url)
+    //  async function Conquistas() {
+    //      let url = 'https:api.rawg.io/api/games/'+ idprod +'/achievements?key=c03e618a39f9447e9e212b29e03b8707&page_size=' + qntdconq
+    //      let resposta = await axios.get(url)
 
 
-        setConquistas(resposta.data.results)
-    }
+    //      setConquistas(resposta.data.results)
+    //  }
 
-    useEffect (() => {
-        Conquistas()
-    }, [])
+    //  useEffect (() => {
+    //      Conquistas()
+    //  }, [])
 
-    async function Capturas() {
-        let url = 'https://api.rawg.io/api/games/'+  idprod +'/screenshots?key=c03e618a39f9447e9e212b29e03b8707&page_size=5'
-        let resposta = await axios.get(url)
+    //  async function Capturas() {
+    //      let url = 'https:api.rawg.io/api/games/'+  idprod +'/screenshots?key=c03e618a39f9447e9e212b29e03b8707&page_size=5'
+    //      let resposta = await axios.get(url)
 
-        setImagens(resposta.data.results)
-    }
+    //      setImagens(resposta.data.results)
+    //  }
 
-    useEffect(() => {
-        Capturas()
-    }, [])
+    //  useEffect(() => {
+    //      Capturas()
+    //  }, [])
 
-    async function Videos() {
-        let url = 'https://api.rawg.io/api/games/'+ idprod +'/movies?key=c03e618a39f9447e9e212b29e03b8707'
-        let resposta = await axios.get(url)
+    //  async function Videos() {
+    //      let url = 'https:api.rawg.io/api/games/'+ idprod +'/movies?key=c03e618a39f9447e9e212b29e03b8707'
+    //      let resposta = await axios.get(url)
 
-        setVideos(resposta.data.results)
-    }
+    //      setVideos(resposta.data.results)
+    //  }
 
-    useEffect(() => {
-        Videos()
-    }, [])
+    //  useEffect(() => {
+    //      Videos()
+    //  }, [])
 
-    async function Complementos() {
-        let url = 'https://api.rawg.io/api/games/'+ idprod +'/additions?key=c03e618a39f9447e9e212b29e03b8707&page_size=50'
-        let resposta = await axios.get(url)
+    //  async function Complementos() {
+    //      let url = 'https:api.rawg.io/api/games/'+ idprod +'/additions?key=c03e618a39f9447e9e212b29e03b8707&page_size=50'
+    //      let resposta = await axios.get(url)
 
-        setComplementos(resposta.data.results)
-    }
+    //      setComplementos(resposta.data.results)
+    //  }
 
-    useEffect(()=> {
-        Complementos()
-    }, [])
+    //  useEffect(()=> {
+    //      Complementos()
+    //  }, [])
 
 
 
@@ -562,26 +554,6 @@ export default function Produto() {
                             lancamento={item.released}
                             tipo={'complemento'}
                             />
-
-                            // <section className='produto'>
-                            //     <div className='imagem-produto'>
-                            //         <div className='sombra'>
-                            //             <div className='linha'></div>
-                            //         </div>
-                            //         <div className='produtoIMG'>
-                            //             <img src={item.background_image} alt='Conquista'/>
-                            //         </div>
-                            //     </div>
-                            //     <div className='informacoes'>
-                            //         <div className='dados'>
-                            //             <a>{item.name}</a>
-                            //             <p>{item.description}</p>
-                            //         </div>
-                            //         <div className='info'>
-                            //             <h3>{item.released}</h3>
-                            //         </div>
-                            //     </div>
-                            // </section>
 
                         )}
 

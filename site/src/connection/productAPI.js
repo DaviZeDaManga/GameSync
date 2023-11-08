@@ -4,6 +4,12 @@ const api = axios.create({
     baseURL: 'http://localhost:5000'   
 });
 
+
+
+
+
+
+
 export async function CadastrarProduto(produto) {
     const resposta = await api.post('/produto', produto);
     if (resposta.status === 200) {
@@ -19,10 +25,22 @@ export async function CadastrarProduto(produto) {
     }
 }
 
+
+
+
+
+
+
 export async function InserirCategoriaProduto(tabela){
     const resposta = await api.post('/produto/categoria', tabela)
     return resposta.data
 }
+
+
+
+
+
+
 
 export async function EnviarImagens(id, imagem){
 
@@ -37,6 +55,12 @@ export async function EnviarImagens(id, imagem){
     return resposta.status //não tem conteudo ele retorna 204
 }
 
+
+
+
+
+
+
 export async function InserirVideo(produto, url) {
     try {
         const resposta = await api.post('/produto/video/url', {
@@ -49,6 +73,12 @@ export async function InserirVideo(produto, url) {
     }
 }
 
+
+
+
+
+
+
 ///                           buscar
 
 export function BuscarJodoID(imagem){
@@ -56,6 +86,12 @@ export function BuscarJodoID(imagem){
     return `${api.getUri()}/${imagem}`
     // http://localhost:5000/tools\\capasFilmes\\07824752478hh0yfbfy3uhyhyfuh
 }
+
+
+
+
+
+
 
 export async function BuscarJogoNome(nome) {
     try {
@@ -72,6 +108,11 @@ export async function BuscarJogoNome(nome) {
         }
     }
 }
+
+
+
+
+
 
 export async function BuscarJogoID(id){
     try{
@@ -90,10 +131,21 @@ export async function BuscarJogoID(id){
 }
 
 
+
+
+
+
+
 export async function ListarTodosJogos(){
     const resposta = await api.get('/produtos');
     return resposta.data
 }
+
+
+
+
+
+
 
 
 /////                      alterar
@@ -109,6 +161,12 @@ export async function ExcluirProduto(id){
         throw erro;
     }
 }
+
+
+
+
+
+
 
 export async function AlterarProduto(id, nome, preco, precoPro, destaque, promocao, disponivel, qtd, descricao, classificacao, lancamento, tamanho, empresa, desenvolvedor, categoria, admin ){
     const resposta = await api.put(`/produto/${id}`, {
@@ -131,12 +189,24 @@ export async function AlterarProduto(id, nome, preco, precoPro, destaque, promoc
     return resposta.data 
 }
 
+
+
+
+
+
+
 export async function AlterarVideo(id, url){
     const resposta = await api.put(`/produto/${id}/url`, {
         url: url
     })
     return resposta.status
 }
+
+
+
+
+
+
 
 export async function AlterarCategoriaEmP(id, idcategoria){
     const resposta = await api.put(`/produto/${id}/P`, {
@@ -145,12 +215,24 @@ export async function AlterarCategoriaEmP(id, idcategoria){
     return resposta.status
 }
 
+
+
+
+
+
+
 export async function AlterarCategoriaEmCP(id, idcategoria){
     const resposta = await api.put(`/produto/${id}/CP`, {
         idcategoria: idcategoria
     })
     return resposta.status
 }
+
+
+
+
+
+
 
 export async function AlterarImage(id, image){
     const formData = new FormData();

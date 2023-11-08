@@ -247,16 +247,16 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
 
     const [categorias, setCategorias] = useState([])
 
-    async function Categorias() {
-        let url = 'https://api.rawg.io/api/genres?key=c03e618a39f9447e9e212b29e03b8707'
-        let resposta = await axios.get(url)
+    // async function Categorias() {
+    //     let url = 'https://api.rawg.io/api/genres?key=c03e618a39f9447e9e212b29e03b8707'
+    //     let resposta = await axios.get(url)
 
-        setCategorias(resposta.data.results)
-    }
+    //     setCategorias(resposta.data.results)
+    // }
 
-    useEffect(()=> {
-        Categorias()
-    }, [])
+    // useEffect(()=> {
+    //     Categorias()
+    // }, [])
 
     return(
         <div id="BarraLateral">

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import storage, { set } from 'local-storage';
 import { motion } from 'framer-motion';
 import ProdutoCard from '../produto';
+import { ListarTodosJogos } from '../../connection/productAPI';
     
 export default function BarraDeCima ({barra}) {
     const [lista, setLista] = useState (230)
@@ -104,17 +105,15 @@ export default function BarraDeCima ({barra}) {
 
 
     async function TodosGames() {
-        let url = 'https://api.rawg.io/api/games?key=c03e618a39f9447e9e212b29e03b8707'
-        let resposta = await axios.get(url)
-
-        setTgames(resposta.data.results)
+        const resposta = await ListarTodosJogos()
+        setTgames(resposta)
     }
     
     useEffect(()=> {
         TodosGames()
-    })
+    }, [])
 
-
+    console.log(tgames)
 
 
     const [configcard, setConfigcard] = useState(0)
@@ -171,11 +170,12 @@ export default function BarraDeCima ({barra}) {
                 <main className='pGames'>
 
                     {tgames.map( item => 
-                        <ProdutoCard onClick={RecarregarPagina}
-                        id={item.id}
-                        nome={item.name}
-                        imagem={item.background_image}
-                        lancamento={item.released}
+                        <ProdutoCard 
+                        onClick={RecarregarPagina}
+                        id={item.produto_id}
+                        nome={item.nome}
+                        imagem={item.imagem_produto}
+                        lancamento={item.tamanho}
                         />    
                     )}
 
