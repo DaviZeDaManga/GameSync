@@ -94,8 +94,10 @@
             });
         }, []);
         console.log(valor)
+
         async function RemoverJogo(id, nome) {
             console.log("ID do Jogo a ser removido:", id);
+            
             confirmAlert({
                 title: 'Remover Jogo',
                 message: `Você tem certeza que quer fazer isso? Excluir o jogo ${nome}.`,

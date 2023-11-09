@@ -74,9 +74,14 @@ export async function BuscarJogoNome(nome) {
     }
 }
 
+export async function ListarTodosJogos(){
+    const resposta = await api.get('/produtos');
+    return resposta.data
+}
+
 export async function BuscarJogoID(id){
     try{
-        const resposta = await api.get(`/produto/buscar/${id}`);
+        const resposta = await api.get(`/produto/${id}`);
         return resposta.data;
     }   
     catch (error) {
@@ -89,12 +94,6 @@ export async function BuscarJogoID(id){
         }
     }
 }
-
-export async function ListarTodosJogos(){
-    const resposta = await api.get('/produtos');
-    return resposta.data
-}
-
 
 /////                      alterar
 
