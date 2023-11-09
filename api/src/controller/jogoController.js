@@ -178,7 +178,7 @@ server.get('/produto/buscar', async (req, resp) => {
 });
 
 
-server.get('/produto/busca/:id', async (req, resp) => {
+server.get('/produto/:id', async (req, resp) => {
     try {
         const { id } = req.params; // parametro na url
 

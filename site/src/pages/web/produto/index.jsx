@@ -21,8 +21,8 @@ import Title from '../../../components/title'
 
 import EmojiPicker from 'emoji-picker-react';
 import ProdutoCard from '../../../components/produto'
+import { BuscarJogoID, BuscarImagem } from '../../../connection/productAPI'
 
-import { BuscarJodoID } from '../../../connection/productAPI'
 
 export default function Produto() {
 
@@ -35,10 +35,11 @@ export default function Produto() {
     const [mostcompl, setMostcompl] = useState (false)
     
     const [idprod, setIdprod] = useState (id)
+    const [produtoinfo, setProdutoinfo] = useState([])
+
     const [nome, setNome] = useState ('')
     const [desc, setDesc] = useState ('')
     const [lancamento, setLancamento] = useState ('')
-    // const [plataformas, setPlataformas] = useState (["Xbox", "PS4"," Android", "IOS", "PS3", ])
     const [developers, setDevelopers] = useState ([""])
     const [publicador, setPublicador] = useState ([""])
     const [preco, setPreco] = useState (79.99)
@@ -96,10 +97,18 @@ export default function Produto() {
 
 
     
-    
-    async function ProdutoInfo() {
-        const resposta = await BuscarJodoID(id)
+    async function InfoGame() {
+        let resposta = await BuscarJogoID(id)
+
+        setProdutoinfo(resposta)
     }
+
+    console.log(produtoinfo)
+
+    useEffect(() => {
+        InfoGame()
+    }, [])
+
 
     //  async function Conquistas() {
     //      let url = 'https:api.rawg.io/api/games/'+ idprod +'/achievements?key=c03e618a39f9447e9e212b29e03b8707&page_size=' + qntdconq
@@ -211,29 +220,24 @@ export default function Produto() {
                 
                 <section id='produto'>
                     <section id="info-produto">      
+                        {produtoinfo.map( item => 
+                            
+                        <>
                         <div className="titulo">
-                            <h1>{nome}</h1>
-                            <p>{desc}</p>
+                            <h1>{item.nm_produto}</h1>
+                            <p>{item.ds_descricao}</p>
                         </div>
                         <section id='Comprar'>
                             <div className='info'>
-                                <h1>R${preco}</h1>
+                                <h1>R${item.vl_preco}</h1>
                             </div>
                             <div className='comprar'>
                                 <button><Link to={`/BarraLateral/${id}`}></Link>Comprar</button>       
                             </div>
-                            {/* <div className='acoes'>
-                                <div className='acao'>
-                                    <p>Compartilhar</p>
-                                </div>
-                                <div className='acao'>
-                                    <p>Favoritar</p>
-                                </div>
-                                <div className='acao'>
-                                    <p>Reportar</p>
-                                </div>
-                            </div> */}
-                        </section>    
+                        </section>  
+                        </>  
+                            
+                        )}    
                     </section>    
                     
 
@@ -252,13 +256,16 @@ export default function Produto() {
                             className="mySwiper2"
                         >
                             <SwiperSlide>
-                            <img src={imagem} />
+                            {produtoinfo.map( item =>
+                            <img src={BuscarImagem(item.img_produto
+                                )} />    
+                            )}
                             </SwiperSlide>
                                         
-                            {videos.map( item => 
+                            {produtoinfo.map( item => 
                                 
                                 <SwiperSlide>
-                                    <video controls="true">  <source src={item.data.max} type="video/mp4" /></video>
+                                    <video controls="true">  <source src={item.url_video} type="video/mp4" /></video>
                                 </SwiperSlide>    
                                 
                             )}    
@@ -299,31 +306,33 @@ export default function Produto() {
             <section id="descEstatus">
                 <div className="desc">
                     <h1>Sobre</h1>
+                    {produtoinfo.map( item => 
+                        
+                    <>
                     <div className="detalhes">
 
-                        <div className="detalhe">
-                            <h2>Desenvolvido por</h2>                          
-                            {developers.map( item =>
-                                <p>{item}</p>
-                            )}
-                        </div>
-                        <div className="detalhe">
-                            <h2>Publicado por</h2>
-                            {publicador.map(item =>
-                            <p>{item}</p>    
-                            )}
-                        </div>
-                        <div className="detalhe">
-                            <h2>Data de lançamento</h2>
-                            <p>{lancamento}</p>
-                        </div>
-                        <div className="detalhe">
-                            <h2>Tamanho</h2>
-                            <p>Indefinido</p>
-                        </div>
+                    <div className="detalhe">
+                        <h2>Desenvolvido por</h2>                          
+                        <p>{item.ds_desenvolvedor}</p>
+                    </div>
+                    <div className="detalhe">
+                        <h2>Publicado por</h2>
+                        <p>{item.ds_empresa_publi}</p>           
+                    </div>
+                    <div className="detalhe">
+                        <h2>Data de lançamento</h2>
+                        <p>{item.dt_lancamento}</p>
+                    </div>
+                    <div className="detalhe">
+                        <h2>Tamanho</h2>
+                        <p>{item.ds_tamanho}</p>
+                    </div>
 
                     </div>
-                    <p>{desc}</p>
+                    <p>{item.ds_descricao}</p>
+                    </>
+                    
+                    )}
                 </div>
 
                 <div className="status">
@@ -549,8 +558,8 @@ export default function Produto() {
                         
                             <ProdutoCard
                             id={id}
-                            nome={item.name}
-                            imagem={item.background_image}
+                            nome={item.nm_produto}
+                            imagem={BuscarImagem(item.img_produto)}
                             lancamento={item.released}
                             tipo={'complemento'}
                             />

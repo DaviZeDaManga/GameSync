@@ -6,6 +6,7 @@ import storage, { set } from 'local-storage';
 import { motion } from 'framer-motion';
 import ProdutoCard from '../produto';
 import { ListarTodosJogos } from '../../connection/productAPI';
+import { BuscarImagem } from '../../connection/productAPI';
     
 export default function BarraDeCima ({barra}) {
     const [lista, setLista] = useState (230)
@@ -174,7 +175,7 @@ export default function BarraDeCima ({barra}) {
                         onClick={RecarregarPagina}
                         id={item.produto_id}
                         nome={item.nome}
-                        imagem={item.imagem_produto}
+                        imagem={BuscarImagem(item.imagem_produto)}
                         lancamento={item.tamanho}
                         />    
                     )}
