@@ -1,14 +1,17 @@
 import { useState, useEffect } from 'react'
 import './index.scss'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import storage, { set } from 'local-storage';
 import { motion } from 'framer-motion';
 import ProdutoCard from '../produto';
 import { ListarTodosJogos } from '../../connection/productAPI';
 import { BuscarImagem } from '../../connection/productAPI';
+
     
 export default function BarraDeCima ({barra}) {
+    const navigate = useNavigate()
+
     const [lista, setLista] = useState (230)
     const [idprod, setIdprod] = useState ('')
     const [imguser, setImguser] = useState("")
@@ -85,16 +88,6 @@ export default function BarraDeCima ({barra}) {
             }     
         }
     })
-
-    async function RecarregarPagina() {
-        for (let i = 0; i >= 0; i--){           
-            await espera(1000);         
-            
-            if(i == 0) {
-                window.location.reload()
-            }
-        }
-    }  
      
         
 
@@ -105,14 +98,14 @@ export default function BarraDeCima ({barra}) {
 
 
 
-    // async function TodosGames() {
-    //     const resposta = await ListarTodosJogos()
-    //     setTgames(resposta)
-    // }
+    async function TodosGames() {
+        const resposta = await ListarTodosJogos()
+        setTgames(resposta)
+    }
     
-    // useEffect(()=> {
-    //     TodosGames()
-    // }, [])
+    useEffect(()=> {
+        TodosGames()
+    }, [])
 
     console.log(tgames)
 
@@ -172,11 +165,11 @@ export default function BarraDeCima ({barra}) {
 
                     {tgames.map( item => 
                         <ProdutoCard 
-                        onClick={RecarregarPagina}
                         id={item.produto_id}
                         nome={item.nome}
                         imagem={BuscarImagem(item.imagem_produto)}
                         lancamento={item.tamanho}
+                        recarregarpage={true}
                         />    
                     )}
 

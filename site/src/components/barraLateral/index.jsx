@@ -11,10 +11,19 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
     const[nameuser, setNameuser] = useState("")
     const{imguser, setImguser} = useState('/assets/images/GameSync/user.png')
 
+    useEffect(() => {
+        if(storage('user-logado')){
+            const nomeUser = storage('user-logado');
+            setNameuser(nomeUser.nome);
+        }
+        else{
+            setNameuser('anonymous')
+        }
+    }, [])
+
     const[menu, setMenu] = useState(false)
     const[carrin, setCarrin] = useState(false)
     const[fundo, setFundo] = useState(false)
-    const[configs, setConfigs] = useState(false)
 
     function MostrarCarrin() {
         setAssis(false)
@@ -34,16 +43,28 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
 
 
 
-    useEffect(() => {
-        if(storage('user-logado')){
-            const nomeUser = storage('user-logado');
-            setNameuser(nomeUser.nome);
-        }
-        else{
-            setNameuser('anonymous')
-        }
-    }, [])
+   const[configs, setConfigs] = useState(false)
+    const [x, setX] = useState(0);
+    const [y, setY] = useState(0);
+    const [rotate, setRotate] = useState(0);
 
+    function Configs() {
+        setConfigs(!configs)
+    }
+    function Mconfigs() {
+        if (configs == true) {
+            setX(320)
+            setConfigs(true)
+            Fundo()
+        }
+        else {
+            setX(0)
+        }
+    }
+
+    useEffect( () => {
+        Mconfigs()
+    }, [configs])
 
 
 
@@ -102,27 +123,7 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
 
 
 
-    const [x, setX] = useState(0);
-    const [y, setY] = useState(0);
-    const [rotate, setRotate] = useState(0);
-
-    function Configs() {
-        setConfigs(!configs)
-    }
-    function Mconfigs() {
-        if (configs == true) {
-            setX(320)
-            setConfigs(true)
-            Fundo()
-        }
-        else {
-            setX(0)
-        }
-    }
-
-    useEffect( () => {
-        Mconfigs()
-    }, [configs])
+    
 
 
 
@@ -247,16 +248,13 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
 
     const [categorias, setCategorias] = useState([])
 
-    // async function Categorias() {
-    //     let url = 'https://api.rawg.io/api/genres?key=c03e618a39f9447e9e212b29e03b8707'
-    //     let resposta = await axios.get(url)
+    async function Categorias() {
+        
+    }
 
-    //     setCategorias(resposta.data.results)
-    // }
-
-    // useEffect(()=> {
-    //     Categorias()
-    // }, [])
+    useEffect(()=> {
+        Categorias()
+    }, [])
 
     return(
         <div id="BarraLateral">
@@ -388,67 +386,8 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
                         </section>
                     </div>
 
-                    {assis == true &&
-                        <motion.div
-                        className='animation-BarraBot'
-                        animate={{ 
-                            x: xbot,
-                            y: ybot,
-                            scale: 1,
-                        }}
-                        transition={{ type: "spring"}}
-                        >
-
-                        <section id='assistente'> 
-                            {bot == true &&
-                            <div className='linhabot'></div>}
-                            {bot == false &&
-                            <div className='linhaassis'></div>}
-
-                            <main className='assis'>
-                                <section className='assisOUbot'>
-
-                                    {bot == true &&
-                                    <>
-                                    <button className='botao bot a'>
-                                        Bot
-                                    </button>
-                                    <button onClick={botOUassis} className='botao assistente'>
-                                        Assistente
-                                    </button>
-                                    </>
-                                    }
-
-                                    {bot == false &&
-                                    <>
-                                    <button onClick={botOUassis} className='botao bot'>
-                                        Bot
-                                    </button>
-                                    <button className='botao assistente b'>
-                                        Assistente
-                                    </button>
-                                    </>
-                                    }
-
-                                </section>
-                                <div className='mensagens'>
-
-                                    <textarea value={Resposta}  onChange={(e) => setResposta(e.target.value)} cols="100" rows="50"></textarea>
-
-                                </div>
-                                <nav className='enviar'>
-                                    <input onKeyDown={Enter} value={IQuestion}  onChange={(e) => setIQuestion(e.target.value)} type='text' placeholder='Qual a sua duvida?'/>
-                                {bot == true &&
-                                    <button onClick={GPTbro} className='envbot'><img src="/assets/images/carrinho/enviar.png"/></button>}
-
-                                    {bot == false &&
-                                    <button className='envassis'><img src="/assets/images/carrinho/enviar.png"/></button>}
-                                </nav>
-                            </main>
-                        </section>
-
-                        </motion.div>
-                    }
+                    
+                    
 
 
 

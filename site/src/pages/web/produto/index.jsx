@@ -22,6 +22,7 @@ import Title from '../../../components/title'
 import EmojiPicker from 'emoji-picker-react';
 import ProdutoCard from '../../../components/produto'
 import { BuscarJogoID, BuscarImagem } from '../../../connection/productAPI'
+import { motion } from 'framer-motion'
 
 
 export default function Produto() {
@@ -36,17 +37,7 @@ export default function Produto() {
     
     const [idprod, setIdprod] = useState (id)
     const [produtoinfo, setProdutoinfo] = useState([])
-
-    const [nome, setNome] = useState ('')
-    const [desc, setDesc] = useState ('')
-    const [lancamento, setLancamento] = useState ('')
-    const [developers, setDevelopers] = useState ([""])
-    const [publicador, setPublicador] = useState ([""])
-    const [preco, setPreco] = useState (79.99)
-
-    const [imagem, setImagem] = useState ('')
     const [imagens, setImagens] = useState ([])
-    const [videos, setVideos] = useState ([])
 
     const [conquistas, setConquistas] = useState ([])
     const [complementos, setComplementos] = useState ([])
@@ -133,16 +124,6 @@ export default function Produto() {
     //      Capturas()
     //  }, [])
 
-    //  async function Videos() {
-    //      let url = 'https:api.rawg.io/api/games/'+ idprod +'/movies?key=c03e618a39f9447e9e212b29e03b8707'
-    //      let resposta = await axios.get(url)
-
-    //      setVideos(resposta.data.results)
-    //  }
-
-    //  useEffect(() => {
-    //      Videos()
-    //  }, [])
 
     //  async function Complementos() {
     //      let url = 'https:api.rawg.io/api/games/'+ idprod +'/additions?key=c03e618a39f9447e9e212b29e03b8707&page_size=50'
@@ -207,6 +188,22 @@ export default function Produto() {
 
 
     const [emojiselect, setEmojiselect ] = useState(false)
+
+
+
+
+
+    const [acoes, setAcoes] = useState(0)
+    const [acoesboo, setAcoesboo] = useState(false)
+
+    useEffect(()=> {
+        if(acoesboo == true) {
+            setAcoes(1)
+        }
+        else{
+            setAcoes(0)
+        }
+    })
     
     return(
         <div className="Produto">
@@ -229,15 +226,40 @@ export default function Produto() {
                         </div>
                         <section id='Comprar'>
                             <div className='info'>
-                                <h1>R${item.vl_preco}</h1>
+                                {item.bt_promocao == true &&
+                                <h1 className='promocao'>R${item.vl_preco_promocional}</h1>}
+                                <h1 className={`${item.bt_promocao == true && 'noprice'}`}>R${item.vl_preco}</h1>
                             </div>
                             <div className='comprar'>
-                                <button><Link to={`/BarraLateral/${id}`}></Link>Comprar</button>       
+                                <button><Link to={`/BarraLateral/${id}`}></Link>Comprar</button>    
+                                <button className='acoes'>
+                                    <img src='/assets/images/carrinho/carrinho.png' />
+                                </button>   
+                                <button onClick={()=> (setAcoesboo(!acoesboo))} className={`acoes ${acoesboo == true && 'selecionado'}`}>
+                                    <img src='/assets/images/acoes/pontos.png' />
+                                </button> 
                             </div>
                         </section>  
                         </>  
                             
                         )}    
+
+                        <motion.div
+                        className='escolhacard'
+                        animate={{ scale: acoes  }}
+                        >
+                        <div className='card'>
+                            Compartilhar
+                        </div>
+                        <div className='linha'></div>
+                        <div className='card'>
+                            Salvar
+                        </div>
+                        <div className='linha'></div>
+                        <div className='card'>
+                            Reportar
+                        </div>
+                        </motion.div>
                     </section>    
                     
 
@@ -368,18 +390,6 @@ export default function Produto() {
                 </div>
 
             </section>
-
-            {/* <section id='plataformas'>
-                <section className='plataformas'>
-
-                    {plataformas.map( item =>
-                        <div className='plataforma'>
-                            <p>{item.platform.name}</p>
-                        </div>    
-                    )}
-
-                </section>
-            </section> */}
             
             {conquistas != '' &&
             <section id='titles'>
@@ -500,7 +510,9 @@ export default function Produto() {
                     {comentando == 1 &&
                     <div className='Comentar'>
                         <div className='title'>
-                            <button onClick={VolComentar}> c </button>
+                            <button onClick={VolComentar}>  
+                                <img src='/assets/images/acoes/seta-esquerda.png' />
+                            </button>
                             <h1>Adicionar Comentario</h1>
                         </div>
                         <textarea onChange={e => setComentario (e.target.value)} value={comentario}/>
@@ -525,7 +537,9 @@ export default function Produto() {
                     {comentando == 2 &&
                     <div id='estrelas'>
                         <div className='title'>
-                            <button onClick={VolComentar}> c </button>
+                            <button onClick={VolComentar}>
+                                <img src='/assets/images/acoes/seta-esquerda.png' />
+                            </button>
                             <h1>Escolha o numero de estrelas</h1>
                             {estrelas >= 1 &&
                             <h1 className='starstitle'>{estrelas} estrelas </h1>}
