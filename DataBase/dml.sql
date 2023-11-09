@@ -4,9 +4,9 @@ USE GameSync;
 INSERT INTO tb_admin (nm_admin, ds_email, ds_senha, vl_codigo)
 VALUES 
     ('Luis Felipi', '@Luis.com.br', '1234', 'JK$)@),S(:#-JZb(K*.):h7}Ff}9;CZ|'),
-    ('Davi Matinho', 'davi@example.com', 'davi', '£h-I4VWQ4bCj8I=8/=304Fu\RrQT8~DfNgBJA`,JRjhYAM>2[`'),
+    ('Davi Matinho', 'davi@example.com', 'davi', 'jmE5qJVis5uzNaI9j5CZqizEo3NlAL2lUHp8L3rpKpdl5x7wLe'),
     ('Juan Oliveira', 'juan@example.com', 'juan', 'x^,zbp_XK[3Lt}@GYLA{OKI!qiMc;5/z40£YNW:6m<{mMflt4q'),
-    ('Felipe Pereira', 'felipe@example.com', 'felipe', 'jcR'']BI~D2w92X}4Hpl)}E=3kFeo.?nlCnZLv$4Ky<P3K/i.T');
+    ('Felipe Pereira', 'felipe@example.com', 'felipe', '9KJ92PExz0ZBGZrtWxVMJAHXrThuXx4L75sq3wa0ZUkAgyjVJk');
 
 -- Inserir um novo cliente
 INSERT INTO tb_cliente (nm_cliente, ds_telefone, ds_cpf, ds_email, ds_senha)

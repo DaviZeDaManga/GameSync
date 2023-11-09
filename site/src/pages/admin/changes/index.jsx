@@ -3,7 +3,7 @@
     import AdmBarraUp from '../../../components/AdminBarraUp';
 
     import storage, { set } from 'local-storage';
-    import { ListarTodosJogos, ExcluirProduto, BuscarJogoNome, AlterarProduto, AlterarVideo, AlterarCategoriaEmP, AlterarCategoriaEmCP, AlterarImage} from '../../../connection/productAPI';
+    import { ListarTodosJogos, ExcluirProduto, BuscarJogoNome, AlterarProduto, AlterarVideo, AlterarCategoriaEmP, AlterarCategoriaEmCP, AlterarImage, BuscarImagem} from '../../../connection/productAPI';
     import { useNavigate } from 'react-router-dom';
     import { useState, useEffect } from 'react';
     import { toast } from 'react-toastify';
@@ -27,6 +27,24 @@
         const [adm, setAdm] = useState();
         let [editar, setEditar] = useState(null);
 
+        //pegar informações do arry
+        const [nome, setNome] = useState('');
+        const [valor, setValor] = useState(0);
+        const [promocao, setPromocao] = useState(false);
+        const [destaque, setDestaque] = useState(false);
+        const [EmPromocao, setEmPromocao] = useState(false);
+        const [disponivel, setDisponivel] = useState(false);
+        const [qtd, setQtd] = useState(0);
+        const [descricao, setDescricao] = useState('');
+        const [classificacao, setClassificacao] = useState('');
+        const [lancamento, setLancamento] = useState('');
+        const [tamanho, setTamanho] = useState(0);
+        const [empresa, setEmpresa] = useState('');
+        const [desenvolvedor, setDesenvolvedor] = useState('');
+        const [categoria, setCategoria] = useState('');
+        const [imagem, setImagem] = useState(null);
+        const [video, setVideo] = useState('');
+
         async function filtrar(){  
             const resposta = await BuscarJogoNome(filtro);
             setJogos(resposta)
@@ -44,16 +62,38 @@
                 }
             }
         }    
-        console.log(Enter)
+    
         async function CarregarTodosJogos(){
             const resposta = await ListarTodosJogos();
             setJogos(resposta)
         }
 
         useEffect(() => {
-            CarregarTodosJogos();
-        }, [])
-
+            CarregarTodosJogos().then((jogosCarregados) => {
+                if (jogosCarregados && jogosCarregados.length > 0) {
+                    const Info = jogosCarregados[editar || jogoSelecionado];
+        
+                    // Defina as variáveis de estado com os valores de cada campo.
+                    setNome(Info.nome);
+                    setValor(Info.valor);
+                    setPromocao(Info.promocao);
+                    setDestaque(Info.destaque);
+                    setEmPromocao(Info.EmPromocao);
+                    setDisponivel(Info.disponivel);
+                    setQtd(Info.estoque);
+                    setDescricao(Info.descricao);
+                    setClassificacao(Info.classificacao);
+                    setLancamento(Info.lancamento);
+                    setTamanho(Info.tamanho);
+                    setEmpresa(Info.empresa);
+                    setDesenvolvedor(Info.desenvolvedor);
+                    setCategoria(Info.categoria_id);
+                    setImagem(Info.imagem_produto);
+                    setVideo(Info.video_url);
+                }
+            });
+        }, []);
+        console.log(valor)
         async function RemoverJogo(id, nome) {
             console.log("ID do Jogo a ser removido:", id);
             confirmAlert({
@@ -79,8 +119,7 @@
                 ]
             });
         }
-        
-        console.log(RemoverJogo)
+
 
         function SelecionarJogo(id) {
             setJogoSelecionado(id);
@@ -99,14 +138,16 @@
         let [x, setX] = useState(0)
         var y = 0
         var rotate = 0
-        
-        async function EditarJogo(id, nome, valor, promocao, destaque, Empromocao, disponivel, qtd, descricao, classificacao, lancamento, tamanho, empresa, desenvolvedor, categoria, imagem, video, ){
+        console.log(editar)
+
+        async function EditarJogo(id){
             setEditar(id)
             try{
                 if (id !== 0) {
                     const idAdm = storage('admin-logado');
                     setAdm(idAdm.id)
-                    await AlterarProduto(nome, valor, promocao, destaque, Empromocao, disponivel, qtd, descricao, classificacao, lancamento, tamanho, empresa, desenvolvedor, categoria, adm);
+                    await AlterarProduto(nome, valor, promocao, destaque, EmPromocao, disponivel, qtd, descricao, classificacao, 
+                        lancamento, tamanho, empresa, desenvolvedor, categoria, adm);
 
                     await AlterarVideo(id,video )
 
@@ -245,10 +286,8 @@
                                     <div className='card' onClick={() => SelecionarJogo(item.produto_id)}>
 
                                         <div className='acoes'>
-                                            <img src='/assets/images/adm/pencil.png' alt='editar' onClick={e => { e.stopPropagation(); EditarJogo(item.produto_id,item.nome,item.valor,
-                                            item.promocao,item.destaque,item.EmPromocao,item.disponivel,item.estoque, item.descricao, item.classificacao, item.lancamento, item.tamanho, item.empresa,
-                                            item.desenvolvedor,item.categoria_id, item.imagem_produto, item.video_url ) }} />
-
+                                            <img src='/assets/images/adm/pencil.png' alt='editar' onClick={e => { e.stopPropagation(); EditarJogo(item.produto_id)}} />
+                                            <img src={BuscarImagem(item.imagem_produto)}/>{/*AQUI!!!!!!!!!*/}
                                             <img src='/assets/images/adm/trash.png' alt='remover' onClick={e => { e.stopPropagation(); RemoverJogo(item.produto_id, item.nome) }} />
                                         </div>
 
@@ -259,6 +298,15 @@
                                         </div>
 
                                         <div>
+                                            {/* <div>  
+                                                <iframe
+                                                    width="350"
+                                                    height="300"
+                                                    src={item.video_url}
+                                                    title="YouTube Video"
+                                                    frameBorder="0"
+                                                    allowFullScreen
+                                                ></iframe></div> */}
                                             <div className='avaliacao'>ESTOQUE: {item.estoque}</div>
                                             <div className='disponivel'>DISPONÍVEL: {item.disponivel ? 'Sim' : 'Não'}</div>
                                         </div>

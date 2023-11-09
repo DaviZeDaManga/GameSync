@@ -3,7 +3,7 @@
         import AdmBarraUp from '../../../components/AdminBarraUp';
 
         import storage from 'local-storage';
-        import { CadastrarProduto, EnviarImagens, BuscarJodoID, InserirCategoriaProduto, InserirVideo} from '../../../connection/productAPI';
+        import { CadastrarProduto, EnviarImagens, InserirCategoriaProduto, InserirVideo, BuscarImagem} from '../../../connection/productAPI';
 
         import { useEffect, useState } from 'react';
         import { toast } from 'react-toastify';
@@ -123,7 +123,7 @@
                 return URL.createObjectURL(imagem);
                 }
                 else{
-                    return BuscarJodoID(imagem)
+                    return BuscarImagem(imagem)
                 }
             }
 

@@ -22,7 +22,6 @@ import Title from '../../../components/title'
 import EmojiPicker from 'emoji-picker-react';
 import ProdutoCard from '../../../components/produto'
 
-import { BuscarJodoID } from '../../../connection/productAPI'
 
 export default function Produto() {
 
@@ -96,10 +95,7 @@ export default function Produto() {
 
 
     
-    
-    async function ProdutoInfo() {
-        const resposta = await BuscarJodoID(id)
-    }
+
 
     //  async function Conquistas() {
     //      let url = 'https:api.rawg.io/api/games/'+ idprod +'/achievements?key=c03e618a39f9447e9e212b29e03b8707&page_size=' + qntdconq
