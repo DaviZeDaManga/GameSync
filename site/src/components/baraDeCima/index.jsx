@@ -104,14 +104,14 @@ export default function BarraDeCima ({barra}) {
 
 
 
-    async function TodosGames() {
-        const resposta = await ListarTodosJogos()
-        setTgames(resposta)
-    }
+    // async function TodosGames() {
+    //     const resposta = await ListarTodosJogos()
+    //     setTgames(resposta)
+    // }
     
-    useEffect(()=> {
-        TodosGames()
-    }, [])
+    // useEffect(()=> {
+    //     TodosGames()
+    // }, [])
 
     console.log(tgames)
 
