@@ -41,7 +41,7 @@ export default function CadastroAdmin(){
             ref.current.complete();
             setCarregando(false);
 
-            if(err.response.status === 401){
+            if(err.response.status === 400){
                 setErro(err.response.data.erro)
             }
         }

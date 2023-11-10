@@ -67,13 +67,13 @@ export default function AddProduct() {
 
           const tbCategoriaProduto = {
             categoria: categoria,
-            produto: idJogo
+            produto: jogo
           };
 
           await InserirCategoriaProduto(tbCategoriaProduto);
 
-          await EnviarImagens(idJogo, imagem);
-          await InserirVideo(idJogo, video);
+          await EnviarImagens(jogo, imagem);
+          await InserirVideo(jogo, video);
 
           toast.success('Produto Gamer adicionado com SUCESSO!');
         } else {
@@ -173,6 +173,7 @@ export default function AddProduct() {
                     <figure className='sobre-jogo'> 
                     <div className='add-part1-negocio-nr'>
                         <select value={categoria} onChange={e => setCategoria(parseInt(e.target.value, 10))}>
+                        <option>Selecionar</option>
                         <option value={1}>Ação</option>
                         <option value={2}>Terror</option>
                         <option value={3}>FPS</option>
@@ -258,7 +259,7 @@ export default function AddProduct() {
 
         <footer className='botao'>
             <button onClick={SalveClik}>Adicionar produto</button>
-            <button onClick={NovoClick}>Novo Produto</button>
+            <button onClick={NovoClick}>Limpar Formulario</button>
         </footer>
 
     </div>
