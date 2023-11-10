@@ -2,7 +2,6 @@ import './index.scss'
 import axios from 'axios'
 
 import BarraLateral from '../../../components/barraLateral'
-import BarraDeCima from '../../../components/baraDeCima'
 import FooterPage from '../../../components/footerpage/index,'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -203,6 +202,13 @@ export default function Produto() {
         else{
             setAcoes(0)
         }
+    })
+
+
+
+
+    useEffect(()=> {
+        localStorage.setItem('titleaba', `| davihaha`)
     })
     
     return(

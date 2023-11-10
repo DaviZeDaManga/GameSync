@@ -5,7 +5,6 @@ import Produto from './pages/web/produto'
 import Planos from './pages/web/planos'
 import Conquistas from './pages/web/conquistas'
 import MudarPerfil from './pages/web/changes'
-import Navegar from './pages/web/navegar'
 import GameSync from './pages/web/GameSync'
 import CadastroUser from './pages/web/authentication'
 import LoginUser from './pages/web/log'
@@ -15,7 +14,7 @@ import Noticias from './pages/web/noticias'
 import Grupos from './pages/web/grupos'
 import Home from './pages/web/Home'
 import JogosParecidos from './pages/web/jogosparecidos'
-
+import Planosacess from './pages/web/planosacess'
 import CadastroAdmin from './pages/admin/authentication'
 import HomeAdmin from './pages/admin/home'
 import AddProduct from './pages/admin/AddProducts'
@@ -32,7 +31,7 @@ export default function Routess(){
                 <Route path='/planos' element={<Planos/>} />
                 <Route path='/conquistas/:id' element={<Conquistas/>} />
                 <Route path='/perfil' element={<MudarPerfil/>} />
-                <Route path='/planos/plano' element={<Navegar/>} />
+                <Route path='/planos/gamesync' element={<Planosacess/>} />
                 <Route path='/gamesync' element={<GameSync/>} />
                 <Route path='/cadastro' element={<CadastroUser/>} />
                 <Route path='/login' element={<LoginUser/>} />

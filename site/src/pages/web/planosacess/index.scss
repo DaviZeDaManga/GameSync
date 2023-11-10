@@ -1,0 +1,64 @@
+.Planosacess {
+    width: 100vw;
+    left: 0;
+    position: absolute;
+
+    .danadinho {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.504);
+
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 6;
+    }
+
+    .news {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        width: 100%;
+        height: 360px;
+        padding: 20px 30px 20px 110px;
+
+        .news-cards {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+
+            width: 100%;
+            height: 100%;
+
+            .swiper {
+                width: 100%;
+                height: 100%;
+            }
+              
+                .swiper-slide {
+                text-align: center;
+                font-size: 18px;
+                background: #363636;
+                border-radius: 10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                img {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+    }
+}
