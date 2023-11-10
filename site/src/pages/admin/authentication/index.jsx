@@ -54,31 +54,31 @@ export default function CadastroAdmin(){
             <figure className='mae-formulario'>
                 <div className='n-creio'>
                     <span className='borda2'></span>
-                <form>
-                    <h1 class="animate__animated animate__lightSpeedInLeft">Login Admin</h1>
-                    <div className='formulario'>
-                        <input type="text" required="required" value={email} onChange={e => setEmail(e.target.value)}/>
-                        <span class="animate__animated animate__fadeInTopLeft">Email</span>
-                        <i></i>
-                    </div>
+                    <form>
+                        <h1 class="animate__animated animate__lightSpeedInLeft">Login Admin</h1>
+                        <div className='formulario'>
+                            <input type="text" required="required" value={email} onChange={e => setEmail(e.target.value)}/>
+                            <span class="animate__animated animate__fadeInTopLeft">Email</span>
+                            <i></i>
+                        </div>
 
-                    <div className='formulario'>
-                        <input type="password" required="required" value={senha} onChange={e => setSenha(e.target.value)}/>
-                        <span class="animate__animated animate__fadeInTopRight">Senha</span>
-                        <i></i>
-                    </div>
+                        <div className='formulario'>
+                            <input type="password" required="required" value={senha} onChange={e => setSenha(e.target.value)}/>
+                            <span class="animate__animated animate__fadeInTopRight">Senha</span>
+                            <i></i>
+                        </div>
 
-                    <div className='formulario'>
-                        <input type="text" required="required" value={codigo} onChange={e => setCodigo(e.target.value)}/>
-                        <span class="animate__animated animate__fadeInBottomLeft">Codigo</span>
-                        <i></i>
-                    </div>
+                        <div className='formulario'>
+                            <input type="text" required="required" value={codigo} onChange={e => setCodigo(e.target.value)}/>
+                            <span class="animate__animated animate__fadeInBottomLeft">Codigo</span>
+                            <i></i>
+                        </div>
 
-                    <div className="botao">
-                        <button class="animate__animated animate__rubberBand" onClick={LogAdmin} disabled={carregando} >Entrar</button>
-                        {erro && <div className="erro">{erro}</div>}
-                    </div>
-                </form>
+                        <div className="botao">
+                            <button class="animate__animated animate__rubberBand" onClick={LogAdmin} disabled={carregando} >Entrar</button>
+                            {erro && <div className="erro">{erro}</div>}
+                        </div>
+                    </form>
                 </div>
             </figure>
         </div>
