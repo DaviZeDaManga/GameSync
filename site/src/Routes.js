@@ -21,6 +21,7 @@ import HomeAdmin from './pages/admin/home'
 import AddProduct from './pages/admin/AddProducts'
 import EditarExcluir from './pages/admin/changes'
 
+
 import NotFound from './errors'
 export default function Routess(){
     return(
@@ -47,6 +48,7 @@ export default function Routess(){
                 <Route path='/admin/addproduts' element={<AddProduct/> }/>
                 <Route path='/admin/MudarProduto' element={<EditarExcluir/>} />
                 <Route path='*' element={<NotFound/>} />
+               
             </Routes>
         </BrowserRouter>
     )
