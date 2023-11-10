@@ -6,6 +6,7 @@ import axios from 'axios';
 import { motion } from "framer-motion"
 
 import BarraDeCima from '../baraDeCima';
+import { BuscarJogoID } from '../../connection/productAPI';
 
 export default function BarraLateral({home, planos, noticias, pesquisa}) {
     const[nameuser, setNameuser] = useState("")
@@ -256,6 +257,16 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
         Categorias()
     }, [])
 
+
+
+
+
+    async function BuscarProdutos() {
+        let resposta = BuscarJogoID(1)
+        
+
+    }
+
     return(
         <div id="BarraLateral">
             <BarraDeCima
@@ -398,74 +409,54 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
                         </div>
 
                         <main className='prodEsub'>
-                            <section className='produtos-car'>
+                            <section className='produtins'>
+                                <section className='produtos'>
 
-                                <Link to={'/produto/54'}>
-                                <div className='produto-car'>
-                                    <div className='card'>
-                                        <div className='verproduto'>
-                                            <img src="https://imgs.search.brave.com/A5BOTpwf5ubCH_k3uDrxVORUzgN7nf0oOIAEPZT4n4Y/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZS5hcGkucGxheXN0/YXRpb24uY29tL3Z1/bGNhbi9pbWcvcm5k/LzIwMjAxMC8xNTIw/L3lQbWxQTmU5ZXh0/VDJBVnN2OTBoT0tt/bi5wbmc" />
-                                            <button>Ver Produto</button>
-                                        </div>
-                                        <div className='info'>
-                                            <h1>The Texas Chain Saw Massacre</h1>
-                                            <p>O personagem Leatherface teve como inspiração o assassino serial Ed Gein, (1906-1984), que deu origem a outros vilões em outros livros e filmes, mas o caso real do assassino é bem mais monstruoso do que qualquer ficção. Sua primeira vítima foi seu irmão Henry, morto em 1944, embora nada tenha sido provado na época. No ano seguinte, a mãe dele morreu, e então Gein perdeu a razão e, eventualmente, começou a criar roupas e acessórios dos corpos de suas vítimas, das quais guardava os órgãos na sua casa.</p>
-                                            <h1>R$109,90</h1>
-                                        </div>
-                                    </div>
+                                   {[2,3].map( item =>
+                                    <Link to={'/produto/23'}>
+                                        <div className='produto-car'>
+                                            <div className='card'>
+                                                <div className='verproduto'>
+                                                    <img src="https://imgs.search.brave.com/TBlZEjcbJciqDQgy_SeMfc5EKiISv9VuTkDjOdVDca0/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMubmludGVuZG8u/Y29tL2ltYWdlL3Vw/bG9hZC9hcl8xNjo5/LGNfbHBhZCx3XzEy/NDAvYl93aGl0ZS9m/X2F1dG8vcV9hdXRv/L25jb20vc29mdHdh/cmUvc3dpdGNoLzcw/MDEwMDAwMDAwOTY0/LzgxMTQ2MWI4ZDFj/YWNmMWYyZGE3OTFi/NDc4ZGNjZmUyYTU1/NDU3NzgwMzY0YzNk/NWE5NWZiZmNkZDRj/MzA4NmY.jpeg" />
+                                                    <button>Ver Produto</button>
+                                                </div>
+                                                <div className='info'>
+                                                    <h1>Minecraft Bedrock Edition</h1>
+                                                    <p>Minecraft é um jogo eletrônico sandbox de sobrevivência criado pelo desenvolvedor sueco Markus "Notch" Persson e posteriormente desenvolvido e publicado pela Mojang Studios, cuja propriedade intelectual foi obtida pela Microsoft em 2014. Lançado inicialmente em maio de 2009 como um projeto em desenvolvimento, seu lançamento completo ocorreu em novembro de 2011 para Microsoft Windows, macOS, Linux e alguns dispositivos móveis, sendo posteriormente relançado para uma ampla variedade de plataformas.</p>
+                                                    <h1>R$79,90</h1>
+                                                </div>
+                                            </div>
 
-                                    <div className='acoes'>
-                                        <div className='buton apagar'>
-                                            <img src="/assets/images/barralateral/carrinho/lixo.png" />
+                                            <div className='acoes'>
+                                                <div className='buton apagar'>
+                                                    <img src="/assets/images/barralateral/carrinho/lixo.png" />
+                                                </div>
+                                                <div className='buton qnt'>
+                                                    
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div className='buton qnt'>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                                </Link>
-                                
+                                    </Link>)}
+                                    
 
-                            <Link to={'/produto/23'}>
-                            <div className='produto-car'>
-                                    <div className='card'>
-                                        <div className='verproduto'>
-                                            <img src="https://imgs.search.brave.com/TBlZEjcbJciqDQgy_SeMfc5EKiISv9VuTkDjOdVDca0/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMubmludGVuZG8u/Y29tL2ltYWdlL3Vw/bG9hZC9hcl8xNjo5/LGNfbHBhZCx3XzEy/NDAvYl93aGl0ZS9m/X2F1dG8vcV9hdXRv/L25jb20vc29mdHdh/cmUvc3dpdGNoLzcw/MDEwMDAwMDAwOTY0/LzgxMTQ2MWI4ZDFj/YWNmMWYyZGE3OTFi/NDc4ZGNjZmUyYTU1/NDU3NzgwMzY0YzNk/NWE5NWZiZmNkZDRj/MzA4NmY.jpeg" />
-                                            <button>Ver Produto</button>
-                                        </div>
-                                        <div className='info'>
-                                            <h1>Minecraft Bedrock Edition</h1>
-                                            <p>Minecraft é um jogo eletrônico sandbox de sobrevivência criado pelo desenvolvedor sueco Markus "Notch" Persson e posteriormente desenvolvido e publicado pela Mojang Studios, cuja propriedade intelectual foi obtida pela Microsoft em 2014. Lançado inicialmente em maio de 2009 como um projeto em desenvolvimento, seu lançamento completo ocorreu em novembro de 2011 para Microsoft Windows, macOS, Linux e alguns dispositivos móveis, sendo posteriormente relançado para uma ampla variedade de plataformas.</p>
-                                            <h1>R$79,90</h1>
-                                        </div>
-                                    </div>
+                                </section>
 
-                                    <div className='acoes'>
-                                        <div className='buton apagar'>
-                                            <img src="/assets/images/barralateral/carrinho/lixo.png" />
-                                        </div>
-                                        <div className='buton qnt'>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </Link>
-
-                            
-
+                                <main className='fake'></main>
                             </section>
 
-                            <section className='subtotal'>
-                                <div className='dados'>
+                        
+                            <section className='menu-carrin'>
+                                <div className='subtotal'>
 
                                 </div>
-                                <button>Fechar Pedido</button>
+                                <div className='botao continuar'>
+                                    <p>Fechar</p>
+                                </div>
+                                <div className='botao sair'>
+                                    <p>Sair</p>
+                                </div>
                             </section>
                         </main>
-
-                        <button className='continuar'>
-                            Continuar Comprando
-                        </button>
                     </section>}
                 </div>
 

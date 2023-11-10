@@ -285,8 +285,7 @@ export default function Produto() {
                         >
                             <SwiperSlide>
                             {produtoinfo.map( item =>
-                            <img src={BuscarImagem(item.img_produto
-                                )} />    
+                            <img src={BuscarImagem(item.img_produto)} />    
                             )}
                             </SwiperSlide>
                                         

@@ -319,7 +319,7 @@
             
                 width: 520px;
                 height: 100vh;
-                background-color: #323232;
+                background-color: #3b3b3b;
             
                 z-index: 9;
                 position: absolute;
@@ -350,202 +350,227 @@
         
                     width: 100%;
                     height: 100%;
-                    padding: 20px;
-                    position: relative;
-        
-                    .produtos-car {
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: start;
-                        align-items: center;
-            
-                        width: 100%;
-                        gap: 20px;
-                        overflow: auto;
-        
-                        .produto-car {
-                            display: flex;
-                            flex-direction: row;
-                            justify-content: space-between;
-                            align-items: center;
-        
-                            width: 100%;
-                            min-height: 180px;
-                            gap: 10px;
-        
-                            > .card {
-                                display: flex;
-                                flex-direction: row;
-                                justify-content: space-between;
-                                align-items: center;
-        
-                                width: 100%;
-                                height: 180px;
-                                padding: 10px;
-                                border-radius: 10px;
-                                gap: 10px;
-                                background-color: #3B3B3B;
-        
-                                .verproduto {
-                                    display: flex;
-                                    flex-direction: column;
-                                    justify-content: space-between;
-                                    align-items: center;
-        
-                                    height: 100%;
-        
-                                    > img {
-                                        height: 100%;
-                                        width: 160px;
-                                        border-top-right-radius: 10px;
-                                        border-top-left-radius: 10px;
-                                        background: cover;
-                                    }
-        
-                                    > button {
-                                        border-bottom-left-radius: 10px;
-                                        border-bottom-right-radius: 10px;
-                                        width: 100%;
-                                        height: 30px;
-                                        border: none;
-                                        background-color: #212121;
-                                        color: white;
-                                        transition: 0.3s;
-                                    }
-        
-                                    > button:hover {
-                                        border: solid 2px white;
-                                    }
-                                }
-        
-                                .info {
-                                    display: flex;
-                                    flex-direction: column;
-                                    justify-content: space-between;
-                                    align-items: start;
-        
-                                    width: 100%;
-                                    height: 100%;
-        
-                                    > h1 {
-                                        font-size: 15px;   
-                                        color: rgb(236, 236, 236);
-                                    }
-        
-                                    > p {
-                                        overflow-x: hidden;
-                                        font-weight: 400;
-                                        max-height: 10ch;
-                                    }
-        
-                                    ::-webkit-scrollbar {
-                                        width: 10px;
-                                    }
-                                      
-                                    ::-webkit-scrollbar-track {
-                                        background-color: transparent;
-                                    }
-                                    
-                                    ::-webkit-scrollbar-thumb {
-                                        background-color: #333333;
-                                        border-radius: 20px;
-                                    }
-                                }
-                            }
-        
-                            .acoes {
-                                display: flex;
-                                flex-direction: column;
-                                justify-content: space-between;
-                                align-items: center;
-        
-                                width: 100px;
-                                height: 180px;
-                                border-radius: 10px;
-                                padding: 10px;
-                                background-color: #3B3B3B;
-        
-                                .buton {
-                                    display: flex;
-                                    flex-direction: row;
-                                    justify-content: center;
-                                    align-items: center;
-        
-                                    width: 100%;
-                                    height: 65px;
-                                    padding: 18px;
-                                    background-color: #333333;
-                                    border-radius: 10px;
-                                    transition: 0.3s;
-        
-                                    > img {
-                                        opacity: 0.6;
-                                        height: 100%;
-                                    }
-                                }
-        
-                                .buton:hover {
-                                    padding: 17px;
-                                    > img {
-                                        opacity: 1;
-                                    }
-                                }
-        
-                                .apagar:hover {
-                                    background-color: rgb(172, 38, 38);
-                                    border: solid 2px rgb(48, 1, 1);
-                                }
-                                .qnt:hover {
-                                    background-color: rgb(70, 70, 70);
-                                }
-                            }
-                        }
-                    }
-        
-                    .subtotal {
+                
+                    .produtins {
                         display: flex;
                         flex-direction: column;
                         justify-content: space-between;
                         align-items: center;
-            
+
                         width: 100%;
-                        height: auto;
-                        gap: 20px;
-        
-                        .dados {
+                        height: 100%;
+
+                        .fake {
+                            width: 100%;
+                            height: 620px;
+                        }
+
+                        .produtos {
                             display: flex;
                             flex-direction: column;
-                            justify-content: space-between;
-                            align-items: center;
-        
+                            justify-content: start;
+                            align-items: start;
+    
                             width: 100%;
-                            height: auto;
+                            height: 100%;
+                            gap: 20px;
                             padding: 20px;
-                            border-radius: 10px;
-                            background-color: #212121;
-                        }
-        
-                        > button {
-                            width: 100%;
-                            padding: 20px;
-                            background-color: #CF833D;
-                            border: none;
-                            border-radius: 10px;
-                            color: #D3D3D3;
-                            font-size: 15px;
-                            font-weight: 600;
+                            overflow: auto;
+    
+                            .produto-car {
+                                display: flex;
+                                flex-direction: row;
+                                justify-content: space-between;
+                                align-items: center;
+            
+                                width: 100%;
+                                min-height: 180px;
+                                gap: 10px;
+            
+                                > .card {
+                                    display: flex;
+                                    flex-direction: row;
+                                    justify-content: space-between;
+                                    align-items: center;
+            
+                                    width: 100%;
+                                    height: 180px;
+                                    padding: 10px;
+                                    border-radius: 10px;
+                                    gap: 10px;
+                                    background-color: #2f2f2f;
+            
+                                    .verproduto {
+                                        display: flex;
+                                        flex-direction: column;
+                                        justify-content: space-between;
+                                        align-items: center;
+            
+                                        height: 100%;
+            
+                                        > img {
+                                            height: 100%;
+                                            width: 160px;
+                                            border-top-right-radius: 10px;
+                                            border-top-left-radius: 10px;
+                                            background: cover;
+                                        }
+            
+                                        > button {
+                                            border-bottom-left-radius: 10px;
+                                            border-bottom-right-radius: 10px;
+                                            width: 100%;
+                                            height: 30px;
+                                            border: none;
+                                            background-color: #212121;
+                                            color: white;
+                                            transition: 0.3s;
+                                        }
+            
+                                        > button:hover {
+                                            border: solid 2px white;
+                                        }
+                                    }
+            
+                                    .info {
+                                        display: flex;
+                                        flex-direction: column;
+                                        justify-content: space-between;
+                                        align-items: start;
+            
+                                        width: 100%;
+                                        height: 100%;
+            
+                                        > h1 {
+                                            font-size: 15px;   
+                                            color: rgb(236, 236, 236);
+                                        }
+            
+                                        > p {
+                                            overflow-x: hidden;
+                                            font-weight: 400;
+                                            max-height: 10ch;
+                                        }
+            
+                                        ::-webkit-scrollbar {
+                                            width: 10px;
+                                        }
+                                          
+                                        ::-webkit-scrollbar-track {
+                                            background-color: transparent;
+                                        }
+                                        
+                                        ::-webkit-scrollbar-thumb {
+                                            background-color: #333333;
+                                            border-radius: 20px;
+                                        }
+                                    }
+                                }
+            
+                                .acoes {
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: space-between;
+                                    align-items: center;
+            
+                                    width: 100px;
+                                    height: 180px;
+                                    border-radius: 10px;
+                                    padding: 10px;
+                                    background-color: #2f2f2f;
+            
+                                    .buton {
+                                        display: flex;
+                                        flex-direction: row;
+                                        justify-content: center;
+                                        align-items: center;
+            
+                                        width: 100%;
+                                        height: 65px;
+                                        padding: 18px;
+                                        background-color: #333333;
+                                        border-radius: 10px;
+                                        transition: 0.3s;
+            
+                                        > img {
+                                            opacity: 0.6;
+                                            height: 100%;
+                                        }
+                                    }
+            
+                                    .buton:hover {
+                                        padding: 17px;
+                                        > img {
+                                            opacity: 1;
+                                        }
+                                    }
+            
+                                    .apagar:hover {
+                                        background-color: rgb(172, 38, 38);
+                                        border: solid 2px rgb(48, 1, 1);
+                                    }
+                                    .qnt:hover {
+                                        background-color: rgb(70, 70, 70);
+                                    }
+                                }
+                            }
                         }
                     }
-                }
-        
-                > button {
-                    width: 100%;
-                    padding: 20px;
-                    background-color: #212121;
-                    border: none;
-                    color: #D3D3D3;
-                    font-size: 15px;
-                    font-weight: 600;
+
+                    .menu-carrin {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: start;
+                        align-items: start;
+
+                        width: 100%;
+                        height: 350px;
+                        padding: 20px;
+                        gap: 10px;
+                        background: linear-gradient(180deg, rgba(255, 255, 255, 0),  #3b3b3b 20%);
+
+                        position: absolute;
+                        bottom: 0;
+
+                        .subtotal {
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: start;
+                            align-items: start;
+
+                            width: 100%;
+                            height: 100%;
+                            border-radius: 10px;
+                            background-color: #2f2f2f;
+                        }
+
+                        .continuar {
+                            background-color: #CF833D;
+                        }
+                        .sair {
+                            background-color: #2f2f2f;
+                        }
+
+                        .botao {
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: center;
+                            align-items: center;
+
+                            width: 100%;
+                            height: 60px;
+                            border-radius: 10px;
+                            cursor: pointer;
+
+                            &:hover {
+                                border: solid 2px white;
+                            }
+
+                            p {
+                                color: white;
+                            }
+                        }
+                    }
                 }
             }
         }

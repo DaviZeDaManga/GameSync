@@ -11,13 +11,13 @@
 
         width: 100vw;
         height: auto;
-        padding: 20px 20px 20px 100px;
+        padding: 20px 30px 20px 110px;
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
         
         .swiper {
             width: 100%;
-            height: 250px;
+            height: 270px;
           }
           
           .swiper-slide {
@@ -28,93 +28,69 @@
             justify-content: center;
             align-items: center;
             position: relative;
+            overflow: hidden;
+            border-radius: 5px;
 
-            .now {
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-
-                width: 100%;
-                height: 250px;  
-
-                position: absolute;
-                bottom: 0;
-                left: 0;
-
-                .card {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: center;
-                    align-items: center;
-            
-                    width: 520px;
-                    height: 250px;
-                    border-radius: 10px;
-                    background-color: rgb(69, 69, 69);
-            
-                    position: relative;
-                    overflow: hidden;
-            
-                    .conteudo {
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: end;
-                        align-items: start;
-                
-                        width: 100%;
-                        height: 100%;
-                        padding: 20px;
-                        background: linear-gradient(360deg, rgba(0, 0, 0, 0.578), rgba(19, 19, 19, 0.049));
-                
-                        position: absolute;
-                
-                        > h1 {
-                            font-size: 15px;
-                            color: white;
-                        }
-                        > p {
-                            text-align: start;
-                            color: #ededed;
-                            max-width: 55ch;
-                        }
-                    }
-            
-                    img {
-                        display: block;
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                        -moz-transition: all 0.5s;
-                        -webkit-transition: all 0.5s;
-                        transition: all 0.5s;
-                    }
-            
-                    p {
-                        max-height: 8ch;
-                        overflow: hidden;
-                    }
-                }
-            
-                .borda:hover { 
-                    border: solid 2px rgb(201, 200, 200);
-                    animation: bordauser 3s infinite;
-                }
-                .borda:hover { 
-                    > img {
-                        -moz-transform: scale(1.1);
-                        -webkit-transform: scale(1.1);
-                        transform: scale(1.05);
-                    }
+            &:hover { 
+                border: solid 2px rgb(201, 200, 200);
+                animation: bordauser 3s infinite;
+            }
+            &:hover { 
+                > img {
+                    -moz-transform: scale(1.1);
+                    -webkit-transform: scale(1.1);
+                    transform: scale(1.05);
                 }
             }
-          }
+
+            .conteudo {
+                display: flex;
+                flex-direction: column;
+                justify-content: end;
+                align-items: start;
+        
+                width: 100%;
+                height: 100%;
+                padding: 20px;
+                background: linear-gradient(360deg, rgba(0, 0, 0, 0.578), rgba(19, 19, 19, 0.049));
+        
+                position: absolute;
+        
+                > h1 {
+                    font-size: 15px;
+                    color: white;
+                }
+                > p {
+                    text-align: start;
+                    color: #ededed;
+                    max-width: 55ch;
+                }
+            }
+    
+            img {
+                display: block;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                -moz-transition: all 0.5s;
+                -webkit-transition: all 0.5s;
+                transition: all 0.5s;
+            }
+    
+            p {
+                max-height: 8ch;
+                overflow: hidden;
+            }
+        }
           
-          .swiper-slide img {
+        .swiper-slide img {
             display: block;
             width: 100%;
             height: 100%;
             object-fit: cover;
-          }
+        }
     }
+
+    
+    
 }

@@ -26,7 +26,7 @@
         align-items: center;
 
         width: 100%;
-        height: 360px;
+        height: auto;
         padding: 20px 30px 20px 110px;
 
         .news-cards {
@@ -36,27 +36,72 @@
             align-items: center;
 
             width: 100%;
-            height: 100%;
+            height: auto;
 
             .swiper {
                 width: 100%;
-                height: 100%;
+                height: 270px;
             }
               
-                .swiper-slide {
+            .swiper-slide {
                 text-align: center;
                 font-size: 18px;
                 background: #363636;
-                border-radius: 10px;
+                border-radius: 5px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                overflow: hidden;
+                position: relative;
 
+                &:hover { 
+                    border: solid 2px rgb(201, 200, 200);
+                    animation: bordauser 3s infinite;
+                }
+                &:hover { 
+                    > img {
+                        -moz-transform: scale(1.1);
+                        -webkit-transform: scale(1.1);
+                        transform: scale(1.05);
+                    }
+                }
+
+                .conteudo {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: end;
+                    align-items: start;
+            
+                    width: 100%;
+                    height: 100%;
+                    padding: 20px;
+                    background: linear-gradient(360deg, rgba(0, 0, 0, 0.578), rgba(19, 19, 19, 0.049));
+            
+                    position: absolute;
+            
+                    > h1 {
+                        font-size: 15px;
+                        color: white;
+                    }
+                    > p {
+                        text-align: start;
+                        color: #ededed;
+                    }
+                }
+        
                 img {
                     display: block;
                     width: 100%;
                     height: 100%;
                     object-fit: cover;
+                    -moz-transition: all 0.5s;
+                    -webkit-transition: all 0.5s;
+                    transition: all 0.5s;
+                }
+        
+                p {
+                    max-height: 8ch;
+                    overflow: hidden;
                 }
             }
         }
