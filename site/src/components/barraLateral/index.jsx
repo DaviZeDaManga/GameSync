@@ -450,10 +450,10 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
 
                                 </div>
                                 <div className='botao continuar'>
-                                    <p>Fechar</p>
+                                    <p>Fechar pedido</p>
                                 </div>
                                 <div className='botao sair'>
-                                    <p>Sair</p>
+                                    <p>Continuar comprando</p>
                                 </div>
                             </section>
                         </main>

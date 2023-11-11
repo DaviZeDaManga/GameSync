@@ -21,7 +21,9 @@ export default function Grupos() {
             />
 
             <section className='name-grupo'>
-                <h1>{titulo}</h1>
+                <div className='name'>
+                    <h1>{titulo}</h1>
+                </div>
             </section>
 
             <section className='filtragem'>

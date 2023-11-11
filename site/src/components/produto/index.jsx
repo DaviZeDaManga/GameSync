@@ -39,9 +39,14 @@ export default function ProdutoCard({id, imagem, nome, produtora, lancamento, ti
         }
     }
 
+
+
+
+    
+
     return(
         <Link to={tipoprodurl + id}>
-            <section  className='produto'>
+            <section className='produto'>
                 <div className='imagem-produto'>
                     <div className='sombra'>
                         <div className='linha'></div>
