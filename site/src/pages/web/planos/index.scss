@@ -22,7 +22,7 @@
       .beneficios-engine {
         display: flex;
         flex-direction: row;
-        justify-content: start;
+        justify-content: flex-start;
         align-items: center;
 
         min-width: 90vw;
@@ -47,7 +47,7 @@
 
             > p {
               max-width: 50ch;
-              text-align: start;
+              text-align: flex-start;
               padding: 10px;
               background-color: rgba(139, 70, 174, 0.163);
               border: solid 3px rgb(132, 71, 190);
@@ -154,7 +154,7 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        align-items: start;
+        align-items: flex-start;
         
         width: 100vw;
         height: 33rem; 
@@ -181,7 +181,7 @@
               width: 100%;
               border-radius: 10px;
               background-color: rgba(41, 41, 41, 1);
-              text-align: start;
+              text-align: flex-start;
               padding: 15px;
               height: 100%;
             }
@@ -239,7 +239,7 @@
             width: 100%;
             height: 100%;
             justify-content: baseline;
-            align-items:end;
+            align-items: flex-end;
             padding: 20px;
             font-size: larger;
             border-radius: 10px;
@@ -256,8 +256,8 @@
       .planos1{
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
-        align-items: start;
+        justify-content: flex-flex-start;
+        align-items: flex-start;
         
         width: 100vw;
         height: 24rem; //
@@ -351,9 +351,9 @@
       .preco1{
         display: flex;
         flex-direction: row;
-        justify-content: flex-start;
+        justify-content: flex-flex-start;
         justify-content: space-between;
-        align-items: start;
+        align-items: flex-start;
        
         width: 100vw;
         padding: 20px 20px 20px 120px;
@@ -444,8 +444,8 @@
       .planos2{
         display: flex;
         flex-direction: column;
-        justify-content: start;
-        align-items: start;
+        justify-content: flex-start;
+        align-items: flex-start;
        
         width: 100vw;
         height: 24rem; //
@@ -459,7 +459,7 @@
         .planos2-gamers{
           display: flex;
           flex-direction: row;
-          justify-content: start;
+          justify-content: flex-start;
          
           width: 100%;
           height: auto;
@@ -524,8 +524,8 @@
      .preco2{
       display: flex;
       flex-direction: row;
-      justify-content: start;
-      align-items: start;
+      justify-content: flex-start;
+      align-items: flex-start;
     
       width: 100vw;
       gap: 40px;
@@ -589,9 +589,9 @@
     .perguntas{
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
+      justify-content: flex-flex-start;
       justify-content: space-around;
-      align-items: flex-start;
+      align-items: flex-flex-start;
 
       width: 100vw;
       padding: 20px 20px 20px 120px;
@@ -614,8 +614,8 @@
       .pergunta-resp {
         display: flex;
         flex-direction: row;
-        justify-content: start;
-        align-items: start;
+        justify-content: flex-start;
+        align-items: flex-start;
 
         width: 100%;
         height: auto;

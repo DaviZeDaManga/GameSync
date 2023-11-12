@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.0797e6ce.css",
+    "main.js": "/static/js/main.42a003bf.js",
+    "static/media/giphy.gif": "/static/media/giphy.11c5d21a5778a0881fcd.gif",
+    "static/media/pesquisa-de-dados.png": "/static/media/pesquisa-de-dados.061b4583e67a84c93b1e.png",
+    "static/media/video.png": "/static/media/video.4637ddd6684707173405.png",
+    "static/media/Rectangle 860.png": "/static/media/Rectangle 860.75c6c14dd5457e88b6d3.png",
+    "index.html": "/index.html",
+    "main.0797e6ce.css.map": "/static/css/main.0797e6ce.css.map",
+    "main.42a003bf.js.map": "/static/js/main.42a003bf.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0797e6ce.css",
+    "static/js/main.42a003bf.js"
+  ]
+}

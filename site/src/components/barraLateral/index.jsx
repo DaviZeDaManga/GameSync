@@ -7,7 +7,7 @@ import { motion } from "framer-motion"
 import BarraDeCima from '../baraDeCima';
 import { BuscarJogoID } from '../../connection/productAPI';
 
-export default function BarraLateral({home, planos, noticias, pesquisa, carrinho}) {
+export default function BarraLateral({home, planos, noticias, pesquisa}) {
     const[nameuser, setNameuser] = useState("")
     const{imguser, setImguser} = useState('/assets/images/GameSync/user.png')
 
@@ -404,7 +404,7 @@ export default function BarraLateral({home, planos, noticias, pesquisa, carrinho
                             <section className='produtins'>
                                 <section className='produtos'>
 
-                                   {carrinho.map( item =>
+                                   {[1,3,4].map( item =>
                                     <Link to={'/produto/23'}>
                                         <div className='produto-car'>
                                             <div className='card'>

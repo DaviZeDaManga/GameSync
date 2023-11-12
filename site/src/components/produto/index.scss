@@ -43,8 +43,8 @@
         .sombra {
             display: flex;
             flex-direction: column;
-            justify-content: end;
-            align-items: start;
+            justify-content: flex-end;
+            align-items: flex-start;
   
             position: absolute;
             z-index: 1;
@@ -128,8 +128,8 @@
         .dados {
             display: flex;
             flex-direction: column;
-            justify-content: start;
-            align-items: start;
+            justify-content: flex-start;
+            align-items: flex-start;
     
             width: 100%;
             height: auto;
@@ -139,7 +139,7 @@
         .info {
             display: flex;
             flex-direction: row;
-            justify-content: start;
+            justify-content: flex-start;
             align-items: center;
     
             width: 100%;
