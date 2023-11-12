@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import ProdutoCard from '../produto';
 import { ListarTodosJogos } from '../../connection/productAPI';
 import { BuscarImagem } from '../../connection/productAPI';
-
+import BarraLateral from '../barraLateral';
     
 export default function BarraDeCima ({barra}) {
     const navigate = useNavigate()
@@ -112,8 +112,33 @@ export default function BarraDeCima ({barra}) {
 
     const [configcard, setConfigcard] = useState(0)
 
+
+
+
+
+
+
+
+    const [paracarrinho, setParacarrinho] = useState([])
+
+    function Carrinho() {
+        const itemcarrin = {
+            nome: "bla bla",
+            imagem: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdAsDSSKeuAFldRDZbOWFuVrdgdAcZf-S6Aw&usqp=CAU",
+            desc: 'bla bla',
+            url: '/produto/29',
+            preco: '12,99'
+        }
+
+        setParacarrinho(...paracarrinho, itemcarrin)
+    }
+
     return(
         <>
+        <BarraLateral
+        className="barranone"
+        carrinho={paracarrinho}
+        />
 
         <section className='perfil'>
             <p>{nome}</p>

@@ -8,7 +8,7 @@ import { motion } from "framer-motion"
 import BarraDeCima from '../baraDeCima';
 import { BuscarJogoID } from '../../connection/productAPI';
 
-export default function BarraLateral({home, planos, noticias, pesquisa}) {
+export default function BarraLateral({home, planos, noticias, pesquisa, carrinho}) {
     const[nameuser, setNameuser] = useState("")
     const{imguser, setImguser} = useState('/assets/images/GameSync/user.png')
 
@@ -259,13 +259,6 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
 
 
 
-
-
-    async function BuscarProdutos() {
-        let resposta = BuscarJogoID(1)
-        
-
-    }
 
     return(
         <div id="BarraLateral">

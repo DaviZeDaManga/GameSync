@@ -1,0 +1,44 @@
+server.put('/produto/:id/imagens', upload.array('imagens', 5), async (req, resp) => {
+    try{
+        const {id} = req.params;
+        const imagens = req.files.map(file => file.path); // Array de arquivos de imagem, por isso files
+
+        if (!imagens || imagens.length === 0){
+            throw new Error('Precisa escolher pelo menos uma imagem!')
+        }
+        // Lógica para salvar as imagens no banco de dados ou armazenamento
+        const resposta = await AlterarImagem(imagens, id);
+
+        if(resposta != 1)
+            throw new Error('A imagem não pode ser salva!')
+
+        resp.status(204).send();
+    }
+    catch(err){
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
+server.put('/produto/:id/imagem', upload.single('imagem'), async (req, resp) => {
+    try{
+
+        if (!req.file)
+        throw new Error('Precisa escolher a capa do jogo')
+
+        const { id } = req.params;
+        const imagem = req.file.path;    // constante para caminho da imagem
+
+        const resposta = await AlterarImagem(imagem, id);
+        if(resposta != 1) // validação
+            throw new Error('A imagem não pode ser salva')
+
+        resp.status(204).send();
+    }
+    catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
