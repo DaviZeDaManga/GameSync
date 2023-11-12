@@ -2,7 +2,7 @@ import './index.scss'
 import BarraLateral from '../../../components/barraLateral'
 import Title from '../../../components/title';
 
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/css';
@@ -10,9 +10,22 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Navigation, Pagination, Keyboard } from 'swiper/modules';
 
+import { BuscarImagem, ListarTodosJogos } from '../../../connection/productAPI';
+
 export default function Noticias() {
 
+    const [noticias, setNoticias] = useState([])
 
+    async function CarregarNoticias() {
+        let resposta = await ListarTodosJogos()
+        setNoticias(resposta)
+    }
+
+    useEffect(()=> {
+        CarregarNoticias()
+    }, [])
+
+    console.log(noticias)
     
     return(
 
@@ -64,6 +77,30 @@ export default function Noticias() {
             <Title
             nome={'Ultimas noticias do momento'}
             />
+
+
+
+
+
+            <section className='noticias'>
+
+                {
+                    noticias.map( item => 
+                        <section className={`noticia ${item.produto_id == 3 && 'maior'}`}>
+
+                            <div className='img'>
+                                <img src={BuscarImagem(item.imagem_produto)} />
+                            </div>
+                            <div className='conteudo'>
+
+                            </div>
+
+                        </section>   
+                    )
+                }
+                
+
+            </section>
         </main>
     )
 }

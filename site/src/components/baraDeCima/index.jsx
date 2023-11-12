@@ -132,11 +132,11 @@ export default function BarraDeCima ({barra}) {
             </Link>
             {configcard == 0 &&
             <div onClick={()=> (setConfigcard(-200))} className='card p'>
-                <img src='/assets/images/acoes/pontos.png' />
+                <img className='pontos' src='/assets/images/acoes/pontos.png' />
             </div>}
             {configcard == -200 &&
             <div onClick={()=> (setConfigcard(0))} className='card p selecionado'>
-                <img src='/assets/images/acoes/pontos.png' />
+                <img className='pontos' src='/assets/images/acoes/pontos.png' />
             </div>}
 
             <motion.div

@@ -92,5 +92,68 @@
     }
 
     
+
+
+
+
+
+
+    .noticias {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-wrap: wrap;
+
+        width: 100%;
+        padding: 20px 30px 20px 110px;
+        gap: 20px;
+
+        .noticia {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+
+            width: 419px;
+            height: 400px;
+            background-color: rgb(52, 52, 52);
+            border-radius: 10px;
+            overflow: hidden;
+
+            .img {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
     
+                width: 100%;
+                height: 100%;
+                background-color: rgb(161, 18, 18); 
+                overflow: hidden;
+
+                img {
+                    height: 100%;
+                    width: 100%;
+                }
+            }
+            .conteudo {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+    
+                width: 100%;
+                height: 100%;
+            }
+
+            &.maior {
+                width: 838px;
+
+                .conteudo {
+                    display: none;
+                }
+            }
+        }
+    }
 }

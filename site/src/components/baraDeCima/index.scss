@@ -20,7 +20,7 @@
     .pesquisa {
         display: flex;
         flex-direction: row;
-        justify-content: start;
+        justify-content: flex-start;
         align-items: center;
 
         width: 100%;
@@ -98,7 +98,7 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        align-items: center;
+        align-items: flex-start;
 
         width: 100%;
         height: 100%;
@@ -107,14 +107,14 @@
         .pGames {
             display: flex;
             flex-direction: row;
-            justify-content: start;
-            align-items: start;
+            justify-content: flex-start;
+            align-items: flex-start;
             flex-wrap: wrap;
 
             gap: 20px;
             width: 100%;
             min-width: 1200px;
-            height: 100%;
+            height: auto;
             padding: 0px 20px 20px 0px;
 
             overflow: auto;
@@ -122,8 +122,8 @@
         .filtragem {
             display: flex;
             flex-direction: row;
-            justify-content: start;
-            align-items: start;
+            justify-content: flex-start;
+            align-items: flex-start;
 
             width: 100%;
             height: 100%;
@@ -164,10 +164,14 @@
         border-radius: 100%;
         background-color: rgb(44, 44, 44);
         overflow: hidden;
-        border: solid 1px rgb(16, 16, 16);
+        border: solid 1px rgb(73, 73, 73);
 
         &.selecionado {
             border: solid 2px white;
+
+            .pontos {
+                opacity: 1;
+            }
         }
 
         &.p {
@@ -176,10 +180,18 @@
 
         &:hover {
             border: solid 2px white;
+
+            .pontos {
+                opacity: 1;
+            }
         }
         
         img {
             height: 100%;
+
+            &.pontos {
+                opacity: 0.4;
+            }
         }
     }
 
