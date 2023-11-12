@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
-import './index.scss'
-import axios from 'axios'
+
 import { Link, useNavigate } from 'react-router-dom'
 import storage, { set } from 'local-storage';
 import { motion } from 'framer-motion';
