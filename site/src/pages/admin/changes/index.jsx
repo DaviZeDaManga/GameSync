@@ -186,7 +186,7 @@ export default function EditarExcluir(){
 
     return (
         <main id='EditarExcluir'>
-          <AdmBarraLateral/>
+          <AdmBarraLateral selecionado='MudarProduto' />
 
           {editar &&(
             <main id='editar'>
