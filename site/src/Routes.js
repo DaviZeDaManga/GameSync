@@ -7,9 +7,8 @@ import Conquistas from './pages/web/conquistas'
 import MudarPerfil from './pages/web/changes'
 import GameSync from './pages/web/GameSync'
 import CadastroUser from './pages/web/authentication'
-import LoginUser from './pages/web/log'
+import LoginUsuario from './pages/web/log'
 import EscolherLogin from './pages/web/escolherconta'
-import Cadaster from './pages/web/cadaster'
 import Noticias from './pages/web/noticias'
 import Grupos from './pages/web/grupos'
 import Home from './pages/web/Home'
@@ -34,9 +33,9 @@ export default function Routess(){
                 <Route path='/planos/gamesync' element={<Planosacess/>} />
                 <Route path='/gamesync' element={<GameSync/>} />
                 <Route path='/cadastro' element={<CadastroUser/>} />
-                <Route path='/login' element={<LoginUser/>} />
+
                 <Route path='/escolherlogin' element={<EscolherLogin/>} />
-                <Route path="/cadaster" element={<Cadaster/>} />
+                <Route path="/login" element={<LoginUsuario/>} />
                 <Route path="/noticias" element={<Noticias/>} />
                 <Route path='/gamegrupos/:id' element={<Grupos/>} />
                 <Route path='/produto/:id/jogosparecidos' element={<JogosParecidos/>} />
