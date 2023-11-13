@@ -18,7 +18,7 @@ import CadastroAdmin from './pages/admin/authentication'
 import Dashboard from './pages/admin/build'
 import AddProduct from './pages/admin/AddProducts'
 import EditarExcluir from './pages/admin/changes'
-
+import Addnews from './pages/admin/AddNews'
 
 import NotFound from './errors'
 export default function Routess(){
@@ -45,6 +45,7 @@ export default function Routess(){
                 <Route path='/admin' element={<CadastroAdmin/>} />
                 <Route path='/admin/addproduts' element={<AddProduct/> }/>
                 <Route path='/admin/MudarProduto' element={<EditarExcluir/>} />
+                <Route path='/admin/AddNews' element={<Addnews/>} />
                 <Route path='*' element={<NotFound/>} />
                
             </Routes>
