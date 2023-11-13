@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react'
-import './index.scss'
-import axios from 'axios'
+
 import { Link, useNavigate } from 'react-router-dom'
 import storage, { set } from 'local-storage';
 import { motion } from 'framer-motion';
 import ProdutoCard from '../produto';
 import { ListarTodosJogos } from '../../connection/productAPI';
 import { BuscarImagem } from '../../connection/productAPI';
-
+import './index.scss'
     
 export default function BarraDeCima ({barra}) {
     const navigate = useNavigate()
@@ -111,6 +110,15 @@ export default function BarraDeCima ({barra}) {
 
 
     const [configcard, setConfigcard] = useState(0)
+
+
+
+
+
+
+
+
+
 
     return(
         <>

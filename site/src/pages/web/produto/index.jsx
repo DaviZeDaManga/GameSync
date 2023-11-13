@@ -207,9 +207,10 @@ export default function Produto() {
 
 
 
-    useEffect(()=> {
-        localStorage.setItem('titleaba', `| davihaha`)
-    })
+
+
+
+   
     
     return(
         <div className="Produto">

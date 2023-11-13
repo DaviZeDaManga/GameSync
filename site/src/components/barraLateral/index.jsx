@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import './index.scss'
 import { Link, json } from 'react-router-dom'
 import storage, { set } from 'local-storage';
-import axios from 'axios';
 import { motion } from "framer-motion"
 
 import BarraDeCima from '../baraDeCima';
@@ -260,13 +259,6 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
 
 
 
-
-    async function BuscarProdutos() {
-        let resposta = BuscarJogoID(1)
-        
-
-    }
-
     return(
         <div id="BarraLateral">
             <BarraDeCima
@@ -412,7 +404,7 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
                             <section className='produtins'>
                                 <section className='produtos'>
 
-                                   {[2,3].map( item =>
+                                   {[1,3,4].map( item =>
                                     <Link to={'/produto/23'}>
                                         <div className='produto-car'>
                                             <div className='card'>

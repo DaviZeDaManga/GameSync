@@ -20,7 +20,7 @@
     .image-frame{
         display: flex;
         flex-direction: column;
-        align-items: start;
+        align-items: flex-start;
         padding: 20px 0px;
         position: relative;
 
@@ -56,7 +56,7 @@
 
         .image-main{
             display: flex;
-            align-items: start;
+            align-items: flex-start;
             background-size: cover;
             flex-direction: column;
         
@@ -85,7 +85,7 @@
         .search-bar{
             display: flex;
             flex-direction: row;
-            align-items: end;    
+            align-items: flex-end;    
             width: 100%;
             position: relative;
             z-index: 3;
@@ -182,7 +182,7 @@
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-            align-items: start;
+            align-items: flex-start;
 
             padding: 30px 0px;
             width: 100%;
@@ -199,8 +199,8 @@
             .section-left{
                 display: flex;
                 flex-direction: column;
-                align-items: start;
-                justify-content: start;
+                align-items: flex-start;
+                justify-content: flex-start;
                 width: 550px;
 
                 .block-points p {
@@ -307,8 +307,8 @@
                             .sombra {
                                 display: flex;
                                 flex-direction: column;
-                                justify-content: end;
-                                align-items: start;
+                                justify-content: flex-end;
+                                align-items: flex-start;
                       
                                 position: absolute;
                                 z-index: 1;
@@ -391,8 +391,8 @@
                             .dados {
                                 display: flex;
                                 flex-direction: column;
-                                justify-content: start;
-                                align-items: start;
+                                justify-content: flex-start;
+                                align-items: flex-start;
                         
                                 width: 100%;
                                 height: auto;
@@ -402,7 +402,7 @@
                             .info {
                                 display: flex;
                                 flex-direction: row;
-                                justify-content: start;
+                                justify-content: flex-start;
                                 align-items: center;
                         
                                 width: 100%;
@@ -455,8 +455,8 @@
                         .awards-s2{
                             display: flex;
                             flex-direction: column;
-                            justify-content: start;
-                            align-items: start;
+                            justify-content: flex-start;
+                            align-items: flex-start;
 
                             padding: 5px 10px;
                             height: 70px;

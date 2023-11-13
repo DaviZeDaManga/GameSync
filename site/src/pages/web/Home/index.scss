@@ -40,8 +40,8 @@
             .conteudoC {
                 display: flex;
                 flex-direction: column;
-                justify-content: start;
-                align-items: start;
+                justify-content: flex-start;
+                align-items: flex-start;
         
                 width: 100%;
                 height: 100%;
@@ -103,8 +103,8 @@
     .conteudo {
         display: flex;
         flex-direction: column;
-        justify-content: end;
-        align-items: start;
+        justify-content: flex-end;
+        align-items: flex-start;
 
         width: 100%;
         height: 100%;
@@ -118,8 +118,8 @@
         .info {
             display: flex;
             flex-direction: column;
-            justify-content: start;
-            align-items: start;
+            justify-content: flex-start;
+            align-items: flex-start;
 
             width: 100%;
             height: 200px;
@@ -133,14 +133,14 @@
 
             h1, p {
                 font-size: 15px;
-                text-align: start;
+                text-align: flex-start;
             }
             
             .sobre {
                 display: flex;
                 flex-direction: column;
-                justify-content: start;
-                align-items: start;
+                justify-content: flex-start;
+                align-items: flex-start;
 
                 width: 100%;
                 height: 70%;
@@ -157,7 +157,7 @@
             color: white;
         }
         > p {
-            text-align: start;
+            text-align: flex-start;
             color: #ededed;
             max-width: 55ch;
         }
@@ -262,7 +262,7 @@
     .beneficios {
         display: flex;
         flex-direction: row;
-        justify-content: start;
+        justify-content: flex-start;
         align-items: center;
 
         width: 100%;
@@ -311,7 +311,7 @@
         .title {
             display: flex;
             flex-direction: row;
-            justify-content: start;
+            justify-content: flex-start;
             align-items: center;
 
             width: 100%;
