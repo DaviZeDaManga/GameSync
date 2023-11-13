@@ -95,9 +95,9 @@ export default function EditarExcluir(){
     }, []);
 
 
-    console.log(valor)
+    //console.log(valor)
     async function RemoverJogo(id, nome) {
-        console.log("ID do Jogo a ser removido:", id);
+        //console.log("ID do Jogo a ser removido:", id);
         confirmAlert({
             title: 'Remover Jogo',
             message: `Você tem certeza que quer fazer isso? Excluir o jogo ${nome}.`,
@@ -133,14 +133,14 @@ export default function EditarExcluir(){
         setX(0)
     }
 
-    console.log(jogoSelecionado); 
+    //console.log(jogoSelecionado); 
     
-    console.log(jogos[1])
+    //console.log(jogos[1])
 
     let [x, setX] = useState(0)
     var y = 0
     var rotate = 0
-    console.log(editar)
+    //console.log(editar)
 
     async function EditarJogo(id){
         setEditar(id)

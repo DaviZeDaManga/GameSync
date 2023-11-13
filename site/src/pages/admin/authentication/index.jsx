@@ -18,7 +18,7 @@ export default function CadastroAdmin(){
 
     useEffect(() => {
         if (storage('admin-logado')){
-            navigate('/admin/home')
+            navigate('/admin/dashboard')
         }
     }, [])
 
@@ -33,7 +33,7 @@ export default function CadastroAdmin(){
             storage('admin-logado', r);
 
             setTimeout(() => {
-                navigate('/admin/home')
+                navigate('/admin/dashboard')
             }, 3000)
         }
         catch(err){

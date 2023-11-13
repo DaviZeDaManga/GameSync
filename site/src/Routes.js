@@ -15,10 +15,10 @@ import Home from './pages/web/Home'
 import JogosParecidos from './pages/web/jogosparecidos'
 import Planosacess from './pages/web/planosacess'
 import CadastroAdmin from './pages/admin/authentication'
-import HomeAdmin from './pages/admin/home'
+import Dashboard from './pages/admin/build'
 import AddProduct from './pages/admin/AddProducts'
 import EditarExcluir from './pages/admin/changes'
-
+import Addnews from './pages/admin/AddNews'
 
 import NotFound from './errors'
 export default function Routess(){
@@ -41,10 +41,11 @@ export default function Routess(){
                 <Route path='/produto/:id/jogosparecidos' element={<JogosParecidos/>} />
                 <Route path='/' element={<Home/>} />
 
-                <Route path='/admin/home' element={<HomeAdmin/>} />
+                <Route path='/admin/dashboard' element={<Dashboard/>} />
                 <Route path='/admin' element={<CadastroAdmin/>} />
                 <Route path='/admin/addproduts' element={<AddProduct/> }/>
                 <Route path='/admin/MudarProduto' element={<EditarExcluir/>} />
+                <Route path='/admin/AddNews' element={<Addnews/>} />
                 <Route path='*' element={<NotFound/>} />
                
             </Routes>
