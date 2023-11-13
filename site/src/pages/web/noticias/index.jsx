@@ -11,6 +11,7 @@ import 'swiper/css/navigation';
 import { Navigation, Pagination, Keyboard } from 'swiper/modules';
 
 import { BuscarImagem, ListarTodosJogos } from '../../../connection/productAPI';
+import ProdutoCard from '../../../components/produto';
 
 export default function Noticias() {
 
@@ -82,25 +83,22 @@ export default function Noticias() {
 
 
 
-            <section className='noticias'>
+            {/* <section className='noticias'>
 
                 {
                     noticias.map( item => 
-                        <section className={`noticia ${item.produto_id == 3 && 'maior'}`}>
-
-                            <div className='img'>
-                                <img src={BuscarImagem(item.imagem_produto)} />
-                            </div>
-                            <div className='conteudo'>
-
-                            </div>
-
-                        </section>   
+                        <ProdutoCard 
+                        id={item.produto_id}
+                        nome={item.nome}
+                        imagem={BuscarImagem(item.imagem_produto)}
+                        lancamento={item.tamanho}
+                        recarregarpage={true}
+                        />  
                     )
                 }
                 
 
-            </section>
+            </section> */}
         </main>
     )
 }

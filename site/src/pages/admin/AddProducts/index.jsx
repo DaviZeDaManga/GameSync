@@ -106,23 +106,6 @@ export default function AddProduct() {
   }
 
   function NovoClick() {
-    setIdJogo(null);
-    setNome('');
-    setPreco(0);
-    setPrecoPro(0);
-    setDestaque(false);
-    setPromocao(false);
-    setDisponivel(false);
-    setQtd(0);
-    setDescricao('');
-    setClassificacao('');
-    setLancamento('');
-    setTamanho('');
-    setEmpresa('');
-    setDesenvolvedor('');
-    setImagem(null);
-    setVideo('');
-    setCategoria(1);
     window.location.reload();
   }
 

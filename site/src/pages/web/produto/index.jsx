@@ -307,11 +307,6 @@ export default function Produto() {
 
                             )}  
 
-                            <SwiperSlide>
-                                <iframe src='https://term.ooo/'>
-                                </iframe>
-                            </SwiperSlide>  
-                            
                         </Swiper>
         
                     </main>
