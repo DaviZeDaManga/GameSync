@@ -210,7 +210,21 @@ export default function Produto() {
 
 
 
-   
+   function SalvarCarrinho(nome, desc) {
+        let carrinho = new Array()
+
+        if(localStorage.hasOwnProperty('carrinho')) {
+            carrinho = JSON.parse(localStorage.getItem('carrinho'))
+        }
+
+        carrinho.push({
+            nome: nome,
+            desc: desc
+        })
+
+        localStorage.setItem('carrinho', JSON.stringify(carrinho))
+   }
+
     
     return(
         <div className="Produto">
@@ -239,7 +253,7 @@ export default function Produto() {
                             </div>
                             <div className='comprar'>
                                 <button><Link to={`/BarraLateral/${id}`}></Link>Comprar</button>    
-                                <button className='acoes'>
+                                <button onClick={SalvarCarrinho(item.nm_produto, item.ds_descricao)} className='acoes'>
                                     <img src='/assets/images/carrinho/carrinho.png' />
                                 </button>   
                                 <button onClick={()=> (setAcoesboo(!acoesboo))} className={`acoes ${acoesboo == true && 'selecionado'}`}>

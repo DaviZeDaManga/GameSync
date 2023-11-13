@@ -246,17 +246,23 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
 
 
 
-    const [categorias, setCategorias] = useState([])
+    const [carrinho, setCarrinho] = useState([])
 
-    async function Categorias() {
-        
+    async function Carrinho() {
+        let carrin = []
+        carrin = JSON.parse(localStorage.getItem('carrinho'))
+        setCarrinho(carrin)
     }
 
     useEffect(()=> {
-        Categorias()
+        Carrinho()
     }, [])
 
 
+
+    function Limpar() {
+        localStorage.clear('carrinho')
+    }
 
 
     return(
@@ -343,7 +349,7 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
                         {pesqB == true &&
                         <>
 
-                        {categorias.map( item =>
+                        {[1,2,3].map( item =>
                             <Link to={'/gamegrupos/' + item.id}>
                             <section className='categoria'>
                                 <p>{item.name}</p>
@@ -404,31 +410,37 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
                             <section className='produtins'>
                                 <section className='produtos'>
 
-                                   {[1,3,4].map( item =>
-                                    <Link to={'/produto/23'}>
-                                        <div className='produto-car'>
-                                            <div className='card'>
-                                                <div className='verproduto'>
-                                                    <img src="https://imgs.search.brave.com/TBlZEjcbJciqDQgy_SeMfc5EKiISv9VuTkDjOdVDca0/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMubmludGVuZG8u/Y29tL2ltYWdlL3Vw/bG9hZC9hcl8xNjo5/LGNfbHBhZCx3XzEy/NDAvYl93aGl0ZS9m/X2F1dG8vcV9hdXRv/L25jb20vc29mdHdh/cmUvc3dpdGNoLzcw/MDEwMDAwMDAwOTY0/LzgxMTQ2MWI4ZDFj/YWNmMWYyZGE3OTFi/NDc4ZGNjZmUyYTU1/NDU3NzgwMzY0YzNk/NWE5NWZiZmNkZDRj/MzA4NmY.jpeg" />
-                                                    <button>Ver Produto</button>
-                                                </div>
-                                                <div className='info'>
-                                                    <h1>Minecraft Bedrock Edition</h1>
-                                                    <p>Minecraft é um jogo eletrônico sandbox de sobrevivência criado pelo desenvolvedor sueco Markus "Notch" Persson e posteriormente desenvolvido e publicado pela Mojang Studios, cuja propriedade intelectual foi obtida pela Microsoft em 2014. Lançado inicialmente em maio de 2009 como um projeto em desenvolvimento, seu lançamento completo ocorreu em novembro de 2011 para Microsoft Windows, macOS, Linux e alguns dispositivos móveis, sendo posteriormente relançado para uma ampla variedade de plataformas.</p>
-                                                    <h1>R$79,90</h1>
-                                                </div>
-                                            </div>
+                                   {carrinho != '' &&
 
-                                            <div className='acoes'>
-                                                <div className='buton apagar'>
-                                                    <img src="/assets/images/barralateral/carrinho/lixo.png" />
+                                    <>
+                                    {carrinho.map( item =>
+                                        <Link to={'/produto/23'}>
+                                            <div className='produto-car'>
+                                                <div className='card'>
+                                                    <div className='verproduto'>
+                                                        <img src="https://imgs.search.brave.com/TBlZEjcbJciqDQgy_SeMfc5EKiISv9VuTkDjOdVDca0/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMubmludGVuZG8u/Y29tL2ltYWdlL3Vw/bG9hZC9hcl8xNjo5/LGNfbHBhZCx3XzEy/NDAvYl93aGl0ZS9m/X2F1dG8vcV9hdXRv/L25jb20vc29mdHdh/cmUvc3dpdGNoLzcw/MDEwMDAwMDAwOTY0/LzgxMTQ2MWI4ZDFj/YWNmMWYyZGE3OTFi/NDc4ZGNjZmUyYTU1/NDU3NzgwMzY0YzNk/NWE5NWZiZmNkZDRj/MzA4NmY.jpeg" />
+                                                        <button>Ver Produto</button>
+                                                    </div>
+                                                    <div className='info'>
+                                                        <h1>{item.nome}</h1>
+                                                        <p>{item.desc}</p>
+                                                        <h1>R$79,90</h1>
+                                                    </div>
                                                 </div>
-                                                <div className='buton qnt'>
-                                                    
+
+                                                <div className='acoes'>
+                                                    <div className='buton apagar'>
+                                                        <img src="/assets/images/barralateral/carrinho/lixo.png" />
+                                                    </div>
+                                                    <div className='buton qnt'>
+                                                        
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </Link>)}
+                                        </Link>)}
+                                    </>
+
+                                   }
                                     
 
                                 </section>
@@ -439,7 +451,7 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
                         
                             <section className='menu-carrin'>
                                 <div className='subtotal'>
-
+                                    <button onClick={Limpar}>Limpar tudo</button>
                                 </div>
                                 <div className='botao continuar'>
                                     <p>Fechar pedido</p>

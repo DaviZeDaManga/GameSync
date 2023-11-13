@@ -27,7 +27,7 @@ export default function Game() {
                     </>
                     }
                     {jogar == true &&
-                    <iframe src='https://term.ooo/' />}
+                    <iframe src='https://ev.io' />}
                 </main>
                 <section className='sobre'>
                     <section className='title'>
