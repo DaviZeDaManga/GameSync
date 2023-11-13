@@ -32,10 +32,10 @@ export default function AdmBarraLateral(props){
             </header>
 
             <section className="opcoes">
-                <Link to='/admin/home' className={`opcoes-z ${props.selecionado === 'home' ? 'selecionado' : ''}`}>
+                <Link to='/admin/dashboard' className={`opcoes-z ${props.selecionado === 'dashboard' ? 'selecionado' : ''}`}>
                     <div className="opcoes-z">
                         <h1>DASHBOARD</h1>
-                        <img src="/assets/images/adm/dashboard.png" alt="home" />
+                        <img src="/assets/images/adm/dashboard.png" alt="dashboard" />
                     </div>
                 </Link>
                 {/* Se a prop 'selecionado' for 'home', a classe 'selecionado' será aplicada */}
