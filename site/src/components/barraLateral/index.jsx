@@ -247,20 +247,29 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
 
 
     const [carrinho, setCarrinho] = useState([])
+    const [quantitens, setQuantitens] = useState(0)
 
     async function Carrinho() {
+
         let carrin = []
         carrin = JSON.parse(localStorage.getItem('carrinho'))
-        setCarrinho(carrin)
+        setCarrinho(carrin || [])
+
+        let totalitens = carrinho.length
+        setQuantitens(totalitens)
     }
 
     useEffect(()=> {
         Carrinho()
-    }, [])
+    }, [carrinho])
 
     function Limpar() {
         localStorage.clear('carrinho')
     }
+
+
+
+
 
 
     return(
@@ -386,6 +395,10 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
                             <img src="/assets/images/carrinho/bot.png" />
                         </section>
                         <section onClick={MostrarCarrin} className='redirects'>
+                            {carrinho.length > 0 &&
+                            <div className='itenscar'>
+                                <p>{quantitens}</p>
+                            </div>}
                             <img src="/assets/images/carrinho/carrinho.png" />
                         </section>
                         <section className='redirects'>
@@ -408,8 +421,8 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
                             <section className='produtins'>
                                 <section className='produtos'>
 
-                                   {carrinho != '' &&
-
+                                   {carrinho.length >= 1 &&
+                                        
                                     <>
                                     {carrinho.map( item =>
                                         <Link to={'/produto/' + item.id}>
@@ -417,11 +430,14 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
                                                 <div className='card'>
                                                     <div className='verproduto'>
                                                         <img src={BuscarImagem(item.img)} />
-                                                        <button>Ver Produto</button>
                                                     </div>
                                                     <div className='info'>
+
+                                                        <div className='text'>
                                                         <h1>{item.nome}</h1>
                                                         <p>{item.desc}</p>
+                                                        </div>
+
                                                         <h1>R${item.preco}</h1>
                                                     </div>
                                                 </div>
@@ -443,7 +459,6 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
 
                                 </section>
 
-                                <main className='fake'></main>
                             </section>
 
                         

@@ -23,6 +23,7 @@ import ProdutoCard from '../../../components/produto'
 import { BuscarJogoID, BuscarImagem } from '../../../connection/productAPI'
 import { motion } from 'framer-motion'
 
+import { toast } from 'react-toastify';
 
 export default function Produto() {
 
@@ -100,41 +101,6 @@ export default function Produto() {
     }, [])
 
 
-    //  async function Conquistas() {
-    //      let url = 'https:api.rawg.io/api/games/'+ idprod +'/achievements?key=c03e618a39f9447e9e212b29e03b8707&page_size=' + qntdconq
-    //      let resposta = await axios.get(url)
-
-
-    //      setConquistas(resposta.data.results)
-    //  }
-
-    //  useEffect (() => {
-    //      Conquistas()
-    //  }, [])
-
-    //  async function Capturas() {
-    //      let url = 'https:api.rawg.io/api/games/'+  idprod +'/screenshots?key=c03e618a39f9447e9e212b29e03b8707&page_size=5'
-    //      let resposta = await axios.get(url)
-
-    //      setImagens(resposta.data.results)
-    //  }
-
-    //  useEffect(() => {
-    //      Capturas()
-    //  }, [])
-
-
-    //  async function Complementos() {
-    //      let url = 'https:api.rawg.io/api/games/'+ idprod +'/additions?key=c03e618a39f9447e9e212b29e03b8707&page_size=50'
-    //      let resposta = await axios.get(url)
-
-    //      setComplementos(resposta.data.results)
-    //  }
-
-    //  useEffect(()=> {
-    //      Complementos()
-    //  }, [])
-
 
 
 
@@ -208,24 +174,32 @@ export default function Produto() {
 
 
 
-
+    const [carrinhar, setCarronhar] = useState(true)
 
    function SalvarCarrinho(id, nome, desc, preco, img) {
-        let carrinho = new Array()
+    	if(carrinhar == true) {
+            let carrinho = new Array()
 
-        if(localStorage.hasOwnProperty('carrinho')) {
-            carrinho = JSON.parse(localStorage.getItem('carrinho'))
+            if(localStorage.hasOwnProperty('carrinho')) {
+                carrinho = JSON.parse(localStorage.getItem('carrinho'))
+            }
+
+            carrinho.push({
+                id: id,
+                nome: nome,
+                desc: desc,
+                preco: preco,
+                img: img
+            })
+
+            localStorage.setItem('carrinho', JSON.stringify(carrinho))
+
+            setCarronhar(false)
         }
 
-        carrinho.push({
-            id: id,
-            nome: nome,
-            desc: desc,
-            preco: preco,
-            img: img
-        })
-
-        localStorage.setItem('carrinho', JSON.stringify(carrinho))
+        else {
+            toast.warning('Este produto já esta no carrinho!');
+        }
    }
 
 
