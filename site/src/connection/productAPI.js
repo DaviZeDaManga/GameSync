@@ -164,5 +164,9 @@ export async function AlterarImage(id, image){
     return linhas.status
 }
 
-
+///Games da GameSync
+export async function TodosGames(){
+    const resposta = await api.get('/games');
+    return resposta.data
+}
 
