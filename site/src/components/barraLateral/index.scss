@@ -407,6 +407,13 @@
                                         align-items: center;
             
                                         height: 100%;
+                                        border-radius: 10px;
+                                        border: solid 2px rgb(51, 51, 51);
+                                        cursor: pointer;
+
+                                        &:hover {
+                                            border: solid 2px white;
+                                        }
             
                                         > img {
                                             height: 100%;
@@ -425,10 +432,6 @@
                                             background-color: #212121;
                                             color: white;
                                             transition: 0.3s;
-                                        }
-            
-                                        > button:hover {
-                                            border: solid 2px white;
                                         }
                                     }
             

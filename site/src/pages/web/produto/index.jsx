@@ -210,7 +210,7 @@ export default function Produto() {
 
 
 
-   function SalvarCarrinho(nome, desc) {
+   function SalvarCarrinho(id, nome, desc, preco, img) {
         let carrinho = new Array()
 
         if(localStorage.hasOwnProperty('carrinho')) {
@@ -218,16 +218,29 @@ export default function Produto() {
         }
 
         carrinho.push({
+            id: id,
             nome: nome,
-            desc: desc
+            desc: desc,
+            preco: preco,
+            img: img
         })
 
         localStorage.setItem('carrinho', JSON.stringify(carrinho))
    }
 
+
+
+   
     
     return(
         <div className="Produto">
+            
+            <section className='fake-nerwe'>
+            <ProdutoCard
+            recarregarpage={true}
+            />
+            </section>
+
             <BarraLateral/>
             <Title
             nome={"Details"}
@@ -253,7 +266,7 @@ export default function Produto() {
                             </div>
                             <div className='comprar'>
                                 <button><Link to={`/BarraLateral/${id}`}></Link>Comprar</button>    
-                                <button onClick={SalvarCarrinho(item.nm_produto, item.ds_descricao)} className='acoes'>
+                                <button onClick={()=> (SalvarCarrinho(id, item.nm_produto, item.ds_descricao, item.vl_preco , item.img_produto))} className='acoes'>
                                     <img src='/assets/images/carrinho/carrinho.png' />
                                 </button>   
                                 <button onClick={()=> (setAcoesboo(!acoesboo))} className={`acoes ${acoesboo == true && 'selecionado'}`}>

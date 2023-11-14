@@ -5,7 +5,7 @@ import storage, { set } from 'local-storage';
 import { motion } from "framer-motion"
 
 import BarraDeCima from '../baraDeCima';
-import { BuscarJogoID } from '../../connection/productAPI';
+import { BuscarImagem, BuscarJogoID } from '../../connection/productAPI';
 
 export default function BarraLateral({home, planos, noticias, pesquisa}) {
     const[nameuser, setNameuser] = useState("")
@@ -258,8 +258,6 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
         Carrinho()
     }, [])
 
-
-
     function Limpar() {
         localStorage.clear('carrinho')
     }
@@ -414,17 +412,17 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
 
                                     <>
                                     {carrinho.map( item =>
-                                        <Link to={'/produto/23'}>
+                                        <Link to={'/produto/' + item.id}>
                                             <div className='produto-car'>
                                                 <div className='card'>
                                                     <div className='verproduto'>
-                                                        <img src="https://imgs.search.brave.com/TBlZEjcbJciqDQgy_SeMfc5EKiISv9VuTkDjOdVDca0/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMubmludGVuZG8u/Y29tL2ltYWdlL3Vw/bG9hZC9hcl8xNjo5/LGNfbHBhZCx3XzEy/NDAvYl93aGl0ZS9m/X2F1dG8vcV9hdXRv/L25jb20vc29mdHdh/cmUvc3dpdGNoLzcw/MDEwMDAwMDAwOTY0/LzgxMTQ2MWI4ZDFj/YWNmMWYyZGE3OTFi/NDc4ZGNjZmUyYTU1/NDU3NzgwMzY0YzNk/NWE5NWZiZmNkZDRj/MzA4NmY.jpeg" />
+                                                        <img src={BuscarImagem(item.img)} />
                                                         <button>Ver Produto</button>
                                                     </div>
                                                     <div className='info'>
                                                         <h1>{item.nome}</h1>
                                                         <p>{item.desc}</p>
-                                                        <h1>R$79,90</h1>
+                                                        <h1>R${item.preco}</h1>
                                                     </div>
                                                 </div>
 

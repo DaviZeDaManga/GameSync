@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import './index.scss'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import LoadingBar from 'react-top-loading-bar'
 
 export default function ProdutoCard({id, imagem, nome, produtora, lancamento, tipo, recarregarpage}) {
     const [tipoprodurl, setTipoprodurl] = useState('/produto/')
@@ -14,57 +15,55 @@ export default function ProdutoCard({id, imagem, nome, produtora, lancamento, ti
         else if (tipo == 'complemento') {
             setTipoprod("Complemento")
         }
-    })
+    })          
 
-    function espera (ms) {          
-        return new Promise ( resolve => {              
-            setTimeout(() => {resolve('')}, ms);          
-        })        
-    } 
 
-    const [verificarrecarregar, setVerificarrecarregar] = useState(0)
+    const ref = useRef()
+    const navigate = useNavigate()
+    const [carregando, setCarregando] = useState(false)
 
-    async function RecarregarPage() {
-        if (recarregarpage == true) {
-            for (let i = 1; i >= 0; i--) {
-                await espera(1000)
+    function Navegar() {
+        ref.current.continuousStart();
+        setCarregando(true);
 
-                if (i == 0) {
-                    window.location.reload()
-                }
+        setTimeout(() => {
+            navigate(tipoprodurl+id)
+            
+            if(recarregarpage == true) {
+                window.location.reload()
             }
-        }
-        else{
-            alert("Vai recarregar n hahahah")
-        }
+        }, 3000)
     }
-
-
 
 
     
 
     return(
-        <Link to={tipoprodurl + id}>
-            <section className='produto'>
-                <div className='imagem-produto'>
-                    <div className='sombra'>
-                        <div className='linha'></div>
-                    </div>
-                    <div className='produtoIMG'>
-                        <img src={imagem}/>
-                    </div>
+        <>
+        <LoadingBar
+        color='#FFFFFF'
+        ref={ref}
+        />
+
+        <section onClick={Navegar} className='produto'>
+            <div className='imagem-produto'>
+                <div className='sombra'>
+                    <div className='linha'></div>
                 </div>
-                <div className='informacoes'>
-                    <div className='dados'>
-                        <a>{nome}</a>
-                        <p>{tipoprod}</p>
-                    </div>
-                    <div className='info'>
-                        <h3>{lancamento}</h3>
-                    </div>
+                <div className='produtoIMG'>
+                    <img src={imagem}/>
                 </div>
-            </section>  
-        </Link>
+            </div>
+            <div className='informacoes'>
+                <div className='dados'>
+                    <a>{nome}</a>
+                    <p>{tipoprod}</p>
+                </div>
+                <div className='info'>
+                    <h3>{lancamento}</h3>
+                </div>
+            </div>
+        </section>  
+        </>
     )
 }
