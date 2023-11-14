@@ -15,7 +15,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
-import { Mousewheel, Pagination, Navigation } from 'swiper/modules';
+import { Navigation } from 'swiper/modules';
 
 import { motion, Variants } from 'framer-motion';
 
@@ -190,35 +190,43 @@ export default function EditarExcluir(){
 
           {editar &&(
             <main id='editar'>
-                <button onClick={Fechar} className='sair'>
+                 <button onClick={Fechar} className='sair'>
                     <img src="/assets/images/acoes/remover.png" alt="" />
                 </button>
 
-                <section className='editar'>
-
-                    <div className='nome'>
-
-                    </div>
-
+                <section className='all'>
+                    
                 </section>
-               
             </main>
           )}
 
           {jogoSelecionado && (
             <main id='detalhes'>
-                <button onClick={Fechar} className='sair'></button>
-                 <section>
-                    <article> {/*barra lateral*/}
-                        
-                    </article>
 
-                    <article>  {/*conteudo do lado*/}
-                        <section>
+            
+
+                <button onClick={Fechar} className='sair'> 
+                    <img src="/assets/images/acoes/remover.png" alt="" />
+                </button>
+
+                <section className='all'>
+                    <Swiper
+                    navigation={true}
+                    modules={[ Navigation ]}
+                    >
+
+                    <SwiperSlide>
+                        <section className='info-gerais'>
 
                         </section>
-                    </article>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        oi
+                    </SwiperSlide>
+
+                    </Swiper>
                 </section>
+
             </main>
           )}
           
