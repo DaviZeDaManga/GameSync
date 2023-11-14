@@ -21,6 +21,8 @@ import EditarExcluir from './pages/admin/changes'
 import Addnews from './pages/admin/AddNews'
 import Game from './pages/web/game'
 
+import AddProductTest from './test/test'
+
 import NotFound from './errors'
 export default function Routess(){
     return(
@@ -48,8 +50,9 @@ export default function Routess(){
                 <Route path='/admin/addproduts' element={<AddProduct/> }/>
                 <Route path='/admin/MudarProduto' element={<EditarExcluir/>} />
                 <Route path='/admin/AddNews' element={<Addnews/>} />
+
                 <Route path='*' element={<NotFound/>} />
-               
+               <Route path='/teste' element={<AddProductTest/>} />
             </Routes>
         </BrowserRouter>
     )
