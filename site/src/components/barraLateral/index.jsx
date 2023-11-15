@@ -271,6 +271,10 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
 
 
 
+    function ContinuarComprando() {
+        setBarra(true)
+        setCarrin(false)
+    }
 
     return(
         <div id="BarraLateral">
@@ -465,11 +469,38 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
                             <section className='menu-carrin'>
                                 <div className='subtotal'>
                                     <button onClick={Limpar}>Limpar tudo</button>
+
+                                    <div className='total'>
+                                        <h1>Subtotal</h1>
+                                        <p>R$123.99</p>
+                                    </div>
+                                    <div className='cartao'>
+                                        <section className='card'>
+                                            <div className='img'>
+                                                <img src='/assets/images/carrinho/cartao-de-credito.png' />
+                                            </div>
+                                            <div className='info'>
+                                                <h1>2x de R$63,89</h1>
+                                                <p>sem juros</p>
+                                            </div>
+                                        </section>
+                                    </div>
+                                    <div className='boleto'>
+                                        <section className='card'>
+                                            <div className='img'>
+                                                <img src='/assets/images/carrinho/codigo-de-barras.png' />
+                                            </div>
+                                            <div className='info'>
+                                                <h1>R$100,89</h1>
+                                                <p>com boleto ou no pix a vista</p>
+                                            </div>
+                                        </section>
+                                    </div>
                                 </div>
                                 <div className='botao continuar'>
-                                    <p>Fechar pedido</p>
+                                    <p className='black'>Fechar pedido</p>
                                 </div>
-                                <div className='botao sair'>
+                                <div onClick={ContinuarComprando} className='botao sair'>
                                     <p>Continuar comprando</p>
                                 </div>
                             </section>

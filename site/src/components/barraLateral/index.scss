@@ -558,10 +558,105 @@
 
                             width: 100%;
                             height: 100%;
-                            padding: 20px;
+                            padding: 0px 10px 10px 10px;
                             border-radius: 10px;
                             background-color: #2f2f2f;
                             position: relative;
+
+                            .total {
+                                display: flex;
+                                flex-direction: row;
+                                justify-content: space-between;
+                                align-items: center;
+
+                                width: 100%;
+                                height: 50%;
+                                padding: 10px;
+
+                                h1 {
+                                    font-size: 15px;
+                                }
+                            }
+
+                            .card {
+                                display: flex;
+                                flex-direction: row;
+                                justify-content: space-between;
+                                align-items: center;
+
+                                width: 100%;
+                                height: 90%;
+                                background-color: #333333;
+                                border-radius: 10px;
+                                cursor: pointer;
+                                border: solid 2px #333333;
+
+                                &:hover {
+                                    border: solid 2px white;
+                                }
+
+                                .img {
+                                    display: flex;
+                                    justify-content: space-between;
+                                    align-items: center;
+
+                                    width: 60px;
+                                    height: 90%;
+                                    padding: 15px;
+
+                                    img {
+                                        width: 100%;
+                                        opacity: 0.2;
+                                    }
+                                }
+
+                                .info {
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: flex-start;
+                                    align-items: flex-start;
+
+                                    width: 100%;
+                                    height: 100%;
+                                    padding: 20px 10px;
+
+                                    h1 {
+                                        font-size: 15px;
+                                    }
+                                }
+                            }
+
+                            .cartao {
+                                display: flex;
+                                flex-direction: row;
+                                justify-content: space-between;
+                                align-items: flex-start;
+
+                                width: 100%;
+                                height: 100%;
+                            }
+
+                            .boleto {
+                                display: flex;
+                                flex-direction: row;
+                                justify-content: space-between;
+                                align-items: flex-end;
+
+                                width: 100%;
+                                height: 100%;
+                                
+                                .card {
+                                    display: flex;
+                                    flex-direction: row;
+                                    justify-content: space-between;
+                                    align-items: center;
+
+                                    width: 100%;
+                                    height: 90%;
+                                    background-color: #333333;
+                                    border-radius: 10px;
+                                }
+                            }
 
                             button {
                                background-color: #2f2f2f;
@@ -581,8 +676,12 @@
                         }
 
                         .continuar {
-                            background-color: #9e3dcf;
-                            border: solid 2px #9e3dcf   ;
+                            background-color: #f1f1f1;
+                            border: solid 2px #f0f0f0;
+
+                            .black {
+                                color: #000000;
+                            }
                         }
                         .sair {
                             background-color: #2f2f2f;

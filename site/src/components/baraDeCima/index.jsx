@@ -119,7 +119,6 @@ export default function BarraDeCima ({barra}) {
 
 
 
-
     return(
         <>
 
@@ -182,6 +181,7 @@ export default function BarraDeCima ({barra}) {
                     )}
 
                 </main>
+
                 <section className='filtragem'>
 
                 </section>

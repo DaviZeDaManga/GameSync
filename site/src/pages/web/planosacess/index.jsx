@@ -25,7 +25,7 @@ export default function Planosacess() {
 
             </section>}
 
-            <section className='news'>
+            {/* <section className='news'>
                 <main className='news-cards'>
                 <Swiper
                     slidesPerView={3}
@@ -51,7 +51,9 @@ export default function Planosacess() {
                     </SwiperSlide>               
                 </Swiper>
                 </main>
-            </section>
+            </section> */}
+
+
         </div>
     )
 }
