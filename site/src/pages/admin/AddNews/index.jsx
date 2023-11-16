@@ -4,15 +4,13 @@ import AdmBarraLateral from '../../../components/AdminBarraL';
 import { toast } from 'react-toastify';
 
 
-
-
-
-
 export default function Addnews() {
 
 
 
+
      return(
+
         <div id='add-main-addnews'>
             <AdmBarraLateral selecionado='NEWS' />
 
@@ -20,17 +18,37 @@ export default function Addnews() {
                 <div className='add-news2'>
                     <div className='add-news-cont'>
                         <div className='add-news-texts'>
-                            <div className='title'><input  type="text" placeholder='Titulo' /> </div>
-                            <div className='subtitle'> <input type="text"placeholder='subtitulo'/> </div>
-                            <div className='Text'> <input type="text" placeholder='Texto'/> </div>
+
+                            <div className='border-addnews'>
+                                <input className='text-1'  type="text" placeholder='Titulo' />
+                                
+                            </div>
+                            <div className='spaceline-addnews'></div>
+
+                            <div className='border-addnews'>
+                                <input className='text-1' type="text"placeholder='subtitulo'/>
+                                
+                            </div>
+                            <div className='spaceline-addnews'></div>
+
+                            <div className='border-addnews'>
+                                <input className='text-addnews' type="text" placeholder='Texto da Notícia'/>
+                                
+                            </div>
+                            
                         </div>
-                        <div className='add-news-images'>aa</div>
+                        <div className='add-news-images'>
+                            <h1>adicione imagem da noticia</h1>
+                            <img src="/assets/images/adm/addimg.png"  id='imagem-capa'/>   
+                            <input className='addnews1' type="file" id="file"/>
+                        </div>
                     </div>
                     
                 </div>
             </div>
 
         </div>
+
     )
 
 
