@@ -65,26 +65,22 @@ export default function BarraDeCima ({barra}) {
     useEffect(() => {
         if(barra == true) {
             setGames(true)
-            setPesquisa(true)
-            setX(0)
-            setEscalapesquisa(1)
+
+            setTimeout(() => {
+                setPesquisa(true)
+                setX(5000)
+                setEscalapesquisa(1)
+            }, 1000);
         }
 
         else {
-            setX(-2000)
-            Sair()
-            
-            async function Sair() {
-                for (let i = 2; i >= 0; i--){           
-                    await espera(1000);         
-                    
-                    if(i == 0) {
-                        setPesquisa(false)
-                        setGames(false)
-                        setEscalapesquisa(0)
-                    }
-                }
-            }     
+            setX(0)
+
+            setTimeout(() => {
+                setPesquisa(false)
+                setGames(false)
+                setEscalapesquisa(0)
+            }, 2000);    
         }
     })
      

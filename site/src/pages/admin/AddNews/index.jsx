@@ -38,9 +38,9 @@ export default function Addnews() {
                             
                         </div>
                         <div className='add-news-images'>
-                            <h1>adicione imagem da noticia</h1>
-                            <img src="/assets/images/adm/addimg.png"  id='imagem-capa'/>   
-                            <input className='addnews1' type="file" id="file"/>
+
+                               
+                            
                         </div>
                     </div>
                     

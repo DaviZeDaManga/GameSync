@@ -4,6 +4,7 @@ import Title from '../../../components/title'
 import { useState, useEffect } from 'react'
 import storage, { set } from 'local-storage';
 import EmojiPicker from 'emoji-picker-react';
+import FooterPage from '../../../components/footerpage/index,';
 
 export default function Game() {
     const [jogar, setJogar] = useState(false)
@@ -66,7 +67,20 @@ export default function Game() {
 
 
 
+    const [mostrar, setMostrar] = useState('desc')
+    const [mostrardesc, setMostrardesc] = useState(true)
+    const [mostrarcoment, setMostrarcoment] = useState(false)
 
+    useEffect(() => {
+        if(mostrar == 'coment') {
+            setMostrarcoment(true)
+            setMostrardesc(false)
+        }
+        else {
+            setMostrardesc(true)
+            setMostrarcoment(false)
+        }
+    }, [mostrar])
 
     return(
         <div className='game'>
@@ -92,23 +106,32 @@ export default function Game() {
                     <iframe src='https://kirka.io' />}
                 </main>
                 <section className='sobre'>
-                    <section className='title'>
-                        <h1>Termo</h1>
-                    </section>
+                    <div className='acoes'>
+                        <section className='title'>
+                            <h1>Termo</h1>
+                        </section>
 
-                    <section className='info'>
-                        <p>O objetivo da brincadeira é fazer o usuário adivinhar uma palavra em até seis tentativas. Enquanto a resposta certa não é dada, o jogador precisa arriscar termos ao invés de dar palpites de letras. Além disso, uma nova palavra é escolhida a cada 24h e é a mesma para todos que estejam jogando naquele dia.</p>
-                    </section>
+                        <section className='info'>
+                            <p>O objetivo da brincadeira é fazer o usuário adivinhar uma palavra em até seis tentativas. Enquanto a resposta certa não é dada, o jogador precisa arriscar termos ao invés de dar palpites de letras. Além disso, uma nova palavra é escolhida a cada 24h e é a mesma para todos que estejam jogando naquele dia.</p>
+                        </section>
 
-                    <section className='jogar'>
-                        <button onClick={()=> (setJogar(!jogar))}>
-                            {jogar == false && "Jogar"}
-                            {jogar == true && "Parar"}
-                        </button>
+                        <section className='jogar'>
+                            <button onClick={()=> (setJogar(!jogar))}>
+                                {jogar == false && "Jogar"}
+                                {jogar == true && "Parar"}
+                            </button>
+                        </section>
+                    </div>
+
+                    <section className='trocar'>
+                        <button className={`${mostrar == 'desc' && 'selecionado'}`} onClick={()=> (setMostrar('desc'))}>Sobre</button>
+                        <button className={`${mostrar == 'coment' && 'selecionado'}`} onClick={()=> (setMostrar('coment'))}>Comentarios</button>
                     </section>
                 </section>
             </section>
 
+
+            {mostrardesc == true &&
             <section className='desc_engine'>
                 <div className="desc">
                     <h1>Sobre</h1>
@@ -120,8 +143,9 @@ export default function Game() {
                         <img src='/assets/images/GameSync/Rectangle 860.png' />
                     </div>
                 </div>
-            </section>
+            </section>}
 
+            {mostrarcoment == true &&
             <section id="comentarios">
                 <div id='status'>
                     <div className="status">
@@ -263,9 +287,9 @@ export default function Game() {
                     
                 </section>}
 
-            </section>
+            </section>}
 
-            
+            <FooterPage/>
 
         </div>
     )
