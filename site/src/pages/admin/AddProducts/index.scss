@@ -7,7 +7,7 @@
         align-items: flex-start;
 
 
-        background-color: rgb(219, 219, 219);
+        background: #181818;
         width: 100vw;
         height: auto;
         padding: 20px 20px 20px 370px;
@@ -281,7 +281,7 @@
     justify-content: center;
     align-items: center;
 
-    background-color: rgb(219, 219, 219);
+    background: #181818;
     width: 100vw;
     height: auto;
     padding: 20px 20px 20px 370px;
@@ -316,7 +316,7 @@
       z-index: -1;
       transform: scaleX(0);
       transform-origin: 0 50%;
-      transition: transform 0.3s ease, background-color 0.3s ease;
+      transition: transform 0.90s ease, background-color 0.3s ease;
   }
   
   button:hover::before {

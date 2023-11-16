@@ -1,7 +1,7 @@
 #EditarExcluir{
-
+    
     p{
-        color: black;
+        color: white;
     }
     .cards{
         display: flex;
@@ -9,7 +9,7 @@
         justify-content: flex-start;
         align-items: flex-start;
         flex-wrap: wrap;
-
+        cursor: pointer;
         
         width: 100vw;
         height: auto;
@@ -23,11 +23,14 @@
             align-items: center;
             width: 300px;
             height: 350px;
-            border-radius: 30px;
+            border-radius: 10px;
             overflow: hidden;
-            background-color: rgb(229, 229, 229);
+            background: linear-gradient(to bottom, #303030 0%, #303030 40%, #151515 150%), linear-gradient(to top, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.25) 200%);
+            background-blend-mode: multiply;
+           
             
               &:hover {
+                
             .acoes img {
                 visibility: visible;
                 opacity: 1;
@@ -133,6 +136,40 @@
             }
         }
 
+        .card::before,
+        .card::after {
+            content: "";
+            position: absolute;
+            width: calc(95% + 6px); 
+            height: calc(95% + 6px);
+            border: 3px solid transparent;
+            border-radius: 340rem;
+            pointer-events: none;
+            animation: brilho 5s linear infinite; 
+          }
+
+          .card::before {
+            top: -3px;
+            left: -3px;
+            border-image: linear-gradient(45deg, #00f, #f00, #ff0, #0f0);
+            border-image-slice: 1;
+          }
+          
+          .card::after {
+            bottom: -3px;
+            right: -3px; 
+            border-image: linear-gradient(-45deg, #00f, #f00, #ff0, #0f0);
+            border-image-slice: 1;
+          }
+          
+          @keyframes brilho {
+            0% {
+              transform: rotate(-180deg);
+            }
+            100% {
+              transform: rotate(180deg);
+            }
+        }
     }
 
     #detalhes{
@@ -168,7 +205,7 @@
             height: 80%;
             background-color: rgb(53, 53, 53);
             border-radius: 10px;
-
+                
             .swiper {
                 width: 100%;
                 height: 100%;
@@ -185,7 +222,156 @@
                 .info-gerais {
                     width: 100%;
                     height: 100%;
-                    background-color: red;
+                   
+                    .barra{
+                        display: flex;
+                        flex-direction: column;
+                        width: 30%;
+                        height: 100%;
+                        background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
+                        background-blend-mode: multiply,multiply;
+                        position: fixed;
+
+                        .info-jogo{
+                            display: flex;
+                            flex-direction: column;
+                            height: 90%;
+                            
+            
+                            h1{
+                                display: flex;
+                                justify-content: center;
+                                padding: 30px 0px 20px 0px;
+                                font-size: 40px;
+                                color: hwb(0 100% 0% / 0.5);
+                                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adicionando sombra às letras */
+                                transition: color 0.3s ease-in-out;
+                            }
+
+                            .coisas{
+                                display: flex;
+                                flex-direction: column;
+                                gap: 20px;
+                                height: 40%;
+                                font-size: 33px;
+
+                                h4{
+                                    font-size: 28px;
+                                    letter-spacing: 2px; /* Adicionando espaçamento entre as letras */
+                                }
+                            }
+
+                            .negocio{
+                                display: flex;
+                                flex-direction: column;
+                                gap: 20px;
+                                font-size: 33px;
+                            }   
+                        }
+                    }
+
+                    .principal{
+                        display: flex;
+                        flex-direction: column;
+                        height: 100vh;
+                        background-color: yellow;
+                        width: 70%; 
+                        max-width: calc(100% - 30%); 
+                        border-radius: 50px;
+                        margin-left: 30%; ///causador da vitoria
+                        
+                        .img{
+                            height: 57%;
+                            width: 100%;
+                            overflow: hidden;
+                            background-color: red;
+                            img{
+                                width: 100%;
+                                height: 100%;
+                                object-fit:fill;
+                            }
+                        }
+
+                        .jogo{
+                            display: flex;
+                            flex-direction: column;
+                            background-color: thistle;
+                            width: 100%;
+                            
+                            .preco{
+                                display: flex;
+                                flex-direction: row;
+                                justify-content: center;
+                                align-items: center;
+                                justify-content: space-evenly;
+                                width: 100%;
+                                background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
+                                font-size: 50px;
+                                padding: 30px 0px 30px;
+                            }
+
+                            .adicional{
+                                display: flex;
+                                flex-direction: row;
+                                justify-content: center;
+                                align-items: center;
+                                justify-content: space-evenly;
+                                width: 100%;
+                                font-size: 50px;
+                                padding: 40px 0px 30px 0px; 
+                                background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
+                            }
+                        }
+                    }
+                }
+
+                .plus{
+                    display: flex;
+                    width: 100%;
+                    height: 100%;
+
+                    .player{
+                        display: flex;
+                        height: 100%;
+                        width: 65%;
+                        background-color: rgba(0, 0, 0, 0.981);
+
+                        video{
+                            width: 100%;
+                            height: 100%;
+                            border: solid rebeccapurple 3px;
+                        }
+                    }
+
+                    .descricao{
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        height: auto; /* Mudança para height: auto */
+                        width: 35%;
+                        flex-wrap: wrap;
+                        background-image: linear-gradient(to right, #232323 0%, black 100%);
+                        p{
+                            background-image: linear-gradient(to right, #434343 0%, black 100%);
+                            display: flex;
+                            align-items: start;
+                            justify-content: center;
+                            height: 90%;
+                            width: 90%;
+                            padding: 30px;
+                            font-size: 20px;
+                            color: rgb(0, 0, 0);
+                            border: solid 3px fuchsia;
+                            border-radius: 5px;
+                            overflow: auto; 
+                            word-wrap: break-word;
+                            color: white;
+                            font-family: system-ui; 
+                            gap: 10px;
+                            letter-spacing: 1px;
+                        }
+                    }
                 }
               }
               
@@ -231,7 +417,36 @@
             height: 80%;
             background-color: rgba(0, 0, 0, 0.788);
 
-            
+            swiper {
+                width: 100%;
+                height: 100%;
+              }
+              
+              .swiper-slide {
+                text-align: center;
+                font-size: 18px;
+                height: 80vh;
+         
+                /* Center slide text vertically */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .alterar-first{
+                    display: flex;
+                    width: 100%;
+                    height: 100%;
+
+                    
+                }
+              }
+              
+              .swiper-slide img {
+                display: block;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+              }
         }
     }
 }
