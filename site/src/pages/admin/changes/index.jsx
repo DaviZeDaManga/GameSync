@@ -5,7 +5,7 @@ import AdmBarraUp from '../../../components/AdminBarraUp';
 import storage, { set } from 'local-storage';
 import { ListarTodosJogos, ExcluirProduto, BuscarJogoNome, AlterarProduto, AlterarVideo, AlterarCategoriaEmP, AlterarCategoriaEmCP, AlterarImage, BuscarImagem} from '../../../connection/productAPI';
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { toast } from 'react-toastify';
 import { confirmAlert } from 'react-confirm-alert';
 
@@ -15,7 +15,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
-import { Navigation } from 'swiper/modules';
+import { Navigation, Pagination } from 'swiper/modules';
 
 import { motion, Variants } from 'framer-motion';
 
@@ -184,6 +184,8 @@ export default function EditarExcluir(){
         },
       };
 
+      console.log(jogos[1])
+
     return (
         <main id='EditarExcluir'>
           <AdmBarraLateral selecionado='MudarProduto' />
@@ -195,7 +197,95 @@ export default function EditarExcluir(){
                 </button>
 
                 <section className='all'>
-                    
+
+                    <Swiper pagination={{
+                    type: 'progressbar',
+                    }}
+                    navigation={true}
+                    modules={[Pagination, Navigation]}>
+
+                        <SwiperSlide>
+                            <section className='alterar-first'>
+                                <nav className='title'>
+                                    <h1>Alterar Informações Gerais</h1>
+                                </nav>
+
+                                <header className='body'>
+
+                                    <div className='items1'>
+                                        <h1>Nome:</h1>
+                                        <input type="text" placeholder='Corrija o nome do produto'/>
+                                    </div>
+
+                                    <div className='items1'>
+                                        <h1>Categoria:</h1>
+                                        <select >
+                                            <option>Selecionar</option>
+                                            <option value={1}>Ação</option>
+                                            <option value={2}>Terror</option>
+                                            <option value={3}>FPS</option>
+                                            <option value={4}>RPG</option>
+                                            <option value={5}>Souls Like</option>
+                                            <option value={6}>Aventura</option>
+                                            <option value={7}>Tiro</option>
+                                            <option value={8}>Estratégia</option>
+                                            <option value={9}>Esportes</option>
+                                            <option value={10}>Corrida</option>
+                                            <option value={11}>Quebra-cabeça</option>
+                                            <option value={12}>Plataforma</option>
+                                            <option value={13}>Simulação</option>
+                                            <option value={14}>Luta</option>
+                                            <option value={15}>Sobrevivência</option>
+                                            <option value={16}>RTS</option>
+                                            <option value={17}>Cartas</option>
+                                            <option value={18}>Música</option>
+                                            <option value={19}>MMO</option>
+                                            <option value={20}>Mundo Aberto</option>
+                                            <option value={21}>Sandbox</option>
+                                            <option value={22}>História Interativa</option>
+                                            <option value={23}>Educacional</option>
+                                            <option value={24}>Visual Novel</option>
+                                            <option value={25}>Battle Royale</option>
+                                            <option value={26}>Rogue-like</option>
+                                            <option value={27}>Construção</option>
+                                        </select>
+                                    </div>
+
+                                    <div className='items1'> 
+                                        <h1>Classificação:</h1>
+                                        <input type="text" placeholder='Corrija a classificação do produto'/>
+                                    </div>
+
+                                    <div className='items1'>
+                                        <h1>Empresa:</h1>
+                                        <input type="text" placeholder='Corrija o nome da Empresa do produto'/>
+                                    </div>
+
+                                    <div className='items1'>
+                                        <h1>Desenvolvedor:</h1>
+                                        <input type="text" placeholder='Corrija o nome do Desenvolvedora do produto'/>
+                                    </div>
+                                </header>
+                            </section>
+                        </SwiperSlide>
+
+                        <SwiperSlide>
+                            <section className='alterar-second'>
+                                <nav className='title'>
+                                    <h1>Informações de négocio</h1>
+                                </nav>
+
+                                <header className='body'>
+                                    <div className=''>
+                                        <h1>Estoque:</h1>
+                                        <input type="number" />
+                                    </div>
+                                </header>
+
+                            </section>
+                       
+                        </SwiperSlide>
+                    </Swiper>
                 </section>
             </main>
           )}
@@ -203,34 +293,85 @@ export default function EditarExcluir(){
           {jogoSelecionado && (
             <main id='detalhes'>
 
-            
-
                 <button onClick={Fechar} className='sair'> 
                     <img src="/assets/images/acoes/remover.png" alt="" />
                 </button>
 
                 <section className='all'>
+                {jogos
+                .filter(item => item.produto_id === jogoSelecionado)
+                .map(selectedItem => (
+                    
                     <Swiper
                     navigation={true}
                     modules={[ Navigation ]}
+                    key={selectedItem.produto_id}
                     >
+                        <SwiperSlide>
+                            <section className='info-gerais'>
+                                <aside className='barra'>
+                                    <article className='info-jogo'>
+                                       <h1>Informações Gerais</h1>
 
-                    <SwiperSlide>
-                        <section className='info-gerais'>
+                                       <div className='coisas'>
+                                            <h4>{selectedItem.nome}</h4>
+                                            <h6>Gênero: {selectedItem.categoria_nome}</h6>
+                                            <h6>{selectedItem.classificacao}</h6>
+                                            <h6>{selectedItem.empresa}</h6>
+                                            <h6>{selectedItem.desenvolvedor}</h6>
+                                       </div>
 
-                        </section>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        oi
-                    </SwiperSlide>
+                                        <h1>Informações de négocio</h1>
+
+                                        <div className='negocio'>
+                                            <h6>estoque: {selectedItem.estoque}</h6>
+                                            <h6>Disponivel: {selectedItem.disponivel ? 'Sim' : 'Não'}</h6>
+                                            <h6>Destaque: {selectedItem.destaque ? 'Sim' : 'Não'}</h6>
+                                            <h6>Promoção: {selectedItem.EmPromocao ? 'Sim' : 'Não'}</h6>
+                                        </div>
+                                    </article>
+                                </aside>
+
+                                <figure className='principal'>
+                                    <article className='img'>
+                                        <img src={BuscarImagem(selectedItem.imagem_produto)} alt="" />
+                                    </article>
+
+                                    <article className='jogo'>
+                                        <div className='preco'>
+                                            <h6>Preço: {selectedItem.valor}</h6>
+                                            <h6>Preço em Promoção: {selectedItem.promocao}</h6>
+                                        </div>
+
+                                        <div className='adicional'>
+                                            <h6>Lacamento: {selectedItem.lancamento.substr(0, 10)}</h6>
+                                            <h6>Estoque: {selectedItem.estoque}</h6>
+                                        </div>
+                                    </article>
+                                </figure>
+                            </section>
+                        </SwiperSlide>
+
+                        <SwiperSlide>
+                           <section className='plus'>
+                                <figure className='player'>
+                                    <video controls="true">  <source src={selectedItem.video_url} type="video/mp4" /></video>
+                                </figure>
+
+                                <article className='descricao'>
+                                    <p>{selectedItem.descricao}</p>
+                                </article>
+                           </section>
+                        </SwiperSlide>
 
                     </Swiper>
+                    ))}
                 </section>
 
             </main>
           )}
           
-            <section className='cards'>
+            <section className='cards' >
                 {jogos.map(item => (
 
                 <motion.div
@@ -239,12 +380,12 @@ export default function EditarExcluir(){
                 variants={cardVariants}
                 initial='hidden'
                 animate='visible'
-                >
+                onClick={() => SelecionarJogo(item.produto_id)}>
                     <div className='acoes'>
                         <img src='/assets/images/adm/pencil.png' alt='editar' onClick={e => { e.stopPropagation(); EditarJogo(item.produto_id)}} />
                         <img src='/assets/images/adm/trash.png' alt='remover' onClick={e => { e.stopPropagation(); RemoverJogo(item.produto_id, item.nome) }} />
                     </div>
-                    <div className='card-L' onClick={() => SelecionarJogo(item.produto_id)}>
+                    <div className='card-L'>
                         <div className='Letra'>
                             <h1>{item.nome.substr(0, 1)}</h1>
                         </div>

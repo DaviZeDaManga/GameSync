@@ -170,3 +170,54 @@ export async function TodosGames(){
     return resposta.data
 }
 
+export async function Favoritar(produto, cliente){
+    try{
+        const resposta = await api.post('/favoritar', {
+            produto: produto,
+            cliente: cliente
+        });
+        return resposta.data;
+    }
+    catch(erro){
+        throw erro;
+    }
+}
+
+export async function TodosFavoritos(id){
+    try{
+        const resposta = await api.get(`/favoritos/${id}`);
+        return resposta.data
+    }
+    catch (erro){
+        throw erro;
+    }
+}
+
+export async function TirarFavorito(id){
+const resposta = await api.delete(`/favorito/${id}`);
+return resposta.status
+}
+
+export async function FiltarCategoria(id){
+    const resposta = await api.get(`/categorias/${id}`);
+    return resposta.data
+}
+
+export async function Avaliacao(id, avaliacao, comentario, id_cliente){
+    try{
+        const resposta = await api.post(`/avaliacao/${id}`, {
+            id_cliente: id_cliente,
+            comentario: comentario,
+            avaliacao: avaliacao
+        });
+        return resposta.data
+    }
+    catch(erro){
+        throw erro;
+    }
+}
+
+export async function BuscarGameID(id){
+    const resposta = await api.get(`/games/${id}`);
+    return resposta.data
+}
