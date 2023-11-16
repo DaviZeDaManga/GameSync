@@ -20,6 +20,7 @@ import AddProduct from './pages/admin/AddProducts'
 import EditarExcluir from './pages/admin/changes'
 import Addnews from './pages/admin/AddNews'
 import Game from './pages/web/game'
+import Engine from './pages/web/engine'
 
 import AddProductTest from './test/test'
 
@@ -37,6 +38,7 @@ export default function Routess(){
                 <Route path='/gamesync' element={<GameSync/>} />
                 <Route path='/cadastro' element={<CadastroUser/>} />
                 <Route path='/games/jogar/:id' element={<Game/>} />
+                <Route path='/planos/engine' element={<Engine/>} />
 
                 <Route path='/escolherlogin' element={<EscolherLogin/>} />
                 <Route path="/login" element={<LoginUsuario/>} />
