@@ -217,6 +217,11 @@ export async function Avaliacao(id, avaliacao, comentario, id_cliente){
     }
 }
 
+export async function SelecionarComentario(id){
+    const resposta = await api.get(`/comentario/${id}`)
+    return resposta.data
+}
+
 export async function BuscarGameID(id){
     const resposta = await api.get(`/games/${id}`);
     return resposta.data
