@@ -99,8 +99,6 @@ export default function BarraDeCima ({barra}) {
         TodosGames()
     }, [])
 
-    console.log(tgames)
-
 
     const [configcard, setConfigcard] = useState(0)
 

@@ -94,8 +94,6 @@ export default function Produto() {
         setProdutoinfo(resposta)
     }
 
-    console.log(produtoinfo)
-
     useEffect(() => {
         InfoGame()
     }, [])
@@ -502,7 +500,7 @@ export default function Produto() {
 
                     {comentarios == '' &&
                     <section className='NoComentarios'>
-                        <h1>Esse produto ainda nao tem nunhum comentario, no que tal ser o primeiro a comentar?</h1>
+                        <h1>Esse produto ainda nao tem nunhum comentario, que tal ser o primeiro a comentar?</h1>
                     </section>}
 
                       

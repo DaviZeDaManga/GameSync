@@ -5,12 +5,27 @@ import { useState, useEffect } from 'react'
 import storage, { set } from 'local-storage';
 import EmojiPicker from 'emoji-picker-react';
 import FooterPage from '../../../components/footerpage/index,';
+import { useParams } from 'react-router-dom';
+import { BuscarGameID } from '../../../connection/productAPI';
 
 export default function Game() {
     const [jogar, setJogar] = useState(false)
+    const { id } = useParams()
 
+    const [infogame, setInfogame] = useState([])
 
+    async function InfoJogo() {
+        let resposta = await BuscarGameID(id)
 
+        setInfogame(resposta)
+        console.log(resposta[0])
+    }
+
+    useEffect(() => {
+        InfoJogo()
+    }, [])
+
+    
 
 
 
@@ -103,7 +118,18 @@ export default function Game() {
                     </>
                     }
                     {jogar == true &&
-                    <iframe src='https://kirka.io' />}
+
+                    <>
+                    {infogame.map( item =>
+                    
+                    <>
+                    <iframe src={item.url} />
+                    </>
+
+                    )}
+                    </>
+                    
+                    }
                 </main>
                 <section className='sobre'>
                     <div className='acoes'>
@@ -223,7 +249,7 @@ export default function Game() {
 
                     {comentarios == '' &&
                     <section className='NoComentarios'>
-                        <h1>Esse produto ainda nao tem nunhum comentario, no que tal ser o primeiro a comentar?</h1>
+                        <h1>Esse produto ainda nao tem nunhum comentario, que tal ser o primeiro a comentar?</h1>
                     </section>}
 
                       
