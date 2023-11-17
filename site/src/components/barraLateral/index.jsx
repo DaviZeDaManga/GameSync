@@ -394,7 +394,9 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
                         </section>
                     </div>
 
-                    <div className='botoesdown'>
+                    
+
+                        <div className='botoesdown'>
                         <section onClick={Massistente} className='redirects'>
                             <img src="/assets/images/carrinho/bot.png" />
                         </section>
@@ -474,7 +476,10 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
                                         <h1>Subtotal</h1>
                                         <p>R$123.99</p>
                                     </div>
-                                    <div className='cartao'>
+
+
+                                    <a href='/PayCard'>         
+                                          <div className='cartao'>  
                                         <section className='card'>
                                             <div className='img'>
                                                 <img src='/assets/images/carrinho/cartao-de-credito.png' />
@@ -482,10 +487,12 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
                                             <div className='info'>
                                                 <h1>2x de R$63,89</h1>
                                                 <p>sem juros</p>
-                                            </div>
+                                            </div>                                         
                                         </section>
                                     </div>
-                                    <div className='boleto'>
+                                     </a>
+                                   
+                                            <div className='boleto'>
                                         <section className='card'>
                                             <div className='img'>
                                                 <img src='/assets/images/carrinho/codigo-de-barras.png' />
@@ -497,6 +504,7 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
                                         </section>
                                     </div>
                                 </div>
+                                
                                 <div className='botao continuar'>
                                     <p className='black'>Fechar pedido</p>
                                 </div>
