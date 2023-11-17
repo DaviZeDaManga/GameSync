@@ -6,23 +6,38 @@
         justify-content: start;
         align-items: start;
         flex-wrap: wrap;
-        
         width: 100vw;
         height: auto;
         padding: 20px 20px 20px 370px;
         gap: 30px;
 
-        .Grafico-pau{
+        .Graficos{
             display: flex;
-            background-color: thistle;
+            flex-direction: row;
+            height: 40rem;
             width: 100%;
-            height: 200px;
+            justify-content: space-around;
+            justify-content: center;
+            gap: 100px;
 
-            .pau-chart{
-                width: 500px;
-                background-color: rgb(84, 251, 0);
-                color: yellowgreen;
+            .Grafico-pau{
+            display: flex;
+            width: 50%;
+            height: 590px; 
             }
+
+           .Grafico-pizza{
+            display: flex;
+            width: 50%;
+            height: 590px; 
+           }
         }
+
+        .Grafico-linha{
+            display: flex;
+            width: 100%;
+            height: 590px; 
+        }
+        
     }
 }
