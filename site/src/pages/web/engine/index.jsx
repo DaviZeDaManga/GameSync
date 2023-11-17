@@ -21,10 +21,9 @@ export default function Engine() {
                 rotateYMax={3}
                 >
                     <main className='sobre'>
-                        {/* <div className='download'>
+                        <div className='download'>
                             <div>
-                                <h1>Crie seus Jogos!</h1>
-
+                                <p>A GameMaker Engine é uma ferramenta de desenvolvimento de jogos que opera com base em eventos e ações. Ela oferece uma linguagem de programação chamada GML e suporta a criação de jogos 2D e 3D. Além disso, fornece recursos para design de níveis e permite exportar jogos para várias plataformas, tornando-a uma escolha popular para desenvolvedores de jogos de todos os níveis de habilidade.</p>
                             </div>
                             <div className='downloads'>
                                 <button>
@@ -34,25 +33,16 @@ export default function Engine() {
                                     Download
                                 </button>
                             </div>
-                        </div> */}
+                        </div>
 
                         <img className='sonic' src='/assets/images/engine/sonic.png' />
                     </main>
                 </Atropos>
             </section>
 
-            {/* <section className='bene-gerais'>
-                <section className='card blue'>
-                    <h1>Linguagem de programação fácil de aprender:</h1>
-                    <p>Embora o Game Maker permita que os desenvolvedores utilizem seu sistema de arrastar e soltar, também incluem seu próprio idioma de programação chamado GML (GameMaker Language). GML é fácil de aprender e é uma boa introdução para aqueles que desejam melhorar suas habilidades de programação.</p>
-                </section>
-                <section className='card'>
-
-                </section>
-                <section className='card'>
-
-                </section>
-            </section> */}
+            <section className='bene'>
+                
+            </section>
         </div>
     )
 }

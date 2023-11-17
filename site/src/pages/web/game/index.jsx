@@ -1,12 +1,13 @@
 import './index.scss'
 import BarraLateral from '../../../components/barraLateral'
 import Title from '../../../components/title'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import storage, { set } from 'local-storage';
 import EmojiPicker from 'emoji-picker-react';
 import FooterPage from '../../../components/footerpage/index,';
-import { useParams } from 'react-router-dom';
-import { BuscarGameID } from '../../../connection/productAPI';
+import { useParams, useNavigate } from 'react-router-dom';
+import { BuscarGameID, BuscarImagem } from '../../../connection/productAPI';
+import LoadingBar from 'react-top-loading-bar';
 
 export default function Game() {
     const [jogar, setJogar] = useState(false)
@@ -25,6 +26,7 @@ export default function Game() {
         InfoJogo()
     }, [])
 
+    console.log(infogame)
     
 
 
@@ -84,36 +86,60 @@ export default function Game() {
 
     const [mostrar, setMostrar] = useState('desc')
     const [mostrardesc, setMostrardesc] = useState(true)
-    const [mostrarcoment, setMostrarcoment] = useState(false)
+    const [mostrarcoment, setMostrarcoment] = useState(true)
 
-    useEffect(() => {
-        if(mostrar == 'coment') {
-            setMostrarcoment(true)
-            setMostrardesc(false)
-        }
-        else {
-            setMostrardesc(true)
-            setMostrarcoment(false)
-        }
-    }, [mostrar])
+    // useEffect(() => {
+    //     if(mostrar == 'coment') {
+    //         setMostrarcoment(true)
+    //         setMostrardesc(false)
+    //     }
+    //     else {
+    //         setMostrardesc(true)
+    //         setMostrarcoment(false)
+    //     }
+    // }, [mostrar])
+
+
+
+
+
+    const ref = useRef()
+    const navegate = useNavigate()
+    var   [carregando, setCarregando] = useState(false)
+
+    function Navegar() {
+        ref.current.continuousStart();
+        setCarregando(true);
+
+        setTimeout(() => {
+            navegate('/planos/engine')
+        }, 3000);
+    }
 
     return(
         <div className='game'>
             <BarraLateral/>
             <Title
-            nome={'Game'}
+            nome={'Jogar'}
             voltar={true}
             />
 
+            <LoadingBar color='#f11946' ref={ref} />
+
             <section className='gameinfo'>
+
                 <main className='jogo'>
                     {jogar == false &&
                     <>
-                    <img src='/assets/images/games/img/termo.webp' />
+                    {infogame.map( item =>
+                    <img src={BuscarImagem(item.img_jogo)} />    
+                    )}
                     <div className='name'>
-                        <div>
-                            <h1>Termo</h1>
-                        </div>
+                        {infogame.map( item => [
+                            <div>
+                                <h1>{item.nm_jogo}</h1>
+                            </div>
+                        ])}
                     </div>
                     </>
                     }
@@ -123,7 +149,7 @@ export default function Game() {
                     {infogame.map( item =>
                     
                     <>
-                    <iframe src={item.url} />
+                    <iframe src={item.url_jogo} />
                     </>
 
                     )}
@@ -133,13 +159,19 @@ export default function Game() {
                 </main>
                 <section className='sobre'>
                     <div className='acoes'>
+                        {infogame.map( item => 
+                            
+                        <>
                         <section className='title'>
-                            <h1>Termo</h1>
+                            <h1>{item.nm_jogo}</h1>
                         </section>
 
                         <section className='info'>
-                            <p>O objetivo da brincadeira é fazer o usuário adivinhar uma palavra em até seis tentativas. Enquanto a resposta certa não é dada, o jogador precisa arriscar termos ao invés de dar palpites de letras. Além disso, uma nova palavra é escolhida a cada 24h e é a mesma para todos que estejam jogando naquele dia.</p>
+                            <p>{item.ds_descricao}</p>
                         </section>
+                        </>
+                            
+                        )}
 
                         <section className='jogar'>
                             <button onClick={()=> (setJogar(!jogar))}>
@@ -149,22 +181,29 @@ export default function Game() {
                         </section>
                     </div>
 
-                    <section className='trocar'>
-                        <button className={`${mostrar == 'desc' && 'selecionado'}`} onClick={()=> (setMostrar('desc'))}>Sobre</button>
-                        <button className={`${mostrar == 'coment' && 'selecionado'}`} onClick={()=> (setMostrar('coment'))}>Comentarios</button>
-                    </section>
+                    
                 </section>
             </section>
+
+
+
+            {/* <section className='trocar'>
+                <button className={`${mostrar == 'desc' && 'selecionado'}`} onClick={()=> (setMostrar('desc'))}>Sobre</button>
+                <button className={`${mostrar == 'coment' && 'selecionado'}`} onClick={()=> (setMostrar('coment'))}>Comentarios</button>
+            </section> */}
 
 
             {mostrardesc == true &&
             <section className='desc_engine'>
                 <div className="desc">
                     <h1>Sobre</h1>
-                    <p>Grand Theft Auto V (Também conhecido como GTA V, GTA 5 ou GTA Cinco) é um jogo eletrônico no estilo sandbox desenvolvido pela Rockstar North, e publicado pela Rockstar Games. O GTA V é o décimo quinto titulo da série GTA, seu lançamento aconteceu no dia 17 de setembro de 2013 nas plataformas PlayStation 3 e no Xbox 360, em 18 de novembro de 2014 foram lançadas as versões para PlayStation 4 e Xbox One, e em 14 de abril de 2015 foi lançada a última versão para a plataforma Windows. No Brasil, a versão para PlayStation 3 e Xbox 360 chegou no dia 19 de setembro de 2013 e a versão japonesa do jogo foi anunciada entre 2013 e acabou chegando em 15 de Julho do mesmo ano, muito antes da versão brasileira do jogo. O Grand Theft Auto V se passa na cidade metropolitana de Los Santos e no condado de Blaine County, no sul do estado de San Andreas no ano de 2013, cinco anos após os acontecimentos de Grand Theft Auto IV e Grand Theft Auto: Episódios de Liberty City, e quatro anos após Grand Theft Auto: Chinatown Wars. E pela primeira vez em toda saga Grand Theft Auto, este jogo conta uma história com três protagonistas diferentes envolvidos, entre eles estão: Franklin Clinton, Michael De Santa, Trevor Phillips</p> 
+                    {infogame.map( item => [
+                        <>
+                        <p>{item.ds_descricao}</p> 
+                        </>
+                    ])}
                 </div>
-
-                <div className='engine'>
+                <div onClick={()=> (Navegar())} className='engine'>
                     <div className='card'>
                         <img src='/assets/images/GameSync/Rectangle 860.png' />
                     </div>
@@ -315,7 +354,7 @@ export default function Game() {
 
             </section>}
 
-            <FooterPage/>
+            {/* <FooterPage/> */}
 
         </div>
     )

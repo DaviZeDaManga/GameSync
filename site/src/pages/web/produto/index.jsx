@@ -52,7 +52,7 @@ export default function Produto() {
 
 
     
-
+    const [infogame, setInfogame] = useState([])
 
     function MostrarDescricao () {
         setMostdesc(true)
