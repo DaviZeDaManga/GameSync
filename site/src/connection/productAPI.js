@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: 'http://localhost:5000'   
+    baseURL: 'http://129.148.42.252:5012'   
 });
 
 export async function CadastrarProduto(produto) {
@@ -55,7 +55,7 @@ export async function InserirVideo(produto, url) {
 export function BuscarImagem(imagem){
     console.log(api.getUri())
     return `${api.getUri()}/${imagem}`
-    // http://localhost:5000/tools\\capasFilmes\\07824752478hh0yfbfy3uhyhyfuh
+    // http://129.148.42.252:5012/tools\\capasFilmes\\07824752478hh0yfbfy3uhyhyfuh
 }
 
 export async function BuscarJogoNome(nome) {

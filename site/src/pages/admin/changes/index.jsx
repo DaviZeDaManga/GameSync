@@ -265,6 +265,17 @@ export default function EditarExcluir(){
                                         <h1>Desenvolvedor:</h1>
                                         <input type="text" placeholder='Corrija o nome do Desenvolvedora do produto'/>
                                     </div>
+
+                                    <div className='items1'>
+                                        <h1>Lançamento:</h1>
+                                        <input type="date" placeholder='Corrija o nome do Desenvolvedora do produto'/>
+                                    </div>
+
+                                    <div className='items1'>
+                                        <h1>Tamanho:</h1>
+                                        <input type="text" placeholder='Corrija o nome do Desenvolvedora do produto'/>
+                                    </div>
+
                                 </header>
                             </section>
                         </SwiperSlide>
@@ -276,14 +287,63 @@ export default function EditarExcluir(){
                                 </nav>
 
                                 <header className='body'>
-                                    <div className=''>
+                                    <div className='items2'>
                                         <h1>Estoque:</h1>
                                         <input type="number" />
                                     </div>
+
+                                    <div className='items2-RADIO'>
+                                       <div className='radio'>
+                                            <h6>Disponivel:</h6>
+                                            <input type='checkbox' />
+                                       </div>
+
+                                       <div className='radio'>
+                                            <h6>Destaque:</h6>
+                                            <input type='checkbox' />
+                                       </div>
+
+                                       <div className='radio'>
+                                            <h6>Em Promoção:</h6>
+                                            <input type='checkbox' />
+                                       </div>
+                                    </div>
+
+                                    <div className='items2-preco'>
+                                        <div className='preco'>
+                                            <h1>Preço:</h1>
+                                            <input type="number" />
+                                        </div>
+
+                                        <div className='preco'>
+                                            <h1>Preço em Promoção:</h1>
+                                            <input type="number" />
+                                        </div>
+                                    </div>
+                                </header>
+                            </section>
+                        </SwiperSlide>
+
+                        <SwiperSlide>
+                            <section className='alterar-third'>
+                                <nav>
+                                    <h1>Detalhes Finais</h1>
+                                </nav>
+
+                                <header className=''>
+                                    <div>
+                                    <textarea cols='40' rows='4' placeholder='Descrição do Produto'></textarea>
+                                    </div>
+
+                                    <div>
+                                        <input type="file" id="file"/>
+                                    </div>
                                 </header>
 
+                                <footer>
+                                    <input type="url"/>
+                                </footer>
                             </section>
-                       
                         </SwiperSlide>
                     </Swiper>
                 </section>

@@ -22,7 +22,7 @@ export default function Dashboard() {
       labels: dados.map((item) => item.nome),
       datasets: [
         {
-          label: 'Algumas coisas',
+          label: 'Valor Escalado',
           data: dados.map((item) => item.valor),
           backgroundColor: [
           "rgb(222, 251, 0)", 
@@ -39,7 +39,7 @@ export default function Dashboard() {
         },
       ],
     };
-
+    
     setChartData(novoChartData);
   };
 
@@ -47,16 +47,19 @@ export default function Dashboard() {
     <div id='DASHBOARD'>
       <AdmBarraLateral selecionado='dashboard' />
         <main className='Dashboard'>
+
+          <section className="Graficos">
             <div className='Grafico-pau'>
-                {chartData && <BarChart informacoes={chartData} className="pau-chart" />}
-            </div>
+                  {chartData && <BarChart informacoes={chartData} className="pau-chart" />}
+              </div>
+
+              <div className='Grafico-pizza'>
+                  {chartData && <PieChart informacoes={chartData} className="pizza-chart" />}
+              </div>
+          </section>
 
             <div className='Grafico-linha'>
                 {chartData && <LineChart informacoes={chartData} className="linha-chart" />}
-            </div>
-
-            <div className='Grafico-pizza'>
-                {chartData && <PieChart informacoes={chartData} className="pizza-chart" />}
             </div>
         </main>
     </div>

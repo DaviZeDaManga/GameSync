@@ -76,7 +76,7 @@ export default function CadastroAdmin(){
 
                         <div className="botao">
                             <button class="animate__animated animate__rubberBand" onClick={LogAdmin} disabled={carregando} >Entrar</button>
-                            {erro && <div className="erro">{erro}</div>}
+                            {erro && <div class="animate__animated animate__rubberBand" className="erro">{erro}</div>}
                         </div>
                     </form>
                 </div>

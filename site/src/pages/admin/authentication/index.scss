@@ -1,6 +1,6 @@
 #CadastroAdmin {
-    width: 1600px;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     padding: 0px 0px 0px 0px;
    
     .mae-formulario {
@@ -10,14 +10,16 @@
       height: 51.2rem;
       align-items: center;
       justify-content: center;
+
       
       .n-creio {
         position: fixed;
         background-color: #1c1c1c;
-        width: 30rem;
-        height: 30rem;
+        width: 30%;
+        height: 55%;
         border-radius: 8px;
         overflow: hidden;
+    
 
         &::before {
             content: '';
@@ -174,6 +176,13 @@
 
             }
           }
+
+          .botao{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
           .botao > button{
             border: none;
             outline: none;

@@ -2,17 +2,23 @@
     width: 100vw;
     position: absolute;
     left: 0;
-    
-    .name-grupo{
+    .my-atropos {
+        width: 100%;
+        transition: 0.3s;  
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
 
-        width: 100%;
-        margin-top: 20px;
         height: 300px;
         padding: 0px 30px 0px 110px;
+
+        &:hover {
+            transform: scale(0.95);
+        }
+        &:active {
+            transform: scale(0.93);
+        }
 
         .name {
             display: flex;

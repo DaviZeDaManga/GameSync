@@ -4,6 +4,7 @@ import BarraDeCima from '../../../components/baraDeCima'
 import BarraLateral from '../../../components/barraLateral'
 import Title from '../../../components/title'
 import ProdutoCard from '../../../components/produto'
+import Atropos from 'atropos/react';
 
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion';
@@ -20,11 +21,15 @@ export default function Grupos() {
             nome={'Grupos de Games'}
             />
 
-            <section className='name-grupo'>
+            <Atropos
+            className='my-atropos'
+            rotateXMax={3}
+            rotateYMax={3}
+            >
                 <div className='name'>
                     <h1>{titulo}</h1>
                 </div>
-            </section>
+            </Atropos>
 
             <section className='filtragem'>
                 <div className='mostrar'>
