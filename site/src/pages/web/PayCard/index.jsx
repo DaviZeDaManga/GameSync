@@ -1,10 +1,15 @@
 import './index.scss'
+import React from 'react';
 
 export default function PayCard(){
-
+  
  
-    
+    const handleClick = () => {
+      alert('Pagamento Realizado com Sucesso!');
+    };
 
+    
+    
     return(
        
        <main className='PayCard'>
@@ -70,7 +75,10 @@ export default function PayCard(){
  
   <div class="panel-footer">
   <a href='/'> <button class="btn back-btn">Back</button></a> 
-    <a href='/FimPay'><button className='btn netx-btn'>Next Stap</button></a> 
+
+  <button className='btn next-btn' onClick={handleClick}>Finish</button>
+
+
   </div>
 </div>
 
@@ -78,3 +86,4 @@ export default function PayCard(){
         </main>        
     )
 }
+
