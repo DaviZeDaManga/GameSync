@@ -80,7 +80,7 @@ export default function Produto() {
 
 
     function naopode() {
-        alert('Escolha o número de estrelas')
+        toast.warning('Escolha o numero de estrelas')
     }
 
     
@@ -107,8 +107,13 @@ export default function Produto() {
 
 
     function Comentando() {
-        setComentando(comentando + 1)
-        setEmojiselect(false)
+        if(storage('user-logado')){
+            setComentando(comentando + 1)
+            setEmojiselect(false)
+        }
+        else {
+            toast.warning('Você precisa estar logado para comentar!')
+        }
     }
     function VolComentar() {
         setComentando(comentando - 1)
@@ -172,10 +177,8 @@ export default function Produto() {
 
 
 
-    const [carrinhar, setCarronhar] = useState(true)
-
    function SalvarCarrinho(id, nome, desc, preco, img) {
-    	if(carrinhar == true) {
+    	if(storage('user-logado')) {
             let carrinho = new Array()
 
             if(localStorage.hasOwnProperty('carrinho')) {
@@ -191,12 +194,10 @@ export default function Produto() {
             })
 
             localStorage.setItem('carrinho', JSON.stringify(carrinho))
-
-            setCarronhar(false)
         }
 
         else {
-            toast.warning('Este produto já esta no carrinho!');
+            toast.warning('Voce precisa estar logado para salvar este item no carrinho!');
         }
    }
 
@@ -237,10 +238,12 @@ export default function Produto() {
                                 <h1 className={`${item.bt_promocao == true && 'noprice'}`}>R${item.vl_preco}</h1>
                             </div>
                             <div className='comprar'>
-                                <button><Link to={`/BarraLateral/${id}`}></Link>Comprar</button>    
+                                <button><Link to={`/BarraLateral/${id}`}></Link>Comprar</button> 
+
                                 <button onClick={()=> (SalvarCarrinho(id, item.nm_produto, item.ds_descricao, item.vl_preco , item.img_produto))} className='acoes'>
                                     <img src='/assets/images/carrinho/carrinho.png' />
                                 </button>   
+
                                 <button onClick={()=> (setAcoesboo(!acoesboo))} className={`acoes ${acoesboo == true && 'selecionado'}`}>
                                     <img src='/assets/images/acoes/pontos.png' />
                                 </button> 

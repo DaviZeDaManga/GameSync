@@ -1,7 +1,6 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import './index.scss'
-import { Link, useNavigate } from 'react-router-dom'
-import LoadingBar from 'react-top-loading-bar'
+import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
 export default function ProdutoCard({id, imagem, nome, produtora, lancamento, tipo, recarregarpage}) {
@@ -16,7 +15,10 @@ export default function ProdutoCard({id, imagem, nome, produtora, lancamento, ti
         else if (tipo == 'complemento') {
             setTipoprod("Complemento")
         }
-    })          
+    })       
+    
+    
+    
 
     return(
         <>

@@ -278,9 +278,7 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
 
     return(
         <div id="BarraLateral">
-            <BarraDeCima
-            barra={barra}
-            />
+            <BarraDeCima/>
 
             <div>
                 <motion.div

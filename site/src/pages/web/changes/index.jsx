@@ -1,116 +1,136 @@
 import './index.scss'
-import { useState } from 'react'
-
+import { useState, useEffect } from 'react'
 import BarraLateral from '../../../components/barraLateral'
-import BarraDeCima from '../../../components/baraDeCima'
+import storage, { set } from 'local-storage';
 
-
-import LinksPerfil from '../../../components/perfil_mudar_links'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
+import { EffectCoverflow, Navigation, Pagination } from 'swiper/modules';
 
 export default function MudarPerfil(){
-    const [nameuser, setNameuser] = useState('Davi Matinho')
-
     const [backgroundColor, setBackgroundColor] = useState('linear-gradient(to bottom, rgba(206, 165, 60, 1), rgba(175, 64, 49, 1))');
 
     const MudarCor = (NovaCor) => {
         setBackgroundColor(NovaCor);
     };
 
+
+
+
+    const [imguser, setImguser] = useState("")
+    const [nome, setNome] = useState('')
+
+    useEffect(() => {
+        if(storage('user-logado')){
+            const nomeUser = storage('user-logado');
+            setNome(nomeUser.nome);
+
+            const imguser = storage('user-logado')
+            setImguser(imguser.img)
+        }
+        else{
+            setNome('anonymous')
+            
+            setImguser('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdAsDSSKeuAFldRDZbOWFuVrdgdAcZf-S6Aw&usqp=CAU')
+        }
+    }, [])
+
+
+
+
+
+    const [escolhermasc, setEscolhermasc] = useState(false)
+    const [mascote, setMascote] = useState('none')
+
+    function EscolherMasc(masc) {
+        setEscolhermasc(false)
+
+        if (masc == 0) {
+            setBackgroundColor('linear-gradient(to bottom, rgba(206, 165, 60, 1), rgba(175, 64, 49, 1))')
+            setMascote('none')
+        }
+        else if(masc == 1) {
+           setMascote('/assets/videos/mascotes/sonic.mp4')
+           setBackgroundColor('linear-gradient(to bottom, black, black)')
+        }
+        else if(masc == 2) {
+           setMascote('/assets/videos/mascotes/leao.mp4')
+           setBackgroundColor('linear-gradient(to bottom, black, black)')
+        }
+        else if(masc == 3) {
+           setMascote('/assets/videos/mascotes/thanos.mp4')
+           setBackgroundColor('linear-gradient(to bottom, black, black)')
+        }
+    }
+
     return(
         <div id='Change'>
             <BarraLateral/>
-            <BarraDeCima/>
 
-            <nav className='Change-fundo' style={{ background: backgroundColor }}>
-                <div className='Change-fundo-f'>
-                    <img src="assets/images/GameSync/blue.webp" alt="" />
-                </div>
+            {escolhermasc == true &&
+            <section className='mascotes'>
+                <Swiper
+                    effect={'coverflow'}
+                    grabCursor={true}
+                    centeredSlides={true}
+                    slidesPerView={'auto'}
+                    coverflowEffect={{
+                    rotate: 20,
+                    stretch: 0,
+                    depth: 100,
+                    modifier: 1,
+                    slideShadows: true,
+                    }}
+                    modules={[EffectCoverflow]}
+                    className="mySwiper"
+                >
 
-                <div className='Change-fundo-n'>
-                    <p><strong>{nameuser}</strong></p>
-                </div>
+                    <SwiperSlide onClick={()=> (EscolherMasc(1))} className='eu'>
+                        <img className='sonicimg' src='/assets/images/engine/sonic.png' />
+                    </SwiperSlide>
+                    
+                    <SwiperSlide onClick={()=> (EscolherMasc(2))} className='dino'>
+                        <img className='leaoimg' src='/assets/images/mascotes/leao.png' />
+                    </SwiperSlide>
+                    
+                    <SwiperSlide onClick={()=> (EscolherMasc(3))} className='thanos'>
+                        <img className='thanosimg' src='/assets/images/mascotes/thanos.png' />
+                    </SwiperSlide>
+
+                    <SwiperSlide onClick={()=> (EscolherMasc(0))} >
+                        <h1>Não quero!</h1>
+                    </SwiperSlide>
+
+                </Swiper>
+            </section>
+            }
+
+            <nav className='Change-fundo' style={{"background": backgroundColor}}>
+                <main className='img'>
+                    <img src={imguser} />
+                </main>
+                {mascote != "none" &&
+                <div className='videofoda'>
+                    <video src={mascote} autoPlay loop></video>
+                </div>}
             </nav>
 
-            <LinksPerfil />
-
-            <main className='Information'>
-                <section className='Information-pessoal'>
-                    <h1>Informações Pessoais</h1>
-                    
-                    <div className='Information-name'>
-                        <h5>Nome</h5>
-                        <input type="text" required="required" placeholder='Digite aqui seu nome'/>
-                    </div>
-
-                    <div className='Information-DT-g'>
-                        <div className='Information-DT'>
-                            <h5>Data de Nascimento</h5>
-                            <input type="date" required="required" placeholder='Sua data de Nascimento' />
-                        </div>
-
-                        <div className='Information-g'>
-                            <h5>Genero</h5>
-
-                            <select required="required" id="gender" name="gender">
-                                <option value="male">Masculino</option>
-                                <option value="female">Feminino</option>
-                                <option value="other">Outro</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div className='Information-cpf'>
-                        <h5>CPF</h5>
-                        <input required="required"
-                        type="password" />
-                    </div>
-
-                    <button>Alterar dados</button>
+            <main className='informacoes'>
+                <section className='dados'>
+                    {/* <section className='name'>
+                        <h1>{nome}</h1>
+                    </section>
+                    <section className='desc'>
+                        <p>Olá, seja bem-vindo a sua pagina do usuário, aqui você pode fazer diversas modificações no seu perfil, como escolher um mascote para te definir, alterar dados pessoais, e saber o status de algumas ações sua perante a GameSync</p>
+                    </section> */}
                 </section>
-
-                <article className='Information-perfil'>
-                    <h1>Informações do Perfil</h1>
-                    
-                    <div className='Information-name'>
-                        <h5>Nome do Perfil</h5>
-                        <input type="text" placeholder='Digite aqui o nome do perfil'/>
-                    </div>
-
-                    <div className='Information-I-FP'>
-                        <div className='Information-I-F'>
-                            <h5>Escolher imagem de fundo</h5>
-
-                            <label className='upload'>
-                                <input type="file" placeholder='Procurar' />
-                            </label>
-                        </div>
-
-                        <div className='Information-I-F'>
-                            <h5>Escolher imagem de Perfil</h5>
-
-                            <label className='upload'>
-                                <input type="file" placeholder='Procurar'/>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div className='Information-color'>
-                        <h5>Escolher cores</h5>
-
-                        <div className='cores'>
-                        <button className='red' onClick={() => MudarCor('rgba(212, 70, 70, 1)')}></button>
-                        <button className='green' onClick={() => MudarCor('linear-gradient(to bottom, rgba(107, 189, 106, 1), rgba(22, 133, 133, 1))')}></button>
-                        <button className='purple' onClick={() => MudarCor('linear-gradient(to bottom, rgba(143, 69, 201, 1), rgba(84, 63, 212, 1))')}></button>
-                        <button className='orangeF' onClick={() => MudarCor('linear-gradient(to bottom, rgba(212, 121, 70, 1), rgba(212, 70, 70, 1))')}></button>
-                        <button className='orangeL' onClick={() => MudarCor('linear-gradient(to bottom, rgba(206, 165, 60, 1), rgba(175, 64, 49, 1))')}></button>
-
-                        <button className='nova'><div className='horizontal'></div> <div className='vertical'></div></button>
-                        </div>
-                    </div>
-
-                    <button className='Alterar'>Alterar dados</button>
-                </article>
+                <section onClick={() => (setEscolhermasc(true))} className='dados-perfil'>
+                    <button>Escolher mascote</button>
+                </section>
             </main>
+           
 
         </div>
     )

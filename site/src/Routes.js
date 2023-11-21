@@ -23,6 +23,8 @@ import Game from './pages/web/game'
 import Engine from './pages/web/engine'
 import PayCard from './pages/web/PayCard'
 import FimPay from './pages/web/FimPay'
+import Pesquisa from './pages/web/pesquisar'
+import Gamespage from './pages/web/gamespage'
 
 import AddProductTest from './test/test'
 
@@ -39,10 +41,12 @@ export default function Routess(){
                 <Route path='/planos/gamesync' element={<Planosacess/>} />
                 <Route path='/gamesync' element={<GameSync/>} />
                 <Route path='/cadastro' element={<CadastroUser/>} />
+                <Route path='/games' element={<Gamespage/>} />
                 <Route path='/games/jogar/:id' element={<Game/>} />
                 <Route path='/planos/engine' element={<Engine/>} />
                 <Route path='/PayCard' element={<PayCard/>} />
                 <Route path='/FimPay' element={<FimPay/>} />
+                <Route path='/pesquisar' element={<Pesquisa/>} />
 
                 <Route path='/escolherlogin' element={<EscolherLogin/>} />
                 <Route path="/login" element={<LoginUsuario/>} />
