@@ -10,7 +10,8 @@ import 'swiper/css/pagination';
 import { EffectCoverflow, Navigation, Pagination } from 'swiper/modules';
 
 export default function MudarPerfil(){
-    const [backgroundColor, setBackgroundColor] = useState('linear-gradient(to bottom, rgba(206, 165, 60, 1), rgba(175, 64, 49, 1))');
+    const [backgroundColor, setBackgroundColor] = useState('linear-gradient(130deg, rgba(206, 165, 60, 1), rgba(175, 64, 49, 1))');
+    const [cor, setCor] = useState('linear-gradient(130deg, rgba(206, 165, 60, 1), rgba(175, 64, 49, 1))');
 
     const MudarCor = (NovaCor) => {
         setBackgroundColor(NovaCor);
@@ -39,8 +40,7 @@ export default function MudarPerfil(){
 
 
 
-
-
+    const [fundo, setFundo] = useState('')
     const [escolhermasc, setEscolhermasc] = useState(false)
     const [mascote, setMascote] = useState('none')
 
@@ -48,22 +48,31 @@ export default function MudarPerfil(){
         setEscolhermasc(false)
 
         if (masc == 0) {
-            setBackgroundColor('linear-gradient(to bottom, rgba(206, 165, 60, 1), rgba(175, 64, 49, 1))')
+            setBackgroundColor('linear-gradient(130deg, rgba(206, 165, 60, 1), rgba(175, 64, 49, 1))')
+            setCor('linear-gradient(130deg, rgba(206, 165, 60, 1), rgba(175, 64, 49, 1))')
             setMascote('none')
         }
         else if(masc == 1) {
-           setMascote('/assets/videos/mascotes/sonic.mp4')
-           setBackgroundColor('linear-gradient(to bottom, black, black)')
+           setMascote('/assets/images/mascotes/soniquin.gif')
+           setCor('linear-gradient(120deg, rgb(0, 49, 128), rgb(0, 110, 255))')
+           setFundo('/assets/images/fundosperfil/sonic.png')
+           setBackgroundColor('linear-gradient(to bottom, rgba(0, 0, 0, 0.356), rgba(0, 0, 0, 0.356))')
         }
         else if(masc == 2) {
-           setMascote('/assets/videos/mascotes/leao.mp4')
-           setBackgroundColor('linear-gradient(to bottom, black, black)')
+           setMascote('/assets/images/mascotes/thanos.gif')
+           setCor('linear-gradient(130deg, rgb(52, 154, 76), rgb(60, 156, 92))')
+           setFundo('/assets/images/fundosperfil/proerd.jpeg')
+           setBackgroundColor('linear-gradient(to bottom, rgba(0, 0, 0, 0.356), rgba(0, 0, 0, 0.356))')
         }
         else if(masc == 3) {
-           setMascote('/assets/videos/mascotes/thanos.mp4')
-           setBackgroundColor('linear-gradient(to bottom, black, black)')
+           setMascote('/assets/images/mascotes/thanos.mp4')
+           setCor('linear-gradient(130deg, rgb(154, 52, 154), rgb(60, 60, 156))')
+           setFundo('/assets/images/fundosperfil/sonic.png')
+           setBackgroundColor('linear-gradient(to bottom, rgba(0, 0, 0, 0.356), rgba(0, 0, 0, 0.356))')
         }
     }
+
+
 
     return(
         <div id='Change'>
@@ -113,21 +122,29 @@ export default function MudarPerfil(){
                 </main>
                 {mascote != "none" &&
                 <div className='videofoda'>
-                    <video src={mascote} autoPlay loop></video>
+                    <img src={mascote}  />
                 </div>}
+                <img className='fundo' src={fundo} />
             </nav>
 
             <main className='informacoes'>
                 <section className='dados'>
-                    {/* <section className='name'>
+                    <section className='name'>
                         <h1>{nome}</h1>
                     </section>
-                    <section className='desc'>
-                        <p>Olá, seja bem-vindo a sua pagina do usuário, aqui você pode fazer diversas modificações no seu perfil, como escolher um mascote para te definir, alterar dados pessoais, e saber o status de algumas ações sua perante a GameSync</p>
-                    </section> */}
+                    <main className='desc'>
+
+                    </main>
+                    <section className='info'>
+                        <button>Cadastrar</button>
+                        <button>Entrar</button>
+                    </section>
                 </section>
-                <section onClick={() => (setEscolhermasc(true))} className='dados-perfil'>
-                    <button>Escolher mascote</button>
+                <section className='dados-perfil' style={{"background": cor}}>
+                    <div>
+
+                    </div>
+                    <button onClick={() => (setEscolhermasc(true))}>Escolher mascote</button>
                 </section>
             </main>
            

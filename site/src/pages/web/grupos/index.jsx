@@ -1,17 +1,29 @@
 import './index.scss'
 
-import BarraDeCima from '../../../components/baraDeCima'
 import BarraLateral from '../../../components/barraLateral'
 import Title from '../../../components/title'
 import ProdutoCard from '../../../components/produto'
 import Atropos from 'atropos/react';
 
-import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion';
-import { useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { BuscarImagem, FiltarCategoria } from '../../../connection/productAPI';
 
 export default function Grupos() {
-    const [titulo, setTitulo] = useState("GameGrupos")
+    const { id } = useParams()
+
+    const [jogos, setJogos] = useState([])
+
+    async function JogosCategoria() {
+        let resposta = await FiltarCategoria(id)
+        setJogos(resposta)
+    }
+
+    useEffect(()=> {
+        JogosCategoria()
+    }, [])
+    
+    console.log(jogos)
 
     return (
         <section id='Grupos'>
@@ -27,7 +39,7 @@ export default function Grupos() {
             rotateYMax={3}
             >
                 <div className='name'>
-                    <h1>{titulo}</h1>
+                    <h1>{}</h1>
                 </div>
             </Atropos>
 
@@ -40,12 +52,15 @@ export default function Grupos() {
             </section>
 
             <div className='grupo'>
+                {jogos.map( item => 
+                    
                 <ProdutoCard
-                    imagem={'https://imgs.search.brave.com/F-akkk9WgONHprNR_K-jNOtLt1TvV4ElecXgduldH-0/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9maWxl/cy50ZWNub2Jsb2cu/bmV0L3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDIwLzEyL2NvbW8t/am9nYXItbWluZWNy/YWZ0LXZpYS1oYW1h/Y2hpLTM0MHgxOTEu/anBn'}
-                    nome={'Minecraft Bedrock Edition'}
-                    produtora={'Mojang'}
-                    estado={'Novo'}
-                />
+                    imagem={BuscarImagem(item.img_produto)}
+                    nome={item.nm_produto}
+                    estado={item.ds_tamanho}
+                />    
+                    
+                )}
             </div>
         </section>
     )

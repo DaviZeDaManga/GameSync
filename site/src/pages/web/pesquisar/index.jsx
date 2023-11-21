@@ -6,6 +6,8 @@ import { BuscarImagem } from '../../../connection/productAPI';
 import { useState, useEffect } from 'react'
 import BarraLateral from '../../../components/barraLateral';
 import { Link } from 'react-router-dom';
+import { BuscarJogoNome } from '../../../connection/productAPI';
+import { toast } from 'react-toastify';
 
 export default function Pesquisa() {
     const [x, setX] = useState(0);
@@ -30,7 +32,23 @@ export default function Pesquisa() {
 
 
 
+    const [pesqnome, setPesqnome] = useState('')
+    const [jogosnome, setJogosnome] = useState([])
 
+    async function BuscarPorNome() {
+        try {
+            let resposta = await BuscarJogoNome(pesqnome)
+            setJogosnome(resposta)
+        } catch {
+            
+        }
+    }
+
+    useEffect(()=> {
+        BuscarPorNome()
+    }, [pesqnome])
+
+    console.log(jogosnome)
 
 
 
@@ -98,25 +116,46 @@ export default function Pesquisa() {
             <BarraLateral/>
 
             <section className='barraup-pesquisa'>  
-                <input type="text" placeholder="procurar na GameSync" />
-                <button>
-                    
-                </button>
+                <input type="text" placeholder="procurar na GameSync" onChange={(e) => setPesqnome(e.target.value)} value={pesqnome}/>
             </section>
 
             <section id='pesquisar'>
                 <main className='pGames'>
 
-                    {tgames.map( item =>
+                    {pesqnome != "" &&
+                    <>
+                    {jogosnome.map( item =>
+
+                        <ProdutoCard
+                            id={item.id}
+                            nome={item.nome}
+                            imagem={BuscarImagem(item.imagem_produto)}
+                            lancamento={item.tamanho}
+                        />
                         
-                    <ProdutoCard
-                        id={item.produto_id}
-                        nome={item.nome}
-                        imagem={BuscarImagem(item.imagem_produto)}
-                        lancamento={item.tamanho}
-                    />
-                    
                     )}
+
+                    {jogosnome.length == 0 &&
+                    <section className='errorpesquisa'>
+                        <h1>Parece que não encontramos nenhum jogo :( tente procurar por outras palavras chave</h1>
+                    </section>}
+                    </>
+                    }
+
+                    {pesqnome == '' &&
+                    <>
+                    {tgames.map( item =>
+                                            
+                        <ProdutoCard
+                            id={item.produto_id}
+                            nome={item.nome}
+                            imagem={BuscarImagem(item.imagem_produto)}
+                            lancamento={item.tamanho}
+                        />
+                        
+                    )}
+                    </>
+                    }
 
                 </main>
 
@@ -156,6 +195,38 @@ export default function Pesquisa() {
                                 <h1>{nomefiltro}</h1>
                             </section>
                         </section>
+
+                        {escolhido == 2 && 
+                        <main className='gamegrupos'>
+                            <section className='gamegrupo'>
+                                <h1>Terror</h1>
+                            </section>
+                            <section className='gamegrupo'>
+                                <h1>RPG</h1>
+                            </section>
+                            <section className='gamegrupo'>
+                                <h1>Ação</h1>
+                            </section>
+                            <section className='gamegrupo'>
+                                <h1>Purzzle</h1>
+                            </section>
+                            <section className='gamegrupo'>
+                                <h1>Desafios</h1>
+                            </section>
+                            <section className='gamegrupo'>
+                                <h1>Tiro</h1>
+                            </section>
+                            <section className='gamegrupo'>
+                                <h1>Terror</h1>
+                            </section>
+                            <section className='gamegrupo'>
+                                <h1>Terror</h1>
+                            </section>
+                            <section className='gamegrupo'>
+                                <h1>Terror</h1>
+                            </section>
+                        </main>
+                        }
 
                         {escolhido == 3 &&
                         <main className='surpreenda'>

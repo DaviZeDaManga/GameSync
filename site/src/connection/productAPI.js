@@ -5,6 +5,7 @@ const api = axios.create({
     baseURL: 'http://localhost:5000'
 });
 
+
 export async function CadastrarProduto(produto) {
     const resposta = await api.post('/produto', produto);
     if (resposta.status === 200) {
