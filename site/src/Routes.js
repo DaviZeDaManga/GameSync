@@ -22,7 +22,6 @@ import Addnews from './pages/admin/AddNews'
 import Game from './pages/web/game'
 import Engine from './pages/web/engine'
 import PayCard from './pages/web/PayCard'
-import FimPay from './pages/web/FimPay'
 import Pesquisa from './pages/web/pesquisar'
 import Gamespage from './pages/web/gamespage'
 
@@ -45,7 +44,6 @@ export default function Routess(){
                 <Route path='/games/jogar/:id' element={<Game/>} />
                 <Route path='/planos/engine' element={<Engine/>} />
                 <Route path='/PayCard' element={<PayCard/>} />
-                <Route path='/FimPay' element={<FimPay/>} />
                 <Route path='/pesquisar' element={<Pesquisa/>} />
 
                 <Route path='/escolherlogin' element={<EscolherLogin/>} />
