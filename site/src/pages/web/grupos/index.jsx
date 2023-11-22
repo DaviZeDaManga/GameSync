@@ -7,30 +7,31 @@ import Atropos from 'atropos/react';
 
 import { Link, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { BuscarImagem, ListarTodosJogos } from '../../../connection/productAPI';
+import { BuscarImagem, FiltarCategoria } from '../../../connection/productAPI';
 
 export default function Grupos() {
     const { id } = useParams()
 
     const [jogos, setJogos] = useState([])
+    const [categoria, setCategoria] = useState()
 
     async function JogosCategoria() {
-        let resposta = await ListarTodosJogos(id)
+        let resposta = await FiltarCategoria(id)
         setJogos(resposta)
+
+        let nomeca = jogos.filter( item => item.nm_categoria)
+        setCategoria(nomeca)
     }
 
     useEffect(()=> {
         JogosCategoria()
     }, [])
     
-    console.log(jogos)
-
-    const categoria = jogos.filter(categoria => (categoria.categoria_id == id));
 
 
 
 
-    console.log( categoria );
+
 
     return (
         <section id='Grupos'>
@@ -46,7 +47,7 @@ export default function Grupos() {
             rotateYMax={3}
             >
                 <div className='name'>
-                    <h1>Teste</h1>
+                    <h1>{categoria}</h1>
                 </div>
             </Atropos>
 
@@ -59,13 +60,13 @@ export default function Grupos() {
             </section>
 
             <div className='grupo'>
-                {categoria.map( item => 
+                {jogos.map( item => 
                     
                 <ProdutoCard
-                    id={item.produto_id}
-                    imagem={BuscarImagem(item.imagem_produto)}
-                    nome={item.nome}
-                    lancamento={item.tamanho}
+                    id={item.id_produto}
+                    imagem={BuscarImagem(item.img_produto)}
+                    nome={item.nm_produto}
+                    lancamento={item.ds_tamanho}
                 />    
                     
                 )}

@@ -106,7 +106,7 @@ export default function Produto() {
 
 
     function Comentando() {
-        if(!storage('user-logado')){
+        if(storage('user-logado')){
             setComentando(comentando + 1)
             setEmojiselect(false)
         }
@@ -132,7 +132,7 @@ export default function Produto() {
 
     async function Comentar() {
         
-        if(!storage('usuer-logado')) {
+        if(storage('usuer-logado')) {
             await Avaliacao(id, estrelas, comentario, 1)
         }
 

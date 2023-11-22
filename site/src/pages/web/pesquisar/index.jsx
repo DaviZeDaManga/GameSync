@@ -47,6 +47,8 @@ export default function Pesquisa() {
         BuscarPorNome()
     }, [pesqnome])
 
+    console.log(jogosnome)
+
 
     const [escolhido, setEscolhido] = useState(0)
 
@@ -92,7 +94,7 @@ export default function Pesquisa() {
     const [jogoall, setJogoall] = useState([])
 
     function Idaleatorio() {
-        const numeroAleatorio = Math.floor(Math.random() * 20) + 1;
+        const numeroAleatorio = Math.floor(Math.random() * tgames.length) + 1;
         setIdaleatorio(numeroAleatorio)
     }
 
