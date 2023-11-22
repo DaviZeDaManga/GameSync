@@ -235,7 +235,7 @@ export default function Pesquisa() {
                         <ProdutoCard
                             id={item.id}
                             nome={item.nome}
-                            imagem={BuscarImagem(item.imagem_produto)}
+                            imagem={BuscarImagem(item.img_produto)}
                             lancamento={item.tamanho}
                         />
                         
