@@ -1,5 +1,4 @@
 import './index.scss'
-import axios from 'axios'
 
 import BarraLateral from '../../../components/barraLateral'
 import FooterPage from '../../../components/footerpage/index,'
@@ -107,7 +106,7 @@ export default function Produto() {
 
 
     function Comentando() {
-        if(storage('user-logado')){
+        if(!storage('user-logado')){
             setComentando(comentando + 1)
             setEmojiselect(false)
         }
@@ -133,7 +132,7 @@ export default function Produto() {
 
     async function Comentar() {
         
-        if(storage('usuer-logado')) {
+        if(!storage('usuer-logado')) {
             await Avaliacao(id, estrelas, comentario, 1)
         }
 
@@ -190,7 +189,7 @@ export default function Produto() {
 
 
 
-   function SalvarCarrinho(id, nome, desc, preco, img) {
+    function SalvarCarrinho(id, nome, desc, preco, img) {
     	if(storage('user-logado')) {
             let carrinho = new Array()
 
@@ -212,48 +211,96 @@ export default function Produto() {
         else {
             toast.warning('Voce precisa estar logado para salvar este item no carrinho!');
         }
-   }
+    }
 
 
 
-   const [poravaliacoes, setPoravaliacoes] = useState([])
-   const [porcum, setPorcum] = useState(0)
-   const [porcdois, setPorcdois] = useState(0)
-   const [porctres, setPorctres] = useState(0)
-   const [porcquatro, setPorcquatro] = useState(0)
-   const [porccinco, setPorccinco] = useState(0)
 
-   function Avaliacoes() {
-        let qntdavaliacao = comentarios.length
-        setAvaliacoes(qntdavaliacao)
 
-        let nota = comentarios.map( item => item.avaliacao)
+
+
+
+
+
+    const [porcum, setPorcum] = useState(0)
+    const [porcdois, setPorcdois] = useState(0)
+    const [porctres, setPorctres] = useState(0)
+    const [porcquatro, setPorcquatro] = useState(0)
+    const [porccinco, setPorccinco] = useState(0)
+
+    function Avaliacoes() {
+            let qntdavaliacao = comentarios.length
+            setAvaliacoes(qntdavaliacao)
+    }
+
+    useEffect(() => {
+            Avaliacoes()
+    })
+
+    useEffect(() => {
+        let nota = comentarios.filter( item => item.avaliacao == 5)
+        let qtdnota = nota.length
+
+        if (qtdnota > 0) {
+            let resp = qtdnota * 100 / avaliacoes
+            setPorccinco(Math.trunc(resp))
+        }
+        else {
+            setPorccinco(0)
+        }
+    })
+
+    useEffect(() => {
+        let nota = comentarios.filter( item => item.avaliacao == 4)
+        let qtdnota = nota.length
+
+        if (qtdnota > 0) {
+            let resp = qtdnota * 100 / avaliacoes
+            setPorcquatro(Math.trunc(resp))
+        }
+        else {
+            setPorcquatro(0)
+        }
+    })
+
+    useEffect(() => {
+        let nota = comentarios.filter( item => item.avaliacao == 3)
+        let qtdnota = nota.length
+
+        if (qtdnota > 0) {
+            let resp = qtdnota * 100 / avaliacoes
+            setPorctres(Math.trunc(resp))
+        }
+        else {
+            setPorctres(0)
+        }
+    })
+
+    useEffect(() => {
+        let nota = comentarios.filter( item => item.avaliacao == 2)
+        let qtdnota = nota.length
         
-        if (nota == 1 ) {
-            let transform = 1 / qntdavaliacao * 100
-            setPorcum(transform)
+        if (qtdnota > 0) {
+            let resp = qtdnota * 100 / avaliacoes
+            setPorcdois(Math.trunc(resp))
         }
-        else if (nota == 2 ) {
-            let transform = 2 / qntdavaliacao * 100
-            setPorcdois(transform)
+        else {
+            setPorcdois(0)
         }
-        else if (nota == 3 ) {
-            let transform = 3 / qntdavaliacao * 100
-            setPorctres(transform)
-        }
-        else if (nota == 4 ) {
-            let transform = 4 / qntdavaliacao * 100
-            setPorcquatro(transform)
-        }
-        else if (nota == 5 ) {
-            let transform = 5 / qntdavaliacao * 100
-            setPorccinco(transform)
-        }
-   }
+    })
 
-   useEffect(() => {
-        Avaliacoes()
-   })
+    useEffect(() => {
+        let nota = comentarios.filter( item => item.avaliacao == 1)
+        let qtdnota = nota.length
+        
+        if (qtdnota > 0) {
+            let resp = qtdnota * 100 / avaliacoes
+            setPorcum(Math.trunc(resp))
+        }
+        else {
+            setPorcum(0)
+        }
+    })
    
     
     return(
@@ -491,35 +538,35 @@ export default function Produto() {
                                 <div className='porcentagem'>
                                     <div id="p5" style={{"width": porccinco + '%'}} className='porcento'></div>
                                 </div>
-                                <p>{porccinco}%</p>
+                                {/* <p>{porccinco}%</p> */}
                             </div>
                             <div className='resultado'>
                                 <p>4</p>
                                 <div className='porcentagem'>
                                     <div id="p4" style={{"width": porcquatro + '%'}} className='porcento'></div>
                                 </div>
-                                <p>{porcquatro}%</p>
+                                {/* <p>{porcquatro}%</p> */}
                             </div>
                             <div className='resultado'>
                                 <p>3</p>
                                 <div className='porcentagem'>
                                     <div id="p3" style={{"width": porctres + '%'}} className='porcento'></div>
                                 </div>
-                                <p>{porctres}%</p>
+                                {/* <p>{porctres}%</p> */}
                             </div>
                             <div className='resultado'>
                                 <p>2</p>
                                 <div className='porcentagem'>
                                     <div id="p2" style={{"width": porcdois + '%'}} className='porcento'></div>
                                 </div>
-                                <p>{porcdois}%</p>
+                                {/* <p>{porcdois}%</p> */}
                             </div>
                             <div className='resultado'>
                                 <p>1</p>
                                 <div className='porcentagem'>
                                     <div id="p1" style={{"width": porcum + '%'}} className='porcento'></div>
                                 </div>
-                                <p>{porcum}%</p>
+                                {/* <p>{porcum}%</p> */}
                             </div>
 
                         </div>

@@ -88,24 +88,28 @@ export default function Pesquisa() {
 
 
     const [idaleatorio, setIdaleatorio] = useState(0)
+    const [filjogoall, setFiljogoall] = useState([])
     const [jogoall, setJogoall] = useState([])
-
-    console.log(jogoall)
 
     function Idaleatorio() {
         const numeroAleatorio = Math.floor(Math.random() * 20) + 1;
         setIdaleatorio(numeroAleatorio)
     }
 
-
     async function GameAleatorio() {
-        let resposta = await BuscarJogoID(idaleatorio)
-        setJogoall(resposta)
+        let resposta = await ListarTodosJogos()
+        setFiljogoall(resposta)
+
+        let filtro = filjogoall.filter( item => item.produto_id == idaleatorio)
+        setJogoall(filtro)
     }
+
+    console.log(jogoall)
 
     useEffect(() => {
         GameAleatorio()
     }, [idaleatorio])
+
 
 
 
@@ -155,8 +159,6 @@ export default function Pesquisa() {
             item.categoria_nome == categoria    
         ))
     }, [categoria])
-
-    console.log(jogosfiltragem)
 
     return(
         <div className='BarraDeCima'>
@@ -393,10 +395,10 @@ export default function Pesquisa() {
                                 {jogoall.map( item => 
                                     
                                 <>
-                                <img src={BuscarImagem(item.img_produto)} />    
+                                <img src={BuscarImagem(item.imagem_produto)} />    
                                     
                                 <div className='preto'>
-                                    <Link to={`/produto/${item.id}`}>
+                                    <Link to={`/produto/${item.produto_id}`}>
                                     <p>Clique para ver o produto</p>
                                     </Link>
                                 </div>
@@ -411,7 +413,7 @@ export default function Pesquisa() {
                             <section className='desc'>
                                 {jogoall.map( item => 
                                     
-                                <p>{item.nm_produto}</p>   
+                                <p>{item.nome}</p>   
                                     
                                 )}
                             </section>}
