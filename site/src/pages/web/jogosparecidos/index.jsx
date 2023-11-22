@@ -3,7 +3,7 @@ import BarraDeCima from '../../../components/baraDeCima'
 import BarraLateral from '../../../components/barraLateral'
 import Title from '../../../components/title'
 import ProdutoCard from '../../../components/produto'
-import { BuscarJogoID, BuscarImagem } from '../../../connection/productAPI'
+import { BuscarJogoID, BuscarImagem, ListarTodosJogos } from '../../../connection/productAPI'
 
 import { useParams, Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
@@ -21,7 +21,36 @@ export default function JogosParecidos() {
         JogoInfo()
     }, [])
 
-    console.log(jogoinfo)
+
+    const [jogos, setJogos] = useState([])
+
+    async function Jogos() {
+        let resposta = await ListarTodosJogos()
+        setJogos(resposta)
+    }
+
+    useEffect(() => {
+        Jogos()
+    }, [])
+
+
+
+
+
+
+
+
+    const [categoria, setCategoria] = useState()
+    const [desenvolvedor, setDesenvolvedor] = useState()
+
+    useEffect(() => {
+        jogoinfo.map( item => setCategoria(item.nm_categoria))
+        jogoinfo.map( item => setDesenvolvedor(item.ds_desenvolvedor))
+    })
+
+    const jogosparecidos = jogos.filter(item => item.categoria_nome == categoria || item.desenvolvedor == desenvolvedor)
+    console.log(jogosparecidos)
+
     return(
         <div id='jogosparecidos'>
             <BarraLateral/>
@@ -55,12 +84,17 @@ export default function JogosParecidos() {
             </section>
 
             <main className='jogos'>
-                <ProdutoCard
-                imagem={'https://imgs.search.brave.com/F-akkk9WgONHprNR_K-jNOtLt1TvV4ElecXgduldH-0/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9maWxl/cy50ZWNub2Jsb2cu/bmV0L3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDIwLzEyL2NvbW8t/am9nYXItbWluZWNy/YWZ0LXZpYS1oYW1h/Y2hpLTM0MHgxOTEu/anBn'}
-                nome={'Minecraft Bedrock Edition'}
-                produtora={'Mojang'}
-                estado={'Novo'}
-                />
+                {jogosparecidos.map( item =>
+                    
+                    <ProdutoCard
+                    id={item.produto_id}
+                    imagem={BuscarImagem(item.imagem_produto)}
+                    nome={item.nome}
+                    lancamento={item.tamanho}
+                    />
+                    
+                )}
+
             </main>
         </div>
     )

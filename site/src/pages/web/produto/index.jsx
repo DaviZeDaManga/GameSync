@@ -98,6 +98,8 @@ export default function Produto() {
         InfoGame()
     }, [])
 
+    console.log(produtoinfo)
+
 
 
 
@@ -178,7 +180,7 @@ export default function Produto() {
 
 
    function SalvarCarrinho(id, nome, desc, preco, img) {
-    	if(storage('user-logado')) {
+    	if(!storage('user-logado')) {
             let carrinho = new Array()
 
             if(localStorage.hasOwnProperty('carrinho')) {

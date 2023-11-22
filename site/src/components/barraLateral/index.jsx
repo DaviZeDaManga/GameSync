@@ -276,6 +276,20 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
         setCarrin(false)
     }
 
+
+
+    const [precos, setPrecos] = useState([])
+    const [total, setTotal] = useState(0)
+
+    function Precinhos() {
+        let numero = 1
+
+        setPrecos([...precos, numero])
+    }
+
+    console.log(precos)
+
+
     return(
         <div id="BarraLateral">
             <BarraDeCima/>
@@ -472,7 +486,7 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
 
                                     <div className='total'>
                                         <h1>Subtotal</h1>
-                                        <p>R$123.99</p>
+                                        <p>R${total}</p>
                                     </div>
 
 
@@ -491,7 +505,7 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
                                      </a>
                                    
                                             <div className='boleto'>
-                                        <section className='card'>
+                                        <section onClick={Precinhos} className='card'>
                                             <div className='img'>
                                                 <img src='/assets/images/carrinho/codigo-de-barras.png' />
                                             </div>

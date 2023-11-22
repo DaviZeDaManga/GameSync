@@ -5,17 +5,12 @@ import { BuscarJogoID, ListarTodosJogos } from '../../../connection/productAPI';
 import { BuscarImagem } from '../../../connection/productAPI';
 import { useState, useEffect } from 'react'
 import BarraLateral from '../../../components/barraLateral';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BuscarJogoNome } from '../../../connection/productAPI';
 import { toast } from 'react-toastify';
 
+
 export default function Pesquisa() {
-    const [x, setX] = useState(0);
-    const [y, setY] = useState(0);
-    const [rotate, setRotate] = useState(0);
-    const [escalapesquisa, setEscalapesquisa] = useState(1)
-    const [pesquisa, setPesquisa] = useState(false)
-    const [games, setGames] = useState (false)
     const [tgames, setTgames] = useState ([])
 
     async function TodosGames() {
@@ -28,6 +23,10 @@ export default function Pesquisa() {
     }, [])
 
 
+
+
+
+    
 
 
 
@@ -47,9 +46,6 @@ export default function Pesquisa() {
     useEffect(()=> {
         BuscarPorNome()
     }, [pesqnome])
-
-    console.log(jogosnome)
-
 
 
     const [escolhido, setEscolhido] = useState(0)
@@ -94,6 +90,8 @@ export default function Pesquisa() {
     const [idaleatorio, setIdaleatorio] = useState(0)
     const [jogoall, setJogoall] = useState([])
 
+    console.log(jogoall)
+
     function Idaleatorio() {
         const numeroAleatorio = Math.floor(Math.random() * 20) + 1;
         setIdaleatorio(numeroAleatorio)
@@ -109,14 +107,118 @@ export default function Pesquisa() {
         GameAleatorio()
     }, [idaleatorio])
 
-    console.log(jogoall)
+
+
+
+
+
+
+
+    const navigate = useNavigate()
+
+    function GameGrupos(id) {
+        navigate('/gamegrupos/' + id)
+    }
+
+
+
+
+
+
+    const [filtragem, setFiltragem] = useState(false)
+
+    const [categoria, setCategoria] = useState('')
+    const [precomax, setPrecomax] = useState(5000)
+    const [precomin, setPrecomin] = useState(0)
+    const [promocao, setPromocao] = useState(false)
+
+    const [jogosfiltragem, setJogosfiltragem] = useState([])
+    
+    useEffect(()=> {
+        if(promocao == true) {
+            setJogosfiltragem( tgames.filter( item => 
+                item.valor > precomin &&
+                item.valor < precomax &&
+                item.EmPromocao == promocao   
+            ))
+        }
+        else if (promocao == false ) {
+            setJogosfiltragem(tgames.filter( item => 
+                item.valor > precomin &&
+                item.valor < precomax 
+            )) 
+        }
+    })
+
+    useEffect(()=> {
+        setJogosfiltragem( tgames.filter( item => 
+            item.categoria_nome == categoria    
+        ))
+    }, [categoria])
+
+    console.log(jogosfiltragem)
 
     return(
         <div className='BarraDeCima'>
             <BarraLateral/>
 
+            {filtragem == true &&
+            <section className='filtragemprod'>
+                <section className='card'>
+                    <section className='title'>
+                        <div onClick={() => (setFiltragem(false))} className='voltar'>
+                            <img src='/assets/images/acoes/seta-esquerda.png' />
+                        </div>
+                        <section className='titlename'>
+                            <h1>Filtragem</h1>
+                        </section>
+                    </section>
+
+                    <select value={categoria} onChange={e => setCategoria(e.target.value)}>
+                        <option>Selecionar</option>
+                        <option value={"Ação"}>Ação</option>
+                        <option value={'Terror'}>Terror</option>
+                        <option value={'FPS'}>FPS</option>
+                        <option value={'RPG'}>RPG</option>
+                        <option value={'Souls Like'}>Souls Like</option>
+                        <option value={'Aventura'}>Aventura</option>
+                        <option value={'Tiro'}>Tiro</option>
+                        <option value={'Estratégia'}>Estratégia</option>
+                        <option value={'Esportes'}>Esportes</option>
+                        <option value={'Corrida'}>Corrida</option>
+                        <option value={'Quebra-cabeça'}>Quebra-cabeça</option>
+                        <option value={'Plataforma'}>Plataforma</option>
+                        <option value={'Simulação'}>Simulação</option>
+                        <option value={'Luta'}>Luta</option>
+                        <option value={'Sobrevivência'}>Sobrevivência</option>
+                        <option value={'RTS'}>RTS</option>
+                        <option value={'Cartas'}>Cartas</option>
+                        <option value={'Música'}>Música</option>
+                        <option value={'MMO'}>MMO</option>
+                        <option value={'Mundo Aberto'}>Mundo Aberto</option>
+                        <option value={'Sandbox'}>Sandbox</option>
+                        <option value={'História Interativa'}>História Interativa</option>
+                        <option value={'Educacional'}>Educacional</option>
+                        <option value={'Visual Novel'}>Visual Novel</option>
+                        <option value={'Battle Royale'}>Battle Royale</option>
+                        <option value={'Rogue-like'}>Rogue-like</option>
+                        <option value={'Construção'}>Construção</option>
+                    </select>
+
+                    <section onClick={()=> (setPromocao(!promocao))} className={`promocao ${promocao == true && 'selecionado'}`}>
+                        <p>Promoção</p>
+                    </section>
+
+                    <section className='preco'>
+                        <input type='number' placeholder='Preço minimo' onChange={(e) => setPrecomin(e.target.value)} value={precomin}/>
+                        <input type='number' placeholder='Preço maximo' onChange={(e) => setPrecomax(e.target.value)} value={precomax}/>
+                    </section>
+                </section>
+            </section>}
+
             <section className='barraup-pesquisa'>  
                 <input type="text" placeholder="procurar na GameSync" onChange={(e) => setPesqnome(e.target.value)} value={pesqnome}/>
+                <button onClick={()=> (setFiltragem(true))}></button>
             </section>
 
             <section id='pesquisar'>
@@ -144,7 +246,7 @@ export default function Pesquisa() {
 
                     {pesqnome == '' &&
                     <>
-                    {tgames.map( item =>
+                    {jogosfiltragem.map( item =>
                                             
                         <ProdutoCard
                             id={item.produto_id}
@@ -198,33 +300,90 @@ export default function Pesquisa() {
 
                         {escolhido == 2 && 
                         <main className='gamegrupos'>
-                            <section className='gamegrupo'>
-                                <h1>Terror</h1>
-                            </section>
-                            <section className='gamegrupo'>
-                                <h1>RPG</h1>
-                            </section>
-                            <section className='gamegrupo'>
+                            <section onClick={()=> (GameGrupos(1))} className='gamegrupo'>
                                 <h1>Ação</h1>
                             </section>
-                            <section className='gamegrupo'>
-                                <h1>Purzzle</h1>
+                            <section onClick={()=> (GameGrupos(2))} className='gamegrupo'>
+                                <h1>Terror</h1>
                             </section>
-                            <section className='gamegrupo'>
-                                <h1>Desafios</h1>
+                            <section onClick={()=> (GameGrupos(3))} className='gamegrupo'>
+                                <h1>FPS</h1>
                             </section>
-                            <section className='gamegrupo'>
+                            <section onClick={()=> (GameGrupos(4))} className='gamegrupo'>
+                                <h1>RPG</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(5))} className='gamegrupo'>
+                                <h1>Souls Like</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(6))} className='gamegrupo'>
+                                <h1>Aventura</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(7))} className='gamegrupo'>
                                 <h1>Tiro</h1>
                             </section>
-                            <section className='gamegrupo'>
-                                <h1>Terror</h1>
+                            <section onClick={()=> (GameGrupos(8))} className='gamegrupo'>
+                                <h1>Estratégia</h1>
                             </section>
-                            <section className='gamegrupo'>
-                                <h1>Terror</h1>
+                            <section onClick={()=> (GameGrupos(9))} className='gamegrupo'>
+                                <h1>Esportes</h1>
                             </section>
-                            <section className='gamegrupo'>
-                                <h1>Terror</h1>
+                            <section onClick={()=> (GameGrupos(10))} className='gamegrupo'>
+                                <h1>Corrida</h1>
                             </section>
+                            <section onClick={()=> (GameGrupos(11))} className='gamegrupo'>
+                                <h1>Quebra-Cabeça</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(12))} className='gamegrupo'>
+                                <h1>Plataforma</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(13))} className='gamegrupo'>
+                                <h1>Simulação</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(14))} className='gamegrupo'>
+                                <h1>Luta</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(15))} className='gamegrupo'>
+                                <h1>Sobrevivência</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(16))} className='gamegrupo'>
+                                <h1>RTS</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(17))} className='gamegrupo'>
+                                <h1>Cartas</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(18))} className='gamegrupo'>
+                                <h1>Musica</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(19))} className='gamegrupo'>
+                                <h1>MMO</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(20))} className='gamegrupo'>
+                                <h1>Mundo aberto</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(21))} className='gamegrupo'>
+                                <h1>Sandbox</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(22))} className='gamegrupo'>
+                                <h1>História interatva</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(23))} className='gamegrupo'>
+                                <h1>Educacional</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(24))} className='gamegrupo'>
+                                <h1>Visual Novel</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(25))} className='gamegrupo'>
+                                <h1>Battle Royale</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(26))} className='gamegrupo'>
+                                <h1>Rogue-like</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(27))} className='gamegrupo'>
+                                <h1>Construção</h1>
+                            </section>
+
+
+                            
                         </main>
                         }
 
@@ -237,7 +396,7 @@ export default function Pesquisa() {
                                 <img src={BuscarImagem(item.img_produto)} />    
                                     
                                 <div className='preto'>
-                                    <Link to={'/produto/' + idaleatorio}>
+                                    <Link to={`/produto/${item.id}`}>
                                     <p>Clique para ver o produto</p>
                                     </Link>
                                 </div>
