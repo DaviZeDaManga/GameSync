@@ -34,7 +34,7 @@ export default function MudarPerfil(){
         else{
             setNome('anonymous')
             
-            setImguser('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdAsDSSKeuAFldRDZbOWFuVrdgdAcZf-S6Aw&usqp=CAU')
+            setImguser('/assets/images/GameSync/User.png')
         }
     }, [])
 
@@ -109,7 +109,7 @@ export default function MudarPerfil(){
                     </SwiperSlide>
 
                     <SwiperSlide onClick={()=> (EscolherMasc(0))} >
-                        <h1>Não quero!</h1>
+                        <img className='sair' src='/assets/images/login/add.png' />
                     </SwiperSlide>
 
                 </Swiper>
@@ -117,7 +117,7 @@ export default function MudarPerfil(){
             }
 
             <nav className='Change-fundo' style={{"background": backgroundColor}}>
-                <main className='img'>
+                <main className={`img ${imguser == '/assets/images/GameSync/User.png' && 'paddingzing'}`}>
                     <img src={imguser} />
                 </main>
                 {mascote != "none" &&

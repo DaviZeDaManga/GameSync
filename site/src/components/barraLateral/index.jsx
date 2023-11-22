@@ -287,8 +287,6 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
         setPrecos([...precos, numero])
     }
 
-    console.log(precos)
-
 
     return(
         <div id="BarraLateral">

@@ -20,7 +20,7 @@ import Title from '../../../components/title'
 
 import EmojiPicker from 'emoji-picker-react';
 import ProdutoCard from '../../../components/produto'
-import { BuscarJogoID, BuscarImagem } from '../../../connection/productAPI'
+import { BuscarJogoID, BuscarImagem, Avaliacao, SelecionarComentario } from '../../../connection/productAPI'
 import { motion } from 'framer-motion'
 
 import { toast } from 'react-toastify';
@@ -48,7 +48,7 @@ export default function Produto() {
     const [estrelas, setEstrelas] = useState (0)
     const [comentario, setComentario] = useState ('')
 
-    const [avaliacoes, setAvaliacoes] = useState (0)
+    const [avaliacoes, setAvaliacoes] = useState ()
 
 
     
@@ -98,8 +98,6 @@ export default function Produto() {
         InfoGame()
     }, [])
 
-    console.log(produtoinfo)
-
 
 
 
@@ -133,19 +131,32 @@ export default function Produto() {
         }
     })
 
-    function Comentar() {
-        const c = {
-            user: user,
-            desc: comentario,
-            estrelas: estrelas
+    async function Comentar() {
+        
+        if(storage('usuer-logado')) {
+            await Avaliacao(id, estrelas, comentario, 1)
         }
 
+        else {
+            toast.warning('Você precisa estar logado para comentar!')
+        }
+
+        
+
         setComentando(0)
-        setComentarios([...comentarios, c])
         setComentario('')
         setEstrelas(0)
         setAvaliacoes(avaliacoes + 1)
     }
+
+    async function Comentarios() {
+        let resposta = await SelecionarComentario(id)
+        setComentarios(resposta)
+    }
+
+    useEffect(() => {
+        Comentarios()
+    })
     
 
 
@@ -180,7 +191,7 @@ export default function Produto() {
 
 
    function SalvarCarrinho(id, nome, desc, preco, img) {
-    	if(!storage('user-logado')) {
+    	if(storage('user-logado')) {
             let carrinho = new Array()
 
             if(localStorage.hasOwnProperty('carrinho')) {
@@ -205,6 +216,44 @@ export default function Produto() {
 
 
 
+   const [poravaliacoes, setPoravaliacoes] = useState([])
+   const [porcum, setPorcum] = useState(0)
+   const [porcdois, setPorcdois] = useState(0)
+   const [porctres, setPorctres] = useState(0)
+   const [porcquatro, setPorcquatro] = useState(0)
+   const [porccinco, setPorccinco] = useState(0)
+
+   function Avaliacoes() {
+        let qntdavaliacao = comentarios.length
+        setAvaliacoes(qntdavaliacao)
+
+        let nota = comentarios.map( item => item.avaliacao)
+        
+        if (nota == 1 ) {
+            let transform = 1 / qntdavaliacao * 100
+            setPorcum(transform)
+        }
+        else if (nota == 2 ) {
+            let transform = 2 / qntdavaliacao * 100
+            setPorcdois(transform)
+        }
+        else if (nota == 3 ) {
+            let transform = 3 / qntdavaliacao * 100
+            setPorctres(transform)
+        }
+        else if (nota == 4 ) {
+            let transform = 4 / qntdavaliacao * 100
+            setPorcquatro(transform)
+        }
+        else if (nota == 5 ) {
+            let transform = 5 / qntdavaliacao * 100
+            setPorccinco(transform)
+        }
+   }
+
+   useEffect(() => {
+        Avaliacoes()
+   })
    
     
     return(
@@ -440,37 +489,37 @@ export default function Produto() {
                             <div className='resultado'>
                                 <p>5</p>
                                 <div className='porcentagem'>
-                                    <div id="p5" className='porcento'></div>
+                                    <div id="p5" style={{"width": porccinco + '%'}} className='porcento'></div>
                                 </div>
-                                <p>79%</p>
+                                <p>{porccinco}%</p>
                             </div>
                             <div className='resultado'>
                                 <p>4</p>
                                 <div className='porcentagem'>
-                                    <div id="p4" className='porcento'></div>
+                                    <div id="p4" style={{"width": porcquatro + '%'}} className='porcento'></div>
                                 </div>
-                                <p>8%</p>
+                                <p>{porcquatro}%</p>
                             </div>
                             <div className='resultado'>
                                 <p>3</p>
                                 <div className='porcentagem'>
-                                    <div id="p3" className='porcento'></div>
+                                    <div id="p3" style={{"width": porctres + '%'}} className='porcento'></div>
                                 </div>
-                                <p>9%</p>
+                                <p>{porctres}%</p>
                             </div>
                             <div className='resultado'>
                                 <p>2</p>
                                 <div className='porcentagem'>
-                                    <div id="p2" className='porcento'></div>
+                                    <div id="p2" style={{"width": porcdois + '%'}} className='porcento'></div>
                                 </div>
-                                <p>1%</p>
+                                <p>{porcdois}%</p>
                             </div>
                             <div className='resultado'>
                                 <p>1</p>
                                 <div className='porcentagem'>
-                                    <div id="p1" className='porcento'></div>
+                                    <div id="p1" style={{"width": porcum + '%'}} className='porcento'></div>
                                 </div>
-                                <p>3%</p>
+                                <p>{porcum}%</p>
                             </div>
 
                         </div>
@@ -492,11 +541,11 @@ export default function Produto() {
                                     <h1>{item.user}</h1>
                                 </section>
                                 <main id='comentario'>
-                                    <p>{item.desc}</p>
+                                    <p>{item.comentario}</p>
                                 </main>
                             </div>
                             <section className='estrelas'>
-                                <h3>Avaliado em <span>{item.estrelas} estrelas</span></h3>
+                                <h3>Avaliado em {item.avaliacao.substr(0,1)} estrelas</h3>
                             </section>
                         </div>
                         

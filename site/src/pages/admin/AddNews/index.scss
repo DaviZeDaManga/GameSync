@@ -9,7 +9,7 @@
         display: flex;
         flex-direction: column;
         background-color: #000000;
-        width: 90vw;
+        width: 100vw;
         height: auto;
         padding: 20px 20px 20px 370px;
         gap: 30px;
@@ -22,6 +22,8 @@
 
         display: flex;
         flex-direction: row;
+        height: 700px;
+        justify-content: center;
 
 
     }
@@ -46,64 +48,132 @@
 
         border-radius: 10px;
         display: flex;
-        justify-content:space-around;
+        justify-content: center;
         align-items: center;
         flex-direction: column;
-        padding: 5px
+        width: 40vw;
 
     }
 
-    .border-addnews {
-    border-radius: 10px;
-    padding: 40px;
-        
-    }
-
-    .spaceline-addnews {
-        height: 1px;
-        background-color: #fff;
-        width: 80%;
-    }
-
-    .text-1 {
-        border: 5px solid #2C2C2C;
+    .add-news-texts input {
+        border: none;
         background-color: #454545;
-        width: 52.5rem;
-        height: 60px;
         padding: 10px;
-        border-radius: 10px;
-
     } 
-
-    .text-addnews{
-        border: 5px solid #2C2C2C;
-        background-color: #454545;
-        width: 52.5rem;
-        border-radius: 5px;
-        height: 130px;
-        padding: 10px;
-    }
 
     .add-news-images{
         
         display: flex;
-        background-color: rgb(84, 83, 82);
-
-        border-radius: 10px;
-        align-items: center;
         flex-direction: column;
-        width: 36.5rem;
-
-        .addnews1{
-            
-        }
+        width: 33.5rem;
+        align-items: center;
+        justify-content:flex-start;
 
     }
 
+    
+
+    #picture__input {
+        display: none;
+    }
+      
+    .picture {
+        width: 400px;
+        aspect-ratio: 16/9;
+        background: #3f3f3f;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #aaa;
+        border: 2px dashed currentcolor;
+        cursor: pointer;
+        font-family: sans-serif;
+        transition: color 300ms ease-in-out, background 300ms ease-in-out;
+        outline: none;
+        overflow: hidden;
+    }
+      
+    .picture:hover {
+        color: #777;
+        background: #666666;
+    }
+      
+    .picture:active {
+        border-color: turquoise;
+        color: turquoise;
+        background: #515151;
+    }
+      
+    .picture:focus {
+        color: #777;
+        background: #8a8a8a;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+      
+    
 
 
+    .imagem-capa {
+        width: 150px;
+        height: 110px;
+    }
 
+    #file {
+        display: none;
+    }
 
+    input {
+        width: 500px;
+        margin: 10px;
+        justify-content: space-evenly;
+    }
+
+    .Tittle{
+        height: 60px;
+        border-radius: 8px;
+    }
+
+    .SubTittle{
+        height: 60px;
+        border-radius: 8px;
+        margin: 30px;
+    }
+    
+    .Text { 
+        height: 300px;
+        border-radius: 8px;
+        margin: 60px;
+        text-align: start
+    }
+
+    .insert{
+        background-color: #454545;  
+        width: 200px;
+        height: 200px;
+        margin-left: 110px;
+        border-radius: 8px;
+        background-color: #363636 ;
+                //site/public/assets/images/addnews/OIP.jfif
+    }
+
+   // input add-part1-video{
+    //    background: url('../../../../public/assets/images/adm/video.png') no-repeat center center;
+    //    background-size:contain;
+    //    width: 300px;
+     //   padding: 6px;
+     //   border: 2px solid #3498db;
+      //  border-radius: 5px;
+//font-size: 12px;
+     //   outline: none;
+      //  transition: border-color 0.3s ease;
+      //  background-color: #ddd;
+       // justify-content: flex-end;
+  //  }
 
 
 }
+
+
+//  <div className='title'><input class  type="text" placeholder='Titulo' /> </div>
+//<div className='subtitle'> <input type="text"placeholder='subtitulo'/> </div>
+//<div className='Text'> <input type="text" placeholder='Texto'/> </div>

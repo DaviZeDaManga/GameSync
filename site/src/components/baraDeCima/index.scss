@@ -35,6 +35,11 @@
         overflow: hidden;
         border: solid 1px rgb(73, 73, 73);
 
+        &.paddingzing {
+            background-color: white;
+            padding: 10px;
+        }
+
         &.selecionado {
             border: solid 2px white;
 

@@ -46,7 +46,7 @@ export default function AdmBarraLateral(props){
                     </div>
                 </Link>
 
-                <Link to='' className={`opcoes-z ${props.selecionado === 'NEWS' ? 'selecionado' : ''}`}>
+                <Link to='/admin/Addnews' className={`opcoes-z ${SessionSelect({opcoes: 'NEWS', selecionado: props.selecionado}) }`}>
                     <div className="opcoes-z">
                         <h1 class="animate__animated animate__backInLeft">NEWS</h1>
                         <img src="/assets/images/adm/newspaper.png" alt="" />

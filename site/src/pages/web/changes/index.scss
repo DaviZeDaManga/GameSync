@@ -59,6 +59,7 @@
               }
           }
 
+
           &.thanos {
             background: linear-gradient(140deg, rgb(116, 49, 158), rgb(149, 49, 180));
           }
@@ -88,6 +89,9 @@
                 bottom: 0;
                 right: -60px;
               }
+              &.sair {
+                transform: rotate(45deg);
+             }
           }
         }
     }
@@ -131,6 +135,11 @@
             position: absolute;
             bottom: -125px;
             left: 110px;
+
+            &.paddingzing {
+              background-color: white;
+              padding: 100px;
+            }
 
             img {
                 height: 100%;

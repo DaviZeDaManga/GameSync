@@ -1,16 +1,28 @@
 import React, { useState } from 'react';
 import './index.scss';
 import AdmBarraLateral from '../../../components/AdminBarraL';
+import { BuscarImgAddNews } from '../../../connection/addnewsAPI'
 import { toast } from 'react-toastify';
+
+
+
+
 
 
 export default function Addnews() {
 
-
-
-
-     return(
-
+    const [imagem, setImagem] = useState(null);
+    
+    function mostrarImg() {
+        if (typeof imagem === 'object') {
+          return URL.createObjectURL(imagem);
+        } else {
+          return BuscarImgAddNews(imagem);
+        }
+    }
+    
+    
+    return(
         <div id='add-main-addnews'>
             <AdmBarraLateral selecionado='NEWS' />
 
@@ -18,58 +30,35 @@ export default function Addnews() {
                 <div className='add-news2'>
                     <div className='add-news-cont'>
                         <div className='add-news-texts'>
-
-                            <div className='border-addnews'>
-                                <input className='text-1'  type="text" placeholder='Titulo' />
-                                
-                            </div>
-                            <div className='spaceline-addnews'></div>
-
-                            <div className='border-addnews'>
-                                <input className='text-1' type="text"placeholder='subtitulo'/>
-                                
-                            </div>
-                            <div className='spaceline-addnews'></div>
-
-                            <div className='border-addnews'>
-                                <input className='text-addnews' type="text" placeholder='Texto da Notícia'/>
-                                
-                            </div>
-                            
+                           <input className='Tittle'  type="text" placeholder='Titulo' /> 
+                            <input className='SubTittle' type="text"placeholder='subtitulo'/> 
+                             <input className='Text' type="text" placeholder='Texto'/> 
                         </div>
                         <div className='add-news-images'>
-
+                            <label className='picture'>
+                                {!imagem && 
+                                <img src="/assets/images/adm/addimage.png"  className='imagem-capa' alt="" />
+                                }
+                                {
+                                imagem && 
+                                <img id='imagem-capa' src={mostrarImg()} alt="" />
+                                }
+                                <input type="file" id="file" onChange={e => setImagem(e.target.files[0])}/>
+                           
+                            </label>
+                            <footer className='botao'>
                                
-                            
+                            </footer>
                         </div>
+    
+                     
+                        
                     </div>
                     
                 </div>
             </div>
 
         </div>
-
     )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

@@ -29,7 +29,7 @@ export default function BarraDeCima () {
         else{
             setNome('anonymous')
             
-            setImguser('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdAsDSSKeuAFldRDZbOWFuVrdgdAcZf-S6Aw&usqp=CAU')
+            setImguser('/assets/images/GameSync/User.png')
         }
     }, [])
 
@@ -43,7 +43,7 @@ export default function BarraDeCima () {
         <section className='perfil'>
             <p>{nome}</p>
             <Link to={`/perfil`}>
-                <div className='card'>
+                <div className={`card ${imguser == '/assets/images/GameSync/User.png' && 'paddingzing'}`}>
                     <img src={imguser} />
                 </div>
             </Link>
