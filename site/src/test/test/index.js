@@ -55,6 +55,8 @@ export default function AddProductTest() {
     }
   }
 
+  ////AQUI DAVI
+
   const [dados, setdados] = useState([])
   const [erro, setErro] = useState('')
   const [imagem, setImagem] = useState(null);
@@ -133,8 +135,9 @@ export default function AddProductTest() {
       return BuscarImagem(imagem);
     }
   }
-  console.log(idUser)
-  console.log(dados)
+
+  //////////
+
   return (
     <div id='AddProductTest'>
       <div>

@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const api = axios.create({
-    //baseURL: 'http://129.148.42.252:5012'   
-    baseURL: 'http://localhost:5000'
+    baseURL: 'http://129.148.42.252:5012'   
+    //baseURL: 'http://localhost:5000'
 });
 
 
@@ -234,33 +234,34 @@ export async function TodasNoticias(){
     return resposta.data
 }
 
-export async function InserirNoticia(titulo, subtitulo, texto){
-    try{
+export async function InserirNoticia(titulo, subtitulo, texto) {
+    try {
         const resposta = await api.post(`/noticia/new`, {
             titulo: titulo,
             subtitulo: subtitulo,
             texto: texto
         });
-        return resposta.data
-    }
-    catch(erro){
+        console.log(resposta.data)
+        return resposta.data;
+    } catch (erro) {
         throw erro;
     }
 }
+
 
 export async function NoticiasID(id){
     const resposta = await api.get(`/noticia/${id}`)
     return resposta.data
 }
 
-export async function ImgNoticia(id, imagem){
+export async function ImgNoticia(id, imagem) {
     const formData = new FormData();
     formData.append('imagens', imagem);
 
-    const resposta = await api.put(`/noticia/${id}/imagens`, formData,{
-        headers:{
-            "Content-Type": "multipart/form-data", 
+    const resposta = await api.put(`/noticia/${id}/imagens`, formData, {
+        headers: {
+            "Content-Type": "multipart/form-data",
         },
     });
-    return resposta.status
+    return resposta.status;
 }
