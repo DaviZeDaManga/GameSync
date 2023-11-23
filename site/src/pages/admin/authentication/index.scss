@@ -1,8 +1,11 @@
-#CadastroAdmin {
+#CadastroAdmin {  
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     height: 100%;
     padding: 0px 0px 0px 0px;
-   
+  
     .mae-formulario {
       display: flex;
       flex-direction: column;
@@ -120,8 +123,8 @@
   
           .formulario {
             display: flex;
-            width: 400px;
-            margin-top: 40px;
+            width: 100%;
+            margin-top: 3%;
   
             > input {
               position: relative;

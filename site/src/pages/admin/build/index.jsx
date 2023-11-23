@@ -37,7 +37,38 @@ export default function Dashboard() {
           backgroundColor: [
             "rgb(222, 251, 0)",
             "rgb(0, 247, 251)",
-            // ... (adicionar mais cores conforme necessário)
+            "rgb(255, 247, 195)",
+            "rgb(255, 247, 0)",
+            "rgb(255, 195, 0)",
+            "rgb(255, 0, 0)",
+            "rgb(255, 0, 247)",
+            "rgb(0, 0, 247)",
+            "rgb(0, 247, 0)",
+            "rgb(247, 247, 247)",
+            "rgb(195, 195, 195)",
+            "rgb(128, 0, 0)",
+            "rgb(0, 128, 0)",
+            "rgb(0, 0, 128)",
+            "rgb(128, 128, 0)",
+            "rgb(128, 0, 128)",
+            "rgb(0, 128, 128)",
+            "rgb(128, 128, 128)",
+            "rgb(128, 128, 0)",
+            "rgb(222, 251, 0)",
+"rgb(0, 247, 251)",
+"rgb(255, 247, 195)",
+"rgb(255, 247, 0)",
+"rgb(255, 195, 0)",
+"rgb(255, 0, 0)",
+"rgb(255, 0, 247)",
+"rgb(0, 0, 247)",
+"rgb(0, 247, 0)",
+"rgb(247, 247, 247)",
+"rgb(195, 195, 195)",
+"rgb(128, 0, 0)",
+"rgb(0, 128, 0)",
+"rgb(0, 0, 128)",
+"rgb(128, 128, 0)"
           ],
           borderColor: "black",
           borderWidth: 2,
@@ -53,7 +84,7 @@ export default function Dashboard() {
   return valoresMultiplicadosCategoria;
 });
 
-// Converte a matriz de valores multiplicados para um array simples
+// Convertendo a matriz de valores multiplicados para um array simples
 const valores = valoresMultiplicados.flat();
 
 const lineChartData = {
@@ -66,13 +97,13 @@ const lineChartData = {
           .filter((item) => item.categoria_nome === categoria)
           .map((item) => item.valor * 10);
 
-        // Calcula a soma dos valores multiplicados para a categoria
+        // Calculando a soma dos valores multiplicados para a categoria
         return valoresCategoria.reduce((total, valor) => total + valor, 0);
       }),
       backgroundColor: [
         "rgb(222, 251, 0)",
         "rgb(0, 247, 251)",
-        // ... (adicionar mais cores conforme necessário)
+        // (adicionar mais cores conforme necessário)
       ],
       borderColor: "black",
       borderWidth: 2,
@@ -118,16 +149,16 @@ const lineChartData = {
 
           <header className='Barra'>
               <nav className='title'>
-                  <h1>DashBoard Financias</h1>
+                  <h1>DashBoard Financias Estatísticas</h1>
               </nav>
 
               <nav className='dois'>
-                <select name="" id="">
-                  <option value="" key="">Novembro</option>
+                <select id="mes">
+                  <option >Novembro</option>
                 </select>
 
-                <select name="" id="">
-                  <option value="" key="">2023</option>
+                  <select id="ano">
+                  <option>2023</option>
                 </select>
               </nav>
           </header>

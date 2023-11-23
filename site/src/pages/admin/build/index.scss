@@ -1,5 +1,29 @@
 #DASHBOARD{
     
+    select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        padding: 6px;
+        font-size: 12px;
+        cursor: pointer;
+        outline: none;
+        background-color: #353434;
+        color:  white;
+      }
+      select:focus {
+        border-color: #2980b9;
+        box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+      }
+      option {
+        background-color: #000000;
+        color: #ffffff;
+      }
+      option:hover {
+        background-color: #3498db;
+        color: #fff;
+      }
+
     .Dashboard{
         display: flex;
         flex-direction: row;
@@ -10,6 +34,34 @@
         height: auto;
         padding: 20px 20px 20px 370px;
         gap: 30px;
+
+        .Barra{
+            display: flex;
+            flex-direction: row;
+            background-color: #353434;
+            width: 100%;
+            padding: 30px;
+            justify-content: center;
+            align-items: center;
+            justify-content: space-between;
+
+            .dois{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                justify-content: center;
+                width: 30%;
+                gap: 30px;
+                #mes{
+                    width: 25%;
+                }
+
+                #ano{
+                    width: 13%;
+                }
+            }
+        }
 
         .Graficos{
             display: flex;
