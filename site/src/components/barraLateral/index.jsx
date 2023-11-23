@@ -7,7 +7,7 @@ import { motion } from "framer-motion"
 import BarraDeCima from '../baraDeCima';
 import { BuscarImagem, BuscarJogoID } from '../../connection/productAPI';
 
-export default function BarraLateral({home, planos, noticias, pesquisa}) {
+export default function BarraLateral({home, planos, noticias, pesquisa, games}) {
     const[nameuser, setNameuser] = useState("")
     const{imguser, setImguser} = useState('/assets/images/GameSync/user.png')
 
@@ -333,6 +333,12 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
                             <div className={`categoria ${noticias == true && 'selecionado'}`}>
                                 <img src="/assets/images/barradecima/balao-de-fala.png" />
                                 <p>Noticias</p>
+                            </div>
+                            </Link>
+                            <Link to={'/games'}>
+                            <div className={`categoria ${games == true && 'selecionado'}`}>
+                                <img src="/assets/images/barradecima/balao-de-fala.png" />
+                                <p>Jogar</p>
                             </div>
                             </Link>
 

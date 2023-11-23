@@ -132,7 +132,7 @@ export default function Game() {
                     {jogar == false &&
                     <>
                     {infogame.map( item =>
-                    <img src={BuscarImagem(item.img_jogo)} />    
+                    <img src={item.img_jogo} />    
                     )}
                     <div className='name'>
                         {infogame.map( item => [
