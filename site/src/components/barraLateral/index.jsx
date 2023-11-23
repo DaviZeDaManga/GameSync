@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import './index.scss'
-import { Link, json } from 'react-router-dom'
+import { Link, json, useNavigate } from 'react-router-dom'
 import storage, { set } from 'local-storage';
 import { motion } from "framer-motion"
 
@@ -234,8 +234,7 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
     const [barra, setBarra] = useState(false)
 
     function pesquisar() {
-        setConfigs(false)
-        setBarra(true)
+        navigate('/pesquisar')
     }
 
     useEffect(()=> {
@@ -288,6 +287,15 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
     }
 
 
+
+
+
+    const navigate = useNavigate()
+
+    function GameGrupos(id) {
+        navigate('/gamegrupos/' + id)
+    }
+
     return(
         <div id="BarraLateral">
             <BarraDeCima/>
@@ -332,7 +340,7 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
                         
                             <div onClick={PesquisaBarra} className={`categoria ${cateb == 1 &&'selecionado'}`}>
                                 <img src="/assets/images/barralateral/navegar/lupa.png" />
-                                <p>Jogos</p>
+                                <p>GameGrupos</p>
                             </div>
                             <div onClick={PesquisaNoti} className={`categoria ${cateb == 2 && 'selecionado'}`}>
                                 <img src="/assets/images/barralateral/navegar/envelope.png" />
@@ -348,11 +356,6 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
 
 
                         </section>
-                        <footer className='accout'>
-                            <section className='card'>
-
-                            </section>
-                        </footer>
                     </main>
 
 
@@ -370,13 +373,87 @@ export default function BarraLateral({home, planos, noticias, pesquisa}) {
                         {pesqB == true &&
                         <>
 
-                        {[1,2,3].map( item =>
-                            <Link to={'/gamegrupos/' + item.id}>
-                            <section className='categoria'>
-                                <p>{item.name}</p>
+                            <section onClick={()=> (GameGrupos(1))} className='gamegrupo'>
+                                <h1>Ação</h1>
                             </section>
-                            </Link>
-                        )}
+                            <section onClick={()=> (GameGrupos(2))} className='gamegrupo'>
+                                <h1>Terror</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(3))} className='gamegrupo'>
+                                <h1>FPS</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(4))} className='gamegrupo'>
+                                <h1>RPG</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(5))} className='gamegrupo'>
+                                <h1>Souls Like</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(6))} className='gamegrupo'>
+                                <h1>Aventura</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(7))} className='gamegrupo'>
+                                <h1>Tiro</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(8))} className='gamegrupo'>
+                                <h1>Estratégia</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(9))} className='gamegrupo'>
+                                <h1>Esportes</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(10))} className='gamegrupo'>
+                                <h1>Corrida</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(11))} className='gamegrupo'>
+                                <h1>Quebra-Cabeça</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(12))} className='gamegrupo'>
+                                <h1>Plataforma</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(13))} className='gamegrupo'>
+                                <h1>Simulação</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(14))} className='gamegrupo'>
+                                <h1>Luta</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(15))} className='gamegrupo'>
+                                <h1>Sobrevivência</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(16))} className='gamegrupo'>
+                                <h1>RTS</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(17))} className='gamegrupo'>
+                                <h1>Cartas</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(18))} className='gamegrupo'>
+                                <h1>Musica</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(19))} className='gamegrupo'>
+                                <h1>MMO</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(20))} className='gamegrupo'>
+                                <h1>Mundo aberto</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(21))} className='gamegrupo'>
+                                <h1>Sandbox</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(22))} className='gamegrupo'>
+                                <h1>História interatva</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(23))} className='gamegrupo'>
+                                <h1>Educacional</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(24))} className='gamegrupo'>
+                                <h1>Visual Novel</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(25))} className='gamegrupo'>
+                                <h1>Battle Royale</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(26))} className='gamegrupo'>
+                                <h1>Rogue-like</h1>
+                            </section>
+                            <section onClick={()=> (GameGrupos(27))} className='gamegrupo'>
+                                <h1>Construção</h1>
+                            </section>
 
                         </>}
 

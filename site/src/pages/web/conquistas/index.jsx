@@ -1,5 +1,4 @@
 import './index.scss'
-import axios from 'axios'
 
 import BarraLateral from '../../../components/barraLateral'
 import { useEffect, useState } from 'react'

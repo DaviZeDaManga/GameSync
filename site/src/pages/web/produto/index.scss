@@ -618,7 +618,7 @@
         align-items: flex-start;
         
         width: 100%;
-        height: 440px;
+        height: auto;
         padding: 20px 30px 20px 110px;
         gap: 20px;
 
@@ -680,14 +680,20 @@
                         width: 100%;
                         height: 30px;
                         gap: 5px;
+
+                        p {
+                            max-width: 2ch;
+                            text-overflow: hidden;
+                            
+                        }
     
                         .porcentagem {
                             display: flex;
                             flex-direction: row;
                             justify-content: flex-start;
                             align-items: center;
-    
-                            width: 100%;
+                            flex-grow: 1;
+                            
                             height: 4px;
                             border-radius: 20PX;
                             background-color: #C745BA;
@@ -695,6 +701,7 @@
                             .porcento {
                                 height: 100%;
                                 border-radius: 20PX;
+                                transition: 0.3s;
                                 background-color: #fafafa;
                             } 
     

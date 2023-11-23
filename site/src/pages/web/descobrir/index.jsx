@@ -1,7 +1,5 @@
 import './index.scss'
 
-import axios from 'axios'
-
 import BarraLateral from '../../../components/barraLateral'
 import BarraDeCima from '../../../components/baraDeCima'
 import FooterPage from '../../../components/footerpage/index,'
