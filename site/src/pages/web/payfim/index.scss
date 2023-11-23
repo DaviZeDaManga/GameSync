@@ -1,5 +1,6 @@
 #finalizar-payment-main {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     background: rgb(62,62,65);
@@ -8,29 +9,43 @@
     width: 100vw;
     height: 100vh;
 
+    .image-esq {
+        background-image: url(../../../../public/assets/images/pagamento/imagefundo.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 625px;
+        height: 450px;
+        border-radius: 10px 0px 0px 10px;
+
+    }
     .finalizar-payment {
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
 
-        background-color: rgb(62, 62, 62);
+        background-color: rgb(227, 227, 227);
         padding: 20px;
        
-        border-radius: 10px;
+        border-radius: 0px 10px 10px 0px;
     }
 
     .titulo-payment{
         padding: 10px;
     }
 
+    .titulo-payment h1 {
+        color: #000000;
+    }
+
     
 
     .text-payment {
-        color: #ffffff;
+        color: #4c1d95;
         width: 400px;
         text-align: center;
         font-size: 18px;
+        font-weight: 500;
         padding: 10px;        
     }
 
@@ -53,8 +68,8 @@
             
         }
         .pagarpix img{
-                width: 220px;
-                padding: 30px 0px;
+                width: 130px;
+                padding: 19px 0px;
         }
 
         .pagarboleto{
@@ -67,7 +82,7 @@
         }
         .pagarboleto img{
             width: 150px;
-            padding: 0px 0px;
+            padding: 10px 0px;
         }
 
 
@@ -86,9 +101,15 @@
                 width: 200px;
                 height: 50px;
                 border-radius: 10px;
+                border: none;
 
                 color: #fff;
-                background-color: rgb(96, 95, 95);
+                background-color: #4c1d95;
+            }
+
+            .chave-pix:hover {
+                border:none!important;
+                background-color: #6016ce!important;
             }
 
             .boleto {
@@ -98,7 +119,14 @@
                 border-radius: 10px;
 
                 color: #fff;
-                background-color: rgb(96, 95, 95);
+                border: none;
+                background-color: #4c1d95;
+
+                
+            }
+            .boleto:hover {
+                border:none!important;
+                background-color: #6016ce!important;
             }
         }
 

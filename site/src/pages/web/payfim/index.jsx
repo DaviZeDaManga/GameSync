@@ -1,4 +1,5 @@
 import './index.scss'
+import { Link } from 'react-router-dom'
 
 export default function PayFim(){
 
@@ -8,13 +9,13 @@ export default function PayFim(){
     return(
         
         <div id='finalizar-payment-main'>
-            
+            <div className='image-esq'></div>
             <div className='finalizar-payment'>
                 <div className='titulo-payment'>
                     <h1>Estamos Preparando Seu Pagamento!</h1>
                 </div>
                 <div className='text-payment'>
-                Falta Pouco Para Terminarmos Seu Pagamento Selecione o Metodo Que Deseja:
+                Falta Pouco Para Terminarmos Seu Pagamento Selecione o Método Que Deseja:
                 </div>
                 <div className='metodos-de-pagamento'>
                     <div className='pagarpix'>
@@ -27,7 +28,9 @@ export default function PayFim(){
                     <div className='pagarboleto'>
                         <img src='/assets/images/pagamento/boleto3.png' />
                         <div className='btn-pagar'>
-                            <button className='boleto'>Pagar Com Boleto</button>
+                            <Link to={'/payboleto'}>
+                                <button className='boleto'>Pagar Com Boleto</button>
+                            </Link>
                         </div>
                     </div>
                         
