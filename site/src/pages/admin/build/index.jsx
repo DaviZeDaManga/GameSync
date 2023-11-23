@@ -6,7 +6,10 @@ import BarChart from '../../../components/constant/BarChart.js';
 import LineChart from '../../../components/constant/LineChart.js';
 import PieChart from '../../../components/constant/PieChart.js';
 export default function Dashboard() {
-  const [chartData, setChartData] = useState(null);
+
+  const [barChartData, setBarChartData] = useState(null);
+  const [lineChartData, setLineChartData] = useState(null);
+  const [pieChartData, setPieChartData] = useState(null);
 
   async function PegandoInformacoes() {
     const informacoes = await ListarTodosJogos();
@@ -18,48 +21,129 @@ export default function Dashboard() {
   }, []);
 
   const criarDadosGrafico = (dados) => {
-    const novoChartData = {
-      labels: dados.map((item) => item.nome),
+
+    // Mapeiando as categorias únicas presentes nos dados
+  const categoriasUnicas = [...new Set(dados.map((item) => item.categoria_nome))];
+
+  // Inicializando um array para armazenar as quantidades fictícias associadas a cada categoria
+  const quantidadesFicticias = categoriasUnicas.map(() => Math.floor(Math.random() * 100));
+
+    const barChartData = {
+      labels: categoriasUnicas,
       datasets: [
         {
           label: 'Valor Escalado',
-          data: dados.map((item) => item.valor),
+          data: quantidadesFicticias,
           backgroundColor: [
-          "rgb(222, 251, 0)", 
-          "rgb(0, 247, 251)",
-          "rgb(251, 0, 188)",
-          "rgb(251, 130, 0)",
-          "rgb(251, 0, 0)",
-          "rgb(151, 0, 251)",
-          "rgb(0, 25, 251)",
-          "rgb(84, 251, 0)"
-        ],
+            "rgb(222, 251, 0)",
+            "rgb(0, 247, 251)",
+            // ... (adicionar mais cores conforme necessário)
+          ],
           borderColor: "black",
           borderWidth: 2,
         },
       ],
     };
-    
-    setChartData(novoChartData);
+    setBarChartData(barChartData);
+
+// Multiplica os valores em cada categoria por 10
+  const valoresMultiplicados = categoriasUnicas.map((categoria) => {
+  const valoresCategoria = dados.filter((item) => item.categoria_nome === categoria).map((item) => item.valor);
+  const valoresMultiplicadosCategoria = valoresCategoria.map((valor) => valor * 10);
+  return valoresMultiplicadosCategoria;
+});
+
+// Converte a matriz de valores multiplicados para um array simples
+const valores = valoresMultiplicados.flat();
+
+const lineChartData = {
+  labels: categoriasUnicas,
+  datasets: [
+    {
+      label: 'Valor Escalado',
+      data: categoriasUnicas.map((categoria) => {
+        const valoresCategoria = dados
+          .filter((item) => item.categoria_nome === categoria)
+          .map((item) => item.valor * 10);
+
+        // Calcula a soma dos valores multiplicados para a categoria
+        return valoresCategoria.reduce((total, valor) => total + valor, 0);
+      }),
+      backgroundColor: [
+        "rgb(222, 251, 0)",
+        "rgb(0, 247, 251)",
+        // ... (adicionar mais cores conforme necessário)
+      ],
+      borderColor: "black",
+      borderWidth: 2,
+    },
+  ],
+};
+
+    setLineChartData(lineChartData);
+  
+    const valoresNomes = dados.map((item) => {
+      const valoresNomeProdutos = dados
+        .filter((produto) => produto.nome === item.nome)
+        .map((produto) => produto.valor);
+      const valoresLucroTotal = valoresNomeProdutos.map((valor) => Math.random(valor) * 5); //Math.floor(Math.random()
+      return valoresLucroTotal;
+    });
+
+    const values = valoresNomes.flat();
+
+    const pieChartData = {
+      labels: dados.map((item) => item.nome),
+      datasets: [
+        {
+          data: values,
+          backgroundColor: [
+            "rgb(255, 99, 132)",
+            "rgb(75, 192, 192)",
+            // ... (adicionar mais cores conforme necessário)
+          ],
+          borderColor: "black",
+          borderWidth: 2,
+        },
+      ],
+    };
+    setPieChartData(pieChartData);
   };
+  
 
   return (
     <div id='DASHBOARD'>
       <AdmBarraLateral selecionado='dashboard' />
         <main className='Dashboard'>
 
+          <header className='Barra'>
+              <nav className='title'>
+                  <h1>DashBoard Financias</h1>
+              </nav>
+
+              <nav className='dois'>
+                <select name="" id="">
+                  <option value="" key="">Novembro</option>
+                </select>
+
+                <select name="" id="">
+                  <option value="" key="">2023</option>
+                </select>
+              </nav>
+          </header>
+
           <section className="Graficos">
             <div className='Grafico-pau'>
-                  {chartData && <BarChart informacoes={chartData} className="pau-chart" />}
+                  {barChartData && <BarChart informacoes={barChartData} className="pau-chart" />}
               </div>
 
               <div className='Grafico-pizza'>
-                  {chartData && <PieChart informacoes={chartData} className="pizza-chart" />}
+                  {lineChartData && <PieChart informacoes={lineChartData} className="pizza-chart" />}
               </div>
           </section>
 
             <div className='Grafico-linha'>
-                {chartData && <LineChart informacoes={chartData} className="linha-chart" />}
+                {pieChartData && <LineChart informacoes={pieChartData} className="linha-chart" />}
             </div>
         </main>
     </div>

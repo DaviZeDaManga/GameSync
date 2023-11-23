@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './index.scss';
 import AdmBarraLateral from '../../../components/AdminBarraL';
-import { BuscarImgAddNews } from '../../../connection/addnewsAPI'
 import { toast } from 'react-toastify';
 
 
@@ -13,13 +12,7 @@ export default function Addnews() {
 
     const [imagem, setImagem] = useState(null);
     
-    function mostrarImg() {
-        if (typeof imagem === 'object') {
-          return URL.createObjectURL(imagem);
-        } else {
-          return BuscarImgAddNews(imagem);
-        }
-    }
+  
     
     
     return(
@@ -41,7 +34,7 @@ export default function Addnews() {
                                 }
                                 {
                                 imagem && 
-                                <img id='imagem-capa' src={mostrarImg()} alt="" />
+                                <img id='imagem-capa' src='' alt="" />
                                 }
                                 <input type="file" id="file" onChange={e => setImagem(e.target.files[0])}/>
                            

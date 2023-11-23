@@ -2,7 +2,7 @@ import axios from "axios";
 
 const api = axios.create({
     baseURL: 'http://129.148.42.252:5012'   
-    // baseURL: 'http://localhost:5000'
+    //baseURL: 'http://localhost:5000'
 });
 
 
@@ -227,4 +227,40 @@ export async function SelecionarComentario(id){
 export async function BuscarGameID(id){
     const resposta = await api.get(`/games/${id}`);
     return resposta.data
+}
+
+export async function TodasNoticias(){
+    const resposta = await api.get(`/noticia`)
+    return resposta.data
+}
+
+export async function InserirNoticia(titulo, subtitulo, texto){
+    try{
+        const resposta = await api.post(`/noticia/new`, {
+            titulo: titulo,
+            subtitulo: subtitulo,
+            texto: texto
+        });
+        return resposta.data
+    }
+    catch(erro){
+        throw erro;
+    }
+}
+
+export async function NoticiasID(id){
+    const resposta = await api.get(`/noticia/${id}`)
+    return resposta.data
+}
+
+export async function ImgNoticia(id, imagem){
+    const formData = new FormData();
+    formData.append('imagens', imagem);
+
+    const resposta = await api.put(`/noticia/${id}/imagens`, formData,{
+        headers:{
+            "Content-Type": "multipart/form-data", 
+        },
+    });
+    return resposta.status
 }

@@ -228,7 +228,7 @@ export default function AddProduct() {
         <figure className="add-part2">
             <div className="add-part2-imagem1" onClick={EscolherImagemDIV}>
                 {!imagem && 
-                    <img src="/assets/images/adm/photo.png"  id='imagem-capa' alt="" />
+                    <img src="/assets/images/adm/upload-minimalistic-svgrepo-com.svg"  id='imagem-capa' alt="" />  
                 }
                 {
                 imagem && 
