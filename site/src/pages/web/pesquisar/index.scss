@@ -191,7 +191,7 @@
         }
 
         > input {
-            min-width: calc(70vw - 140px);
+            min-width: calc(70vw - 140px - 80px);
             height: 60px;
             border: none;
             border-top-left-radius: 60px;

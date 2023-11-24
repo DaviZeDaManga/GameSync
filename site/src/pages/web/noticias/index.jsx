@@ -2,7 +2,7 @@ import './index.scss'
 import BarraLateral from '../../../components/barraLateral'
 import Title from '../../../components/title';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/css';
@@ -11,7 +11,6 @@ import 'swiper/css/navigation';
 import { Navigation, Pagination, Keyboard } from 'swiper/modules';
 
 import { BuscarImagem, ListarTodosJogos } from '../../../connection/productAPI';
-import ProdutoCard from '../../../components/produto';
 
 export default function Noticias() {
 
@@ -35,6 +34,10 @@ export default function Noticias() {
             <BarraLateral
             noticias={true}
             />
+
+            {/* <Title
+            nome={'Ultimas noticias do momento'}
+            /> */}
 
             <section id='now'>
                 <Swiper
@@ -69,36 +72,41 @@ export default function Noticias() {
                 </Swiper>
             </section>
 
+            <section className='redirects'>
+                <section className='fy'>
+                    <p>Descobrir</p>
+                    <p>Seguindo</p>
+                </section>
+                <p>Novos</p>
+                <p>Jogos</p>
+                <p>Empresas</p>
+            </section>
 
-
-
-
-
-
-            <Title
-            nome={'Ultimas noticias do momento'}
-            />
-
-
-
-
-
-            {/* <section className='noticias'>
-
-                {
-                    noticias.map( item => 
-                        <ProdutoCard 
-                        id={item.produto_id}
-                        nome={item.nome}
-                        imagem={BuscarImagem(item.imagem_produto)}
-                        lancamento={item.tamanho}
-                        recarregarpage={true}
-                        />  
-                    )
-                }
+            <main className='noticias'>
                 
+                {noticias.map( item =>
+                    
+                <section className={`card ${item.produto_id == 3 && 'cardzao'}`} >
+                    
+                    <section className='img'>
+                        <img src={BuscarImagem(item.imagem_produto)} />
+                    </section>
 
-            </section> */}
+                    <section className='conteudo'>
+                        <div className='sub'>
+                            <p>Subtitulo</p>
+                        </div>
+                        <div className='titulo'>
+                            <h1>Alexandre Corrêa fala pela primeira vez sobre suposta agressão, nega</h1>
+                        </div>
+                    </section>
+                </section>    
+                    
+                )}
+
+
+            </main>
+
         </main>
     )
 }

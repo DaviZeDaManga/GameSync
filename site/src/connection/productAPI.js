@@ -229,7 +229,7 @@ export async function BuscarGameID(id){
     return resposta.data
 }
 
-export async function TodasNoticias(){
+export async function todasNoticias(){
     const resposta = await api.get(`/noticia`)
     return resposta.data
 }
