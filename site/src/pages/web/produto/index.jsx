@@ -132,7 +132,7 @@ export default function Produto() {
 
     async function Comentar() {
         
-        if(storage('usuer-logado')) {
+        if(storage('user-logado')) {
             await Avaliacao(id, estrelas, comentario, 1)
         }
 
@@ -585,7 +585,7 @@ export default function Produto() {
                                     <div className='c-user-image'>
 
                                     </div>
-                                    <h1>{item.user}</h1>
+                                    <h1>{user}</h1>
                                 </section>
                                 <main id='comentario'>
                                     <p>{item.comentario}</p>
