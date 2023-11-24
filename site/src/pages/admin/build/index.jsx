@@ -32,7 +32,7 @@ export default function Dashboard() {
       labels: categoriasUnicas,
       datasets: [
         {
-          label: 'Valor Escalado',
+          label: 'Vendidos',
           data: quantidadesFicticias,
           backgroundColor: [
             "rgb(222, 251, 0)",
@@ -54,22 +54,23 @@ export default function Dashboard() {
             "rgb(0, 128, 128)",
             "rgb(128, 128, 128)",
             "rgb(128, 128, 0)",
-            "rgb(222, 251, 0)",
-"rgb(0, 247, 251)",
-"rgb(255, 247, 195)",
-"rgb(255, 247, 0)",
-"rgb(255, 195, 0)",
-"rgb(255, 0, 0)",
-"rgb(255, 0, 247)",
-"rgb(0, 0, 247)",
-"rgb(0, 247, 0)",
-"rgb(247, 247, 247)",
-"rgb(195, 195, 195)",
-"rgb(128, 0, 0)",
-"rgb(0, 128, 0)",
-"rgb(0, 0, 128)",
-"rgb(128, 128, 0)"
+            "rgb(0, 222, 251)",
+            "rgb(195, 247, 128)",
+            "rgb(128, 0, 128)",
+            "rgb(0, 128, 128)",
+            "rgb(247, 0, 195)",
+            "rgb(128, 195, 247)",
+            "rgb(222, 0, 128)",
+            "rgb(0, 128, 195)",
+            "rgb(195, 128, 0)",
+            "rgb(128, 222, 0)",
+            "rgb(0, 195, 128)",
+            "rgb(195, 0, 128)",
+            "rgb(128, 0, 195)",
+            "rgb(0, 195, 0)",
+            "rgb(195, 0, 195)"
           ],
+          
           borderColor: "black",
           borderWidth: 2,
         },
@@ -85,25 +86,54 @@ export default function Dashboard() {
 });
 
 // Convertendo a matriz de valores multiplicados para um array simples
-const valores = valoresMultiplicados.flat();
-
 const lineChartData = {
   labels: categoriasUnicas,
   datasets: [
     {
-      label: 'Valor Escalado',
+      label: 'Lucro Bruto',
       data: categoriasUnicas.map((categoria) => {
         const valoresCategoria = dados
           .filter((item) => item.categoria_nome === categoria)
-          .map((item) => item.valor * 10);
+          .map(() => Math.floor(Math.random() * (100 - 50 + 1) + 50) * 5);
 
-        // Calculando a soma dos valores multiplicados para a categoria
+        // Calculando a soma dos valores para a categoria
         return valoresCategoria.reduce((total, valor) => total + valor, 0);
       }),
       backgroundColor: [
         "rgb(222, 251, 0)",
-        "rgb(0, 247, 251)",
-        // (adicionar mais cores conforme necessário)
+            "rgb(0, 247, 251)",
+            "rgb(255, 247, 195)",
+            "rgb(255, 247, 0)",
+            "rgb(255, 195, 0)",
+            "rgb(255, 0, 0)",
+            "rgb(255, 0, 247)",
+            "rgb(0, 0, 247)",
+            "rgb(0, 247, 0)",
+            "rgb(247, 247, 247)",
+            "rgb(195, 195, 195)",
+            "rgb(128, 0, 0)",
+            "rgb(0, 128, 0)",
+            "rgb(0, 0, 128)",
+            "rgb(128, 128, 0)",
+            "rgb(128, 0, 128)",
+            "rgb(0, 128, 128)",
+            "rgb(128, 128, 128)",
+            "rgb(128, 128, 0)",
+            "rgb(0, 222, 251)",
+            "rgb(195, 247, 128)",
+            "rgb(128, 0, 128)",
+            "rgb(0, 128, 128)",
+            "rgb(247, 0, 195)",
+            "rgb(128, 195, 247)",
+            "rgb(222, 0, 128)",
+            "rgb(0, 128, 195)",
+            "rgb(195, 128, 0)",
+            "rgb(128, 222, 0)",
+            "rgb(0, 195, 128)",
+            "rgb(195, 0, 128)",
+            "rgb(128, 0, 195)",
+            "rgb(0, 195, 0)",
+            "rgb(195, 0, 195)"
       ],
       borderColor: "black",
       borderWidth: 2,
@@ -111,34 +141,43 @@ const lineChartData = {
   ],
 };
 
-    setLineChartData(lineChartData);
+setLineChartData(lineChartData);
+
   
-    const valoresNomes = dados.map((item) => {
-      const valoresNomeProdutos = dados
-        .filter((produto) => produto.nome === item.nome)
-        .map((produto) => produto.valor);
-      const valoresLucroTotal = valoresNomeProdutos.map((valor) => Math.random(valor) * 5); //Math.floor(Math.random()
-      return valoresLucroTotal;
-    });
+const valoresNomes = dados.map((item) => {
+  const valoresNomeProdutos = dados
+    .filter((produto) => produto.nome === item.nome)
+    .map((produto) => produto.valor);
+  const valoresLucroTotal = valoresNomeProdutos.map((valor) => Math.random() * 50);
 
-    const values = valoresNomes.flat();
+  // Calculando a soma dos valores
+  const somaValores = valoresLucroTotal.reduce((total, valor) => total + valor, 0);
 
-    const pieChartData = {
-      labels: dados.map((item) => item.nome),
-      datasets: [
-        {
-          data: values,
-          backgroundColor: [
-            "rgb(255, 99, 132)",
-            "rgb(75, 192, 192)",
-            // ... (adicionar mais cores conforme necessário)
-          ],
-          borderColor: "black",
-          borderWidth: 2,
-        },
+  // Convertendo cada valor para porcentagem em relação à soma total
+  const valoresPorcentagem = valoresLucroTotal.map((valor) => (valor / somaValores) * 100);
+
+  return valoresPorcentagem;
+});
+
+const values = valoresNomes.flat();
+
+const pieChartData = {
+  labels: dados.map((item) => item.categoria_nome),
+  datasets: [
+    {
+      label: 'Porcetagem de Lucro',
+      data: values,
+      backgroundColor: [
+        "rgb(255, 99, 132)",
+        "rgb(75, 192, 192)",
       ],
-    };
-    setPieChartData(pieChartData);
+      borderColor: "black",
+      borderWidth: 2,
+    },
+  ],
+};
+setPieChartData(pieChartData);
+
   };
   
 
