@@ -13,14 +13,14 @@ export default function Grupos() {
     const { id } = useParams()
 
     const [jogos, setJogos] = useState([])
-    const [categoria, setCategoria] = useState()
+    const [categoria, setCategoria] = useState('Categoria')
 
     async function JogosCategoria() {
         let resposta = await FiltarCategoria(id)
         setJogos(resposta)
 
-        let nomeca = jogos.filter( item => item.nm_categoria)
-        setCategoria(nomeca)
+        // let nomeca = jogos.filter( item => item.nm_categoria)
+        // setCategoria(nomeca)
     }
 
     useEffect(()=> {

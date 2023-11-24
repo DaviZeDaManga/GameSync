@@ -23,12 +23,14 @@ import Game from './pages/web/game'
 import Engine from './pages/web/engine'
 import PayCard from './pages/web/PayCard'
 import PayFim from './pages/web/payfim'
+import Boleto from './pages/web/pagamentoboleto'
 import Pesquisa from './pages/web/pesquisar'
 import Gamespage from './pages/web/gamespage'
 
 import AddProductTest from './test/test'
 
 import NotFound from './errors'
+
 export default function Routess(){
     return(
         <BrowserRouter>
@@ -44,8 +46,9 @@ export default function Routess(){
                 <Route path='/games' element={<Gamespage/>} />
                 <Route path='/games/jogar/:id' element={<Game/>} />
                 <Route path='/planos/engine' element={<Engine/>} />
-                <Route path='/PayCard' element={<PayCard/>} />
+                <Route path='/paycard' element={<PayCard/>} />
                 <Route path='/payfim' element={<PayFim/>} />
+                <Route path='/payboleto' element={<Boleto/>} />
                 <Route path='/pesquisar' element={<Pesquisa/>} />
 
                 <Route path='/escolherlogin' element={<EscolherLogin/>} />

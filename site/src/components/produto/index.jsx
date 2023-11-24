@@ -15,6 +15,10 @@ export default function ProdutoCard({id, imagem, nome, produtora, lancamento, ti
         else if (tipo == 'complemento') {
             setTipoprod("Complemento")
         }
+        else if (tipo == 'jogar') {
+            setTipoprodurl('/games/jogar/')
+            setTipoprod('Jogar')
+        }
     })       
     
     

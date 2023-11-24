@@ -191,7 +191,7 @@
         }
 
         > input {
-            width: 1070px;
+            min-width: calc(70vw - 140px);
             height: 60px;
             border: none;
             border-top-left-radius: 60px;
@@ -260,9 +260,8 @@
             align-items: flex-start;
             flex-wrap: wrap;
 
-            gap: 20px;
-            width: 100%;
-            min-width: 1150px;
+            gap: 15px;
+            min-width: calc(70vw - 140px);
             height: auto;
             max-height: 100%;
             padding: 0px 0px 20px 0px;
