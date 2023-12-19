@@ -386,13 +386,13 @@ export default function Produto() {
                         >
                             <SwiperSlide>
                             {produtoinfo.map( item =>
-                            <img src={BuscarImagem(item.img_produto)} />    
+                                <img src={BuscarImagem(item.img_produto)} />    
                             )}
                             </SwiperSlide>
                                         
                             {produtoinfo.map( item => 
                                 
-                                <SwiperSlide>
+                                <SwiperSlide className={`${item.url_video == "nao" && 'none'}`}>
                                     <video controls="true">  <source src={item.url_video} type="video/mp4" /></video>
                                 </SwiperSlide>    
                                 

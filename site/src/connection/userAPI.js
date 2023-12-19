@@ -1,11 +1,13 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: 'http://129.148.42.252:5012'
-    //baseURL: 'http://localhost:5000'
+    baseURL: 'http://localhost:5000'
 });
 
-export async function LoginUser(email, senha){
+////acoes de login
+
+//login
+export async function LoginCliente(email, senha){
     try{
         const r = await api.post('/usuario/login', {
             email: email,
@@ -19,7 +21,8 @@ export async function LoginUser(email, senha){
     }
 }
 
-export async function CadastroUsuario(nome, telefone, cpf, email, senha){
+//cadastrar
+export async function CadastrarCliente(nome, telefone, cpf, email, senha){
     try{
         const r = await api.post('/usuario/cadastrar', {
             nome: nome,
@@ -36,9 +39,25 @@ export async function CadastroUsuario(nome, telefone, cpf, email, senha){
     }
 }
 
-export async function MudarDadosUser(nome, email, senha, telefone, id){
+
+
+
+
+
+
+
+////acoes no perfil
+
+//retornar dados do cliente
+export async function DadosCliente(id){
+    const resposta = await api.get(`/usuario/${id}`)
+    return resposta
+}
+
+//alterar dados cliente
+export async function AlterarDadosUser(nome, email, senha, telefone, id){
     try{
-        const r = await api.put(`/usuario/New/${id}`, {
+        const r = await api.put(`/usuario/${id}/alterardados`, {
             nome: nome,
             email: email,
             senha: senha,
@@ -52,17 +71,13 @@ export async function MudarDadosUser(nome, email, senha, telefone, id){
     }
 }
 
-export async function DadosUser(id){
-    const resposta = await api.get(`/usuario/${id}`)
-    return resposta
-}
-
-export async function FotoUsuario(id, imagem){
+//inserir imagem perfil
+export async function InserirFotoPerfil(id, imagem){
 
     const formData = new FormData();
     formData.append('imagens', imagem);
 
-    const resposta = await api.put(`/usuario/${id}/imagens`, formData,{
+    const resposta = await api.put(`/usuario/${id}/add/imagem`, formData,{
         headers:{
             "Content-Type": "multipart/form-data", 
         },
@@ -70,14 +85,64 @@ export async function FotoUsuario(id, imagem){
     return resposta.status
 }
 
-export async function FotoNova(id, imagem){
+//alterar imagem perfil
+export async function AlterarFotoPerfil(id, imagem){
     const formData = new FormData();
     formData.append('imagens', imagem);
 
-    const resposta = await api.put(`usuario/${id}/mudar`, formData,{
+    const resposta = await api.put(`/usuario/${id}/alter/imagem`, formData,{
         headers:{
             "Content-Type": "multipart/form-data", 
         },
     })
     return resposta.status
-}///usuario/:id/mudar
+}
+
+
+
+
+
+
+
+
+////acoes externar
+
+////avaliacao
+
+//avaliar produto
+export async function AdicionarAvaliacaoProd(id, avaliacao, comentario, id_cliente){
+    try{
+        const resposta = await api.post(`/usuario/avaliacao/${id}`, {
+            id_cliente: id_cliente,
+            comentario: comentario,
+            avaliacao: avaliacao
+        });
+        return resposta.data
+    }
+    catch(erro){
+        throw erro;
+    }
+}
+
+//avaliar jogo
+
+////favoritos
+
+//inserir favorito
+export async function InserirFavorito(produto, cliente){
+    try{
+        const resposta = await api.post('usuario/favoritar', {
+            produto: produto,
+            cliente: cliente
+        });
+        return resposta.data;
+    }
+    catch(erro){
+        throw erro;
+    }
+}
+
+export async function ExcluirFavorito(id){
+    const resposta = await api.delete(`/usuario/favorito/${id}`);
+    return resposta.status
+}
