@@ -3,7 +3,6 @@ import AdmBarraLateral from '../../../components/AdminBarraL';
 import AdmBarraUp from '../../../components/AdminBarraUp';
 
 import storage, { set } from 'local-storage';
-import { ListarTodosJogos, ExcluirProduto, BuscarJogoNome, AlterarProduto, AlterarVideo, AlterarCategoriaEmP, AlterarCategoriaEmCP, AlterarImage, BuscarImagem} from '../../../connection/productAPI';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import { toast } from 'react-toastify';
@@ -18,6 +17,9 @@ import 'swiper/css/navigation';
 import { Navigation, Pagination } from 'swiper/modules';
 
 import { motion, Variants } from 'framer-motion';
+import { BuscarProdutos, BuscarProdutosNM } from '../../../connection/produtosAPI';
+import { AlterarCategoriaProd, AlterarImageProd, AlterarProduto, AlterarVideoProd, ExcluirProduto } from '../../../connection/admAPI';
+import { BuscarImagem } from '../../../connection/produtosAPI';
 
 export default function EditarExcluir(){
     const navigate = useNavigate();
@@ -46,13 +48,13 @@ export default function EditarExcluir(){
     const [video, setVideo] = useState('');
 
     async function filtrar(){  
-        const resposta = await BuscarJogoNome(filtro);
+        const resposta = await BuscarProdutosNM(filtro);
         setJogos(resposta)
     }
 
     async function Enter(event) {
         if (event.key === "Enter") {
-            const resposta = await BuscarJogoNome(filtro);
+            const resposta = await BuscarProdutosNM(filtro);
             if (resposta.length === 0) {
                 // ausência de resultados, mostra uma mensagem de erro.
                 toast.error("Nenhum jogo encontrado com esse nome.");
@@ -64,7 +66,7 @@ export default function EditarExcluir(){
     }    
 
     async function CarregarTodosJogos(){
-        const resposta = await ListarTodosJogos();
+        const resposta = await BuscarProdutos();
         setJogos(resposta)
     }
 
@@ -99,8 +101,8 @@ export default function EditarExcluir(){
     async function RemoverJogo(id, nome) {
         //console.log("ID do Jogo a ser removido:", id);
         confirmAlert({
-            title: 'Remover Jogo',
-            message: `Você tem certeza que quer fazer isso? Excluir o jogo ${nome}.`,
+            title: 'Remover Produto',
+            message: `Você tem certeza que quer fazer isso? Excluir o produto ${nome}.`,
             buttons: [
                 {
                     label: 'Sim!',
@@ -151,14 +153,14 @@ export default function EditarExcluir(){
                 await AlterarProduto(nome, valor, promocao, destaque, EmPromocao, disponivel, qtd, descricao, classificacao, 
                     lancamento, tamanho, empresa, desenvolvedor, categoria, adm);
 
-                await AlterarVideo(id,video )
+                await AlterarVideoProd(id,video )
 
-                await AlterarCategoriaEmP(id,categoria )
+                await AlterarCategoriaProd(id,categoria )
 
-                await AlterarCategoriaEmCP(id, categoria)
+                // await AlterarCategoriaEmCP(id, categoria)
 
                 if (typeof(imagem) == 'object')
-                    await AlterarImage(id, imagem);
+                    await AlterarImageProd(id, imagem);
 
                 ///mudar o comando de consulta no banco para os campos para poder editar
                 ///fazer um comando de update para cada um imagem, video,  categorablalala

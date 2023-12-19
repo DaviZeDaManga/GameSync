@@ -1,7 +1,7 @@
 import './index.scss';
 import { Link } from 'react-router-dom';
 
-import { CadastroUsuario } from '../../../connection/userAPI'
+
 import storage from 'local-storage';
 import { toast } from 'react-toastify';
 import { useState } from 'react';

@@ -9,15 +9,15 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Navigation, Pagination, Keyboard } from 'swiper/modules';
-
-import { BuscarImagem, ListarTodosJogos } from '../../../connection/productAPI';
+import { BuscarProdutos } from '../../../connection/produtosAPI';
+import { BuscarImagem } from '../../../connection/produtosAPI';
 
 export default function Noticias() {
 
     const [noticias, setNoticias] = useState([])
 
     async function CarregarNoticias() {
-        let resposta = await ListarTodosJogos()
+        let resposta = await BuscarProdutos()
         setNoticias(resposta)
     }
 

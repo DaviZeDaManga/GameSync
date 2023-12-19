@@ -1,10 +1,10 @@
 import './index.scss';
 import { useState, useRef, useEffect } from 'react';
-import { LoginUser } from '../../../connection/userAPI';
 import storage from 'local-storage';
 import { useNavigate } from 'react-router-dom';
 import LoadingBar from 'react-top-loading-bar';
 import { toast } from 'react-toastify';
+import { LoginCliente } from '../../../connection/userAPI';
 
 export default function LoginUsuario(){
   
@@ -28,7 +28,7 @@ export default function LoginUsuario(){
       setCarregando(true);
   
   try{
-      const r = await LoginUser(email, senha);
+      const r = await LoginCliente(email, senha);
 
       storage('user-logado', r);
 

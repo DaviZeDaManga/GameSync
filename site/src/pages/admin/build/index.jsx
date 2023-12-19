@@ -1,10 +1,10 @@
 import './index.scss';
 import AdmBarraLateral from '../../../components/AdminBarraL';
-import { ListarTodosJogos } from '../../../connection/productAPI.js';
 import { useEffect, useState } from 'react';
 import BarChart from '../../../components/constant/BarChart.js';
 import LineChart from '../../../components/constant/LineChart.js';
 import PieChart from '../../../components/constant/PieChart.js';
+import { BuscarProdutos } from '../../../connection/produtosAPI.js';
 export default function Dashboard() {
 
   const [barChartData, setBarChartData] = useState(null);
@@ -12,7 +12,7 @@ export default function Dashboard() {
   const [pieChartData, setPieChartData] = useState(null);
 
   async function PegandoInformacoes() {
-    const informacoes = await ListarTodosJogos();
+    const informacoes = await BuscarProdutos();
     criarDadosGrafico(informacoes);
   }
 

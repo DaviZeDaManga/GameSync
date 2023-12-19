@@ -19,10 +19,12 @@ import Title from '../../../components/title'
 
 import EmojiPicker from 'emoji-picker-react';
 import ProdutoCard from '../../../components/produto'
-import { BuscarJogoID, BuscarImagem, Avaliacao, SelecionarComentario } from '../../../connection/productAPI'
 import { motion } from 'framer-motion'
 
 import { toast } from 'react-toastify';
+import { BuscarComentariosProd, BuscarProdutosID } from '../../../connection/produtosAPI';
+import { AdicionarAvaliacaoProd } from '../../../connection/userAPI';
+import { BuscarImagem } from '../../../connection/produtosAPI';
 
 export default function Produto() {
 
@@ -88,7 +90,7 @@ export default function Produto() {
 
     
     async function InfoGame() {
-        let resposta = await BuscarJogoID(id)
+        let resposta = await BuscarProdutosID(id)
 
         setProdutoinfo(resposta)
     }
@@ -133,7 +135,7 @@ export default function Produto() {
     async function Comentar() {
         
         if(storage('user-logado')) {
-            await Avaliacao(id, estrelas, comentario, 1)
+            await AdicionarAvaliacaoProd(id, estrelas, comentario, 1)
         }
 
         else {
@@ -149,7 +151,7 @@ export default function Produto() {
     }
 
     async function Comentarios() {
-        let resposta = await SelecionarComentario(id)
+        let resposta = await BuscarComentariosProd(id)
         setComentarios(resposta)
     }
 

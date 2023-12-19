@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import './index.scss';
 import AdmBarraLateral from '../../../components/AdminBarraL';
-import { CadastrarProduto, EnviarImagens, InserirCategoriaProduto, InserirVideo, BuscarImagem } from '../../../connection/productAPI';
 import storage from 'local-storage';
 import { toast } from 'react-toastify';
+import { InserirCategoriaProd, InserirImagemProd, InserirProduto, InserirVideoProd } from '../../../connection/admAPI';
+import { BuscarImagem } from '../../../connection/produtosAPI';
 
 export default function AddProduct() {
   const [nome, setNome] = useState('');
@@ -62,7 +63,7 @@ export default function AddProduct() {
             admin: IDadmin
           };
 
-          const jogo = await CadastrarProduto(produto);
+          const jogo = await InserirProduto(produto);
           setIdJogo(jogo);
 
           const tbCategoriaProduto = {
@@ -70,10 +71,10 @@ export default function AddProduct() {
             produto: jogo
           };
 
-          await InserirCategoriaProduto(tbCategoriaProduto);
+          await InserirCategoriaProd(tbCategoriaProduto);
 
-          await EnviarImagens(jogo, imagem);
-          await InserirVideo(jogo, video);
+          await InserirImagemProd(jogo, imagem);
+          await InserirVideoProd(jogo, video);
 
           toast.success('Produto Gamer adicionado com SUCESSO!');
         } else {

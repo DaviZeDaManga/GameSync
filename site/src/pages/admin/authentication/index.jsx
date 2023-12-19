@@ -1,9 +1,9 @@
 import './index.scss'
 import { useState, useRef, useEffect } from 'react'
-import { LoginAdm } from '../../../connection/adminAPI'
 import storage from 'local-storage';
 import { useNavigate } from 'react-router-dom';
 import LoadingBar from 'react-top-loading-bar'
+import { LoginAdm } from '../../../connection/admAPI';
 
 export default function CadastroAdmin(){
 

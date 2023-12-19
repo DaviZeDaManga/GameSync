@@ -112,7 +112,7 @@ export async function AlterarFotoPerfil(id, imagem){
 //avaliar produto
 export async function AdicionarAvaliacaoProd(id, avaliacao, comentario, id_cliente){
     try{
-        const resposta = await api.post(`/usuario/avaliacao/${id}`, {
+        const resposta = await api.post(`/usuario/avaliacao/produto/${id}`, {
             id_cliente: id_cliente,
             comentario: comentario,
             avaliacao: avaliacao
@@ -125,6 +125,19 @@ export async function AdicionarAvaliacaoProd(id, avaliacao, comentario, id_clien
 }
 
 //avaliar jogo
+export async function AdicionarAvaliacaoJogo(id, avaliacao, comentario, id_cliente){
+    try{
+        const resposta = await api.post(`/usuario/avaliacao/jogo/${id}`, {
+            id_cliente: id_cliente,
+            comentario: comentario,
+            avaliacao: avaliacao
+        });
+        return resposta.data
+    }
+    catch(erro){
+        throw erro;
+    }
+}
 
 ////favoritos
 

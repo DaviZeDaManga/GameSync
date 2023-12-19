@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './index.scss';
-import { FotoUsuario, DadosUser, FotoNova } from '../../connection/userAPI';
-import { BuscarImagem } from '../../connection/productAPI';
 
 import storage from 'local-storage';
 import { toast } from 'react-toastify';
+import { AlterarFotoPerfil, DadosCliente, InserirFotoPerfil } from '../../connection/userAPI';
+import { BuscarImagem } from '../../connection/produtosAPI';
 export default function AddProductTest() {
   // Parte do bot
   const [IQuestion, setIQuestion] = useState('');
@@ -70,7 +70,7 @@ export default function AddProductTest() {
         if (idusuario && idusuario.id) {
           setIdUser(idusuario.id);
   
-          const resposta = await DadosUser(idUser);
+          const resposta = await DadosCliente(idUser);
           setdados(resposta.data);  // Altere aqui, use resposta.data em vez de resposta
         } else {
           // Lida com a situação em que idusuario ou idusuario.id não está definido
@@ -98,15 +98,15 @@ export default function AddProductTest() {
       }
   
       // Verifique se o usuário já possui uma imagem
-      const resposta = await DadosUser(idUser);
+      const resposta = await DadosCliente(idUser);
   
       if (resposta.data && resposta.data.length > 0 && resposta.data[0].img_cliente) {
         // Se já existe uma imagem, atualize-a usando a função FotoNova
-        await FotoNova(idUser, imagem);
+        await AlterarFotoPerfil(idUser, imagem);
         toast.success('Imagem do usuário atualizada com SUCESSO!');
       } else {
         // Se não existe uma imagem, adicione uma nova usando a função FotoUsuario
-        await FotoUsuario(idUser, imagem);
+        await InserirFotoPerfil(idUser, imagem);
         toast.success('Imagem do usuário adicionada com SUCESSO!');
       }
     } catch (err) {

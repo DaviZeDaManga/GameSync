@@ -3,8 +3,9 @@ import './index.scss';
 import AdmBarraLateral from '../../../components/AdminBarraL';
 import { toast } from 'react-toastify';
 import storage, { set } from 'local-storage';
+import { InserirImagemNot, InserirNoticia } from '../../../connection/admAPI';
+import { BuscarImagem } from '../../../connection/produtosAPI';
 
-import { InserirNoticia, ImgNoticia, BuscarImagem } from '../../../connection/productAPI';
 export default function Addnews() {
 
     const [imagem, setImagem] = useState(null);
@@ -36,7 +37,7 @@ async function AdicionarNoticia() {
                 const Add = await InserirNoticia(titulo, subtitulo, texto);
                 const idNoticia = Add.id;
 
-                await ImgNoticia(idNoticia, imagem);
+                await InserirImagemNot(idNoticia, imagem);
                 toast.success('Nóticia adicionada com SUCESSO!');
             } else {
                 toast.warning('Usuário logado não é um administrador.');

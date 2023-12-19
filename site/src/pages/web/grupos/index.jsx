@@ -7,7 +7,8 @@ import Atropos from 'atropos/react';
 
 import { Link, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { BuscarImagem, FiltarCategoria } from '../../../connection/productAPI';
+import { BuscarProdutosCT } from '../../../connection/produtosAPI';
+import { BuscarImagem } from '../../../connection/produtosAPI';
 
 export default function Grupos() {
     const { id } = useParams()
@@ -16,7 +17,7 @@ export default function Grupos() {
     const [categoria, setCategoria] = useState('Categoria')
 
     async function JogosCategoria() {
-        let resposta = await FiltarCategoria(id)
+        let resposta = await BuscarProdutosCT(id)
         setJogos(resposta)
 
         // let nomeca = jogos.filter( item => item.nm_categoria)

@@ -6,8 +6,9 @@ import storage, { set } from 'local-storage';
 import EmojiPicker from 'emoji-picker-react';
 import FooterPage from '../../../components/footerpage/index,';
 import { useParams, useNavigate } from 'react-router-dom';
-import { BuscarGameID, BuscarImagem } from '../../../connection/productAPI';
+
 import LoadingBar from 'react-top-loading-bar';
+import { BuscarGamesID } from '../../../connection/jogosAPI';
 
 export default function Game() {
     const [jogar, setJogar] = useState(false)
@@ -16,7 +17,7 @@ export default function Game() {
     const [infogame, setInfogame] = useState([])
 
     async function InfoJogo() {
-        let resposta = await BuscarGameID(id)
+        let resposta = await BuscarGamesID(id)
 
         setInfogame(resposta)
         console.log(resposta[0])

@@ -1,20 +1,18 @@
 import './index.scss'
 import { motion } from 'framer-motion';
 import ProdutoCard from '../../../components/produto';
-import { BuscarJogoID, ListarTodosJogos } from '../../../connection/productAPI';
-import { BuscarImagem } from '../../../connection/productAPI';
 import { useState, useEffect } from 'react'
 import BarraLateral from '../../../components/barraLateral';
 import { Link, useNavigate } from 'react-router-dom';
-import { BuscarJogoNome } from '../../../connection/productAPI';
 import { toast } from 'react-toastify';
-
+import { BuscarProdutos, BuscarProdutosNM } from '../../../connection/produtosAPI';
+import { BuscarImagem } from '../../../connection/produtosAPI';
 
 export default function Pesquisa() {
     const [tgames, setTgames] = useState ([])
 
     async function TodosGames() {
-        const resposta = await ListarTodosJogos()
+        const resposta = await BuscarProdutos()
         setTgames(resposta)
     }
     
@@ -36,7 +34,7 @@ export default function Pesquisa() {
 
     async function BuscarPorNome() {
         try {
-            let resposta = await BuscarJogoNome(pesqnome)
+            let resposta = await BuscarProdutosNM(pesqnome)
             setJogosnome(resposta)
         } catch {
             
@@ -99,7 +97,7 @@ export default function Pesquisa() {
     }
 
     async function GameAleatorio() {
-        let resposta = await ListarTodosJogos()
+        let resposta = await BuscarProdutos()
         setFiljogoall(resposta)
 
         let filtro = filjogoall.filter( item => item.produto_id == idaleatorio)

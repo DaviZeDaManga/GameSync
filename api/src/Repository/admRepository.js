@@ -77,7 +77,10 @@ export async function InserirImagemProd(imagem, id){
 //inserir video
 export async function InserirVideoProd(video) {
   try {
-    const comando = 'INSERT INTO tb_produto_video (id_produto, url_video) VALUES (?, ?)';
+    const comando = `
+    INSERT INTO tb_produto_video (id_produto, url_video) 
+    VALUES (?, ?)`;
+    
     const [resposta] = await conx.query(comando, [video.produto, video.url]);
 
     if (resposta && resposta.insertId) {

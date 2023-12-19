@@ -1,19 +1,19 @@
 import './index.scss'
-import BarraDeCima from '../../../components/baraDeCima'
 import BarraLateral from '../../../components/barraLateral'
 import Title from '../../../components/title'
 import ProdutoCard from '../../../components/produto'
-import { BuscarJogoID, BuscarImagem, ListarTodosJogos } from '../../../connection/productAPI'
 
 import { useParams, Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import { BuscarProdutos, BuscarProdutosID } from '../../../connection/produtosAPI'
+import { BuscarImagem } from '../../../connection/produtosAPI'
 
 export default function JogosParecidos() {
     const { id } = useParams();
     const [jogoinfo, setJogoinfo] = useState([])
 
     async function JogoInfo() {
-        let resposta = await BuscarJogoID(id)
+        let resposta = await BuscarProdutosID(id)
         setJogoinfo(resposta)
     }
 
@@ -25,7 +25,7 @@ export default function JogosParecidos() {
     const [jogos, setJogos] = useState([])
 
     async function Jogos() {
-        let resposta = await ListarTodosJogos()
+        let resposta = await BuscarProdutos()
         setJogos(resposta)
     }
 

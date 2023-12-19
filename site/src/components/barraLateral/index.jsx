@@ -3,9 +3,8 @@ import './index.scss'
 import { Link, json, useNavigate } from 'react-router-dom'
 import storage, { set } from 'local-storage';
 import { motion } from "framer-motion"
-
+import { BuscarImagem } from '../../connection/produtosAPI';
 import BarraDeCima from '../baraDeCima';
-import { BuscarImagem, BuscarJogoID } from '../../connection/productAPI';
 
 export default function BarraLateral({home, planos, noticias, pesquisa, games}) {
     const[nameuser, setNameuser] = useState("")

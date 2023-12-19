@@ -21,8 +21,8 @@ export async function LoginCliente(email, senha){
 
 //cadastrar
 export async function CadastrarCliente (cliente){
-    const comando = `INSERT INTO tb_cliente (nm_cliente, ds_telefone, ds_cpf, ds_email, ds_senha)
-    VALUES (?, ?, ?, ?, ?);`
+    const comando = `INSERT INTO tb_cliente (nm_cliente, ds_telefone, ds_cpf, ds_email, ds_senha, ds_cor)
+    VALUES (?, ?, ?, ?, ?, ?);`
 
     const [resposta] = await conx.query(comando, [cliente.nome, cliente.telefone, cliente.cpf, cliente.email, cliente.senha]);
     cliente.id = resposta.insertId;
@@ -39,20 +39,17 @@ export async function CadastrarCliente (cliente){
 export async function DadosCliente(id){
     const comando = `
     SELECT 
-    tb_cliente.id_cliente,
-    tb_cliente.nm_cliente,
-    tb_cliente.ds_email,
-    tb_cliente.ds_senha,
-    tb_cliente.ds_telefone,
-    tb_cliente.ds_cpf,
+    tb_clientes.id_cliente					id,
+    tb_clientes.nm_cliente					nome,
+    tb_clientes.ds_email						email,
+    tb_clientes.ds_senha						senha,
+    tb_clientes.ds_telefone					telefone,
+    tb_clientes.ds_cpf						cpf,
     tb_cliente_imagem.id_cliente_img,
-    tb_cliente_imagem.img_cliente
-FROM 
-    tb_cliente
-LEFT JOIN 
-    tb_cliente_imagem ON tb_cliente.id_cliente = tb_cliente_imagem.id_cliente
-WHERE 
-    tb_cliente.id_cliente = ?;
+    tb_cliente_imagem.img_cliente			imagem
+FROM tb_clientes
+LEFT JOIN tb_cliente_imagem ON tb_cliente.id_cliente = tb_cliente_imagem.id_cliente
+WHERE tb_clientes.id_cliente = ?
 `
 const [linhas] = await conx.query(comando, [id])
 return linhas
@@ -61,12 +58,13 @@ return linhas
 //alterar dados cliente
 export async function AlterarDadosUser(New, id) {
     const comando = `
-    UPDATE tb_cliente
+    UPDATE tb_clientes
     SET nm_cliente = ?,
         ds_email = ?,
         ds_senha = ?,
-        ds_telefone = ?
-    WHERE id_cliente = ?;`
+        ds_telefone = ?,
+        ds_cor = ?
+    WHERE id_cliente = ?`
 
     if (!New) {
         throw new Error('Os dados do usuário não foram fornecidos.');
@@ -123,8 +121,8 @@ return resposta.affectedRows
 //avaliar produto
 export async function AdicionarAvaliacaoProd(idProduto, avaliacao){
     const comando = `
-    INSERT INTO tb_comentarios_avaliacoes (id_cliente, comentario, avaliacao, data_comentario, id_produto)
-    VALUES (?, ?, ?, CURDATE(), ?);`
+    INSERT INTO tb_comentarios_avaliacoes_produtos (id_cliente, comentario, avaliacao, data_comentario, id_produto)
+    VALUES (?, ?, ?, CURDATE(), ?)`
   
     const parametros = [avaliacao.id_cliente, avaliacao.comentario, avaliacao.avaliacao, idProduto];
   
@@ -133,6 +131,16 @@ export async function AdicionarAvaliacaoProd(idProduto, avaliacao){
 }
 
 //avaliar jogo
+export async function AdicionarAvaliacaoJogo(idJogo, avaliacao){
+    const comando = `
+    INSERT INTO tb_comentarios_avaliacoes_jogos (id_cliente, comentario, avaliacao, data_comentario, id_jogo)
+    VALUES (?, ?, ?, CURDATE(), ?)`
+  
+    const parametros = [avaliacao.id_cliente, avaliacao.comentario, avaliacao.avaliacao, idJogo];
+  
+    const [resposta] = await conx.query(comando, parametros);
+    return resposta.affectedRows;
+}
 
 ////favoritos
 

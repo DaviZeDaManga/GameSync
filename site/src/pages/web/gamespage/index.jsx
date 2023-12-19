@@ -4,13 +4,15 @@ import Title from '../../../components/title'
 import ProdutoCard from '../../../components/produto'
 
 import { useEffect, useState } from 'react'
-import { BuscarImagem, ListarTodosJogos, TodosGames } from '../../../connection/productAPI'
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Autoplay } from 'swiper/modules';
+import { BuscarProdutos } from '../../../connection/produtosAPI'
+import { BuscarGames } from '../../../connection/jogosAPI'
+import { BuscarImagem } from '../../../connection/produtosAPI'
 
 export default function Gamespage() {
 
@@ -18,7 +20,7 @@ export default function Gamespage() {
     const [jogos, setJogos] = useState([])
 
     async function Games() {
-        let resposta = await TodosGames()
+        let resposta = await BuscarProdutos()
         setGames(resposta)
     }
 
@@ -27,7 +29,7 @@ export default function Gamespage() {
     })
 
     async function Jogos() {
-        let resposta = await ListarTodosJogos()
+        let resposta = await BuscarGames()
         setJogos(resposta)
     }
 
@@ -35,6 +37,7 @@ export default function Gamespage() {
         Jogos()
     })
 
+    console.log(jogos)
     console.log(games)
 
 

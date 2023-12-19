@@ -8,7 +8,7 @@ const uploadN = multer({dest: 'tools/now'})
 
 
 
-import { AdicionarAvaliacaoProd, AlterarDadosUser, AlterarFotoPerfil, CadastrarCliente, DadosCliente, ExcluirFavorito, InserirFavorito, InserirFotoPerfil, LoginCliente } from "../Repository/userRepository.js";
+import { AdicionarAvaliacaoJogo, AdicionarAvaliacaoProd, AlterarDadosUser, AlterarFotoPerfil, CadastrarCliente, DadosCliente, ExcluirFavorito, InserirFavorito, InserirFotoPerfil, LoginCliente } from "../Repository/userRepository.js";
 
 import passwordValidator from 'password-validator';//import
 var schema = new passwordValidator(); // cria uma instância de um objeto chamado schema, Esse objeto schema é usado para definir e aplicar regras de validação personalizadas a senhas.
@@ -192,7 +192,7 @@ server.put('/usuario/:id/alter/imagem', upload.array('imagens', 5), async (req, 
 ////avaliacao
 
 //avaliar produto
-server.post('/usuario/avaliacao/:id', async(req, resp) => {
+server.post('/usuario/avaliacao/produto/:id', async(req, resp) => {
     try{
         const { id } = req.params
         const avaliacao = req.body;
@@ -229,6 +229,41 @@ server.post('/usuario/avaliacao/:id', async(req, resp) => {
 })
 
 //avaliar jogo
+server.post('/usuario/avaliacao/jogo/:id', async(req, resp) => {
+    try{
+        const { id } = req.params
+        const avaliacao = req.body;
+
+        if (isNaN(id)) {
+            throw new Error('ID do jogo não é válido.');
+        }
+
+        if (!avaliacao.id_cliente){
+            throw new Error('ID cliente está vazio');
+        }
+
+        if(!avaliacao.comentario){
+            throw new Error('Comentario está vazio');
+        }
+
+        if(!avaliacao.avaliacao){
+            throw new Error('Avaliação está vazio');
+        }
+
+        const resposta = await AdicionarAvaliacaoJogo(id, avaliacao);
+
+        if (resposta !== 1) {
+            throw new Error('Produto não pode ser alterado.');
+        } else {
+            resp.status(204).send();
+        }
+    }
+    catch(err){
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
 
 ////favoritos
 
