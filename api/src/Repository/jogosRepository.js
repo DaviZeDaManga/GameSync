@@ -14,7 +14,7 @@ export async function BuscarGames(){
 
 //jogo por id
 export async function BuscarGamesID(id){
-    const comando = `SELECT * FROM tb_jogos WHERE id_jogos = ?;`
+    const comando = `SELECT * FROM tb_jogos WHERE id_jogo = ?`
   
     const [linhas] = await conx.query(comando, [id])
     return linhas

@@ -64,11 +64,11 @@ export default function JogosParecidos() {
                 {jogoinfo.map( item => 
                     <section className='produtocard'>
                         <main className='conteudo'>
-                            <h1>{item.nm_produto}</h1>
-                            <p>{item.ds_descricao}</p>
+                            <h1>{item.nome}</h1>
+                            <p>{item.descricao}</p>
                         </main>
                         <div className='img'>
-                            <img src={BuscarImagem(item.img_produto)} />
+                            <img src={BuscarImagem(item.img)} />
                         </div>
                     </section>
                 )}

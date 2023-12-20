@@ -22,9 +22,10 @@ import ProdutoCard from '../../../components/produto'
 import { motion } from 'framer-motion'
 
 import { toast } from 'react-toastify';
-import { BuscarComentariosProd, BuscarProdutosID } from '../../../connection/produtosAPI';
+import { BuscarComentariosProd, BuscarProdutos, BuscarProdutosID } from '../../../connection/produtosAPI';
 import { AdicionarAvaliacaoProd } from '../../../connection/userAPI';
 import { BuscarImagem } from '../../../connection/produtosAPI';
+
 
 export default function Produto() {
 
@@ -40,6 +41,8 @@ export default function Produto() {
     const [produtoinfo, setProdutoinfo] = useState([])
     const [imagens, setImagens] = useState ([])
 
+    const [produtosparecidos, setProdutosparecidos] = useState([])
+
     const [conquistas, setConquistas] = useState ([])
     const [complementos, setComplementos] = useState ([])
     const [qntdconq, setQntdconq] = useState(6)
@@ -50,10 +53,8 @@ export default function Produto() {
     const [comentario, setComentario] = useState ('')
 
     const [avaliacoes, setAvaliacoes] = useState ()
-
-
     
-    const [infogame, setInfogame] = useState([])
+
 
     function MostrarDescricao () {
         setMostdesc(true)
@@ -304,6 +305,22 @@ export default function Produto() {
         }
     })
    
+
+
+
+
+
+
+
+
+    async function JogosParecidos() {
+        let resposta = await BuscarProdutos()
+        setProdutosparecidos(resposta)
+    }
+
+    useEffect(() => {
+        JogosParecidos()
+    }, [])
     
     return(
         <div className="Produto">
@@ -328,19 +345,19 @@ export default function Produto() {
                             
                         <>
                         <div className="titulo">
-                            <h1>{item.nm_produto}</h1>
-                            <p>{item.ds_descricao}</p>
+                            <h1>{item.nome}</h1>
+                            <p>{item.descricao}</p>
                         </div>
                         <section id='Comprar'>
                             <div className='info'>
-                                {item.bt_promocao == true &&
-                                <h1 className='promocao'>R${item.vl_preco_promocional}</h1>}
-                                <h1 className={`${item.bt_promocao == true && 'noprice'}`}>R${item.vl_preco}</h1>
+                                {item.promocao == true &&
+                                <h1 className='promocao'>R${item.vlPromo}</h1>}
+                                <h1 className={`${item.promocao == true && 'noprice'}`}>R${item.preco}</h1>
                             </div>
                             <div className='comprar'>
                                 <button><Link to={`/BarraLateral/${id}`}></Link>Comprar</button> 
 
-                                <button onClick={()=> (SalvarCarrinho(id, item.nm_produto, item.ds_descricao, item.vl_preco , item.img_produto))} className='acoes'>
+                                <button onClick={()=> (SalvarCarrinho(id, item.nome, item.descricao, item.preco , item.img))} className='acoes'>
                                     <img src='/assets/images/carrinho/carrinho.png' />
                                 </button>   
 
@@ -388,14 +405,14 @@ export default function Produto() {
                         >
                             <SwiperSlide>
                             {produtoinfo.map( item =>
-                                <img src={BuscarImagem(item.img_produto)} />    
+                                <img src={BuscarImagem(item.img)} />    
                             )}
                             </SwiperSlide>
                                         
                             {produtoinfo.map( item => 
                                 
                                 <SwiperSlide className={`${item.url_video == "nao" && 'none'}`}>
-                                    <video controls="true">  <source src={item.url_video} type="video/mp4" /></video>
+                                    <video controls="true">  <source src={item.video} type="video/mp4" /></video>
                                 </SwiperSlide>    
                                 
                             )}    
@@ -443,23 +460,23 @@ export default function Produto() {
 
                     <div className="detalhe">
                         <h2>Desenvolvido por</h2>                          
-                        <p>{item.ds_desenvolvedor}</p>
+                        <p>{item.desenvolvedor}</p>
                     </div>
                     <div className="detalhe">
                         <h2>Publicado por</h2>
-                        <p>{item.ds_empresa_publi}</p>           
+                        <p>{item.publi}</p>           
                     </div>
                     <div className="detalhe">
                         <h2>Data de lançamento</h2>
-                        <p>{item.dt_lancamento}</p>
+                        <p>{item.lancamento}</p>
                     </div>
                     <div className="detalhe">
                         <h2>Tamanho</h2>
-                        <p>{item.ds_tamanho}</p>
+                        <p>{item.tamanho}</p>
                     </div>
 
                     </div>
-                    <p>{item.ds_descricao}</p>
+                    <p>{item.descricao}</p>
                     </>
                     
                     )}
@@ -498,6 +515,30 @@ export default function Produto() {
                 </div>
 
             </section>
+
+            {produtosparecidos != '' &&
+            <section id='titles'>
+                <h1 className='tinf'>Jogos Parecidos</h1>
+                <Link to={'/produto/'+id+'/jogosparecidos'}>
+                    <button>Ver mais jogos</button>
+                </Link>
+            </section>}
+
+
+            <div id="produtos">  
+
+                {produtosparecidos.map( item => 
+
+                <ProdutoCard
+                id={item.produto_id}
+                imagem={BuscarImagem(item.imagem_produto)}
+                nome={item.nome}
+                lancamento={item.tamanho}
+                /> 
+
+                )}
+
+            </div>
             
             {conquistas != '' &&
             <section id='titles'>

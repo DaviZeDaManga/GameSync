@@ -5,7 +5,7 @@ const server = Router()
 
 
 
-import { BuscarComentariosProd, BuscarProdutos, BuscarProdutosCT, BuscarProdutosFV, BuscarProdutosID, BuscarProdutosNM } from "../Repository/produtoRepository.js";
+import { BuscarCategoria, BuscarComentariosProd, BuscarProdutos, BuscarProdutosCT, BuscarProdutosFV, BuscarProdutosID, BuscarProdutosNM } from "../Repository/produtoRepository.js";
 
 //retornar produtos
 
@@ -46,8 +46,8 @@ server.get('/produtos/buscar', async (req, resp) => {
 
 //produto por id
 server.get('/produto/:id', async (req, resp) => {
-    try {
-        const { id } = req.params; // parametro na url
+    try{
+        const { id } = req.params;
 
         if (!id) {
             resp.status(400).send({ erro: 'O parâmetro "id" é obrigatório.' });
@@ -61,15 +61,41 @@ server.get('/produto/:id', async (req, resp) => {
         } else {
             resp.send(resposta);
         }
-    } catch (err) {
-        resp.status(500).send({
+    }
+    catch(err){ 
+        resp.status(400).send({
             erro: err.message
-        });
+        })
+    }
+});
+
+//buscar categoria
+server.get('/categorias/:id', async (req, resp) => {
+    try{
+        const { id } = req.params;
+
+        if (!id) {
+            resp.status(400).send({ erro: 'O parâmetro "id" é obrigatório.' });
+            return;
+        }
+
+        const resposta = await BuscarCategoria(id);
+
+        if (!resposta) {
+            resp.status(404).send([]);
+        } else {
+            resp.send(resposta);
+        }
+    }
+    catch(err){ 
+    resp.status(400).send({
+        erro: err.message
+    })
     }
 });
 
 //buscar por categoria
-server.get('/categorias/:id', async(req, resp) => {
+server.get('/produto/categoria/:id', async(req, resp) => {
     try{
         const { id } = req.params;
 
@@ -94,7 +120,7 @@ server.get('/categorias/:id', async(req, resp) => {
 })
 
 //buscar comentarios dos produtos
-server.get(`/produtos/:id/comentarios`, async(req, resp) => {
+server.get(`/produto/:id/comentarios`, async(req, resp) => {
     try {
         const { id } = req.params;
 

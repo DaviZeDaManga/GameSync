@@ -5,29 +5,35 @@ import Title from '../../../components/title'
 import ProdutoCard from '../../../components/produto'
 import Atropos from 'atropos/react';
 
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { BuscarProdutosCT } from '../../../connection/produtosAPI';
+import { BuscarCategoria, BuscarProdutosCT } from '../../../connection/produtosAPI';
 import { BuscarImagem } from '../../../connection/produtosAPI';
 
 export default function Grupos() {
     const { id } = useParams()
 
     const [jogos, setJogos] = useState([])
-    const [categoria, setCategoria] = useState('Categoria')
+    const [categoria, setCategoria] = useState([])
 
     async function JogosCategoria() {
         let resposta = await BuscarProdutosCT(id)
         setJogos(resposta)
-
-        // let nomeca = jogos.filter( item => item.nm_categoria)
-        // setCategoria(nomeca)
     }
 
     useEffect(()=> {
         JogosCategoria()
     }, [])
-    
+
+    async function Categoria() {
+        let resposta = await BuscarCategoria(id)
+        setCategoria(resposta)
+    }
+
+    useEffect(() => {
+        Categoria()
+    }, [])
+
 
 
 
@@ -48,7 +54,13 @@ export default function Grupos() {
             rotateYMax={3}
             >
                 <div className='name'>
-                    <h1>{categoria}</h1>
+                    {categoria.map( item =>
+                        
+                        <h1>
+                            {item.categoria}
+                        </h1>    
+                        
+                    )}
                 </div>
             </Atropos>
 
@@ -64,10 +76,10 @@ export default function Grupos() {
                 {jogos.map( item => 
                     
                 <ProdutoCard
-                    id={item.id_produto}
-                    imagem={BuscarImagem(item.img_produto)}
-                    nome={item.nm_produto}
-                    lancamento={item.ds_tamanho}
+                    id={item.id}
+                    imagem={BuscarImagem(item.img)}
+                    nome={item.nome}
+                    lancamento={item.tamanho}
                 />    
                     
                 )}

@@ -86,56 +86,75 @@ WHERE
 //jogo por id
 export async function BuscarProdutosID(id){
     const comando = `
-    SELECT 
-    c.nm_categoria, 
-    p.id_admin, 
-    p.nm_produto, 
-    p.ds_descricao, 
-    p.vl_preco, 
-    p.vl_preco_promocional, 
-    p.bt_destaque, 
-    p.bt_promocao, 
-    p.bt_disponivel, 
-    p.qtd_estoque, 
-    p.ds_classificacao, 
-    p.dt_lancamento, 
-    p.ds_tamanho, 
-    p.ds_empresa_publi, 
-    p.ds_desenvolvedor,
-    pi.img_produto,
-    pv.url_video
-  FROM tb_categoria c
-  INNER JOIN tb_produto p ON c.id_categoria = p.id_categoria
-  LEFT JOIN tb_produto_imagem pi ON p.id_produto = pi.id_produto
-  LEFT JOIN tb_produto_video pv ON p.id_produto = pv.id_produto
-  WHERE p.id_produto = ?;`
+    SELECT  
+      p.id_produto					    id,
+      p.nm_produto       				nome, 
+      p.ds_descricao	   				descricao, 
+      p.vl_preco						preco, 
+      p.vl_preco_promocional			vlPromo, 
+      p.bt_destaque  					destaque, 
+      p.bt_promocao					promocao, 
+      p.bt_disponivel					disponivel, 
+      p.qtd_estoque					estoque, 
+      p.ds_classificacao				classificacao, 
+      p.dt_lancamento					lancamento, 
+      p.ds_tamanho					tamanho, 
+      p.ds_empresa_publi				publi, 
+      p.ds_desenvolvedor				desenvolvedor,
+      pi.img_produto					img,
+      pv.url_video					video
+    FROM tb_produto p
+    LEFT JOIN tb_produto_imagem pi ON p.id_produto = pi.id_produto
+    LEFT JOIN tb_produto_video pv ON p.id_produto = pv.id_produto
+    where p.id_produto = ?`
   const [linhas] = await conx.query(comando, [id])
   return linhas
   }
 
+//buscar categoria
+export async function BuscarCategoria(id) {
+    const comando = `
+    SELECT 
+    nm_categoria		categoria
+    FROM tb_categoria
+    where id_categoria = ?`
+
+    const [linhas] = await conx.query(comando, [id])
+    return linhas;
+}
+
 //buscar por categoria
 export async function BuscarProdutosCT(id){
     const comando = `
-    SELECT 
-    tp.*,
-    tpi.img_produto,
-    tc.nm_categoria
-  FROM 
-    tb_produto tp
-  JOIN 
-    tb_produto_imagem tpi ON tp.id_produto = tpi.id_produto
-  JOIN 
-    tb_categoria tc ON tp.id_categoria = tc.id_categoria
-  WHERE 
-    tp.id_categoria = ?;`;
+    SELECT  
+      p.id_produto					id,
+      p.nm_produto       				nome, 
+      p.ds_descricao	   				descricao, 
+      p.vl_preco						preco, 
+      p.vl_preco_promocional			vlPromo, 
+      p.bt_destaque  					destaque, 
+      p.bt_promocao					promocao, 
+      p.bt_disponivel					disponivel, 
+      p.qtd_estoque					estoque, 
+      p.ds_classificacao				classificacao, 
+      p.dt_lancamento					lancamento, 
+      p.ds_tamanho					tamanho, 
+      p.ds_empresa_publi				publi, 
+      p.ds_desenvolvedor				desenvolvedor,
+      pi.img_produto					img,
+      pv.url_video					video
+  FROM tb_produto p
+  LEFT JOIN tb_produto_imagem pi ON p.id_produto = pi.id_produto
+  LEFT JOIN tb_produto_video pv ON p.id_produto = pv.id_produto
+  where id_categoria = ?`;
   
-    const [linhas] = await conx.query(comando, [id])
-    return linhas
+  const [linhas] = await conx.query(comando, [id])
+  return linhas
 }
 
 //buscar comentarios dos produtos
 export async function BuscarComentariosProd(id){
-    const comando = `SELECT * FROM tb_comentarios_avaliacoes WHERE id_produto = ?;`
+    const comando = `SELECT * FROM tb_comentarios_avaliacoes_produtos WHERE id_produto = ?`
   
     const [linhas] = await conx.query(comando, [id])
     return linhas

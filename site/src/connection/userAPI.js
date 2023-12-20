@@ -51,7 +51,7 @@ export async function CadastrarCliente(nome, telefone, cpf, email, senha){
 //retornar dados do cliente
 export async function DadosCliente(id){
     const resposta = await api.get(`/usuario/${id}`)
-    return resposta
+    return resposta.data
 }
 
 //alterar dados cliente

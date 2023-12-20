@@ -62,6 +62,19 @@ export default function BarraDeCima () {
                 x: configcard
             }}
             >   
+            <div className='acoes'>
+                <Link to={'/cadastro'}>
+                    <button className='ac'>
+                        Cadastrar
+                    </button>
+                </Link>
+                <Link to={'/login'}>
+                    <button className='ac'>
+                        Login
+                    </button>
+                </Link>
+            </div>
+
             <button>
                 Meu Perfil
             </button>

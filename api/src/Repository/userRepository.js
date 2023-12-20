@@ -11,7 +11,7 @@ export async function LoginCliente(email, senha){
     `SELECT id_cliente id,
         nm_cliente  nome,
         ds_email    email
-    FROM tb_cliente
+    FROM tb_clientes
     WHERE ds_email = ?
     AND   ds_senha = ?`
 
@@ -42,13 +42,13 @@ export async function DadosCliente(id){
     tb_clientes.id_cliente					id,
     tb_clientes.nm_cliente					nome,
     tb_clientes.ds_email						email,
-    tb_clientes.ds_senha						senha,
     tb_clientes.ds_telefone					telefone,
+    tb_clientes.ds_cor						cor,
     tb_clientes.ds_cpf						cpf,
     tb_cliente_imagem.id_cliente_img,
     tb_cliente_imagem.img_cliente			imagem
 FROM tb_clientes
-LEFT JOIN tb_cliente_imagem ON tb_cliente.id_cliente = tb_cliente_imagem.id_cliente
+LEFT JOIN tb_cliente_imagem ON tb_clientes.id_cliente = tb_cliente_imagem.id_cliente
 WHERE tb_clientes.id_cliente = ?
 `
 const [linhas] = await conx.query(comando, [id])
@@ -122,7 +122,7 @@ return resposta.affectedRows
 export async function AdicionarAvaliacaoProd(idProduto, avaliacao){
     const comando = `
     INSERT INTO tb_comentarios_avaliacoes_produtos (id_cliente, comentario, avaliacao, data_comentario, id_produto)
-    VALUES (?, ?, ?, CURDATE(), ?)`
+    VALUES (?, ?, ?, CURDATE(), ?);`
   
     const parametros = [avaliacao.id_cliente, avaliacao.comentario, avaliacao.avaliacao, idProduto];
   

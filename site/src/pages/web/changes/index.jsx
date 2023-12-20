@@ -8,6 +8,7 @@ import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 import { EffectCoverflow, Navigation, Pagination } from 'swiper/modules';
+import { DadosCliente } from '../../../connection/userAPI';
 
 export default function MudarPerfil(){
     const [backgroundColor, setBackgroundColor] = useState('linear-gradient(130deg, rgba(206, 165, 60, 1), rgba(175, 64, 49, 1))');
@@ -22,6 +23,7 @@ export default function MudarPerfil(){
 
     const [imguser, setImguser] = useState("")
     const [nome, setNome] = useState('')
+    const [id, setId] =useState(1)
 
     useEffect(() => {
         if(storage('user-logado')){
@@ -37,6 +39,21 @@ export default function MudarPerfil(){
             setImguser('/assets/images/GameSync/User.png')
         }
     }, [])
+
+    const [dados, setDados] = useState([])
+
+    async function Dados() {
+        let resp = await DadosCliente(id)
+        setDados(resp)
+    }
+
+    useEffect(() => {
+        Dados()
+    }, [])
+
+    console.log(dados)
+
+    
 
 
 

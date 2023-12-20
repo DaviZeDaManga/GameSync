@@ -320,15 +320,15 @@ export default function LoginUsuario(){
 
 <div class="signin">
   <div class="content">
-    <h2>Sign In</h2>
+    <h2>Entrar</h2>
     <div class="form">
       <div class="inputBox">
         <input value={email} onChange={e => setEmail(e.target.value)} type="text" required/>
-        <i>EMAIL</i>
+        <i>Email</i>
       </div>
       <div class="inputBox">
         <input value={senha} onChange={e => setSenha(e.target.value)} type="password" required/>
-        <i>Password</i>
+        <i>Senha</i>
       </div>
       <div class="links">
         <a href="#">Forgot Password</a>

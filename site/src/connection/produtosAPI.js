@@ -46,16 +46,37 @@ export async function BuscarProdutosID(id){
     }
 }
 
+//buscar categoria
+export async function BuscarCategoria(id) {
+    try {
+        const resposta = await api.get(`/categorias/${id}`)
+        return resposta.data
+
+    } catch(erro) {
+        throw erro;
+    }
+}
+
 //produtos por categoria
 export async function BuscarProdutosCT(id){
-    const resposta = await api.get(`/categorias/${id}`);
-    return resposta.data
+    try {
+        const resposta = await api.get(`/produto/categoria/${id}`);
+        return resposta.data
+
+    } catch(erro) {
+        throw erro;
+    }
 }
 
 //buscar comentarios dos produtos
 export async function BuscarComentariosProd(id){
-    const resposta = await api.get(`/produtos/${id}/comentarios`)
-    return resposta.data
+    try {
+        const resposta = await api.get(`/produto/${id}/comentarios`)
+        return resposta.data
+
+    } catch(erro) {
+        throw erro;
+    }
 }
 
 //produtos favoritos
