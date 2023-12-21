@@ -68,6 +68,28 @@ export async function BuscarProdutosCT(id){
     }
 }
 
+//buscar itens carrinho
+export async function BuscarItensCarrinho(id) {
+    try {
+        const resposta = await api.get(`/usuario/${id}/carrinho`)
+        return resposta.data
+    }
+    catch(erro) {
+        throw erro;
+    }
+}
+
+//produtos favoritos
+export async function BuscarItensSalvos(id){
+    try{
+        const resposta = await api.get(`/usuario/${id}/favoritos`);
+        return resposta.data
+    }
+    catch (erro){
+        throw erro;
+    }
+}
+
 //buscar comentarios dos produtos
 export async function BuscarComentariosProd(id){
     try {
@@ -75,17 +97,6 @@ export async function BuscarComentariosProd(id){
         return resposta.data
 
     } catch(erro) {
-        throw erro;
-    }
-}
-
-//produtos favoritos
-export async function TodosFaBuscarProdutosFVvoritos(id){
-    try{
-        const resposta = await api.get(`/favoritos/${id}`);
-        return resposta.data
-    }
-    catch (erro){
         throw erro;
     }
 }

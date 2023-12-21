@@ -5,7 +5,7 @@ const server = Router()
 
 
 
-import { BuscarCategoria, BuscarComentariosProd, BuscarProdutos, BuscarProdutosCT, BuscarProdutosFV, BuscarProdutosID, BuscarProdutosNM } from "../Repository/produtoRepository.js";
+import { BuscarCategoria, BuscarComentariosProd, BuscarItensCarrinho, BuscarProdutos, BuscarProdutosCT, BuscarProdutosFV, BuscarProdutosID, BuscarProdutosNM } from "../Repository/produtoRepository.js";
 
 //retornar produtos
 
@@ -119,29 +119,32 @@ server.get('/produto/categoria/:id', async(req, resp) => {
     }
 })
 
-//buscar comentarios dos produtos
-server.get(`/produto/:id/comentarios`, async(req, resp) => {
+//buscar itens carrinho
+server.get('/usuario/:id/carrinho', async (req, resp) => {
     try {
-        const { id } = req.params;
+        const {id} = req.params
 
-        if (isNaN(id)) {
-            throw new Error('ID do produto não é válido.');
+        if (!id) {
+            throw new Error('Voce precisa informar o id do cliente')
         }
 
-        const resposta = await BuscarComentariosProd(id);
-        console.log('Resposta da SelecioneComentario:', resposta); // Adicione este log
+        const resposta = await BuscarItensCarrinho(id)
 
-        resp.status(200).send(resposta);
-    } catch (err) {
-        console.error('Erro na rota /comentario/:id:', err.message);
-        resp.status(400).send({
-            erro: err.message
-        });
+        if (!resposta) {
+            resp.status(404).send([]);
+        } else {
+            resp.send(resposta);
+        }
     }
-});
+    catch(err){ 
+    resp.status(400).send({
+        erro: err.message
+    })
+    }
+}) 
 
 //produtos por favoritos
-server.get('/favoritos/:id', async(req, resp) => {
+server.get('/usuario/:id/favoritos', async(req, resp) => {
     try{
         const { id } = req.params;
 
@@ -164,5 +167,25 @@ server.get('/favoritos/:id', async(req, resp) => {
         });
     }
 })
+
+//buscar comentarios dos produtos
+server.get(`/produto/:id/comentarios`, async(req, resp) => {
+    try {
+        const { id } = req.params;
+
+        if (isNaN(id)) {
+            throw new Error('ID do produto não é válido.');
+        }
+
+        const resposta = await BuscarComentariosProd(id);
+
+        resp.status(200).send(resposta);
+    } catch (err) {
+        console.error('Erro na rota /comentario/:id:', err.message);
+        resp.status(400).send({
+            erro: err.message
+        });
+    }
+});
 
 export default server;

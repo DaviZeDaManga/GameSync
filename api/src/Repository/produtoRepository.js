@@ -152,6 +152,31 @@ export async function BuscarProdutosCT(id){
   return linhas
 }
 
+//buscar carrinho
+export async function BuscarItensCarrinho(id) {
+    const comando = `
+    SELECT 
+    pi.id_pedido_item				,
+
+    p.id_produto					,
+    p.nm_produto       				nome, 
+    p.ds_descricao	   				descricao, 
+    p.vl_preco						preco, 
+    p.vl_preco_promocional			vlPromo,
+
+    c.id_cliente,
+
+    i.img_produto					
+    FROM tb_pedido_item pi
+    LEFT JOIN tb_produto p ON pi.id_produto = p.id_produto
+    LEFT JOIN tb_clientes c ON pi.id_cliente = c.id_cliente
+    LEFT JOIN tb_produto_imagem i ON p.id_produto = i.id_produto
+    where c.id_cliente = ?`
+
+    const [linhas] = await conx.query(comando, [id])
+    return linhas
+}
+
 //buscar comentarios dos produtos
 export async function BuscarComentariosProd(id){
     const comando = `SELECT * FROM tb_comentarios_avaliacoes_produtos WHERE id_produto = ?`
@@ -163,11 +188,23 @@ export async function BuscarComentariosProd(id){
 //produtos por favoritos
 export async function BuscarProdutosFV(id){
     const comando = `
-    SELECT tb_favoritos.data_adicao, tb_produto.*, tb_produto_imagem.img_produto
-    FROM tb_favoritos
-    JOIN tb_produto ON tb_favoritos.id_produto = tb_produto.id_produto
-    LEFT JOIN tb_produto_imagem ON tb_favoritos.id_produto = tb_produto_imagem.id_produto
-    WHERE tb_favoritos.id_cliente = ?;`
+    SELECT 
+    s.id_favoritos				   ,
+
+    p.id_produto					,
+    p.nm_produto       				nome, 
+    p.ds_descricao	   				descricao, 
+    p.vl_preco						preco, 
+    p.vl_preco_promocional			vlPromo,
+
+    c.id_cliente,
+
+    i.img_produto					
+    FROM tb_favoritos s
+    LEFT JOIN tb_produto p ON s.id_produto = p.id_produto
+    LEFT JOIN tb_clientes c ON s.id_cliente = c.id_cliente
+    LEFT JOIN tb_produto_imagem i ON p.id_produto = i.id_produto
+    where c.id_cliente = ?`
   
     const [linhas] = await conx.query(comando, [id])
     return linhas

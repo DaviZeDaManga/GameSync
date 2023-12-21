@@ -1,5 +1,5 @@
 import './index.scss'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import BarraLateral from '../../../components/barraLateral'
 import storage, { set } from 'local-storage';
 
@@ -7,40 +7,35 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
-import { EffectCoverflow, Navigation, Pagination } from 'swiper/modules';
-import { DadosCliente } from '../../../connection/userAPI';
+import { EffectCoverflow } from 'swiper/modules';
+import { BuscarMascoteCliente, DadosCliente, DeletarMascoteCliente, InserirMascoteCliente } from '../../../connection/userAPI';
+import { BuscarImagem } from '../../../connection/produtosAPI';
+import { toast } from 'react-toastify';
+import LoadingBar from "react-top-loading-bar";
 
 export default function MudarPerfil(){
-    const [backgroundColor, setBackgroundColor] = useState('linear-gradient(130deg, rgba(206, 165, 60, 1), rgba(175, 64, 49, 1))');
-    const [cor, setCor] = useState('linear-gradient(130deg, rgba(206, 165, 60, 1), rgba(175, 64, 49, 1))');
+    
+    const [nome, setNome] = useState()
+    const [id, setId] = useState()
 
-    const MudarCor = (NovaCor) => {
-        setBackgroundColor(NovaCor);
-    };
-
-
-
-
-    const [imguser, setImguser] = useState("")
-    const [nome, setNome] = useState('')
-    const [id, setId] =useState(1)
+    const dadosStorage = storage('user-logado');
 
     useEffect(() => {
         if(storage('user-logado')){
-            const nomeUser = storage('user-logado');
-            setNome(nomeUser.nome);
-
-            const imguser = storage('user-logado')
-            setImguser(imguser.img)
+            setNome(dadosStorage.nome);
+            setId(dadosStorage.id)
         }
         else{
             setNome('anonymous')
-            
-            setImguser('/assets/images/GameSync/User.png')
         }
-    }, [])
+    })
 
+    const [fundo, setFundo] = useState()
+    const [escolhermasc, setEscolhermasc] = useState(false)
+    const [mascote, setMascote] = useState()
+    const [dadosmascote, setDadosmascote] = useState([])
     const [dados, setDados] = useState([])
+    const [backgroundColor, setBackgroundColor] = useState('linear-gradient(130deg, rgba(206, 165, 60, 1), rgba(175, 64, 49, 1))');
 
     async function Dados() {
         let resp = await DadosCliente(id)
@@ -49,50 +44,109 @@ export default function MudarPerfil(){
 
     useEffect(() => {
         Dados()
-    }, [])
+    })
 
-    console.log(dados)
+    const [idmascote, setIdmascote] = useState(0)
+
+    async function Customizacao() {
+        let resposta = await BuscarMascoteCliente(id)
+        setDadosmascote(resposta)
+
+        for (let item of dadosmascote) {
+            setFundo(item.fundo)
+            setMascote(item.gif)
+            setIdmascote(item.id_tb_mascote_cliente)
+        }
+
+        if (idmascote == 0) {
+            for (let item of dados) {
+                setBackgroundColor(item.cor)
+            }
+        }
+        else {
+            for (let item of dadosmascote) {
+                setBackgroundColor(item.cor)
+            }
+        }
+    }
+
+    useEffect(()=> {
+        Customizacao()
+    })
+
+
+
+
+    console.log(dadosmascote)
+    const ref = useRef();
+
+    async function DeletarMascote() {
+        ref.current.continuousStart();
+
+        try {
+            await DeletarMascoteCliente(idmascote)
+            toast.dark("Mascote removido com sucesso")
+            ref.current.complete()
+
+            setTimeout(() => {
+                window.location.reload() 
+            }, 2000);
+        }
+        catch {
+            if (idmascote == 0) {
+                toast.error("Voce não tem nenhum mascote selecionado")
+                ref.current.complete();
+            }
+            else if (idmascote != 0) {
+                toast.error("Parece que tem algo errado")
+                ref.current.complete();
+            }
+        }
+    }
+
 
     
 
 
 
-    const [fundo, setFundo] = useState('')
-    const [escolhermasc, setEscolhermasc] = useState(false)
-    const [mascote, setMascote] = useState('none')
 
-    function EscolherMasc(masc) {
-        setEscolhermasc(false)
+    async function AdicionarMascote(idmasc) {
+        ref.current.continuousStart()
 
-        if (masc == 0) {
-            setBackgroundColor('linear-gradient(130deg, rgba(206, 165, 60, 1), rgba(175, 64, 49, 1))')
-            setCor('linear-gradient(130deg, rgba(206, 165, 60, 1), rgba(175, 64, 49, 1))')
-            setMascote('none')
+        if (idmascote != 0) {
+            try {
+                await DeletarMascoteCliente(idmascote)
+                toast.warning("Trocando seu mascote...")
+                
+                setTimeout(async () => {
+                    await InserirMascoteCliente(idmasc, id)
+                    toast.dark("Voce trocou seu mascote!")
+                    ref.current.complete()
+                    setEscolhermasc(false)
+                }, 1500);
+            }
+            catch {
+                toast.error("Ocorreu um erro ao trocar seu mascote")
+                ref.current.complete();
+            }
         }
-        else if(masc == 1) {
-           setMascote('/assets/images/mascotes/soniquin.gif')
-           setCor('linear-gradient(120deg, rgb(0, 49, 128), rgb(0, 110, 255))')
-           setFundo('/assets/images/fundosperfil/sonic.png')
-           setBackgroundColor('linear-gradient(to bottom, rgba(0, 0, 0, 0.356), rgba(0, 0, 0, 0.356))')
-        }
-        else if(masc == 2) {
-           setMascote('/assets/images/mascotes/thanos.gif')
-           setCor('linear-gradient(130deg, rgb(52, 154, 76), rgb(60, 156, 92))')
-           setFundo('/assets/images/fundosperfil/proerd.jpeg')
-           setBackgroundColor('linear-gradient(to bottom, rgba(0, 0, 0, 0.356), rgba(0, 0, 0, 0.356))')
-        }
-        else if(masc == 3) {
-           setMascote('/assets/images/mascotes/thanos.mp4')
-           setCor('linear-gradient(130deg, rgb(154, 52, 154), rgb(60, 60, 156))')
-           setFundo('/assets/images/fundosperfil/sonic.png')
-           setBackgroundColor('linear-gradient(to bottom, rgba(0, 0, 0, 0.356), rgba(0, 0, 0, 0.356))')
+        else {
+            try {
+                await InserirMascoteCliente(idmasc, id)
+                toast.dark("Voce adicionou um mascote!")
+                ref.current.complete()
+                setEscolhermasc(false)
+            }
+            catch {
+                toast.error("Ocorreu um erro ao adicionar um mascote")
+                ref.current.complete();
+            }
         }
     }
 
-
-
     return(
         <div id='Change'>
+            <LoadingBar color="#f11946" ref={ref} />
             <BarraLateral/>
 
             {escolhermasc == true &&
@@ -113,19 +167,15 @@ export default function MudarPerfil(){
                     className="mySwiper"
                 >
 
-                    <SwiperSlide onClick={()=> (EscolherMasc(1))} className='eu'>
+                    <SwiperSlide onClick={()=> (AdicionarMascote(1))} className='sonic'>
                         <img className='sonicimg' src='/assets/images/engine/sonic.png' />
                     </SwiperSlide>
-                    
-                    <SwiperSlide onClick={()=> (EscolherMasc(2))} className='dino'>
-                        <img className='leaoimg' src='/assets/images/mascotes/leao.png' />
-                    </SwiperSlide>
-                    
-                    <SwiperSlide onClick={()=> (EscolherMasc(3))} className='thanos'>
-                        <img className='thanosimg' src='/assets/images/mascotes/thanos.png' />
+
+                    <SwiperSlide onClick={()=> (AdicionarMascote(2))} className='hulk'>
+                        
                     </SwiperSlide>
 
-                    <SwiperSlide onClick={()=> (EscolherMasc(0))} >
+                    <SwiperSlide onClick={()=> (DeletarMascote())} >
                         <img className='sair' src='/assets/images/login/add.png' />
                     </SwiperSlide>
 
@@ -134,14 +184,24 @@ export default function MudarPerfil(){
             }
 
             <nav className='Change-fundo' style={{"background": backgroundColor}}>
-                <main className={`img ${imguser == '/assets/images/GameSync/User.png' && 'paddingzing'}`}>
-                    <img src={imguser} />
+                <main className={`img`}>
+                    {dados.map( item => 
+                        
+                        <img src={BuscarImagem(item.imagem)} />    
+                        
+                    )}
                 </main>
-                {mascote != "none" &&
-                <div className='videofoda'>
+
+                {mascote != null &&
+                <>
+                <div className='mascote'>
                     <img src={mascote}  />
-                </div>}
+                </div>
                 <img className='fundo' src={fundo} />
+                <div className='filtro'></div>
+                </>
+                }
+
             </nav>
 
             <main className='informacoes'>
@@ -152,16 +212,21 @@ export default function MudarPerfil(){
                     <main className='desc'>
 
                     </main>
+                    {!storage('user-logado') &&
                     <section className='info'>
                         <button>Cadastrar</button>
                         <button>Entrar</button>
-                    </section>
+                    </section>}
                 </section>
-                <section className='dados-perfil' style={{"background": cor}}>
+                <section className='dados-perfil' style={{"background": backgroundColor}}>
                     <div>
 
                     </div>
-                    <button onClick={() => (setEscolhermasc(true))}>Escolher mascote</button>
+                    {idmascote == 0 &&
+                    <button onClick={() => (setEscolhermasc(true))}>Adicionar mascote</button>}
+
+                    {idmascote != 0 &&
+                    <button onClick={() => (setEscolhermasc(true))}>Trocar mascote</button>}
                 </section>
             </main>
            

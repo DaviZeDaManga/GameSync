@@ -11,8 +11,8 @@ import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
-import { useEffect, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 
 import storage, { set } from 'local-storage';
 import Title from '../../../components/title'
@@ -23,8 +23,10 @@ import { motion } from 'framer-motion'
 
 import { toast } from 'react-toastify';
 import { BuscarComentariosProd, BuscarProdutos, BuscarProdutosID } from '../../../connection/produtosAPI';
-import { AdicionarAvaliacaoProd } from '../../../connection/userAPI';
+import { AdicionarAvaliacaoProd, DeletarAvaliacaoProd, InserirCarrinho, InserirFavorito } from '../../../connection/userAPI';
 import { BuscarImagem } from '../../../connection/produtosAPI';
+import { confirmAlert } from 'react-confirm-alert';
+import LoadingBar from "react-top-loading-bar";
 
 
 export default function Produto() {
@@ -54,7 +56,7 @@ export default function Produto() {
 
     const [avaliacoes, setAvaliacoes] = useState ()
     
-
+    console.log(comentarios)
 
     function MostrarDescricao () {
         setMostdesc(true)
@@ -76,6 +78,9 @@ export default function Produto() {
         setMostcompl(true)
         setSelectsection(3)
     }
+
+    const navigate = useNavigate()
+    const ref = useRef()
 
 
 
@@ -133,10 +138,11 @@ export default function Produto() {
         }
     })
 
+    const idcliente = storage('user-logado')
+
     async function Comentar() {
-        
         if(storage('user-logado')) {
-            await AdicionarAvaliacaoProd(id, estrelas, comentario, 1)
+            await AdicionarAvaliacaoProd(id, user, estrelas, comentario, idcliente.id)
         }
 
         else {
@@ -191,29 +197,58 @@ export default function Produto() {
 
 
 
+    async function SalvarFavoritos() {
+        ref.current.continuousStart();
 
-    function SalvarCarrinho(id, nome, desc, preco, img) {
-    	if(storage('user-logado')) {
-            let carrinho = new Array()
+        try {
+            await InserirFavorito(id, idcliente.id)
+            toast.dark("Item salvado com sucesso")
+            ref.current.complete()
 
-            if(localStorage.hasOwnProperty('carrinho')) {
-                carrinho = JSON.parse(localStorage.getItem('carrinho'))
-            }
+        }
+        catch {
+            toast.error("Parece que deu algo errado")
+            ref.current.complete();
 
-            carrinho.push({
-                id: id,
-                nome: nome,
-                desc: desc,
-                preco: preco,
-                img: img
-            })
+        }
+    }
 
-            localStorage.setItem('carrinho', JSON.stringify(carrinho))
+    async function SalvarCarrinho() {
+        ref.current.continuousStart();
+
+        try {
+            await InserirCarrinho(id, idcliente.id)
+            toast.dark("Item adicionado ao carrinho com sucesso")
+            ref.current.complete()
+
+        }
+        catch {
+            toast.error("Parece que deu algo errado")
+            ref.current.complete();
+
         }
 
-        else {
-            toast.warning('Voce precisa estar logado para salvar este item no carrinho!');
-        }
+    	// if(storage('user-logado')) {
+        //     let carrinho = new Array()
+
+        //     if(localStorage.hasOwnProperty('carrinho')) {
+        //         carrinho = JSON.parse(localStorage.getItem('carrinho'))
+        //     }
+
+        //     carrinho.push({
+        //         id: id,
+        //         nome: nome,
+        //         desc: desc,
+        //         preco: preco,
+        //         img: img
+        //     })
+
+        //     localStorage.setItem('carrinho', JSON.stringify(carrinho))
+        // }
+
+        // else {
+        //     toast.warning('Voce precisa estar logado para salvar este item no carrinho!');
+        // }
     }
 
 
@@ -321,9 +356,36 @@ export default function Produto() {
     useEffect(() => {
         JogosParecidos()
     }, [])
-    
+
+
+
+    const [acoescomentarios, setAcoescomentarios] = useState(false)
+
+    async function ApagarComentario(idcoment) {
+
+        confirmAlert({
+            title: 'Remover Comentario',
+            message: `Você tem certeza que quer fazer isso? Excluir o comentario?.`,
+            buttons: [
+                {
+                    label: 'Sim!',
+                    onClick: async () => {
+                        console.log("ID dentro da função de remoção:", idcoment);
+                        await DeletarAvaliacaoProd(idcoment);
+                    }
+                },
+                {
+                    label: 'Não'
+                }
+            ]
+        });
+        
+        setAcoescomentarios(false)
+    }
+     
     return(
         <div className="Produto">
+            <LoadingBar color="#f11946" ref={ref} />
             
             <section className='fake-nerwe'>
             <ProdutoCard
@@ -357,7 +419,7 @@ export default function Produto() {
                             <div className='comprar'>
                                 <button><Link to={`/BarraLateral/${id}`}></Link>Comprar</button> 
 
-                                <button onClick={()=> (SalvarCarrinho(id, item.nome, item.descricao, item.preco , item.img))} className='acoes'>
+                                <button onClick={()=> (SalvarCarrinho())} className='acoes'>
                                     <img src='/assets/images/carrinho/carrinho.png' />
                                 </button>   
 
@@ -378,7 +440,7 @@ export default function Produto() {
                             Compartilhar
                         </div>
                         <div className='linha'></div>
-                        <div className='card'>
+                        <div onClick={()=> (SalvarFavoritos())} className='card'>
                             Salvar
                         </div>
                         <div className='linha'></div>
@@ -411,7 +473,7 @@ export default function Produto() {
                                         
                             {produtoinfo.map( item => 
                                 
-                                <SwiperSlide className={`${item.url_video == "nao" && 'none'}`}>
+                                <SwiperSlide className={`${item.video == "nao" && 'none'}`}>
                                     <video controls="true">  <source src={item.video} type="video/mp4" /></video>
                                 </SwiperSlide>    
                                 
@@ -623,19 +685,65 @@ export default function Produto() {
                     {comentarios.map( item => 
                         
                         <div className="comentario">
+                            {(storage("user-logado")) &&
+                            <>
+                                {idcliente.id == item.id_cliente &&
+                                    <div onClick={() => (setAcoescomentarios(!acoescomentarios))} className='b-acoes'></div>}
+        
+                                    {acoescomentarios == true &&
+                                    <section className='acoes'>
+                                        <button onClick={()=> (ApagarComentario(item.id_comentario_avaliacao))}>Apagar</button>
+                                        <button>Alterar</button>
+                                    </section>}
+                            </>
+                            }
+
                             <div className='conteudo'>
                                 <section className='c-user'>
                                     <div className='c-user-image'>
 
                                     </div>
-                                    <h1>{user}</h1>
+                                    <h1>{item.nm_cliente}</h1>
                                 </section>
                                 <main id='comentario'>
                                     <p>{item.comentario}</p>
                                 </main>
                             </div>
                             <section className='estrelas'>
-                                <h3>Avaliado em {item.avaliacao.substr(0,1)} estrelas</h3>
+
+                                {item.avaliacao == 1 &&
+                                    <div className='bolinha'></div>
+                                }
+                                {item.avaliacao == 2 &&
+                                    <>
+                                    <div className='bolinha'></div>
+                                    <div className='bolinha'></div>
+                                    </>
+                                }
+                                {item.avaliacao == 3 &&
+                                    <>
+                                    <div className='bolinha bom'></div>
+                                    <div className='bolinha bom'></div>
+                                    <div className='bolinha bom'></div>
+                                    </>
+                                }
+                                {item.avaliacao == 4 &&
+                                    <>
+                                    <div className='bolinha bom'></div>
+                                    <div className='bolinha bom'></div>
+                                    <div className='bolinha bom'></div>
+                                    <div className='bolinha bom'></div>
+                                    </>
+                                }
+                                {item.avaliacao == 5 &&
+                                    <>
+                                    <div className='bolinha amei'></div>
+                                    <div className='bolinha amei'></div>
+                                    <div className='bolinha amei'></div>
+                                    <div className='bolinha amei'></div>
+                                    <div className='bolinha amei'></div>
+                                    </>
+                                }
                             </section>
                         </div>
                         

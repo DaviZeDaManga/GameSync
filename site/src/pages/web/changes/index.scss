@@ -35,6 +35,7 @@
           height: 450px;
           border-radius: 10px;
           position: relative;
+          cursor: pointer;
 
           h1 {
               color: rgb(29, 29, 29);
@@ -63,10 +64,10 @@
           &.thanos {
             background: linear-gradient(140deg, rgb(116, 49, 158), rgb(149, 49, 180));
           }
-          &.dino {
+          &.hulk {
             background: linear-gradient(140deg, rgb(42, 171, 85),rgb(52, 136, 41));
           }
-          &.eu {
+          &.sonic {
             background: linear-gradient(140deg, rgb(46, 81, 131), rgb(92, 61, 204));
           }
 
@@ -107,17 +108,30 @@
         align-items: center;
 
         width: 100%;
-        height: 35rem; 
+        height: 40rem; 
         position: relative;
         padding: 20px 30px 20px 110px;
 
         .fundo {
-           position: absolute;
-           width: 100%;
-           height: 100%;
-           top: 0;
-           left: 0;
-           z-index: -1;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            top: 0px;
+            transition: 0.3s;
+            animation: chegada 1s;
+        }
+        .filtro {
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.22);
+            position: absolute;
+            z-index: 4;
+            top: 0px;
+            transition: 0.3s;
+            animation: chegada 1s;
         }
 
         .img {
@@ -135,6 +149,7 @@
             position: absolute;
             bottom: -125px;
             left: 110px;
+            z-index: 5;
 
             &.paddingzing {
               background-color: white;
@@ -146,17 +161,21 @@
             }
         }  
         
-        .videofoda {
+        .mascote {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
 
-            width: 400px;
+            width: auto;
             height: 100%;
             position: absolute;
             right: 150px;
             overflow: hidden;
+            z-index: 3;
+            top: 0px;
+            transition: 0.3s;
+            animation: chegada 1s;
 
             img {
               height: 100%;
@@ -277,4 +296,14 @@
         }
       }
   }
+
+    @keyframes chegada {
+        from {
+            top: -1000px;
+        }
+        to {
+            top: 0px;
+        }
+    }
 }
+

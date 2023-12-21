@@ -117,7 +117,7 @@ export default function AddProduct() {
         <figure className='add-part1'>
 
           <div className='add-part1-nome'>
-            <h3>Nome do Produto</h3>
+            <h3>Nome do Produto </h3>
             <input type='text' value={nome} onChange={(e) => setNome(e.target.value)} />
           </div>
 

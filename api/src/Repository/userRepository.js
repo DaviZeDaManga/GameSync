@@ -21,10 +21,10 @@ export async function LoginCliente(email, senha){
 
 //cadastrar
 export async function CadastrarCliente (cliente){
-    const comando = `INSERT INTO tb_cliente (nm_cliente, ds_telefone, ds_cpf, ds_email, ds_senha, ds_cor)
+    const comando = `INSERT INTO tb_clientes (nm_cliente, ds_telefone, ds_cpf, ds_email, ds_senha, ds_cor)
     VALUES (?, ?, ?, ?, ?, ?);`
 
-    const [resposta] = await conx.query(comando, [cliente.nome, cliente.telefone, cliente.cpf, cliente.email, cliente.senha]);
+    const [resposta] = await conx.query(comando, [cliente.nome, cliente.telefone, cliente.cpf, cliente.email, cliente.senha, cliente.cor]);
     cliente.id = resposta.insertId;
 
     return cliente
@@ -41,7 +41,7 @@ export async function DadosCliente(id){
     SELECT 
     tb_clientes.id_cliente					id,
     tb_clientes.nm_cliente					nome,
-    tb_clientes.ds_email						email,
+    tb_clientes.ds_email					email,
     tb_clientes.ds_telefone					telefone,
     tb_clientes.ds_cor						cor,
     tb_clientes.ds_cpf						cpf,
@@ -121,13 +121,23 @@ return resposta.affectedRows
 //avaliar produto
 export async function AdicionarAvaliacaoProd(idProduto, avaliacao){
     const comando = `
-    INSERT INTO tb_comentarios_avaliacoes_produtos (id_cliente, comentario, avaliacao, data_comentario, id_produto)
-    VALUES (?, ?, ?, CURDATE(), ?);`
+    INSERT INTO tb_comentarios_avaliacoes_produtos (id_cliente, nm_cliente, comentario, avaliacao, data_comentario, id_produto)
+    VALUES (?, ?, ?, ?, CURDATE(), ?);`
   
-    const parametros = [avaliacao.id_cliente, avaliacao.comentario, avaliacao.avaliacao, idProduto];
+    const parametros = [avaliacao.id_cliente, avaliacao.nome, avaliacao.comentario, avaliacao.avaliacao, idProduto];
   
     const [resposta] = await conx.query(comando, parametros);
     return resposta.affectedRows;
+}
+
+//deletar avaliacao produto
+export async function DeletarAvaliacaoProd(id) {
+    const comando = `
+    DELETE FROM tb_comentarios_avaliacoes_produtos
+    where id_comentario_avaliacao = ?;`
+
+    const [linhas] = await conx.query(comando, id)
+    return linhas.affectedRows
 }
 
 //avaliar jogo
@@ -163,3 +173,74 @@ export async function ExcluirFavorito(id){
     return resposta.affectedRows
 }
 
+////carrinho
+
+//inserir carrinho
+export async function InserirCarrinho(carrinho){
+    const comando = `
+    INSERT INTO tb_pedido_item (id_produto, id_cliente)
+    values(?, ?)`;
+  
+    const [resposta] = await conx.query(comando, [carrinho.produto, carrinho.cliente])
+    
+    return resposta.affectedRows
+}
+
+//remover carrinho
+export async function ExcluirCarrinho(id){
+    const comando = `
+    delete from tb_pedido_item
+    where id_pedido_item = ?`
+  
+    const [resposta] = await conx.query(comando, [id])
+    return resposta.affectedRows
+}
+
+
+
+
+
+
+
+
+
+//adicionar mascotes a sua conta
+export async function InserirMascoteCliente(dados) {
+    const comando = `
+    INSERT INTO tb_mascote_cliente (id_mascote, id_cliente)
+    values(? ,? )`
+
+    const parametros = [dados.idmascote, dados.idcliente];
+  
+    const [resposta] = await conx.query(comando, parametros);
+    return resposta.affectedRows;
+}
+
+//retornar mascote do usuario
+export async function BuscarMascoteCliente(id) {
+    const comando = `
+    SELECT 
+    mc.id_tb_mascote_cliente,
+    tm.id_mascote				id_mascote,
+    tm.nm_mascote				mascote,
+    tm.ds_gif    				gif,
+    tm.ds_fundo      			fundo,
+    tm.ds_cor 					cor
+    FROM tb_mascote_cliente mc
+    LEFT JOIN tb_mascotes tm ON mc.id_mascote = tm.id_mascote
+    WHERE id_cliente = ?`
+
+    const [linhas] = await conx.query(comando, [id])
+    return linhas
+}
+
+//deletar mascote
+
+export async function DeletarMascoteCliente(id) {
+    const comando = `
+    delete from tb_mascote_cliente
+    where id_tb_mascote_cliente = ?`
+
+    const [linhas] = await conx.query(comando, [id])
+    return linhas.affectedRows
+}

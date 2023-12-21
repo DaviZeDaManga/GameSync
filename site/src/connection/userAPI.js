@@ -22,14 +22,15 @@ export async function LoginCliente(email, senha){
 }
 
 //cadastrar
-export async function CadastrarCliente(nome, telefone, cpf, email, senha){
+export async function CadastrarCliente(nome, telefone, cpf, email, senha, cor){
     try{
         const r = await api.post('/usuario/cadastrar', {
             nome: nome,
             telefone: telefone,
             cpf: cpf,
             email: email,
-            senha: senha
+            senha: senha,
+            cor: cor
         });
         return r.data
     }
@@ -110,10 +111,11 @@ export async function AlterarFotoPerfil(id, imagem){
 ////avaliacao
 
 //avaliar produto
-export async function AdicionarAvaliacaoProd(id, avaliacao, comentario, id_cliente){
+export async function AdicionarAvaliacaoProd(id, nome, avaliacao, comentario, id_cliente){
     try{
         const resposta = await api.post(`/usuario/avaliacao/produto/${id}`, {
             id_cliente: id_cliente,
+            nome: nome,
             comentario: comentario,
             avaliacao: avaliacao
         });
@@ -121,6 +123,21 @@ export async function AdicionarAvaliacaoProd(id, avaliacao, comentario, id_clien
     }
     catch(erro){
         throw erro;
+    }
+}
+
+//deletar avaliacao produto
+export async function DeletarAvaliacaoProd(id) {
+    try {
+        console.log(`Tentando excluir o comentario de id: ${id}`)
+        const resposta = await api.delete(`/usuario/delete/avaliacao/produto/${id}`)
+
+        console.log(`Resposta da exclusão: ${resposta.status}`)
+        return resposta.status
+
+    } catch(erro) {
+        console.error(`Erro ao excluir produto: ${erro}`)
+        throw erro
     }
 }
 
@@ -156,6 +173,66 @@ export async function InserirFavorito(produto, cliente){
 }
 
 export async function ExcluirFavorito(id){
-    const resposta = await api.delete(`/usuario/favorito/${id}`);
+    const resposta = await api.delete(`/usuario/${id}/favorito`);
+    return resposta.status
+}
+
+////carrinho
+
+//inserir carrinho
+export async function InserirCarrinho(produto, cliente){
+    try{
+        const resposta = await api.post('usuario/carrinho', {
+            produto: produto,
+            cliente: cliente
+        });
+        return resposta.data;
+    }
+    catch(erro){
+        throw erro;
+    }
+}
+
+//remover carrinho
+export async function ExcluirCarrinho(id){
+    const resposta = await api.delete(`/usuario/${id}/carrinho`);
+    return resposta.status
+}
+
+
+
+
+
+
+
+export async function InserirMascoteCliente(idmascote, idcliente) {
+    try {
+        const resposta = await api.post('/usuario/mascote', {
+            idmascote: idmascote,
+            idcliente: idcliente
+        })
+        return resposta.data
+    }
+    catch(erro){
+        throw erro
+    }
+}
+
+export async function BuscarMascoteCliente(id) {
+    try {
+        const resposta = await api.get(`/usuario/mascote/${id}`)
+        return resposta.data
+    }
+    catch(error) {
+        if (error.response && error.response.status === 404) {
+            return [];
+        } else {
+            throw error;
+        }
+    }
+}
+
+export async function DeletarMascoteCliente(id) {
+    const resposta = await api.delete(`/usuario/mascote/${id}`)
     return resposta.status
 }

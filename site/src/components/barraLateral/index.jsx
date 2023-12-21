@@ -1,623 +1,424 @@
-import { useState, useEffect } from 'react'
 import './index.scss'
-import { Link, json, useNavigate } from 'react-router-dom'
+import BarraDeCima from '../baraDeCima'
+import { Link, useNavigate } from 'react-router-dom'
+import LoadingBar from "react-top-loading-bar";
+import { useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
+import { BuscarImagem, BuscarItensCarrinho, BuscarItensSalvos } from '../../connection/produtosAPI';
 import storage, { set } from 'local-storage';
-import { motion } from "framer-motion"
-import { BuscarImagem } from '../../connection/produtosAPI';
-import BarraDeCima from '../baraDeCima';
+import { toast } from 'react-toastify';
+import { ExcluirCarrinho, ExcluirFavorito, InserirCarrinho } from '../../connection/userAPI';
 
-export default function BarraLateral({home, planos, noticias, pesquisa, games}) {
-    const[nameuser, setNameuser] = useState("")
-    const{imguser, setImguser} = useState('/assets/images/GameSync/user.png')
+export default function BarraLateral() {
+    const [idcliente, setIdcliente] = useState(1)
+
+    const dadosStorage = storage('user-logado');
 
     useEffect(() => {
         if(storage('user-logado')){
-            const nomeUser = storage('user-logado');
-            setNameuser(nomeUser.nome);
+            setIdcliente(dadosStorage.id)
         }
         else{
-            setNameuser('anonymous')
-        }
-    }, [])
-
-    const[menu, setMenu] = useState(false)
-    const[carrin, setCarrin] = useState(false)
-    const[fundo, setFundo] = useState(false)
-
-    function MostrarCarrin() {
-        setAssis(false)
-        setCarrin(!carrin)
-        Fundo()
-    }
-    
-    function Sair() {
-        setCarrin(false)
-        setMenu(false)
-        setAssis(false)
-        setConfigs(false)
-        setX(0)
-    }
-
-
-
-
-
-   const[configs, setConfigs] = useState(false)
-    const [x, setX] = useState(0);
-    const [y, setY] = useState(0);
-    const [rotate, setRotate] = useState(0);
-
-    function Configs() {
-        setConfigs(!configs)
-    }
-    function Mconfigs() {
-        if (configs == true) {
-            setX(320)
-            setConfigs(true)
-            Fundo()
-        }
-        else {
-            setX(0)
-        }
-    }
-
-    useEffect( () => {
-        Mconfigs()
-    }, [configs])
-
-
-
-
-
-    
-
-    //parte do bot
-    const [IQuestion, setIQuestion] = useState('');
-    const [Resposta, setResposta] = useState('');
-
-
-    function GPTbro() {
-        const OPENAI_API_KEY = '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';
-    
-        fetch('https://api.openai.com/v1/engines/text-davinci-003/completions', {
-
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + OPENAI_API_KEY,
-          },
-          body: JSON.stringify({
-            prompt: IQuestion,
-            max_tokens: 2048,
-            temperature: 0.5,
-          })
-        })
-        
-        .then((response) => response.json())
-        .then((json) => {
-          if (json.error?.message) {
-            setResposta(`Error: ${json.error.message}`);
-          } else if (json.choices?.[0].text) {
-            const text = json.choices[0].text || "Sem resposta";
-            setResposta(text);
-          }
-        })
-        .catch((error) => console.log('Error:', error));
-      }
-
-      async function Enter(event) {
-        if (event.key === "Enter") {
-            const resposta = await GPTbro();
-            setResposta(resposta)
-        }
-      }
-
-
-
-
-   
-
-
-
-
-
-    
-
-
-
-
-
-    
-    const [assis, setAssis] = useState(false)
-    const [xbot, setXbot] = useState(-520)
-    const [ybot, setYbot] = useState(0)
-
-    const [bot, setBot] = useState(true)
-
-    function Massistente() {
-        setAssis(!assis)
-    }
-
-    useEffect(()=> {
-        if(assis ==true) {
-            setYbot(0)
-        }
-        else {
-            setXbot(0)
-        }
-    })
-
-    function botOUassis() {
-        setBot(!bot)
-    }
-
-
-
-
-
-
-
-
-
-
-    const [namepbarra, setNamepbarra] = useState('')
-    const [pesqB, setPesqB] = useState(false)
-    const [notiB, setNotiB] = useState(false)
-
-    function SairSegundaBarra() {
-        setX(320)
-        setPesqB(false)
-        setNotiB(false)
-        setNamepbarra('tchau')
-        setCateb(0)
-    }
-
-    function PesquisaBarra() {
-        setX(620)
-        setNamepbarra('Jogos')
-        setCateb(1)
-
-        if(notiB == true) {
-            setNotiB(false)
-            setPesqB(true)
-        }
-        else{
-            setPesqB(true)
-        }
-    }
-    function PesquisaNoti() {
-        setX(620)
-        setNamepbarra('Notificações')
-        setCateb(2)
-
-        if(pesqB == true) {
-            setPesqB(false)
-            setNotiB(true)
-        }
-        else {
-            setNotiB(true)
-        }
-    }
-
-
-    const [cateb, setCateb] = useState(0)
-
-
-
-
-
-
-
-    function Fundo() {
-        if(carrin == true || menu == true || assis == true || configs == true ) {
-            setFundo(true)
-        }
-        else {
-            setFundo(false)
-        }
-    }
-
-    useEffect( ()=> {
-        Fundo()
-    }, [carrin, menu, assis, configs])
-
-
-
-
-
-
-
-
-
-    const [barra, setBarra] = useState(false)
-
-    function pesquisar() {
-        navigate('/pesquisar')
-    }
-
-    useEffect(()=> {
-        if(pesquisa == false) {
-            setBarra(false)
+            setIdcliente(0)
         }
     })
 
 
 
-    const [carrinho, setCarrinho] = useState([])
-    const [quantitens, setQuantitens] = useState(0)
-
-    async function Carrinho() {
-
-        let carrin = []
-        carrin = JSON.parse(localStorage.getItem('carrinho'))
-        setCarrinho(carrin || [])
-
-        let totalitens = carrinho.length
-        setQuantitens(totalitens)
-    }
-
-    useEffect(()=> {
-        Carrinho()
-    }, [carrinho])
-
-    function Limpar() {
-        localStorage.clear('carrinho')
-    }
 
 
-
-
-
-    function ContinuarComprando() {
-        setBarra(true)
-        setCarrin(false)
-    }
-
-
-
-    const [precos, setPrecos] = useState([])
-    const [total, setTotal] = useState(0)
-
-    function Precinhos() {
-        let numero = 1
-
-        setPrecos([...precos, numero])
-    }
 
 
 
 
 
     const navigate = useNavigate()
+    const ref = useRef()
 
-    function GameGrupos(id) {
-        navigate('/gamegrupos/' + id)
+    function Navegar(para, id) {
+        ref.current.continuousStart()
+
+        if (para == 1) {
+            setTimeout(() => {
+                ref.current.complete()
+                navigate('/pesquisar')
+            }, 1500);
+        }
+
+        if (para == 2) {
+            setTimeout(() => {
+                ref.current.complete()
+                navigate('/')
+            }, 1500);
+        }
+
+        if (para == 3) {
+            setTimeout(() => {
+                ref.current.complete()
+                navigate('/games')
+            }, 1500);
+        }
+
+        if (para == 4) {
+            setTimeout(() => {
+                ref.current.complete()
+                navigate('/planos')
+            }, 1500);
+        }
+        if (para == 6) {
+            setTimeout(() => {
+                ref.current.complete()
+                navigate(`/produto/${id}`)
+            }, 1500);
+        }
     }
 
-    return(
-        <div id="BarraLateral">
+
+
+
+
+
+
+    //acoes
+
+    const [fundo, setFundo] = useState(false)
+    const [funcoes, setFuncoes] = useState(false)
+    const [aparecer, setAparecer] = useState([])
+    const [funcaoname, setFuncaoname] = useState("Algo")
+
+    function Funcao(qual) {
+        if (fundo == false) {
+            setFuncoes(true) 
+
+            if (qual == 1) {
+                setFuncaoname("Chat")
+            }
+            else if (qual == 2) {
+                setFuncaoname("Carrinho")
+            }
+            else if (qual == 3) {
+                setFuncaoname("Salvos")
+            }
+        }  
+        else {
+            setFuncoes(false) 
+            setFuncaoname("Algo")
+        }  
+    }
+
+
+
+
+
+    //acao carrinho
+
+    const [funcaocarrinho, setFuncaocarrinho] = useState(false)
+    const [aparecercarrinho, setAparecercarrinho] = useState([])
+
+    function Carrinho(parametro) {
+        setFuncaocarrinho(!funcaocarrinho)
+    }
+
+    const [itenscarrinho, setItenscarrinho] = useState([])
+
+    async function ItensCarrinho() {
+        const resposta = await BuscarItensCarrinho(idcliente)
+        setItenscarrinho(resposta)
+    } 
+
+    useEffect(()=> {
+        ItensCarrinho()
+    })
+
+    async function DelItemCarrinho(iditem) {
+        ref.current.continuousStart();
+
+        try {
+            await ExcluirCarrinho(iditem)
+            toast.dark("Item do carrinho removido com sucesso")
+            ref.current.complete()
+
+            const resposta = await BuscarItensCarrinho(idcliente)
+            setItenscarrinho(resposta)
+        }
+        catch {
+            toast.error("Parece que deu algo errado")
+            ref.current.complete();
+
+        }
+    }
+
+    async function SalvarCarrinho(idproduto, idcliente) {
+        ref.current.continuousStart();
+
+        try {
+            await InserirCarrinho(idproduto, idcliente)
+            toast.dark("Item adicionado ao carrinho com sucesso")
+            ref.current.complete()
+
+        }
+        catch {
+            toast.error("Parece que deu algo errado")
+            ref.current.complete();
+
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+    const [itenssalvos, setItenssalvos] = useState([])
+
+    async function ItensSalvos() {
+        const resposta = await BuscarItensSalvos(idcliente)
+        setItenssalvos(resposta)
+    } 
+
+    useEffect(()=> {
+        ItensSalvos()
+    })
+
+    async function DelItemSalvos(iditem) {
+        ref.current.continuousStart();
+
+        try {
+            await ExcluirFavorito(iditem)
+            toast.dark("Item salvado removido com sucesso")
+            ref.current.complete()
+
+            const resposta = await BuscarItensSalvos(idcliente)
+            setItenscarrinho(resposta)
+        }
+        catch {
+            toast.error("Parece que deu algo errado")
+            ref.current.complete();
+
+        }
+    }
+
+    console.log(itenssalvos)
+
+
+
+
+
+
+    //acoes configs
+
+    useEffect(()=> {
+        // qualquer acao
+
+        if (funcoes == true) {
+            setFundo(true)
+            let aparecer = {
+                barra: -850,
+                barrinha: -7
+            }
+            setAparecer(aparecer)
+
+            //acao carrinho
+
+            if (funcaocarrinho == true) {
+                let aparecercarrinho = {
+                    subtotal: -290
+                }
+                setAparecercarrinho(aparecercarrinho)
+            }
+            else {
+                let aparecercarrinho = {
+                    subtotal: -50
+                }
+                setAparecercarrinho(aparecercarrinho)
+            }
+        }
+        else {
+            setFundo(false)
+            let aparecer = {
+                barra: 0,
+                barrinha: 0
+            }
+            setAparecer(aparecer)
+        }
+    })
+
+
+
+
+
+
+
+
+    return ( 
+        <>
+            <LoadingBar color="#f11946" ref={ref} />
             <BarraDeCima/>
 
-            <div>
-                <motion.div
-                className="animation-barraL"
-                animate={{ x, y, rotate }}
-                transition={{ type: "spring" }}
-                >
+            {fundo &&
+            <div onClick={()=> (Funcao())} className='fundo'></div>}
 
-                <div className="BarraLateral">
-
-                    <main className='menu'>
-                        
-                        <section className='categorias'>
-
-                            <div onClick={(pesquisar)} className={`categoria p`}>
-                                <img src="/assets/images/barralateral/navegar/lupa.png" />
-                                <p>Pesquisar</p>
-                            </div>
-                            <Link to={'/'}>
-                            <div className={`categoria ${home == true && 'selecionado'}`} >
-                                <img src="/assets/images/barradecima/bolsa-de-compras.png" />
-                                <p>Home</p>
-                            </div>
-                            </Link>
-                            <Link to={'/planos'}>
-                            <div className={`categoria ${planos == true && 'selecionado'}`}>
-                                <img src="/assets/images/barradecima/controle-de-video-game.png" />
-                                <p>Planos</p>
-                            </div>
-                            </Link>
-                            <Link to={'/noticias'}>
-                            <div className={`categoria ${noticias == true && 'selecionado'}`}>
-                                <img src="/assets/images/barradecima/balao-de-fala.png" />
-                                <p>Noticias</p>
-                            </div>
-                            </Link>
-                            <Link to={'/games'}>
-                            <div className={`categoria ${games == true && 'selecionado'}`}>
-                                <img src="/assets/images/barradecima/balao-de-fala.png" />
-                                <p>Jogar</p>
-                            </div>
-                            </Link>
-
-                            <div className='linhaBarra'></div>
-                        
-                            <div onClick={PesquisaBarra} className={`categoria ${cateb == 1 &&'selecionado'}`}>
-                                <img src="/assets/images/barralateral/navegar/lupa.png" />
-                                <p>GameGrupos</p>
-                            </div>
-                            <div onClick={PesquisaNoti} className={`categoria ${cateb == 2 && 'selecionado'}`}>
-                                <img src="/assets/images/barralateral/navegar/envelope.png" />
-                                <p>Notificações</p>
-                            </div>
-                            
-                            <div className='linhaBarra'></div>
-
-                            <div className={`categoria ${cateb == 3 && 'selecionado'}`}>
-                                <img src="/assets/images/barralateral/navegar/configuracoes.png" />
-                                <p>Configurações</p>
-                            </div>
-
-
-                        </section>
-                    </main>
-
-
-                    <section className='pesquisa'>
-                        
-                        
-                        <div className='titulo-pesquisa'>
-                            <div onClick={SairSegundaBarra} className='sair'>
-                                <img src='/assets/images/acoes/remover.png' />
-                            </div>
-
-                            <h1>{namepbarra}</h1>
-                        </div>
-
-                        {pesqB == true &&
-                        <>
-
-                            <section onClick={()=> (GameGrupos(1))} className='gamegrupo'>
-                                <h1>Ação</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(2))} className='gamegrupo'>
-                                <h1>Terror</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(3))} className='gamegrupo'>
-                                <h1>FPS</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(4))} className='gamegrupo'>
-                                <h1>RPG</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(5))} className='gamegrupo'>
-                                <h1>Souls Like</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(6))} className='gamegrupo'>
-                                <h1>Aventura</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(7))} className='gamegrupo'>
-                                <h1>Tiro</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(8))} className='gamegrupo'>
-                                <h1>Estratégia</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(9))} className='gamegrupo'>
-                                <h1>Esportes</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(10))} className='gamegrupo'>
-                                <h1>Corrida</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(11))} className='gamegrupo'>
-                                <h1>Quebra-Cabeça</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(12))} className='gamegrupo'>
-                                <h1>Plataforma</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(13))} className='gamegrupo'>
-                                <h1>Simulação</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(14))} className='gamegrupo'>
-                                <h1>Luta</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(15))} className='gamegrupo'>
-                                <h1>Sobrevivência</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(16))} className='gamegrupo'>
-                                <h1>RTS</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(17))} className='gamegrupo'>
-                                <h1>Cartas</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(18))} className='gamegrupo'>
-                                <h1>Musica</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(19))} className='gamegrupo'>
-                                <h1>MMO</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(20))} className='gamegrupo'>
-                                <h1>Mundo aberto</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(21))} className='gamegrupo'>
-                                <h1>Sandbox</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(22))} className='gamegrupo'>
-                                <h1>História interatva</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(23))} className='gamegrupo'>
-                                <h1>Educacional</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(24))} className='gamegrupo'>
-                                <h1>Visual Novel</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(25))} className='gamegrupo'>
-                                <h1>Battle Royale</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(26))} className='gamegrupo'>
-                                <h1>Rogue-like</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(27))} className='gamegrupo'>
-                                <h1>Construção</h1>
-                            </section>
-
-                        </>}
-
-                        {notiB == true &&
-                        <>
-                        <section className='cardnoti'>
-                            <h1>Você recebeu um código!</h1>
-                            <p>Parabéns! Você acaba de ter a sorte de ganhar um código que pode ser usado na GameSync, quando estiver finalizando sua compra. 10% de desconto</p>
-                            <button>Ver código</button>
-                        </section>
-
-                        <section className='cardnoti'>
-                            <h1>Você recebeu um código!</h1>
-                            <p>Parabéns! Você acaba de ter 20% de taxa!</p>
-                            <button>Ver código</button>
-                        </section>
-                        </>
-                        }
-                    </section>
-
-                    <img onClick={Configs} className='logo' src="/assets/images/GameSync/giphy-unscreen.gif" />
-                    <div className='botoesup'>
-                        <section onClick={()=> (setBarra(!barra))} className='redirects'>
-                            <img src="/assets/images/carrinho/bot.png" />
-                        </section>
-                    </div>
-
-                    
-
-                        <div className='botoesdown'>
-                        <section onClick={Massistente} className='redirects'>
-                            <img src="/assets/images/carrinho/bot.png" />
-                        </section>
-                        <section onClick={MostrarCarrin} className='redirects'>
-                            {carrinho.length > 0 &&
-                            <div className='itenscar'>
-                                <p>{quantitens}</p>
-                            </div>}
-                            <img src="/assets/images/carrinho/carrinho.png" />
-                        </section>
-                        <section className='redirects'>
-                            <img src="/assets/images/barralateral/coracao.png" />
-                        </section>
-                    </div>
-
-                    
-                    
-
-
-
-                    {carrin == true &&
-                    <section className='BarraLateralCar'>
-                        <div className='Resumo'>
-                            <h1>Resumo do Carrinho</h1>
-                        </div>
-
-                        <main className='prodEsub'>
-                            <section className='produtins'>
-                                <section className='produtos'>
-
-                                   {carrinho.length >= 1 &&
-                                        
-                                    <>
-                                    {carrinho.map( item =>
-                                        <Link to={'/produto/' + item.id}>
-                                            <div className='produto-car'>
-                                                <div className='card'>
-                                                    <div className='verproduto'>
-                                                        <img src={BuscarImagem(item.img)} />
-                                                    </div>
-                                                    <div className='info'>
-
-                                                        <div className='text'>
-                                                        <h1>{item.nome}</h1>
-                                                        <p>{item.desc}</p>
-                                                        </div>
-
-                                                        <h1>R${item.preco}</h1>
-                                                    </div>
-                                                </div>
-
-                                                <div className='acoes'>
-                                                    <div className='buton apagar'>
-                                                        <img src="/assets/images/barralateral/carrinho/lixo.png" />
-                                                    </div>
-                                                    <div className='buton qnt'>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </Link>)}
-                                    </>
-
-                                   }
-                                    
-
-                                </section>
-
-                            </section>
-
-                        
-                            <section className='menu-carrin'>
-                                <div className='subtotal'>
-                                    <button onClick={Limpar}>Limpar tudo</button>
-
-                                    <div className='total'>
-                                        <h1>Subtotal</h1>
-                                        <p>R${total}</p>
-                                    </div>
-
-
-                                    <a href='/PayCard'>         
-                                          <div className='cartao'>  
-                                        <section className='card'>
-                                            <div className='img'>
-                                                <img src='/assets/images/carrinho/cartao-de-credito.png' />
-                                            </div>
-                                            <div className='info'>
-                                                <h1>2x de R$63,89</h1>
-                                                <p>sem juros</p>
-                                            </div>                                         
-                                        </section>
-                                    </div>
-                                     </a>
-                                   
-                                            <div className='boleto'>
-                                        <section onClick={Precinhos} className='card'>
-                                            <div className='img'>
-                                                <img src='/assets/images/carrinho/codigo-de-barras.png' />
-                                            </div>
-                                            <div className='info'>
-                                                <h1>R$100,89</h1>
-                                                <p>com boleto ou no pix a vista</p>
-                                            </div>
-                                        </section>
-                                    </div>
-                                </div>
-                                
-                                <div className='botao continuar'>
-                                    <p className='black'>Fechar pedido</p>
-                                </div>
-                                <div onClick={ContinuarComprando} className='botao sair'>
-                                    <p>Continuar comprando</p>
-                                </div>
-                            </section>
-                        </main>
-                    </section>}
+            <section className='barralateral'>
+                <div onClick={()=> (Navegar(1))} className='navigation'>
+                    <img src="/assets/images/barralateral/navegar/lupa.png" />
+                </div>
+                <div onClick={()=> (Navegar(2))} className='navigation'>
+                    <img src="/assets/images/barradecima/bolsa-de-compras.png" />
+                </div>
+                <div onClick={()=> (Navegar(3))} className='navigation'>
+                    <img src="/assets/images/barradecima/controle-de-video-game.png" />
+                </div>
+                <div onClick={()=> (Navegar(4))} className='navigation'>
+                    <img src="/assets/images/barradecima/balao-de-fala.png" />
                 </div>
 
+                <div className='linha'></div>
 
-                </motion.div>
-            </div>
+                <div onClick={()=> (Funcao(1))} className={`navigation ${funcaoname == "Chat" && 'selecionado'}`}>
+                    <img src="/assets/images/carrinho/bot.png" />
+                </div>
+                <div onClick={()=> (Funcao(2))} className={`navigation ${funcaoname == "Carrinho" && 'selecionado'}`}>
+                    <img src="/assets/images/carrinho/carrinho.png" />
+                    {/* {itenscarrinho.length != 0 &&
+                    <div className='bolinha'></div>
+                    } */}
+                </div>
+                <div onClick={()=> (Funcao(3))} className={`navigation ${funcaoname == "Salvos" && 'selecionado'}`}>
+                    <img src="/assets/images/barralateral/coracao.png" />
+                    {/* {itenssalvos.length != 0 &&
+                    <div className='bolinha'></div>
+                    } */}
+                </div>
+            </section>
 
 
 
 
-            
-            {fundo == true &&
-            <div onClick={Sair} className='fundo'>   </div>}            
-        </div>
+
+            <motion.div 
+            className='rgb'
+            animate={{
+                x: 0,
+                y: aparecer.barrinha,
+                scale: 1,
+                rotate: 0,
+            }}
+            transition={{ type: "just" }}>
+
+            </motion.div>
+
+            <motion.div 
+            className='funcoes'
+            animate={{
+                x: 0,
+                y: aparecer.barra,
+                scale: 1,
+                rotate: 0,
+            }}
+            transition={{ type: "just" }}
+            >
+                <section className='nome'>
+                    <h1>{funcaoname}</h1>
+                </section>
+
+                {funcaoname == "Carrinho" &&
+                <section className='carrinho'>
+                    <main className='itens'>
+                        {itenscarrinho.map( item =>
+                            
+                            <section className='item'>
+                                <section className='img'>
+                                    <div className='ver'>
+                                        <button onClick={()=> (Navegar(6, item.id_produto))}>Ver produto</button>
+                                    </div>
+                                    <img src={BuscarImagem(item.img_produto)} />
+                                </section>
+
+                                <section className='info'>
+                                    <h1>{item.nome}</h1>
+                                    <p>{item.descricao}</p>
+                                    <h1>{item.preco}</h1>
+                                </section>
+
+                                <button onClick={()=> (DelItemCarrinho(item.id_pedido_item))} className='delete'>
+                                    Apagar
+                                </button>
+                            </section>    
+                            
+                        )}
+                    </main>
+
+                    <div className='acoes-carrinho'>
+                        <motion.div 
+                        className='acoes'
+                        animate={{
+                            x: 0,
+                            y: aparecercarrinho.subtotal
+                        }}
+                        transition={{ type: "just" }}
+                        >
+                            <div onClick={()=> (Carrinho())} className='aparecer'>
+                                <p>Ver subtotal</p>
+                            </div>
+                        </motion.div>
+                        <button>Finalizar Carrinho</button>
+                    </div>
+                </section>}
+
+
+
+
+
+
+
+                {funcaoname == "Salvos" &&
+                <section className='salvos'>
+                    <main className='itens'>
+                        {itenssalvos.map( item =>
+                            
+                            <section className='item'>
+                                <section className='img'>
+                                    <div className='ver'>
+                                        <button onClick={()=> (Navegar(6, item.id_produto))}>Ver produto</button>
+                                    </div>
+                                    <img src={BuscarImagem(item.img_produto)} />
+                                </section>
+
+                                <section className='info'>
+                                    <h1>{item.nome}</h1>
+                                    <p>{item.descricao}</p>
+                                    <h1>{item.preco}</h1>
+                                </section>
+
+                                <button onClick={()=> (SalvarCarrinho(item.id_produto, item.id_cliente))} className='add'>
+                                    Carrinho
+                                </button>
+                                <button onClick={()=> (DelItemSalvos(item.id_favoritos))} className='delete'>
+                                    Apagar
+                                </button>
+                            </section>    
+                            
+                        )}
+                    </main>
+
+                    <div className='acoes-salvos'>
+                        <div className='acoes'>
+                            <button>
+                                Adicionar tudo no carrinho
+                            </button>
+                            <button>
+                                Apagar tudo
+                            </button>
+                        </div>
+                        
+                        <button>Procurar por mais jogos</button>
+                    </div>
+                </section>}
+            </motion.div>
+        </>
     )
 }

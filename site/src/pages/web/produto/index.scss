@@ -721,6 +721,52 @@
                 background-color: #2D2D2D;
                 border-radius: 10px;
                 margin-bottom: 20px;
+                position: relative;
+
+                .b-acoes {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+
+                    width: 40px;
+                    height: 40px;
+                    background-color: rgb(36, 36, 36);
+                    border-radius: 100%;
+                    position: absolute;
+                    top: 20px;
+                    right: 20px;
+                    cursor: pointer;
+                }
+
+                .acoes {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+
+                    width: 240px;
+                    height: 40px;
+                    gap: 10px;                    
+                    border-radius: 10px;
+                    position: absolute;
+                    top: -50px;
+                    right: 0px;
+
+                    button {
+                        background-color: rgb(36, 36, 36);
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 10px;
+                        color: white;
+                        border: none;
+                        cursor: pointer;
+
+                        &:hover {
+                            border: solid 1px white;
+                        }
+                    }
+                }
 
                 .conteudo {
                     display: flex;
@@ -796,6 +842,7 @@
 
                     width: 100%;
                     height: 40px;
+                    gap: 10px;
                     padding: 0px 0px 0px 0px;
 
                     > span {
@@ -805,6 +852,20 @@
                     > img {
                         height: 100%;
                         margin-right: 10px;
+                    }
+
+                    .bolinha {
+                        width: 25px;
+                        height: 15px;
+                        border-radius: 15px;
+                        background-color: rgb(190, 58, 58);
+
+                        &.bom {
+                            background-color: rgb(63, 63, 63);
+                        }
+                        &.amei {
+                            background-color: rgb(180, 154, 35);
+                        }
                     }
                 }
             }

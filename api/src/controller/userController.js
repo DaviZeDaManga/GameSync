@@ -8,7 +8,7 @@ const uploadN = multer({dest: 'tools/now'})
 
 
 
-import { AdicionarAvaliacaoJogo, AdicionarAvaliacaoProd, AlterarDadosUser, AlterarFotoPerfil, CadastrarCliente, DadosCliente, ExcluirFavorito, InserirFavorito, InserirFotoPerfil, LoginCliente } from "../Repository/userRepository.js";
+import { AdicionarAvaliacaoJogo, AdicionarAvaliacaoProd, AlterarDadosUser, AlterarFotoPerfil, BuscarMascoteCliente, CadastrarCliente, DadosCliente, DeletarAvaliacaoProd, DeletarMascoteCliente, ExcluirCarrinho, ExcluirFavorito, InserirCarrinho, InserirFavorito, InserirFotoPerfil, InserirMascoteCliente, LoginCliente } from "../Repository/userRepository.js";
 
 import passwordValidator from 'password-validator';//import
 var schema = new passwordValidator(); // cria uma instância de um objeto chamado schema, Esse objeto schema é usado para definir e aplicar regras de validação personalizadas a senhas.
@@ -205,6 +205,10 @@ server.post('/usuario/avaliacao/produto/:id', async(req, resp) => {
             throw new Error('ID cliente está vazio');
         }
 
+        if (!avaliacao.nome){
+            throw new Error('O nome do cliente esta vazio');
+        }
+
         if(!avaliacao.comentario){
             throw new Error('Comentario está vazio');
         }
@@ -223,6 +227,29 @@ server.post('/usuario/avaliacao/produto/:id', async(req, resp) => {
     }
     catch(err){
         resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
+//deletar avaliacao produto
+server.delete('/usuario/delete/avaliacao/produto/:id', async (req, resp) => {
+    try {
+        const { id } = req.params;
+
+        if (!id) {
+            throw new Error('O id do comentario nao foi informado!')
+        }
+
+        let resposta = await DeletarAvaliacaoProd(id)
+
+        if (resposta !== 1) {
+            throw new Error('Comentario não pode ser alterado.');
+        } else {
+            resp.status(204).send()
+        }
+    } catch(err) {
+        resp.status(404).send({
             erro: err.message
         })
     }
@@ -290,7 +317,7 @@ server.post('/usuario/favoritar', async(req, resp) => {
 })
 
 //remover favorito
-server.delete('/usuario/favorito/:id', async(req, resp) => {
+server.delete('/usuario/:id/favorito', async(req, resp) => {
     try{
         const { id } = req.params;
 
@@ -302,6 +329,129 @@ server.delete('/usuario/favorito/:id', async(req, resp) => {
         resp.status(204).send();
     }
     catch(err){
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
+////carrinho
+
+//inserir carrinho
+server.post('/usuario/carrinho', async(req, resp) => {
+    try{
+        const carrinho = req.body
+
+        if (!carrinho.produto)
+        throw new Error ('O id do produto é obrigatorio');
+
+        if (!carrinho.cliente)
+        throw new Error ('O id do cliente é obrigatorio');
+
+        const Favoritacao = await InserirCarrinho(carrinho)
+
+        resp.status(200).send({ Favoritacao }); //status HTTP 200 junto com o corpo da resposta no formato JSON.
+    }
+    catch(err){
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
+//remover carrinho
+server.delete('/usuario/:id/carrinho', async(req, resp) => {
+    try{
+        const { id } = req.params;
+
+        const resposta = await ExcluirCarrinho(id);
+
+        if(resposta != 1)
+        throw new Error('Produto no carrinho não pode ser removido!');
+
+        resp.status(204).send();
+    }
+    catch(err){
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//adicionar mascotes a sua conta
+server.post('/usuario/mascote', async (req, resp) => {
+    try {
+        const dados = req.body
+
+        const resposta = await InserirMascoteCliente(dados)
+
+        if (resposta !== 1) {
+            throw new Error('Mascote não pode ser alterado.');
+        } else {
+            resp.status(204).send();
+        }
+    }
+    catch(err) {
+        resp.status(404).send({
+            erro: err.message
+        })
+    }
+})
+
+//retornar mascote do usuario
+server.get('/usuario/mascote/:id', async (req, resp) => {
+    try {
+        const { id } = req.params;
+
+        if (!id) {
+            throw new Error("Voce precisa informar o id do cliente!")
+        }
+
+        const resposta = await BuscarMascoteCliente(id)
+
+        if (!resposta) {
+            resp.status(404).send([]);
+        } else {
+            resp.send(resposta);
+        }
+    }
+    catch(err) {
+        resp.status(404).send({
+            erro: err.message
+        })
+    }
+})
+
+//deletar mascote
+server.delete('/usuario/mascote/:id', async (req, resp) => {
+    try {
+        const { id } = req.params
+
+        if (!id) {
+            throw new Error("Voce nao informou o id da vinculacao do mascote com o usuario!")
+        }
+
+        const resposta = await DeletarMascoteCliente(id)
+
+        if(resposta != 1)
+        throw new Error('Mascote selecionado não pode ser removido!');
+
+        resp.status(204).send();
+    }
+    catch (err){
         resp.status(400).send({
             erro: err.message
         })

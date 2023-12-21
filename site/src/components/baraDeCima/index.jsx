@@ -3,16 +3,24 @@ import { Link, useNavigate } from 'react-router-dom'
 import storage, { set } from 'local-storage';
 import './index.scss'
 import { motion } from 'framer-motion';
+import { DadosCliente } from '../../connection/userAPI';
+import { BuscarImagem } from '../../connection/produtosAPI';
     
 export default function BarraDeCima () {
     const navigate = useNavigate()
 
-    const [lista, setLista] = useState (230)
-    const [idprod, setIdprod] = useState ('')
-    const [imguser, setImguser] = useState("")
+    const [dados, setDados] = useState ([])
+    const [idcliente, setIdcliente] = useState()
     const [nome, setNome] = useState('')
 
+    async function Dados() {
+        let resposta = await DadosCliente(idcliente)
+        setDados(resposta)
+    }
 
+    useEffect(() => { 
+        Dados()
+    })
 
 
 
@@ -20,22 +28,26 @@ export default function BarraDeCima () {
 
     useEffect(() => {
         if(storage('user-logado')){
-            const nomeUser = storage('user-logado');
-            setNome(nomeUser.nome);
-
-            const imguser = storage('user-logado')
-            setImguser(imguser.img)
+            const opa = storage('user-logado');
+            setNome(opa.nome)
+            setIdcliente(opa.id)
         }
         else{
             setNome('anonymous')
-            
-            setImguser('/assets/images/GameSync/User.png')
         }
-    }, [])
+    })
 
 
 
     const [configcard, setConfigcard] = useState(0)
+
+
+
+
+    function SairContaUser() {
+        storage.remove("user-logado")
+        window.location.reload()
+    }
 
     return(
         <>
@@ -43,8 +55,14 @@ export default function BarraDeCima () {
         <section className='perfil'>
             <p>{nome}</p>
             <Link to={`/perfil`}>
-                <div className={`card ${imguser == '/assets/images/GameSync/User.png' && 'paddingzing'}`}>
-                    <img src={imguser} />
+                <div className={`card`}>
+                    {dados.map( item =>
+                        
+                    <>
+                    <img src={BuscarImagem(item.imagem)} />
+                    </>    
+                        
+                    )}
                 </div>
             </Link>
             {configcard == 0 &&
@@ -73,6 +91,9 @@ export default function BarraDeCima () {
                         Login
                     </button>
                 </Link>
+                <button onClick={()=> (SairContaUser())}>
+                    Sair
+                </button>
             </div>
 
             <button>
