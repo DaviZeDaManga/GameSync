@@ -89,6 +89,16 @@
       background-color: #1a1a1a;
       border-radius: 20px;
   }
+
+
+  @keyframes chegada {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
   
   
   

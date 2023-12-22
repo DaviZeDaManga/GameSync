@@ -55,8 +55,6 @@ export default function Produto() {
     const [comentario, setComentario] = useState ('')
 
     const [avaliacoes, setAvaliacoes] = useState ()
-    
-    console.log(comentarios)
 
     function MostrarDescricao () {
         setMostdesc(true)
@@ -207,9 +205,14 @@ export default function Produto() {
 
         }
         catch {
-            toast.error("Parece que deu algo errado")
-            ref.current.complete();
-
+            if (!storage("user-logado")) {
+                toast.warning("Voce precisa estar logado para salvar este item")
+                ref.current.complete();
+            }
+            else {
+                toast.error("Parece que deu algo errado")
+                ref.current.complete();
+            }
         }
     }
 
@@ -223,9 +226,14 @@ export default function Produto() {
 
         }
         catch {
-            toast.error("Parece que deu algo errado")
-            ref.current.complete();
-
+            if (!storage("user-logado")) {
+                toast.warning("Voce precisa estar logado para salvar este item")
+                ref.current.complete();
+            }
+            else {
+                toast.error("Parece que deu algo errado")
+                ref.current.complete();
+            }
         }
 
     	// if(storage('user-logado')) {

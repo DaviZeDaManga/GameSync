@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 import { ExcluirCarrinho, ExcluirFavorito, InserirCarrinho } from '../../connection/userAPI';
 
 export default function BarraLateral() {
-    const [idcliente, setIdcliente] = useState(1)
+    const [idcliente, setIdcliente] = useState(0)
 
     const dadosStorage = storage('user-logado');
 
@@ -45,30 +45,36 @@ export default function BarraLateral() {
             }, 1500);
         }
 
-        if (para == 2) {
+        else if (para == 2) {
             setTimeout(() => {
                 ref.current.complete()
                 navigate('/')
             }, 1500);
         }
 
-        if (para == 3) {
+        else if (para == 3) {
             setTimeout(() => {
                 ref.current.complete()
                 navigate('/games')
             }, 1500);
         }
 
-        if (para == 4) {
+        else if (para == 4) {
             setTimeout(() => {
                 ref.current.complete()
                 navigate('/planos')
             }, 1500);
         }
-        if (para == 6) {
+        else if (para == 6) {
             setTimeout(() => {
                 ref.current.complete()
                 navigate(`/produto/${id}`)
+            }, 1500);
+        }
+        else if (para == 7) {
+            setTimeout(() => {
+                ref.current.complete()
+                navigate("/pesquisar")
             }, 1500);
         }
     }
@@ -120,15 +126,29 @@ export default function BarraLateral() {
     }
 
     const [itenscarrinho, setItenscarrinho] = useState([])
+    const [totalcarrin, setTotalcarrin] = useState(0)
 
     async function ItensCarrinho() {
-        const resposta = await BuscarItensCarrinho(idcliente)
-        setItenscarrinho(resposta)
+        try {
+            const resposta = await BuscarItensCarrinho(idcliente)
+            setItenscarrinho(resposta)
+        }
+        catch {
+            toast.warning("Nao estamos conseguindo retornar seus itens do carrinho")
+        }
     } 
 
     useEffect(()=> {
         ItensCarrinho()
     })
+
+    useEffect(()=> {
+        for (let i = 0; i < itenscarrinho.length; i++) {
+            for (let item of itenscarrinho) {
+                setTotalcarrin(totalcarrin + Number(item.preco))
+            }
+        }
+    }, [itenscarrinho.length])
 
     async function DelItemCarrinho(iditem) {
         ref.current.continuousStart();
@@ -137,14 +157,10 @@ export default function BarraLateral() {
             await ExcluirCarrinho(iditem)
             toast.dark("Item do carrinho removido com sucesso")
             ref.current.complete()
-
-            const resposta = await BuscarItensCarrinho(idcliente)
-            setItenscarrinho(resposta)
         }
         catch {
             toast.error("Parece que deu algo errado")
             ref.current.complete();
-
         }
     }
 
@@ -155,7 +171,6 @@ export default function BarraLateral() {
             await InserirCarrinho(idproduto, idcliente)
             toast.dark("Item adicionado ao carrinho com sucesso")
             ref.current.complete()
-
         }
         catch {
             toast.error("Parece que deu algo errado")
@@ -164,6 +179,7 @@ export default function BarraLateral() {
         }
     }
 
+    
 
 
 
@@ -172,12 +188,18 @@ export default function BarraLateral() {
 
 
 
+    //acao salvos
 
     const [itenssalvos, setItenssalvos] = useState([])
 
     async function ItensSalvos() {
-        const resposta = await BuscarItensSalvos(idcliente)
-        setItenssalvos(resposta)
+        try {
+            const resposta = await BuscarItensSalvos(idcliente)
+            setItenssalvos(resposta)
+        }
+        catch {
+            toast.warning("Nao estamos conseguindo retonar seus itens salvos")
+        }
     } 
 
     useEffect(()=> {
@@ -191,15 +213,45 @@ export default function BarraLateral() {
             await ExcluirFavorito(iditem)
             toast.dark("Item salvado removido com sucesso")
             ref.current.complete()
-
-            const resposta = await BuscarItensSalvos(idcliente)
-            setItenscarrinho(resposta)
         }
         catch {
             toast.error("Parece que deu algo errado")
             ref.current.complete();
-
         }
+    }
+
+    async function ApagarTudoSalvos() {
+        ref.current.continuousStart();
+
+        try {
+            for (let item of itenssalvos) {
+                await ExcluirFavorito(item.id_favoritos)
+            }
+
+            toast.dark("Todos os itens foram removidos")
+            ref.current.complete()
+        }
+        catch {
+            toast.error("Parece que deu algo errado")
+            ref.current.complete();
+        }
+    }
+
+    async function AdicionarTudoAoCarrinhho() {
+        ref.current.continuousStart();
+
+        try {
+            for (let item of itenssalvos) {
+                await InserirCarrinho(item.id_produto, idcliente)
+            }
+
+            toast.dark("Todos os itens foram salvos no carrinho!")
+            ref.current.complete()
+        }
+        catch {
+            toast.error("Parece que deu algo errado")
+            ref.current.complete()
+        } 
     }
 
     console.log(itenssalvos)
@@ -350,6 +402,12 @@ export default function BarraLateral() {
                             </section>    
                             
                         )}
+
+                       {itenscarrinho.length == 0 &&
+                        <section className='vazio'>
+                            <img src='/assets/images/GameSync/logo.png'/>
+                        </section>
+                        }
                     </main>
 
                     <div className='acoes-carrinho'>
@@ -363,6 +421,17 @@ export default function BarraLateral() {
                         >
                             <div onClick={()=> (Carrinho())} className='aparecer'>
                                 <p>Ver subtotal</p>
+                            </div>
+
+                            <div className='subtotal'>
+                                <h1>Subtotal</h1>
+                                <h1>R${totalcarrin}</h1>
+                            </div>
+                            <div className='infocartao'>
+
+                            </div>
+                            <div className='infopix'>
+
                             </div>
                         </motion.div>
                         <button>Finalizar Carrinho</button>
@@ -403,19 +472,34 @@ export default function BarraLateral() {
                             </section>    
                             
                         )}
+
+                        {itenssalvos.length == 0 &&
+                        <section className='vazio'>
+                            <img src='/assets/images/GameSync/logo.png'/>
+                        </section>
+                        }
                     </main>
 
                     <div className='acoes-salvos'>
                         <div className='acoes'>
-                            <button>
+                            {itenssalvos.length != 0 &&
+                            <>
+                            <button onClick={()=> (AdicionarTudoAoCarrinhho())}>
                                 Adicionar tudo no carrinho
                             </button>
-                            <button>
+                            <button onClick={()=> (ApagarTudoSalvos())}>
                                 Apagar tudo
                             </button>
+                            </>
+                            }
                         </div>
                         
-                        <button>Procurar por mais jogos</button>
+                        {itenssalvos.length == 0 &&
+                        <button onClick={()=> (Navegar(7))}>Procurar por jogos</button>
+                        }
+                        {itenssalvos.length != 0 &&
+                        <button onClick={()=> (Navegar(7))}>Procurar por mais jogos</button>
+                        }
                     </div>
                 </section>}
             </motion.div>
