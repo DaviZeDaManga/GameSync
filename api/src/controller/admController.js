@@ -139,11 +139,11 @@ server.put('/produto/:id/imagem', upload.array('imagens', 5), async (req, resp) 
             throw new Error('Precisa escolher pelo menos uma imagem!')
         }
 
-        console.log({imagem: imagens[0], id: id});
+        // console.log({imagem: imagens[0], id: id});
 
         // Lógica para salvar as imagens no banco de dados ou armazenamento
         const resposta = await InserirImagemProd(imagens[0], id);
-        console.log({resposta});
+        // console.log({resposta});
 
         if(resposta != 1)
             throw new Error('A imagem não pode ser salva!')
@@ -151,7 +151,7 @@ server.put('/produto/:id/imagem', upload.array('imagens', 5), async (req, resp) 
         resp.status(204).send();
     }
     catch(err){
-        console.log(err);
+        // console.log(err);
         resp.status(400).send({
             erro: err.message
         })
@@ -243,11 +243,11 @@ server.put('/produto/:id/imagem', upload.array('imagens', 5), async (req, resp) 
             throw new Error('Precisa escolher pelo menos uma imagem!')
         }
 
-        console.log({imagem: imagens[0], id: id});
+        // console.log({imagem: imagens[0], id: id});
 
         // Lógica para salvar as imagens no banco de dados ou armazenamento
         const resposta = await MudarImagem(id, imagens[0]);
-        console.log({resposta});
+        // console.log({resposta});
 
         if(resposta != 1)
             throw new Error('A imagem não pode ser salva!')
@@ -255,7 +255,7 @@ server.put('/produto/:id/imagem', upload.array('imagens', 5), async (req, resp) 
         resp.status(204).send();
     }
     catch(err){
-        console.log(err);
+        // console.log(err);
         resp.status(400).send({
             erro: err.message
         })
@@ -380,7 +380,7 @@ server.put(`/noticia/:id/imagem`, uploadN.array('imagens', 5), async (req, resp)
         resp.status(204).send();
     }
     catch(err){
-        console.log(err);
+        // console.log(err);
         resp.status(400).send({
             erro: err.message
         })

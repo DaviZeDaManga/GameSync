@@ -122,6 +122,92 @@
 
     bottom: -850px;
 
+    .voltar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 60px;
+        height: 60px;
+        padding: 5px;
+        background-color: #262626f8;
+        border: solid 2px rgba(255, 255, 255, 0);
+        border-radius: 10px;
+        cursor: pointer;
+
+        position: absolute;
+        top: 0;
+        right: -70px;
+        transform: scale(0);
+
+        transition: 0.3s;
+
+        &.aparecer {
+            transform: scale(1);
+        }
+
+        img {
+            height: 40%;
+            opacity: 0.3;
+            transition: 0.3s;
+        }
+
+        &:hover {
+            border: solid 2px white;
+
+            img {
+                height: 50%;
+                opacity: 1;
+            }
+        }
+    }
+
+    .perfil-contato {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+
+        width: 60px;
+        height: 60px;
+        gap: 10px;
+        background-color: rgb(46, 46, 46);
+        border-radius: 10px;
+        padding: 5px;
+
+        position: absolute;
+        top: 70px;
+        right: -70px;
+        transform: scale(0);
+
+        transition: 0.3s;
+
+        &.aparecer {
+            transform: scale(1);
+        }
+
+        .foto {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            width: 50px;
+            height: 50px;
+            background-color: #353535;
+            border-radius: 10px;
+            cursor: pointer;
+            overflow: hidden;
+
+            img {
+                height: 100%;
+            }
+
+            &:hover {
+                border: solid 2px white;
+            }
+        }
+    }
+
     .nome {
         display: flex;
         justify-content: center;
@@ -133,6 +219,211 @@
         border-radius: 10px;
     }
 
+    .chat {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        width: 100%;
+        height: 100%;
+        gap: 10px;
+        position: relative;
+        overflow: hidden;
+
+        .batepapos {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+
+            width: 100%;
+            height: 100%;
+            gap: 10px;
+            
+            position: absolute;
+
+            .contatos {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+
+                width: 100%;
+                gap: 10px;
+                background-color: #90191900;
+                border-radius: 10px;
+                height: auto;
+
+                .contato {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: start;
+                    align-items: center;
+    
+                    width: 100% ;
+                    border-radius: 10px;
+                    padding: 10px;
+                    min-height: 80px;
+                    max-height: 80px;
+                    border: solid 2px rgba(255, 255, 255, 0);
+                    background-color: rgb(55, 55, 55);
+                    overflow: hidden;
+                    cursor: pointer;
+
+                    .img {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        width: 60px;
+                        height: 60px;
+                        background-color: rgb(37, 37, 37);
+                        border-radius: 10px;
+                        overflow: hidden;
+
+                        img {
+                            height: 100%;
+                        }
+                    }
+
+                    .dados {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        align-items: center;
+                        flex-grow: 1;
+
+                        height: 100%;
+                        padding: 0px 10px;
+                    }
+
+                    &:hover {
+                        border: solid 2px white;
+                    }
+                }
+            }
+        }
+
+
+        .batepapo {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+
+            width: 100%;
+            height: calc(100% - 70px);
+            gap: 10px;
+            padding: 10px;
+            
+            position: absolute;
+            top: 700px;
+            background-color: rgb(39, 39, 39);
+            border-radius: 10px;
+            overflow: hidden;
+
+            .bloco-mensagem {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-flex-start;
+                align-items: flex-start;
+
+                width: 100%;
+                height: auto;
+
+                &.minhamensagem {
+                    justify-content: flex-end;
+                }
+
+                .mensagem {
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+
+                    max-width: 200px;
+                    height: auto;
+                    padding: 10px 15px;
+                    border-radius: 10px;
+                    background-color: rgb(53, 53, 53);
+
+                    position: relative;
+
+                    .naolida {
+                        width: 10px;
+                        height: 10px;
+                        background-color: rgb(103, 103, 103);
+                        border-radius: 100%;
+                        position: absolute;
+                        bottom: -2px;
+                        right: -2px;
+
+                        &.lida {
+                            background-color: #654bb3;
+                        }
+                    }
+
+                    p {
+                        font-weight: 600;
+                        color: rgb(206, 206, 206);
+                    }
+                }
+            }
+        }
+
+        button {
+            width: 100%;
+            height: 60px;
+            background-color: #e7e7e7;
+            border: none;
+            outline: 0;
+            color: rgb(28, 28, 28);
+            border-radius: 10px;
+            padding: 10px;
+
+            position: absolute;
+            bottom: 0;
+        }
+
+        .enviar {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+
+            width: 100%;
+            height: 60px;
+            gap: 10px;
+
+            position: absolute;
+            bottom: 0;
+            right: -700px;
+
+            input {
+                width: 100%;
+                height: 60px;
+                background-color: #313131;
+                border: none;
+                outline: 0;
+                color: rgb(221, 221, 221);
+                border-radius: 10px;
+                padding: 10px;
+            }
+
+            button {
+                min-width: 60px;
+                max-width: 60px;
+                position: relative;
+            }
+        }
+    }
+
+
+
+
+
+
+
 
 
 
@@ -140,7 +431,7 @@
     .itens {
         display: flex;
         flex-direction: column;
-        justify-content: start;
+        justify-content: flex-start;
         align-items: center;
         flex-grow: 1;
         gap: 10px;
@@ -245,7 +536,7 @@
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
-                align-items: start;
+                align-items: flex-start;
                 flex-grow: 1;
 
                 height: 100%;

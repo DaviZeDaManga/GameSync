@@ -1,677 +1,74 @@
-#Planos{
+#Planos {
     width: 100vw;
-    right: 0;
+    left: 0;
     position: absolute;
 
-    #engine {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-
-      width: 100%;
-      height: 100vh;
-      filter: blur(5);
-      background-color: #000000bb;
-
-      position: fixed;
-      top: 0;
-      right: 0;
-      z-index: 22;
-
-      .beneficios-engine {
+    .sobre {
         display: flex;
         flex-direction: row;
-        justify-content: flex-start;
+        justify-content: space-between;
         align-items: center;
 
-        min-width: 90vw;
-        height: 60vh;
-        position: fixed;
-        left: 100px;
-        gap: 20px;
-        overflow: hidden;
+        width: 100%;
+        padding: 20px 30px 20px 110px;
 
-        .bene {
-            display: flex;
-            flex-direction: column;
+        .card {
+          	display: flex;
+            flex-direction: column;  
             justify-content: center;
             align-items: center;
 
-            width: 1200px;
-            height: 100%;
-            padding: 80px;
-            gap: 10px;
+            width: calc((100% / 3) - 20px);
+            gap: 15px;
+            aspect-ratio: 5 / 5;
             border-radius: 10px;
-            background: linear-gradient(90deg, rgb(127, 52, 165), rgb(66, 66, 184));
 
-            > p {
-              max-width: 50ch;
-              text-align: flex-start;
-              padding: 10px;
-              background-color: rgba(139, 70, 174, 0.163);
-              border: solid 3px rgb(132, 71, 190);
-              border-radius: 10px;
+            &.engine {
+                background-color: rgb(51, 51, 142);
             }
 
-            .swiper {
-              width: 100%;
-              height: 100%;
-            }
-            
-            .swiper-slide {
-              text-align: center;
-              font-size: 18px;
-              background: #70161600;
-              display: flex;
-              justify-content: center;
-              align-items: center;
+            .bloco {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
 
-              img, video {
-                display: block;
                 width: 100%;
-                height: 100%;
-                object-fit: cover;
-              }
+                height: calc(50% - 10px);
+                gap: 15px;
+
+                .cardbloco {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: start;
+
+                    width: 100%;
+                    height: 100%;
+                    gap: 10px;
+                    padding: 20px;
+                    background-color: rgb(44, 44, 44);
+                    border-radius: 10px;
+
+                    p {
+                        padding: 10px;
+                        background-color: rgb(52, 52, 52);
+                        border-radius: 10px;
+                    }
+
+                    &.azul {
+                        background-color: rgb(61, 61, 146);
+
+                        p { background-color: rgba(31, 31, 94, 0.153); }
+                    }
+
+                    &.roxo {
+                      background: linear-gradient(90deg, rgb(79, 38, 133),rgb(91, 33, 133));
+
+                      p { background-color: rgba(106, 51, 142, 0.348); }
+                    }
+                }
             }
-        }   
-      }
+        }
     }
-
-    .navegacao-swiper {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-
-      width: 100vw;
-      height: 100px;
-      gap: 20px;
-
-      position: fixed;
-      left: 0;
-      bottom: 0;
-
-      .sair {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-
-        width: 40px;
-        height: 40px;
-        padding: 6px;
-        background-color: rgba(231, 231, 231, 0);
-        border-radius: 10px;
-        transition: 0.3s;
-        border: solid 2px white;
-
-        > img {
-          height: 100%;
-        }
-
-        &:hover {
-          padding: 2px;
-        }
-      }
-
-      button {
-        width: 200px;
-        height: 40px;
-        background-color: rgb(231, 231, 231);
-        border: none;
-        border-radius: 10px;
-        transition: 0.3s;
-
-        &:hover {
-          background-color: #00000000;
-          border: solid 2px white;
-          color: white;
-        }
-      }
-    }
-
-    .barrinha  {
-      width: 100%;
-      height: 3px;
-      border-radius: 10px;
-      background-color: rgb(53, 53, 53);
-    }
-
-    .a {
-      background-color: rgba(19, 158, 201, 0.479)
-    }
-
-    .b {
-      background-color: rgba(132, 18, 177, 0.479)
-    }
-
-    .c {
-      background-color: rgba(167, 167, 167, 0.479)
-    }
-
-      .explain{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: flex-start;
-        
-        width: 100vw;
-        height: 33rem; 
-        padding: 30px 20px 20px 120px;
-
-        .explain-1{
-          display: flex;
-          flex-wrap: wrap;
-          flex-direction: row;
-       
-          width: 100%;
-          height: 100%;
-          justify-content: space-around;
-          margin: 0;
-          padding: 0; 
-          gap: 20px;
-
-          .explain-part1{
-            display:flex;
-            
-
-            .explain-1-benefis{
-              display: block;
-              width: 100%;
-              border-radius: 10px;
-              background-color: rgba(41, 41, 41, 1);
-              text-align: flex-start;
-              padding: 15px;
-              height: 100%;
-            }
-          }
-          .explain-part2{
-            display:flex;
-            flex-direction: row;
-            justify-content: space-around;
-            gap: 20px;
-          
-            .explain-1-jogos{
-              display: block;
-              width: 100%;
-              padding: 15px;
-              background: linear-gradient(180deg, #a146d6, #63097a);
-              border-radius: 10px;
-            }
-
-            .explain-1-engine{
-              display: block;
-              width: 100%;
-              padding: 15px;
-              background-color: rgba(64, 133, 197, 1);
-              border-radius: 10px;
-            }
-          }
-          
-        }
-        .explain-2{
-          display: flex;
-          width: 100%;
-          height:100%;
-          align-items: center;
-          justify-content: center;
-
-          .explain-2-logo{
-            display: flex;
-          }
-        }
-
-        .explain-3{
-          display: flex;
-          width: 100%;
-          height: 100%;
-          align-items: center;
-          justify-content: center;
-          
-          .explain-3-tools{
-            display: flex;
-            background-color: rgb(77, 119, 181);
-            background-image:url('../../../../public/assets/images/GameSync/Rectangle\ 860.png') ;
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center center;
-            width: 100%;
-            height: 100%;
-            justify-content: baseline;
-            align-items: flex-end;
-            padding: 20px;
-            font-size: larger;
-            border-radius: 10px;
-            cursor: pointer;
-          }
-          
-          .explain-3-tools:hover {
-            border: solid 2px white;
-          }
-        }
-      }
-
-      
-      .planos1{
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-flex-start;
-        align-items: flex-start;
-        
-        width: 100vw;
-        height: 24rem; //
-        padding: 20px 20px 20px 120px;
-
-        .planos1-title{
-          display: block;
-          padding: 10px;
-        }
-
-        .planos1-gamers{
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          
-          width: 100%;
-          height: auto;
-          gap: 20px;
-  
-          .planos1-gamers-Recursos > h1{
-            height: 60px;
-          }
-          .planos1-gamers-Recursos{
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            height: 18rem;
-            background-color: rgba(43, 43, 43, 1);
-            padding: 10px 20px;
-            border: none;
-            border-radius: 10px;
-
-            .planos1-gamers-Recursos-p{
-              display: grid;
-              gap: 10px 30px;
-            }
-          }
-
-          .planos1-gamers-Diamond > h1{
-            height: 60px;
-          }
-            
-          .planos1-gamers-Diamond{
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            height: 20rem;
-            background: linear-gradient(to bottom, rgb(83, 187, 201) 80%, rgba(21, 109, 99, 1));
-            padding: 10px 20px;
-            border-radius: 10px;
-
-            .planos1-gamers-Recursos-g{
-              display: grid;
-              gap: 10px 30px;
-            }
-            .planos1-gamers-Recursos-g > p{
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              width: 29rem;
-            }
-          }
-
-          .planos1-gamers-Gold > h1{
-            height: 60px;
-          }
-          .planos1-gamers-Gold{
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            height: 20rem;
-            background: rgb(164, 68, 209);
-            padding: 10px 20px;
-            border-radius: 10px;
-
-            .planos1-gamers-Recursos-o{
-              display: grid;
-              gap: 10px 30px;
-            }
-            .planos1-gamers-Recursos-o > p{
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              width: 29rem;
-            }
-          }
-        }
-      }
-
-      
-      .preco1{
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-flex-start;
-        justify-content: space-between;
-        align-items: flex-start;
-       
-        width: 100vw;
-        padding: 20px 20px 20px 120px;
-        gap: 20px;
-
-        .preco1-mes{
-          display: flex;
-          align-items: center;
-          border-radius: 10px;
-          background-color: rgba(43, 43, 43, 1);
-          width: 95%;
-          height: 4rem;
-          padding: 20px;
-        }
-        
-        .preco1-acao1{
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          justify-content: center;
-          justify-content: space-between;
-         
-          width: 100%;
-          height: 4rem;
-          gap: 15px;
-
-          .preco1-acao1-first > p{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: rgba(43, 43, 43, 1);
-            width: 5.5rem;
-            height: 3rem;
-            border: none;
-            border-radius: 10px;
-            font-size: smaller;
-          }
-          .preco1-acao1-second {
-            width: 100%;
-          }
-          .preco1-acao1-second > button{
-            width: 100%;
-            height: 3rem;
-            background-color: rgba(83, 108, 198, 1);
-            color: white;
-            border: none;
-            border-radius: 10px;
-          }
-        }
-
-        .preco1-acao2{
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          justify-content: center;
-          justify-content: space-between;
-          
-          width: 100%;
-          height: 4rem;
-          gap: 15px;
-
-          .preco1-acao1-third > p{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: rgba(43, 43, 43, 1);
-            width: 5.5rem;
-            height: 3rem;
-            border: none;
-            border-radius: 10px;
-            font-size: smaller;
-          }
-
-          .preco1-acao1-fourth {
-            width: 100%;
-          }
-          .preco1-acao1-fourth > button{
-            width: 100%;
-            height: 3rem;
-            background-color: rgba(83, 108, 198, 1);
-            color: white;
-            border: none;
-            border-radius: 10px;
-          }
-        }
-      }
-      
-      .planos2{
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-       
-        width: 100vw;
-        height: 24rem; //
-        padding: 20px 20px 20px 120px;
-
-        .planos2-title{
-          display: block;
-          padding: 10px;
-        }
-
-        .planos2-gamers{
-          display: flex;
-          flex-direction: row;
-          justify-content: flex-start;
-         
-          width: 100%;
-          height: auto;
-          gap: 20px;
-
-          .none {
-            background-color: rgba(255, 0, 0, 0);
-            width: 100%;
-            height: 100%;
-          }
-          
-          .planos2-gamers-Recursos > h1{
-            height: 60px;
-          }
-          .planos2-gamers-Recursos{
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(43, 43, 43, 1);
-            padding: 10px 20px;
-            border: none;
-            border-radius: 10px;
-
-            .planos2-gamers-Recursos-p{
-              display: grid;
-              gap: 10px 30px;
-            }
-          }
-
-          .planos2-gamers-Programer > h1{
-            height: 60px;
-          }
-          
-          .planos2-gamers-Programer{
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, rgba(184, 184, 184, 1), rgba(89, 89, 89, 1));
-            border-radius: 10px;
-            padding: 10px 20px;
-
-            .planos2-gamers-Programer-o{
-              display: grid;
-              gap: 10px 30px;
-
-              .kkkk{
-                height: 4.1rem;
-              }
-            }
-            .planos2-gamers-Programer-o > p{
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              width: 29rem;
-            }
-        } 
-       }
-     }
-     .preco2{
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
-      align-items: flex-start;
-    
-      width: 100vw;
-      gap: 40px;
-      padding: 20px 20px 20px 120px;
-
-      .none {
-        background-color: rgba(255, 0, 0, 0);
-        width: 100%;
-        height: 100%;
-      }
-
-      .preco2-mes{
-        display: flex;
-        align-items: center;
-        border-radius: 10px;
-        background-color: rgba(43, 43, 43, 1);
-        width: 100%;
-        height: 4rem;
-
-        > h1 {
-          margin-left: 20px;
-        }
-      }
-      .preco2-acao1{
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        justify-content: space-between;
-       
-        width: 100%;
-        height: 4rem;
-        gap: 10px;
-
-        .preco2-acao1-first > p{
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background-color: rgba(43, 43, 43, 1);
-          width: 5.5rem;
-          height: 3rem;
-          border: none;
-          border-radius: 10px;
-          font-size: smaller;
-        }
-
-        .preco2-acao1-second {
-          width: 100%;
-        }
-        .preco2-acao1-second > button{
-          width: 100%;
-          height: 3rem;
-          background-color: rgba(83, 108, 198, 1);
-          color: white;
-          border: none;
-          border-radius: 10px;
-        }
-      }
-    }
-
-    .perguntas{
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-flex-start;
-      justify-content: space-around;
-      align-items: flex-flex-start;
-
-      width: 100vw;
-      padding: 20px 20px 20px 120px;
-      margin-top: 50px;
-
-      .perguntas-title {
-        width: 100%;
-        margin: 0px 0px 20px 0px;
-      }
-
-      .perguntas-card{
-        display: flex;
-        background-color: rgba(43, 43, 43, 1);
-        width: 100%;
-        padding: 10px;
-        border-radius: 10px;
-        margin-bottom: 20px;
-      }
-
-      .pergunta-resp {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: flex-start;
-
-        width: 100%;
-        height: auto;
-        padding: 0px 20px 40px 20px;
-      }
-    }
-    .botao{
-      cursor: pointer;
-      transition: 0.1s;
-    }
-
-    .botao::after{
-      content: '';
-      width: 100%;
-      height: 100%;
-      filter: blur(15px);
-      z-index: -1;
-      position: absolute;
-      left: 0;
-      top: 0;
-    }
-
-    .botao:active{
-      transform: scale(0.9) rotate(3deg);
-  background: radial-gradient(circle farthest-corner at 10% 20%, rgb(111, 202, 41) 17.8%, rgb(11, 193, 87) 100.2%);
-  transition: 0.5s;
-    }
-    
-    @media screen and (min-width: 2560px) and (min-height: 1440px) {
-        /* Estilos para dispositivos com resolução 2560x1440 ou superior */
-        
-      }
-      
-      @media screen and (min-width: 1920px) and (min-height: 1080px) {
-        /* Estilos para dispositivos com resolução 1920x1080 ou superior */
-      
-      }
-      
-      @media screen and (min-width: 1680px) and (min-height: 1050px) {
-        
-        
-      }
-
-      @media screen and (min-width: 1440px) and (min-height: 900px) {
-        
-      }
-
-      @media screen and (min-width: 1024px) and (min-height: 768px) {
-        
-      }
-
-      @media screen and (min-width: 375px) and (min-height: 667px) {
-      
-      }
-
-      @media screen and (min-width: 320px) and (min-height: 568px) {
-       
-      }
 }

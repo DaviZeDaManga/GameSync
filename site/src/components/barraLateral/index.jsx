@@ -7,7 +7,10 @@ import { motion } from 'framer-motion';
 import { BuscarImagem, BuscarItensCarrinho, BuscarItensSalvos } from '../../connection/produtosAPI';
 import storage, { set } from 'local-storage';
 import { toast } from 'react-toastify';
-import { ExcluirCarrinho, ExcluirFavorito, InserirCarrinho } from '../../connection/userAPI';
+import { DadosCliente, ExcluirCarrinho, ExcluirFavorito, InserirCarrinho, InserirMensagem } from '../../connection/userAPI';
+import { BuscarBatepapo, BuscarBatepapos, BuscarBatepaposMensagens } from '../../connection/batepapoAPI';
+
+
 
 export default function BarraLateral() {
     const [idcliente, setIdcliente] = useState(0)
@@ -35,43 +38,43 @@ export default function BarraLateral() {
     const navigate = useNavigate()
     const ref = useRef()
 
-    function Navegar(para, id) {
+    function Navegar(destino, id) {
         ref.current.continuousStart()
 
-        if (para == 1) {
+        if (destino == 1) {
             setTimeout(() => {
                 ref.current.complete()
                 navigate('/pesquisar')
             }, 1500);
         }
 
-        else if (para == 2) {
+        else if (destino == 2) {
             setTimeout(() => {
                 ref.current.complete()
                 navigate('/')
             }, 1500);
         }
 
-        else if (para == 3) {
+        else if (destino == 3) {
             setTimeout(() => {
                 ref.current.complete()
                 navigate('/games')
             }, 1500);
         }
 
-        else if (para == 4) {
+        else if (destino == 4) {
             setTimeout(() => {
                 ref.current.complete()
                 navigate('/planos')
             }, 1500);
         }
-        else if (para == 6) {
+        else if (destino == 6) {
             setTimeout(() => {
                 ref.current.complete()
                 navigate(`/produto/${id}`)
             }, 1500);
         }
-        else if (para == 7) {
+        else if (destino == 7) {
             setTimeout(() => {
                 ref.current.complete()
                 navigate("/pesquisar")
@@ -97,7 +100,7 @@ export default function BarraLateral() {
             setFuncoes(true) 
 
             if (qual == 1) {
-                setFuncaoname("Chat")
+                setFuncaoname("Chat Rapido")
             }
             else if (qual == 2) {
                 setFuncaoname("Carrinho")
@@ -144,9 +147,7 @@ export default function BarraLateral() {
 
     useEffect(()=> {
         for (let i = 0; i < itenscarrinho.length; i++) {
-            for (let item of itenscarrinho) {
-                setTotalcarrin(totalcarrin + Number(item.preco))
-            }
+            
         }
     }, [itenscarrinho.length])
 
@@ -254,8 +255,6 @@ export default function BarraLateral() {
         } 
     }
 
-    console.log(itenssalvos)
-
 
 
 
@@ -304,7 +303,87 @@ export default function BarraLateral() {
 
 
 
+    ////batepapos
 
+    //buscar batepapos
+    const [meusbatepapos, setMeusbatepapos] = useState([])
+
+    async function MeusBatepapos() {
+        try {
+            let resposta = await BuscarBatepapos(idcliente)
+            setMeusbatepapos(resposta)
+        }
+        catch {
+            toast.warning("Bate-papos nâo retornados!")
+        }
+    }
+
+    useEffect(() => {
+        MeusBatepapos()
+    })
+
+    //buscar dados do batepapo
+    const [batepapo, setBatepapo] = useState(0)
+    const [dadosbatepapo, setDadosbatepapo] = useState([])
+
+    async function DadosBatepapo() {
+        try {
+            let resposta = await BuscarBatepapo(batepapo)
+            setDadosbatepapo(resposta)
+        }
+        catch {
+            toast.warning('Dados do Bate-papo nâo retornados!')
+        }
+    }
+
+    useEffect(() => {
+        DadosBatepapo()
+    })
+
+    //buscar mensagens de um batepapo
+    const [aparecermensagens, setAparecermensagens] = useState(0)
+    const [mensagens, setMensagens] = useState([])
+    
+    async function MensagensBatepapo() {
+        try {
+            let resposta = await BuscarBatepaposMensagens(batepapo)
+            setMensagens(resposta)
+
+        }
+        catch {
+            toast.warning("Mensagens do Bate-papo nâo retornados!")
+        }  
+    }
+
+    useEffect(() => {
+        MensagensBatepapo()
+
+        if (batepapo != 0) {
+            setAparecermensagens(-700)
+        }
+        else {
+            setAparecermensagens(0)
+        }
+    })
+
+    //inserir mensagem no batepapo
+    const [mensagem, setMensagem] = useState('')
+
+    async function MandarMensagem() {
+        try {
+            let dados = {
+                id_cliente: idcliente,
+                id_batepapo: batepapo,
+                mensagem: mensagem
+            }
+            await InserirMensagem(dados)
+
+            setMensagem('')
+        }
+        catch {
+            toast.warning('Erro ao enviar a mensagem')
+        }
+    }
 
     return ( 
         <>
@@ -376,6 +455,106 @@ export default function BarraLateral() {
                 <section className='nome'>
                     <h1>{funcaoname}</h1>
                 </section>
+
+                <div onClick={()=> (setBatepapo(0))} className={`voltar ${batepapo != 0 && 'aparecer'}`}>
+                    <img src='/assets/images/acoes/seta-esquerda.png' />
+                </div>
+
+                {dadosbatepapo.map( item => 
+                <div style={{"background": item.cor}} className={`perfil-contato ${batepapo != 0 && 'aparecer'}`}>
+                    <div className='foto'>
+                        <img src={BuscarImagem(item.img)} />   
+                    </div>
+                </div>
+                )}
+
+                {funcaoname == "Chat Rapido" &&
+                <div className='chat'>
+
+                    <div className='batepapos'>
+
+                        <section className='help'>
+
+                        </section>
+                        <section className='contatos'>
+
+                            {meusbatepapos.map( item => 
+                                
+                            <section onClick={()=> (setBatepapo(item.id_batepapo))} className='contato'>
+                                <div className='img'>
+                                    <img src={BuscarImagem(item.img)} />
+                                </div>
+
+                                <div className='dados'>
+                                    <p>{item.nome}</p>
+                                </div>
+                            </section>    
+                                
+                            )}
+
+                        </section>
+
+                    </div>
+
+                    <motion.div className='batepapo'
+                    animate={{
+                        x: 0,
+                        y: aparecermensagens,
+                        y: aparecermensagens,
+                        scale: 1,
+                        rotate: 0,
+                    }}
+                    transition={{ type: "just" }}
+                    >
+
+                    {mensagens.map( item =>
+                        
+                    <section className={`bloco-mensagem ${item.id_cliente == idcliente && 'minhamensagem'}`}>
+                        <main className='mensagem'>
+                            <p>{item.ds_mensagem}</p>
+
+                            <div className={`naolida ${item.bt_lida == true && 'lida'}`}></div>
+                        </main>
+                    </section>    
+                        
+                    )}
+
+                    </motion.div>
+
+                    <motion.button
+                    animate={{
+                        x: aparecermensagens,
+                        y: 0,
+                        scale: 1,
+                        rotate: 0,
+                    }}
+                    transition={{ type: "just" }}
+                    >
+                    Procurar por pessoas
+                    </motion.button>
+
+                    <motion.div
+                    className='enviar'
+                    animate={{
+                        x: aparecermensagens,
+                        y: 0,
+                        scale: 1,
+                        rotate: 0,
+                    }}
+                    transition={{ type: "just" }}
+                    >
+                        <input type='text' onChange={(e) => (setMensagem(e.target.value))} value={mensagem}/>
+                        <button onClick={()=> (MandarMensagem())}></button>
+                    </motion.div>
+                </div>
+                }
+
+
+
+
+
+
+
 
                 {funcaoname == "Carrinho" &&
                 <section className='carrinho'>

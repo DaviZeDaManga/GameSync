@@ -8,7 +8,7 @@ const uploadN = multer({dest: 'tools/now'})
 
 
 
-import { AdicionarAvaliacaoJogo, AdicionarAvaliacaoProd, AlterarDadosUser, AlterarFotoPerfil, BuscarMascoteCliente, CadastrarCliente, DadosCliente, DeletarAvaliacaoProd, DeletarMascoteCliente, ExcluirCarrinho, ExcluirFavorito, InserirCarrinho, InserirFavorito, InserirFotoPerfil, InserirMascoteCliente, LoginCliente } from "../Repository/userRepository.js";
+import { AdicionarAvaliacaoJogo, AdicionarAvaliacaoProd, AlterarDadosUser, AlterarFotoPerfil, BuscarMascoteCliente, CadastrarCliente, DadosCliente, DeletarAvaliacaoProd, DeletarMascoteCliente, ExcluirCarrinho, ExcluirFavorito, InserirCarrinho, InserirFavorito, InserirFotoPerfil, InserirMascoteCliente, InserirMensagem, LoginCliente } from "../Repository/userRepository.js";
 
 import passwordValidator from 'password-validator';//import
 var schema = new passwordValidator(); // cria uma instância de um objeto chamado schema, Esse objeto schema é usado para definir e aplicar regras de validação personalizadas a senhas.
@@ -20,7 +20,7 @@ schema
     .has().digits(1, 'Para a mudar a senha tem que ter no mínimo 1 número!') // Pelo menos um dígito numérico
     .has().not().spaces(true, 'Não pode haver espaços na senha!') //Sem espaços            
     .has().symbols(1, 'Para a mudar a senha tem que ter no mínimo 1 caractere especial'); // Pelo menos um caractere especial     
-    //console.log(schema.validate(''));
+    // console.log(schema.validate(''));
     //console.log(schema.validate('K@1BHBHBH', { details: true }));
    // console.log(schema.validate('', { list: true }));
 
@@ -139,7 +139,7 @@ server.put('/usuario/:id/add/imagem', upload.array('imagens', 5), async (req, re
         }
 
         const resposta = await InserirFotoPerfil(imagens[0], id);
-        console.log({resposta});
+        // console.log({resposta});
 
         if(resposta != 1)
             throw new Error('A imagem não pode ser salva!')
@@ -147,7 +147,7 @@ server.put('/usuario/:id/add/imagem', upload.array('imagens', 5), async (req, re
         resp.status(204).send();
     }
     catch(err){
-        console.log(err);
+        // console.log(err);
         resp.status(400).send({
             erro: err.message
         })
@@ -165,7 +165,7 @@ server.put('/usuario/:id/alter/imagem', upload.array('imagens', 5), async (req, 
         }
 
         const resposta = await AlterarFotoPerfil(id, imagens[0]);
-        console.log({resposta});
+        // console.log({resposta});
 
         if(resposta != 1)
         throw new Error('A imagem não pode ser salva!')
@@ -173,7 +173,7 @@ server.put('/usuario/:id/alter/imagem', upload.array('imagens', 5), async (req, 
         resp.status(204).send();
     }
     catch(err){
-        console.log(err);
+        // console.log(err);
         resp.status(400).send({
             erro: err.message
         })
@@ -460,5 +460,33 @@ server.delete('/usuario/mascote/:id', async (req, resp) => {
 
 
 
+
+////batepapo
+
+//insirir mensagem
+server.post('/batepapo/mensagem', async (req, resp) => {
+    try {
+        const dados = req.body
+
+        if (!dados.id_cliente) {
+            throw new Error("Id do cliente nao selecionado")
+        }
+        if (!dados.id_batepapo) {
+            throw new Error("Id dp batepapo nao selecionado")
+        }
+        if (!dados.mensagem) {
+            throw new Error("mensagem nao selecionada")
+        }
+
+        await InserirMensagem(dados.id_cliente, dados.id_batepapo, dados.mensagem)
+
+        resp.status(200).send()
+    }
+    catch (err){
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
 
 export default server;

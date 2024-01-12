@@ -244,3 +244,22 @@ export async function DeletarMascoteCliente(id) {
     const [linhas] = await conx.query(comando, [id])
     return linhas.affectedRows
 }
+
+
+
+
+
+
+
+
+////batepapo
+
+//insirir mensagem
+export async function InserirMensagem(id_cliente, id_batepapo, mensagem) {
+    const comando = `
+    INSERT INTO tb_mensagem (id_cliente, id_batepapo, ds_mensagem, dt_envio, bt_lida)
+    values (?, ?, ?, CURDATE(), false)`
+
+    const [resposta] = await conx.query(comando, [id_cliente, id_batepapo, mensagem])
+    return resposta
+}

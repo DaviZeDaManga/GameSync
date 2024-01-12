@@ -77,7 +77,7 @@ export default function MudarPerfil(){
 
 
 
-    console.log(dadosmascote)
+    // console.log(dadosmascote)
     const ref = useRef();
 
     async function DeletarMascote() {

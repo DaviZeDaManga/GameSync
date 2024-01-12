@@ -9,6 +9,7 @@ import jogosController from './controller/jogosController.js'
 import produtosController from './controller/produtosController.js'
 import noticiasController from './controller/noticiasController.js'
 import admController from './controller/admController.js'
+import batepaposController from './controller/batepapoController.js'
 
 
 const server = express();
@@ -24,5 +25,6 @@ server.use(jogosController);
 server.use(produtosController);
 server.use(noticiasController);
 server.use(admController);
+server.use(batepaposController)
 
 server.listen(process.env.PORT, () => console.log(`API Game Sync 🎮 conectado! ${process.env.PORT}`));

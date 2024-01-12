@@ -236,3 +236,15 @@ export async function DeletarMascoteCliente(id) {
     const resposta = await api.delete(`/usuario/mascote/${id}`)
     return resposta.status
 }
+
+
+
+
+
+
+
+
+export async function InserirMensagem(dados) {
+    const resposta = await api.post('/batepapo/mensagem', dados)
+    return resposta.status
+}
