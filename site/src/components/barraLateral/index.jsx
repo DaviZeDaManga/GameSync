@@ -584,6 +584,27 @@ export default function BarraLateral() {
                     />
                 </div>}
 
+                {/* <div className={`funcoes-mensagens ${batepapo != 0 && 'aparecer'}`}>
+                    <section className='card-funcoes-mensagens s'>
+                        
+                    </section>
+
+                    <section className='card-funcoes-mensagens'>
+                        <p>Enquete</p>
+                    </section>
+                    <section onClick={EscolherImagemMensagem} className='card-funcoes-mensagens'>
+                        <p>Imagem</p>
+                        <input type='file' id='flie_imagem_mensagem' onChange={e => setImagemmensagem(e.target.files[0])} />
+                    </section>
+                </div> */}
+
+                {mensagemselecionada != null &&
+                <section className='mensagem-selecionada'>
+                    <h3>Respondendo ao {nomemensagemselecionada}</h3>
+                    <p>{mensagemselecionada}</p>
+                </section>
+                }
+
                 {imagemmensagem &&
                 <div className='editar_imagem'>
                     <section className='imagem_mensagem'>
@@ -648,20 +669,6 @@ export default function BarraLateral() {
                     transition={{ type: "just" }}
                     >
 
-                    <div className={`funcoes-mensagens ${batepapo != 0 && 'aparecer'}`}>
-                        <section className='card-funcoes-mensagens s'>
-                            
-                        </section>
-
-                        <section className='card-funcoes-mensagens'>
-                            <p>Enquete</p>
-                        </section>
-                        <section onClick={EscolherImagemMensagem} className='card-funcoes-mensagens'>
-                            <p>Imagem</p>
-                            <input type='file' id='flie_imagem_mensagem' onChange={e => setImagemmensagem(e.target.files[0])} />
-                        </section>
-                    </div>
-
                     {mensagens.map( item =>
                         
                     <section className={`bloco-mensagem ${item.id_cliente == idcliente && 'minhamensagem'}`}>
@@ -675,7 +682,7 @@ export default function BarraLateral() {
                             } 
 
                             <main onClick={()=> (setIdmensagemselecionada(item.id_mensagem), setNomemensagemselecionada(item.nm_cliente), setMensagemselecionada(item.ds_mensagem))} style={{"background": item.ds_cor}} className='mensagem'>
-                                <img src={BuscarImagem(item.img_mensagem)} />
+                                <img className={`${item.img_mensagem == null && 'semimagem'}`} src={BuscarImagem(item.img_mensagem)} />
 
                                 <p>{item.ds_mensagem}</p>
 
@@ -693,6 +700,8 @@ export default function BarraLateral() {
                             } 
 
                             <main onClick={()=> (setIdmensagemselecionada(item.id_mensagem), setNomemensagemselecionada(item.nm_cliente), setMensagemselecionada(item.ds_mensagem))} className='mensagem'>
+                                <img className={`${item.img_mensagem == null && 'semimagem'}`} src={BuscarImagem(item.img_mensagem)} />
+
                                 <p>{item.ds_mensagem}</p>
 
                                 <div className={`naolida ${item.bt_lida == true && 'lida'}`}></div>
@@ -702,13 +711,6 @@ export default function BarraLateral() {
                     </section>    
                         
                     )}
-
-                    {mensagemselecionada != null &&
-                    <section className='mensagem-selecionada'>
-                        <h3>Respondendo ao {nomemensagemselecionada}</h3>
-                        <p>{mensagemselecionada}</p>
-                    </section>
-                    }
 
                     </motion.div>
 

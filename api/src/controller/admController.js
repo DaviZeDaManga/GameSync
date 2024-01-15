@@ -2,8 +2,8 @@ import { Router } from 'express';
 const server = Router();
 
 import multer from 'multer'; //img DB
-const upload = multer({dest: 'tools/imagemprodutos'});
-const uploadNoticias = multer({dest: 'tools/imagemnoticias'})
+const upload = multer({dest: 'tools/image/produtos'});
+const uploadNoticias = multer({dest: 'tools/image/noticias'})
 
 
 
