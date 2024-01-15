@@ -242,9 +242,28 @@ export async function DeletarMascoteCliente(id) {
 
 
 
+///batepapo
 
-
+//insirir mensagem
 export async function InserirMensagem(dados) {
     const resposta = await api.post('/batepapo/mensagem', dados)
-    return resposta.status
+    return resposta.data.insertId
+}
+
+//insirir imagem na mensagem
+export async function insirirImagemMensagem(id, imagem) {
+    try {
+        const formData = new FormData()
+        formData.append('imagens', imagem)
+
+        const resposta = await api.put(`/batepapo/mensagem/${id}/imagem`, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        })
+        return resposta.status
+    }
+    catch(erro) {
+        throw erro
+    }
 }

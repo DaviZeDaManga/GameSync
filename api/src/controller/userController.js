@@ -2,13 +2,14 @@ import { Router } from "express";
 const server = Router();
 
 import multer from 'multer'; //img DB
-const upload = multer({dest: 'tools/image'});
-const uploadN = multer({dest: 'tools/now'})
+const uploadClientes = multer({dest: 'tools/imagemperfils'});
+const uploadMensagens = multer({dest: 'tools/imagemmensagens'})
 
 
 
 
-import { AdicionarAvaliacaoJogo, AdicionarAvaliacaoProd, AlterarDadosUser, AlterarFotoPerfil, BuscarMascoteCliente, CadastrarCliente, DadosCliente, DeletarAvaliacaoProd, DeletarMascoteCliente, ExcluirCarrinho, ExcluirFavorito, InserirCarrinho, InserirFavorito, InserirFotoPerfil, InserirMascoteCliente, InserirMensagem, LoginCliente } from "../Repository/userRepository.js";
+
+import { AdicionarAvaliacaoJogo, AdicionarAvaliacaoProd, AlterarDadosUser, AlterarFotoPerfil, BuscarMascoteCliente, CadastrarCliente, DadosCliente, DeletarAvaliacaoProd, DeletarMascoteCliente, ExcluirCarrinho, ExcluirFavorito, InserirCarrinho, InserirFavorito, InserirFotoPerfil, InserirMascoteCliente, InserirMensagem, LoginCliente, insirirImagemMensagem } from "../Repository/userRepository.js";
 
 import passwordValidator from 'password-validator';//import
 var schema = new passwordValidator(); // cria uma instância de um objeto chamado schema, Esse objeto schema é usado para definir e aplicar regras de validação personalizadas a senhas.
@@ -125,7 +126,7 @@ server.put('/usuario/:id/alterardados', async (req, resp) => {
 });
 
 //inserir imagem perfil
-server.put('/usuario/:id/add/imagem', upload.array('imagens', 5), async (req, resp) => {
+server.put('/usuario/:id/add/imagem', uploadClientes.array('imagens', 5), async (req, resp) => {
     try{
         const {id} = req.params;
         const imagens = req.files.map(file => file.path);
@@ -155,7 +156,7 @@ server.put('/usuario/:id/add/imagem', upload.array('imagens', 5), async (req, re
 })
 
 //alterar imagem perfil
-server.put('/usuario/:id/alter/imagem', upload.array('imagens', 5), async (req, resp) => {
+server.put('/usuario/:id/alter/imagem', uploadClientes.array('imagens', 5), async (req, resp) => {
     try{
         const {id} = req.params;
         const imagens = req.files.map(file => file.path); // Array de arquivos de imagem, por isso files
@@ -461,6 +462,10 @@ server.delete('/usuario/mascote/:id', async (req, resp) => {
 
 
 
+
+
+
+
 ////batepapo
 
 //insirir mensagem
@@ -478,12 +483,40 @@ server.post('/batepapo/mensagem', async (req, resp) => {
             throw new Error("mensagem nao selecionada")
         }
 
-        await InserirMensagem(dados.id_cliente, dados.id_batepapo, dados.mensagem)
+        const resposta = await InserirMensagem(dados.id_cliente, dados.id_batepapo, dados.mensagem, dados.id_mensagem_respondida, dados.mensagem_respondida)
 
-        resp.status(200).send()
+        resp.status(200).send(resposta)
     }
     catch (err){
         resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
+//insirir imagem
+server.put('/batepapo/mensagem/:id/imagem', uploadMensagens.array('imagens', 5), async (req, resp) => {
+    try {
+        const {id} = req.params
+        const imagens = req.files.map(file => file.path)
+
+        if (!id) {
+            throw new Error("Id da mensagem nao selecionada")
+        }
+        if (!imagens || imagens.length === 0) {
+            throw new Error("Precisa escolher pelo menos uma imagem")
+        }
+        const resposta = await insirirImagemMensagem(imagens[0], id)
+
+        if (resposta != 1) {
+            throw new Error('A imagem nao pode ser insirida')
+        }
+        else {
+            resp.status(200).send()
+        }
+    }
+    catch(err) {
+        resp.status(404).send({
             erro: err.message
         })
     }

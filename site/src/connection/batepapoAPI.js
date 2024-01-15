@@ -66,7 +66,7 @@ export async function InserirClientesBatepapo(id_batepapo, id_cliente, id_outro)
 //aparecer meus batepapos
 export async function BuscarBatepapos(id) {
     try {
-        const resposta = await api.get(`/batepapos/${id}/meus`)
+        const resposta = await api.get(`/batepapos/${id}/contatos`)
         return resposta.data;
     } 
     catch (error) {
@@ -79,9 +79,9 @@ export async function BuscarBatepapos(id) {
 }
 
 //buscar dados de um batepapo
-export async function BuscarBatepapo(id) {
+export async function BuscarBatepapo(id_batepapo, id_cliente) {
     try {
-        const resposta = await api.get(`/batepapos/${id}`)
+        const resposta = await api.get(`/batepapos/${id_cliente}/contatos/${id_batepapo}`)
         return resposta.data;
     } 
     catch (error) {

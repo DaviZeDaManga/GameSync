@@ -109,16 +109,16 @@ server.post('/batepapo/novo/clientes', async (req, resp) => {
 })
 
 //aparecer meus batepapos
-server.get('/batepapos/:id/meus', async (req, resp) => {
+server.get('/batepapos/:idcliente/contatos', async (req, resp) => {
     try{
-        const { id } = req.params;
+        const { idcliente } = req.params;
 
-        if (!id) {
-            resp.status(400).send({ erro: 'O parâmetro "id" é obrigatório.' });
+        if (!idcliente) {
+            resp.status(400).send({ erro: 'O id do usuario é necessario!' });
             return;
         }
 
-        const resposta = await BuscarBatepapos(id);
+        const resposta = await BuscarBatepapos(idcliente);
 
         if (!resposta) {
             resp.status(404).send([]);
@@ -134,15 +134,22 @@ server.get('/batepapos/:id/meus', async (req, resp) => {
 })
 
 //buscar dados de um batepapo
-server.get('/batepapos/:id', async (req, resp) => {
+server.get('/batepapos/:idcliente/contatos/:idcontato', async (req, resp) => {
     try {
-        const {id} = req.params
+        const { idcliente } = req.params;
+        const { idcontato } = req.params;
 
-        if (!id) {
-            throw new Error("O parametro id é obrigatório!")
+        if (!idcliente) {
+            resp.status(400).send({ erro: 'O id do usuario é necessario!' });
+            return;
         }
 
-        const resposta = await BuscarBatepapo(id)
+        if (!idcontato) {
+            resp.status(400).send({ erro: 'O id do contato é necessario!' });
+            return;
+        }
+
+        const resposta = await BuscarBatepapo(idcontato, idcliente)
 
         if (!resposta) {
             resp.status(404).send()

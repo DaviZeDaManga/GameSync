@@ -2,8 +2,8 @@ import { Router } from 'express';
 const server = Router();
 
 import multer from 'multer'; //img DB
-const upload = multer({dest: 'tools/image'});
-const uploadN = multer({dest: 'tools/now'})
+const upload = multer({dest: 'tools/imagemprodutos'});
+const uploadNoticias = multer({dest: 'tools/imagemnoticias'})
 
 
 
@@ -145,7 +145,7 @@ server.put('/produto/:id/imagem', upload.array('imagens', 5), async (req, resp) 
         const resposta = await InserirImagemProd(imagens[0], id);
         // console.log({resposta});
 
-        if(resposta != 1)
+        if(resposta != 1) 
             throw new Error('A imagem não pode ser salva!')
 
         resp.status(204).send();
@@ -363,7 +363,7 @@ server.post(`/noticia`, async (req, resp) => {
 });
 
 //inserir imagem 
-server.put(`/noticia/:id/imagem`, uploadN.array('imagens', 5), async (req, resp) => {
+server.put(`/noticia/:id/imagem`, uploadNoticias.array('imagens', 5), async (req, resp) => {
     try{
         const {id} = req.params;
         const imagens = req.files.map(file => file.path); 

@@ -102,7 +102,7 @@ export async function BuscarComentariosProd(id){
 }
 
 export function BuscarImagem(imagem){
-    console.log(api.getUri())
-    return `${api.getUri()}/${imagem}`
+    
+    return (`${api.getUri()}/${imagem}`)    
     // http://129.148.42.252:5012/tools\\capasFilmes\\07824752478hh0yfbfy3uhyhyfuh
 }

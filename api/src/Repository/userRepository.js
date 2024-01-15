@@ -255,11 +255,25 @@ export async function DeletarMascoteCliente(id) {
 ////batepapo
 
 //insirir mensagem
-export async function InserirMensagem(id_cliente, id_batepapo, mensagem) {
+export async function InserirMensagem(id_cliente, id_batepapo, mensagem, id_mensagem_respondida,
+    mensagem_respondida) {
     const comando = `
-    INSERT INTO tb_mensagem (id_cliente, id_batepapo, ds_mensagem, dt_envio, bt_lida)
-    values (?, ?, ?, CURDATE(), false)`
+    INSERT INTO tb_mensagem (id_cliente, id_batepapo, ds_mensagem, dt_envio, bt_lida, id_mensagem_respondida,
+    ds_mensagem_respondida )
+    values (?, ?, ?, CURDATE(), false, ?, ?)`
 
-    const [resposta] = await conx.query(comando, [id_cliente, id_batepapo, mensagem])
+    const [resposta] = await conx.query(comando, [id_cliente, id_batepapo, mensagem, id_mensagem_respondida,
+    mensagem_respondida])
+
     return resposta
+}
+
+//insirir imagem
+export async function insirirImagemMensagem(imagem, id_mensagem) {
+    const comando = `
+    INSERT INTO tb_mensagem_imagem (id_mensagem, img_mensagem)
+    values (?, ?)`
+
+    const [linhas] = await conx.query(comando, [id_mensagem, imagem])
+    return linhas.affectedRows
 }

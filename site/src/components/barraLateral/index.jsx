@@ -7,8 +7,9 @@ import { motion } from 'framer-motion';
 import { BuscarImagem, BuscarItensCarrinho, BuscarItensSalvos } from '../../connection/produtosAPI';
 import storage, { set } from 'local-storage';
 import { toast } from 'react-toastify';
-import { DadosCliente, ExcluirCarrinho, ExcluirFavorito, InserirCarrinho, InserirMensagem } from '../../connection/userAPI';
+import { ExcluirCarrinho, ExcluirFavorito, InserirCarrinho, InserirMensagem, insirirImagemMensagem } from '../../connection/userAPI';
 import { BuscarBatepapo, BuscarBatepapos, BuscarBatepaposMensagens } from '../../connection/batepapoAPI';
+import EmojiPicker from 'emoji-picker-react';
 
 
 
@@ -25,7 +26,6 @@ export default function BarraLateral() {
             setIdcliente(0)
         }
     })
-
 
 
 
@@ -124,7 +124,7 @@ export default function BarraLateral() {
     const [funcaocarrinho, setFuncaocarrinho] = useState(false)
     const [aparecercarrinho, setAparecercarrinho] = useState([])
 
-    function Carrinho(parametro) {
+    function Carrinho() {
         setFuncaocarrinho(!funcaocarrinho)
     }
 
@@ -143,11 +143,11 @@ export default function BarraLateral() {
 
     useEffect(()=> {
         ItensCarrinho()
-    })
+    }, [itenscarrinho])
 
     useEffect(()=> {
-        for (let i = 0; i < itenscarrinho.length; i++) {
-            
+        for (let item of itenscarrinho) {
+            setTotalcarrin(totalcarrin + Number(item.preco))
         }
     }, [itenscarrinho.length])
 
@@ -205,7 +205,7 @@ export default function BarraLateral() {
 
     useEffect(()=> {
         ItensSalvos()
-    })
+    }, [itenssalvos])
 
     async function DelItemSalvos(iditem) {
         ref.current.continuousStart();
@@ -320,7 +320,13 @@ export default function BarraLateral() {
 
     useEffect(() => {
         MeusBatepapos()
-    })
+    }, [meusbatepapos])
+
+    //buscar ultima mensagem
+    //arrumar
+    async function UltimaMensagem(contato) {
+        return "oi"
+    }
 
     //buscar dados do batepapo
     const [batepapo, setBatepapo] = useState(0)
@@ -328,7 +334,7 @@ export default function BarraLateral() {
 
     async function DadosBatepapo() {
         try {
-            let resposta = await BuscarBatepapo(batepapo)
+            let resposta = await BuscarBatepapo(batepapo, idcliente)
             setDadosbatepapo(resposta)
         }
         catch {
@@ -338,7 +344,7 @@ export default function BarraLateral() {
 
     useEffect(() => {
         DadosBatepapo()
-    })
+    }, [dadosbatepapo])
 
     //buscar mensagens de um batepapo
     const [aparecermensagens, setAparecermensagens] = useState(0)
@@ -364,26 +370,135 @@ export default function BarraLateral() {
         else {
             setAparecermensagens(0)
         }
-    })
+    }, [mensagens])
 
     //inserir mensagem no batepapo
     const [mensagem, setMensagem] = useState('')
+    const [imagemmensagem , setImagemmensagem] = useState(null)
+    const [idmensagemselecionada, setIdmensagemselecionada] = useState(null)
+    const [mensagemselecionada, setMensagemselecionada] = useState(null)
+    const [nomemensagemselecionada, setNomemensagemselecionada] = useState(null)
 
     async function MandarMensagem() {
         try {
             let dados = {
                 id_cliente: idcliente,
                 id_batepapo: batepapo,
-                mensagem: mensagem
+                mensagem: mensagem,
+                id_mensagem_respondida: idmensagemselecionada,
+                mensagem_respondida: mensagemselecionada
             }
             await InserirMensagem(dados)
-
             setMensagem('')
         }
         catch {
-            toast.warning('Erro ao enviar a mensagem')
+            if (mensagem == '') {
+                toast.warning("Mensagem vazia!")
+            }
+            else {
+                toast.warning('Erro ao enviar a mensagem')
+            }
+        }
+        finally {
+            setIdmensagemselecionada(null)
+            setMensagemselecionada(null)
+            setNomemensagemselecionada(null)
         }
     }
+
+    //escolher imagem
+    function EscolherImagemMensagem() {
+        document.getElementById('flie_imagem_mensagem').click()
+    }
+
+    //mostrar imagem da mensagem
+    function MostarImagemMensagem() {
+        if (typeof imagemmensagem === 'object') {
+            return URL.createObjectURL(imagemmensagem);
+        } 
+        else {
+            return BuscarImagem(imagemmensagem);
+        }
+    }
+
+    //insirir mensagem com foto
+    async function MandarMensagemImagem() {
+        try {
+
+            if (mensagem == '') {
+                let dados = {
+                    id_cliente: idcliente,
+                    id_batepapo: batepapo,
+                    mensagem: "Apenas imagem",
+                    id_mensagem_respondida: idmensagemselecionada,
+                    mensagem_respondida: mensagemselecionada
+                }
+                const idmensagem = await InserirMensagem(dados)
+
+                await insirirImagemMensagem(idmensagem, imagemmensagem)
+            }
+
+            else {
+                let dados = {
+                    id_cliente: idcliente,
+                    id_batepapo: batepapo,
+                    mensagem: mensagem,
+                    id_mensagem_respondida: idmensagemselecionada,
+                    mensagem_respondida: mensagemselecionada
+                }
+                const idmensagem = await InserirMensagem(dados)
+
+                await insirirImagemMensagem(idmensagem, imagemmensagem)
+
+                setMensagem('')
+            }
+
+        }
+        catch {
+            if (mensagem == '') {
+                toast.warning("Mensagem vazia!")
+            }
+            else {
+                toast.warning('Erro ao enviar a mensagem')
+            }
+        }
+        finally {
+            setIdmensagemselecionada(null)
+            setMensagemselecionada(null)
+            setNomemensagemselecionada(null)
+            setImagemmensagem(null)
+        }
+    }
+
+    //funcoes butao do batepapo
+    function FuncoesBatepapo() {
+        if (batepapo == 0) {
+            toast.warning('Procurar pessoas')
+        }
+        else if (imagemmensagem == null) {
+            MandarMensagem()
+            toast.warning('enviar mensagem')
+        }
+        else if (imagemmensagem != null) {
+            MandarMensagemImagem()
+            toast.warning('enviar mensagem com imagem')
+        }
+    }
+
+    //insirir audio ao batepapo
+
+
+
+
+
+
+
+    const [emojiselect, setEmojiselect ] = useState(false)
+
+    const Colocaremoji = () => {
+        
+    }
+
 
     return ( 
         <>
@@ -452,6 +567,30 @@ export default function BarraLateral() {
             }}
             transition={{ type: "just" }}
             >
+                {emojiselect == true &&
+                <div className='emoji'>
+                    <EmojiPicker
+                    height={380}
+                    width={410}
+                    theme='dark'
+                    onEmojiClick={mensagem}
+                    customEmojis={[
+                    {
+                        names: ['Sonic', 'sonic the game'],
+                        imgUrl:
+                        'https://i.imgur.com/3jjFzMv.gif',
+                        id: 'sonic'
+                    },]}
+                    />
+                </div>}
+
+                {imagemmensagem &&
+                <div className='editar_imagem'>
+                    <section className='imagem_mensagem'>
+                        <img src={MostarImagemMensagem()} />
+                    </section>
+                </div>}
+
                 <section className='nome'>
                     <h1>{funcaoname}</h1>
                 </section>
@@ -487,6 +626,7 @@ export default function BarraLateral() {
 
                                 <div className='dados'>
                                     <p>{item.nome}</p>
+                                    <p>{()=>(UltimaMensagem(item.id_batepapo)) }</p>
                                 </div>
                             </section>    
                                 
@@ -496,7 +636,8 @@ export default function BarraLateral() {
 
                     </div>
 
-                    <motion.div className='batepapo'
+                    <motion.div 
+                    className='batepapo'
                     animate={{
                         x: 0,
                         y: aparecermensagens,
@@ -507,45 +648,93 @@ export default function BarraLateral() {
                     transition={{ type: "just" }}
                     >
 
+                    <div className={`funcoes-mensagens ${batepapo != 0 && 'aparecer'}`}>
+                        <section className='card-funcoes-mensagens s'>
+                            
+                        </section>
+
+                        <section className='card-funcoes-mensagens'>
+                            <p>Enquete</p>
+                        </section>
+                        <section onClick={EscolherImagemMensagem} className='card-funcoes-mensagens'>
+                            <p>Imagem</p>
+                            <input type='file' id='flie_imagem_mensagem' onChange={e => setImagemmensagem(e.target.files[0])} />
+                        </section>
+                    </div>
+
                     {mensagens.map( item =>
                         
                     <section className={`bloco-mensagem ${item.id_cliente == idcliente && 'minhamensagem'}`}>
-                        <main className='mensagem'>
-                            <p>{item.ds_mensagem}</p>
 
-                            <div className={`naolida ${item.bt_lida == true && 'lida'}`}></div>
-                        </main>
+                        {item.id_cliente == idcliente &&
+                            <>
+                            {item.id_mensagem_respondida != null &&
+                            <section className='mensagem-respondida'>
+                                <p>{item.ds_mensagem_respondida}</p>
+                            </section>
+                            } 
+
+                            <main onClick={()=> (setIdmensagemselecionada(item.id_mensagem), setNomemensagemselecionada(item.nm_cliente), setMensagemselecionada(item.ds_mensagem))} style={{"background": item.ds_cor}} className='mensagem'>
+                                <img src={BuscarImagem(item.img_mensagem)} />
+
+                                <p>{item.ds_mensagem}</p>
+
+                                <div className={`naolida ${item.bt_lida == true && 'lida'}`}></div>
+                            </main>
+                            </>
+                        }
+
+                        {item.id_cliente != idcliente &&
+                            <>
+                            {item.id_mensagem_respondida != null &&
+                            <section className='mensagem-respondida'>
+                                <p>{item.ds_mensagem_respondida}</p>
+                            </section>
+                            } 
+
+                            <main onClick={()=> (setIdmensagemselecionada(item.id_mensagem), setNomemensagemselecionada(item.nm_cliente), setMensagemselecionada(item.ds_mensagem))} className='mensagem'>
+                                <p>{item.ds_mensagem}</p>
+
+                                <div className={`naolida ${item.bt_lida == true && 'lida'}`}></div>
+                            </main>
+                            </>
+                        }
                     </section>    
                         
                     )}
 
+                    {mensagemselecionada != null &&
+                    <section className='mensagem-selecionada'>
+                        <h3>Respondendo ao {nomemensagemselecionada}</h3>
+                        <p>{mensagemselecionada}</p>
+                    </section>
+                    }
+
                     </motion.div>
 
-                    <motion.button
-                    animate={{
-                        x: aparecermensagens,
-                        y: 0,
-                        scale: 1,
-                        rotate: 0,
-                    }}
-                    transition={{ type: "just" }}
-                    >
-                    Procurar por pessoas
-                    </motion.button>
+                    <section className='enviar'>
+                        <section className='enviar-mensagem'>
+                            
+                            <div onClick={()=> (setEmojiselect(!emojiselect))} className={`emojis ${emojiselect == true && 'selecionado'}`}>
+                                <img src='/assets/images/acoes/feliz.png' />
+                            </div>
 
-                    <motion.div
-                    className='enviar'
-                    animate={{
-                        x: aparecermensagens,
-                        y: 0,
-                        scale: 1,
-                        rotate: 0,
-                    }}
-                    transition={{ type: "just" }}
-                    >
-                        <input type='text' onChange={(e) => (setMensagem(e.target.value))} value={mensagem}/>
-                        <button onClick={()=> (MandarMensagem())}></button>
-                    </motion.div>
+                            {!imagemmensagem &&
+                            <input type='text' placeholder='Mande uma mensagem! :)' onChange={(e) => (setMensagem(e.target.value))} value={mensagem}/>}
+
+                            {imagemmensagem &&
+                            <input type='text' placeholder='Escreva alguma legenda! ;)' onChange={(e) => (setMensagem(e.target.value))} value={mensagem}/>}
+                        </section>
+                        
+                        <button className={`${batepapo != 0 && 'cubo'}`} onClick={()=> (FuncoesBatepapo())}>
+                            {batepapo == 0 &&
+                            <>
+                            Procurar pessoas
+                            </>
+                            }
+                        </button>
+                        
+                    </section>
                 </div>
                 }
 

@@ -63,7 +63,7 @@ export async function BuscarBatepapos(id_cliente) {
 }
 
 //buscar dados de um batepapo
-export async function BuscarBatepapo(id_batepapo) {
+export async function BuscarBatepapo(id_batepapo, id_cliente) {
     const comando = `
     select 
     c.id_cliente				id,
@@ -71,18 +71,33 @@ export async function BuscarBatepapo(id_batepapo) {
     c.ds_cor					cor,
     ci.img_cliente				img
     from tb_batepapo_clientes bc
-    LEFT JOIN tb_clientes c ON bc.id_cliente = c.id_cliente
+    LEFT JOIN tb_clientes c ON bc.id_outro = c.id_cliente
     LEFT JOIN tb_cliente_imagem ci ON c.id_cliente = ci.id_cliente
-    where bc.id_batepapo = ?`
+    where bc.id_batepapo = ?
+    and bc.id_cliente = ?`
 
-    const [linhas] = await conx.query(comando, id_batepapo)
+    const [linhas] = await conx.query(comando, [id_batepapo, id_cliente])
     return linhas
 }
 
 //buscar mensagens de um batepapo
 export async function BuscarMensagensBatepapo(id_batepapo) {
     const comando = `
-    SELECT * FROM tb_mensagem
+    SELECT
+    m.id_batepapo,
+    m.id_mensagem,
+    m.id_cliente,
+    c.nm_cliente,
+    m.ds_mensagem,
+    m.dt_envio,
+    mi.img_mensagem,
+    m.id_mensagem_respondida,
+    m.ds_mensagem_respondida,
+    bt_lida,
+    c.ds_cor
+    FROM tb_mensagem m
+    LEFT JOIN tb_clientes c ON m.id_cliente = c.id_cliente 
+    LEFT JOIN tb_mensagem_imagem mi ON m.id_mensagem = mi.id_mensagem
     where id_batepapo = ?`
 
     const [linhas] = await conx.query(comando, id_batepapo)

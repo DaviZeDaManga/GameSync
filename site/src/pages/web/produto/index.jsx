@@ -267,7 +267,7 @@ export default function Produto() {
 
 
 
-
+    const [nota, setNota] = useState("0.0")
     const [porcum, setPorcum] = useState(0)
     const [porcdois, setPorcdois] = useState(0)
     const [porctres, setPorctres] = useState(0)
@@ -275,8 +275,8 @@ export default function Produto() {
     const [porccinco, setPorccinco] = useState(0)
 
     function Avaliacoes() {
-            let qntdavaliacao = comentarios.length
-            setAvaliacoes(qntdavaliacao)
+        let qntdavaliacao = comentarios.length
+        setAvaliacoes(qntdavaliacao)
     }
 
     useEffect(() => {
@@ -347,7 +347,37 @@ export default function Produto() {
             setPorcum(0)
         }
     })
-   
+
+    // useEffect(()=> {
+    //     let soma = 0
+
+    //     let notaum = comentarios.filter( item => item.avaliacao == 5)
+    //     for(let i = 0; i < notaum.length; i++) {
+    //         soma = soma + 1
+    //     }
+
+    //     let notadois = comentarios.filter( item => item.avaliacao == 4)
+    //     for(let i = 0; i < notadois.length; i++) {
+    //         soma = soma + 2
+    //     }
+
+    //     let notatres = comentarios.filter( item => item.avaliacao == 3)
+    //     for(let i = 0; i < notatres.length; i++) {
+    //         soma = soma + 3
+    //     }
+
+    //     let notaquatro = comentarios.filter( item => item.avaliacao == 2)
+    //     for(let i = 0; i < notaquatro.length; i++) {
+    //         soma = soma + 4
+    //     }
+
+    //     let notacinco = comentarios.filter( item => item.avaliacao == 1)
+    //     for(let i = 0; i < notacinco.length; i++) {
+    //         soma = soma + 5
+    //     }
+
+    //     setNota(soma / comentarios.length )
+    // })
 
 
 
@@ -641,7 +671,7 @@ export default function Produto() {
                 <div id='status'>
                     <div className="status">
                         <div className="resultado">
-                            <h1>4.9</h1>
+                            <h1>{nota}</h1>
                             <p>{avaliacoes} avaliações feitas</p>
                         </div>
                         <div className='estatisticas'>
