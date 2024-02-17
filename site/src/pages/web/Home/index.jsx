@@ -50,7 +50,7 @@ export default function Home() {
     }
 
     return(
-        <div id='Plano'>
+        <div className='Plano PageTransform'>
             <BarraLateral
             home={true}
             />

@@ -5,8 +5,12 @@ import { useState, useEffect } from 'react'
 import BarraLateral from '../../../components/barraLateral';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { BuscarProdutos, BuscarProdutosNM } from '../../../connection/produtosAPI';
+import { BuscarProdutos, BuscarProdutosID, BuscarProdutosNM } from '../../../connection/produtosAPI';
 import { BuscarImagem } from '../../../connection/produtosAPI';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { Keyboard, Mousewheel } from 'swiper/modules';
 
 export default function Pesquisa() {
     const [tgames, setTgames] = useState ([])
@@ -18,7 +22,7 @@ export default function Pesquisa() {
     
     useEffect(()=> {
         TodosGames()
-    }, [])
+    }, [tgames])
 
 
 
@@ -44,8 +48,6 @@ export default function Pesquisa() {
     useEffect(()=> {
         BuscarPorNome()
     }, [pesqnome])
-
-    console.log(jogosnome)
 
 
     const [escolhido, setEscolhido] = useState(0)
@@ -87,8 +89,7 @@ export default function Pesquisa() {
 
 
 
-    const [idaleatorio, setIdaleatorio] = useState(0)
-    const [filjogoall, setFiljogoall] = useState([])
+    const [idaleatorio, setIdaleatorio] = useState(3)
     const [jogoall, setJogoall] = useState([])
 
     function Idaleatorio() {
@@ -96,15 +97,10 @@ export default function Pesquisa() {
         setIdaleatorio(numeroAleatorio)
     }
 
-    async function GameAleatorio() {
-        let resposta = await BuscarProdutos()
-        setFiljogoall(resposta)
-
-        let filtro = filjogoall.filter( item => item.produto_id == idaleatorio)
-        setJogoall(filtro)
+    function GameAleatorio() {
+        let resposta = tgames.slice(idaleatorio, (idaleatorio + 1))
+        setJogoall(resposta)
     }
-
-    console.log(jogoall)
 
     useEffect(() => {
         GameAleatorio()
@@ -164,7 +160,7 @@ export default function Pesquisa() {
         <div className='BarraDeCima'>
             <BarraLateral/>
 
-            {filtragem == true &&
+            {filtragem == 15 &&
             <section className='filtragemprod'>
                 <section className='card'>
                     <section className='title'>
@@ -219,11 +215,73 @@ export default function Pesquisa() {
             </section>}
 
             <section className='barraup-pesquisa'>  
+                <button onClick={()=> (setFiltragem(!filtragem))}></button>
                 <input type="text" placeholder="procurar na GameSync" onChange={(e) => setPesqnome(e.target.value)} value={pesqnome}/>
-                <button onClick={()=> (setFiltragem(true))}></button>
             </section>
 
             <section id='pesquisar'>
+
+                <section className={`filtragem ${filtragem == true && 'selecionado'}`}>
+                <Swiper
+                    direction={'vertical'}
+                    slidesPerView={'auto'}
+                    spaceBetween={15}
+                    keyboard={{
+                    enabled: true,
+                    }}
+                    mousewheel={true}
+                    modules={[Keyboard, Mousewheel]}
+                    className="mySwiper"
+                >
+                    <SwiperSlide></SwiperSlide>
+                    <SwiperSlide></SwiperSlide>
+                    <SwiperSlide>
+                        <main className='surpreenda'>
+                            <section className='cardsur'>
+                                {idaleatorio > 0 &&
+                                <>
+                                    {jogoall.map( item => 
+                                    
+                                    <>
+                                    <img src={BuscarImagem(item.imagem_produto)} />    
+                                        
+                                    <div className='preto'>
+                                        <Link to={`/produto/${item.produto_id}`}>
+                                        <p>Clique para ver o produto</p>
+                                        </Link>
+                                    </div>
+    
+                                    </>
+                                    )}
+                                </>}
+                                
+                            </section>  
+
+                            
+                            {idaleatorio > 0 &&
+                            <section className='desc'>
+                                {jogoall.map( item => 
+                                    
+                                <p>{item.nome}</p>   
+                                    
+                                )}
+                            </section>}
+
+                            <section className='procurar'>
+                                <button onClick={() => (Idaleatorio())}>
+                                    Jogo aleatório
+                                </button>
+                                {idaleatorio > 0 &&
+                                <button onClick={()=> (setIdaleatorio(0))} className='reset'>
+                                    Resetar
+                                </button>}
+                            </section>
+                        </main>
+                    </SwiperSlide>
+
+                </Swiper>
+                </section>
+
                 <main className='pGames'>
 
                     {pesqnome != "" &&
@@ -231,9 +289,9 @@ export default function Pesquisa() {
                     {jogosnome.map( item =>
 
                         <ProdutoCard
-                            id={item.id}
+                            id={item.produto_id}
                             nome={item.nome}
-                            imagem={BuscarImagem(item.img_produto)}
+                            imagem={BuscarImagem(item.imagem_produto)}
                             lancamento={item.tamanho}
                         />
                         
@@ -263,7 +321,9 @@ export default function Pesquisa() {
 
                 </main>
 
-                <section className='filtragem'>
+    
+
+                {/* <section className='filtragem'>
                     <motion.div
                     className='escolhas'
                     animate={{
@@ -389,47 +449,8 @@ export default function Pesquisa() {
                         </main>
                         }
 
-                        {escolhido == 3 &&
-                        <main className='surpreenda'>
-                            <section className='cardsur'>
-                                {jogoall.map( item => 
-                                    
-                                <>
-                                <img src={BuscarImagem(item.imagem_produto)} />    
-                                    
-                                <div className='preto'>
-                                    <Link to={`/produto/${item.produto_id}`}>
-                                    <p>Clique para ver o produto</p>
-                                    </Link>
-                                </div>
-
-                                </>
-                                )}
-                                
-                            </section>  
-
-                            
-                            {idaleatorio > 0 &&
-                            <section className='desc'>
-                                {jogoall.map( item => 
-                                    
-                                <p>{item.nome}</p>   
-                                    
-                                )}
-                            </section>}
-
-                            <section className='procurar'>
-                                <button onClick={() => (Idaleatorio())}>
-                                    Jogo aleatório
-                                </button>
-                                {idaleatorio > 0 &&
-                                <button onClick={()=> (setIdaleatorio(0))} className='reset'>
-                                    Resetar
-                                </button>}
-                            </section>
-                        </main>}
                     </motion.div>
-                </section>
+                </section> */}
             </section>
 
         </div>

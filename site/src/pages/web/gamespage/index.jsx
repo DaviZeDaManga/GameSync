@@ -42,7 +42,7 @@ export default function Gamespage() {
 
 
     return (
-        <div className='Games'>
+        <div className='Games PageTransform'>
             <BarraLateral
             games={true}
             />

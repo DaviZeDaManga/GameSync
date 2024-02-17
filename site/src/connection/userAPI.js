@@ -111,15 +111,14 @@ export async function AlterarFotoPerfil(id, imagem){
 ////avaliacao
 
 //avaliar produto
-export async function AdicionarAvaliacaoProd(id, nome, avaliacao, comentario, id_cliente){
+export async function AdicionarAvaliacaoProd(id, avaliacao, comentario, id_cliente){
     try{
         const resposta = await api.post(`/usuario/avaliacao/produto/${id}`, {
             id_cliente: id_cliente,
-            nome: nome,
             comentario: comentario,
             avaliacao: avaliacao
         });
-        return resposta.data
+        return resposta.status
     }
     catch(erro){
         throw erro;

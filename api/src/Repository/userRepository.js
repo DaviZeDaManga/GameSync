@@ -121,10 +121,10 @@ return resposta.affectedRows
 //avaliar produto
 export async function AdicionarAvaliacaoProd(idProduto, avaliacao){
     const comando = `
-    INSERT INTO tb_comentarios_avaliacoes_produtos (id_cliente, nm_cliente, comentario, avaliacao, data_comentario, id_produto)
-    VALUES (?, ?, ?, ?, CURDATE(), ?);`
+    INSERT INTO tb_comentarios_avaliacoes_produtos (id_cliente, id_produto, comentario, avaliacao, data_comentario)
+    VALUES (?, ?, ?, ?, CURDATE())`
   
-    const parametros = [avaliacao.id_cliente, avaliacao.nome, avaliacao.comentario, avaliacao.avaliacao, idProduto];
+    const parametros = [avaliacao.id_cliente, idProduto, avaliacao.comentario, avaliacao.avaliacao];
   
     const [resposta] = await conx.query(comando, parametros);
     return resposta.affectedRows;

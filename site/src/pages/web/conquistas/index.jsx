@@ -43,7 +43,7 @@ export default function Conquistas(){
 
 return(
 
-    <div id='Conquista'>
+    <div className='Conquista PageTransform'>
         <BarraLateral/>
         <div className='image-frame'>
 

@@ -13,7 +13,7 @@ import { Keyboard, Mousewheel, Pagination } from 'swiper/modules';
 export default function GameSync() {
 
     return(
-        <div className='GameSync'>
+        <div className='GameSync PageTransform'>
             <BarraLateral/>
             <Swiper
                 direction={'vertical'}

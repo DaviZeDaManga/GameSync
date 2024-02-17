@@ -7,7 +7,7 @@ import Atropos from 'atropos/react';
 export default function Engine() {
 
     return(
-        <div id='engine'>
+        <div className='engine PageTransform'>
             <BarraLateral/>
             <Title
             voltar={true}

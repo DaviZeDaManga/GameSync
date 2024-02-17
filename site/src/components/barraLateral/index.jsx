@@ -10,7 +10,8 @@ import { toast } from 'react-toastify';
 import { ExcluirCarrinho, ExcluirFavorito, InserirCarrinho, InserirMensagem, insirirImagemMensagem } from '../../connection/userAPI';
 import { BuscarBatepapo, BuscarBatepapos, BuscarBatepaposMensagens } from '../../connection/batepapoAPI';
 import EmojiPicker from 'emoji-picker-react';
-
+import 'react-image-crop/src/ReactCrop.scss'
+import Ultimamensagem from '../ultimamensagem';
 
 
 export default function BarraLateral() {
@@ -91,12 +92,25 @@ export default function BarraLateral() {
     //acoes
 
     const [fundo, setFundo] = useState(false)
+
+    const [menu, setMenu] = useState(0)
+    const [pagetransform, setPagetransform] = useState(15)
+
     const [funcoes, setFuncoes] = useState(false)
     const [aparecer, setAparecer] = useState([])
     const [funcaoname, setFuncaoname] = useState("Algo")
 
+    function Menu() {
+        if (menu == 0) {
+            setMenu(450)
+        }
+        if (menu == 450) {
+            setMenu(0)
+        }
+    }
+
     function Funcao(qual) {
-        if (fundo == false) {
+        if (funcoes == false) {
             setFuncoes(true) 
 
             if (qual == 1) {
@@ -107,13 +121,62 @@ export default function BarraLateral() {
             }
             else if (qual == 3) {
                 setFuncaoname("Salvos")
-            }
-        }  
+            } 
+        }
         else {
-            setFuncoes(false) 
-            setFuncaoname("Algo")
-        }  
+            setFuncaoname('')
+            setFuncoes(false)
+        }
     }
+
+    //acoes configs
+    useEffect(()=> {
+        // mudar fundo
+        
+        if (menu == 450 || funcoes == true) {
+            setFundo(true)
+        }
+
+        else {
+            setFundo(false)
+        }
+    })
+
+    //acoes das funcoes
+    useEffect(() => {
+        if (funcoes == true) {
+            let aparecer = {
+                barra: -850,
+                barrinha: -7
+            }
+            setAparecer(aparecer)
+
+
+
+            //acao carrinho
+
+            if (funcaocarrinho == true) {
+                let aparecercarrinho = {
+                    subtotal: -290
+                }
+                setAparecercarrinho(aparecercarrinho)
+            }
+            else {
+                let aparecercarrinho = {
+                    subtotal: -50
+                }
+                setAparecercarrinho(aparecercarrinho)
+            }
+        }
+        else {
+            let aparecer = {
+                barra: 0,
+                barrinha: 0
+            }
+            setAparecer(aparecer)
+        }
+    })
+
 
 
 
@@ -260,48 +323,6 @@ export default function BarraLateral() {
 
 
 
-    //acoes configs
-
-    useEffect(()=> {
-        // qualquer acao
-
-        if (funcoes == true) {
-            setFundo(true)
-            let aparecer = {
-                barra: -850,
-                barrinha: -7
-            }
-            setAparecer(aparecer)
-
-            //acao carrinho
-
-            if (funcaocarrinho == true) {
-                let aparecercarrinho = {
-                    subtotal: -290
-                }
-                setAparecercarrinho(aparecercarrinho)
-            }
-            else {
-                let aparecercarrinho = {
-                    subtotal: -50
-                }
-                setAparecercarrinho(aparecercarrinho)
-            }
-        }
-        else {
-            setFundo(false)
-            let aparecer = {
-                barra: 0,
-                barrinha: 0
-            }
-            setAparecer(aparecer)
-        }
-    })
-
-
-
-
-
 
     ////batepapos
 
@@ -321,12 +342,6 @@ export default function BarraLateral() {
     useEffect(() => {
         MeusBatepapos()
     }, [meusbatepapos])
-
-    //buscar ultima mensagem
-    //arrumar
-    async function UltimaMensagem(contato) {
-        return "oi"
-    }
 
     //buscar dados do batepapo
     const [batepapo, setBatepapo] = useState(0)
@@ -421,6 +436,16 @@ export default function BarraLateral() {
         }
     }
 
+    //editar imagem pare envio
+    //arrumar
+    const [crop, setCrop] = useState({
+        unit: '%', // Can be 'px' or '%'
+        x: 25,
+        y: 25,
+        width: 50,
+        height: 50
+    })
+
     //insirir mensagem com foto
     async function MandarMensagemImagem() {
         try {
@@ -495,51 +520,61 @@ export default function BarraLateral() {
 
     const [emojiselect, setEmojiselect ] = useState(false)
 
-    const Colocaremoji = () => {
-        
-    }
-
-
     return ( 
         <>
             <LoadingBar color="#f11946" ref={ref} />
             <BarraDeCima/>
 
+            <div className='PageTransform' style={{"left": "20%"}}></div>
+
             {fundo &&
             <div onClick={()=> (Funcao())} className='fundo'></div>}
 
-            <section className='barralateral'>
-                <div onClick={()=> (Navegar(1))} className='navigation'>
-                    <img src="/assets/images/barralateral/navegar/lupa.png" />
-                </div>
-                <div onClick={()=> (Navegar(2))} className='navigation'>
-                    <img src="/assets/images/barradecima/bolsa-de-compras.png" />
-                </div>
-                <div onClick={()=> (Navegar(3))} className='navigation'>
-                    <img src="/assets/images/barradecima/controle-de-video-game.png" />
-                </div>
-                <div onClick={()=> (Navegar(4))} className='navigation'>
-                    <img src="/assets/images/barradecima/balao-de-fala.png" />
-                </div>
+            <motion.div 
+            className='barralateral'
+            animate={{
+                x: menu,
+                y: 0,
+                scale: 1,
+                rotate: 0,
+            }}
+            transition={{ type: "just" }}
+            >
+                <div className='meu-menu'></div>
 
-                <div className='linha'></div>
+                <main className='navegacao'>
+                    <div onClick={()=> (Navegar(1))} className='navigation'>
+                        <img src="/assets/images/barralateral/navegar/lupa.png" />
+                    </div>
+                    <div onClick={()=> (Navegar(2))} className='navigation'>
+                        <img src="/assets/images/barradecima/bolsa-de-compras.png" />
+                    </div>
+                    <div onClick={()=> (Navegar(3))} className='navigation'>
+                        <img src="/assets/images/barradecima/controle-de-video-game.png" />
+                    </div>
+                    <div onClick={()=> (Navegar(4))} className='navigation'>
+                        <img src="/assets/images/barradecima/balao-de-fala.png" />
+                    </div>
 
-                <div onClick={()=> (Funcao(1))} className={`navigation ${funcaoname == "Chat" && 'selecionado'}`}>
-                    <img src="/assets/images/carrinho/bot.png" />
-                </div>
-                <div onClick={()=> (Funcao(2))} className={`navigation ${funcaoname == "Carrinho" && 'selecionado'}`}>
-                    <img src="/assets/images/carrinho/carrinho.png" />
-                    {/* {itenscarrinho.length != 0 &&
-                    <div className='bolinha'></div>
-                    } */}
-                </div>
-                <div onClick={()=> (Funcao(3))} className={`navigation ${funcaoname == "Salvos" && 'selecionado'}`}>
-                    <img src="/assets/images/barralateral/coracao.png" />
-                    {/* {itenssalvos.length != 0 &&
-                    <div className='bolinha'></div>
-                    } */}
-                </div>
-            </section>
+                    <div onClick={()=> (Menu())} className='linha'></div>
+
+                    <div onClick={()=> (Funcao(1))} className={`navigation ${funcaoname == "Chat" && 'selecionado'}`}>
+                        <img src="/assets/images/carrinho/bot.png" />
+                    </div>
+                    <div onClick={()=> (Funcao(2))} className={`navigation ${funcaoname == "Carrinho" && 'selecionado'}`}>
+                        <img src="/assets/images/carrinho/carrinho.png" />
+                        {/* {itenscarrinho.length != 0 &&
+                        <div className='bolinha'></div>
+                        } */}
+                    </div>
+                    <div onClick={()=> (Funcao(3))} className={`navigation ${funcaoname == "Salvos" && 'selecionado'}`}>
+                        <img src="/assets/images/barralateral/coracao.png" />
+                        {/* {itenssalvos.length != 0 &&
+                        <div className='bolinha'></div>
+                        } */}
+                    </div>
+                </main>
+            </motion.div>
 
 
 
@@ -610,6 +645,9 @@ export default function BarraLateral() {
                     <section className='imagem_mensagem'>
                         <img src={MostarImagemMensagem()} />
                     </section>
+                    {/* <ReactCrop className='imagem_mensagem-crop' crop={crop} onChange={c => setCrop(c)}>
+                        <img src={MostarImagemMensagem()} />
+                    </ReactCrop> */}
                 </div>}
 
                 <section className='nome'>
@@ -647,7 +685,9 @@ export default function BarraLateral() {
 
                                 <div className='dados'>
                                     <p>{item.nome}</p>
-                                    <p>{()=>(UltimaMensagem(item.id_batepapo)) }</p>
+                                    <Ultimamensagem
+                                    batepapo={item.id_batepapo}
+                                    />
                                 </div>
                             </section>    
                                 

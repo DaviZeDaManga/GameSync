@@ -118,7 +118,7 @@ export default function Game() {
     }
 
     return(
-        <div className='game'>
+        <div className='game PageTransform'>
             <BarraLateral/>
             <Title
             nome={'Jogar'}

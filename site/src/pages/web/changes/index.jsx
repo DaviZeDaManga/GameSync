@@ -12,6 +12,7 @@ import { BuscarMascoteCliente, DadosCliente, DeletarMascoteCliente, InserirMasco
 import { BuscarImagem } from '../../../connection/produtosAPI';
 import { toast } from 'react-toastify';
 import LoadingBar from "react-top-loading-bar";
+import Title from '../../../components/title';
 
 export default function MudarPerfil(){
     
@@ -145,7 +146,7 @@ export default function MudarPerfil(){
     }
 
     return(
-        <div id='Change'>
+        <div className='Change PageTransform'>
             <LoadingBar color="#f11946" ref={ref} />
             <BarraLateral/>
 
@@ -210,14 +211,20 @@ export default function MudarPerfil(){
                         <h1>{nome}</h1>
                     </section>
                     <main className='desc'>
+                        <div className='linha-desc'></div>
 
+                        <p>Crie, explore, sobreviva e repita. Minecraft: Java Edition e Bedrock Edition agora são um pacote de oferta para Windows. Minecraft: Java & Bedrock Edition dá a você acesso a ambos os jogos com uma compra e um inicializador unificado, tornando mais fácil do que nunca passar de uma edição para outra. Jogue em cross-play com qualquer outro jogador de Minecraft simplesmente mudando para a versão que seus amigos têm. Agora você pode curtir o dobro da mineração e o dobro da criação, com mais jogadores de Minecraft do que nunca. Explore mundos gerados aleatoriamente e construa das casas mais simples aos maiores castelos.</p>
                     </main>
-                    {!storage('user-logado') &&
-                    <section className='info'>
-                        <button>Cadastrar</button>
-                        <button>Entrar</button>
-                    </section>}
+                    <div className='acoes-dados'>
+                        <button className='black'>Trocar conta</button>
+                        <button>Alterar dados</button>
+                    </div>
                 </section>
+
+                <section className='dados'>
+                    
+                </section>
+
                 <section className='dados-perfil' style={{"background": backgroundColor}}>
                     <div>
 
@@ -229,7 +236,6 @@ export default function MudarPerfil(){
                     <button onClick={() => (setEscolhermasc(true))}>Trocar mascote</button>}
                 </section>
             </main>
-           
 
         </div>
     )

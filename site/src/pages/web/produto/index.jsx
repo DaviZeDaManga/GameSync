@@ -30,31 +30,31 @@ import LoadingBar from "react-top-loading-bar";
 
 
 export default function Produto() {
+    const dadoscliente = storage('user-logado')
 
+    //buscar informacoes do game
     const { id } = useParams();
-
-    const [thumbsSwiper, setThumbsSwiper] = useState(null);
-
-    const [mostdesc, setMostdesc] = useState (true)
-    const [mostcoment, setMostcoment] = useState (false)
-    const [mostcompl, setMostcompl] = useState (false)
-    
     const [idprod, setIdprod] = useState (id)
     const [produtoinfo, setProdutoinfo] = useState([])
     const [imagens, setImagens] = useState ([])
 
-    const [produtosparecidos, setProdutosparecidos] = useState([])
+    async function InfoGame() {
+        let resposta = await BuscarProdutosID(id)
+        setProdutoinfo(resposta)
+    }
 
-    const [conquistas, setConquistas] = useState ([])
-    const [complementos, setComplementos] = useState ([])
-    const [qntdconq, setQntdconq] = useState(6)
+    useEffect(() => {
+        InfoGame()
+    }, [produtoinfo])
 
-    const [comentarios, setComentarios] = useState ([])
-    const [comentando, setComentando] = useState (0)
-    const [estrelas, setEstrelas] = useState (0)
-    const [comentario, setComentario] = useState ('')
 
-    const [avaliacoes, setAvaliacoes] = useState ()
+
+
+
+    //sessoes do pagina
+    const [mostdesc, setMostdesc] = useState (true)
+    const [mostcoment, setMostcoment] = useState (false)
+    const [mostcompl, setMostcompl] = useState (false)
 
     function MostrarDescricao () {
         setMostdesc(true)
@@ -77,39 +77,21 @@ export default function Produto() {
         setSelectsection(3)
     }
 
+    //parte futura
+    const [conquistas, setConquistas] = useState ([])
+    const [complementos, setComplementos] = useState ([])
+    const [qntdconq, setQntdconq] = useState(6)
+
     const navigate = useNavigate()
     const ref = useRef()
 
-
-
-
-
-    function naopode() {
-        toast.warning('Escolha o numero de estrelas')
-    }
-
     
 
 
 
-    
-    async function InfoGame() {
-        let resposta = await BuscarProdutosID(id)
 
-        setProdutoinfo(resposta)
-    }
-
-    useEffect(() => {
-        InfoGame()
-    }, [])
-
-
-
-
-
-
-
-
+    //abrir pop up para comentar
+    const [comentando, setComentando] = useState (0)
 
     function Comentando() {
         if(storage('user-logado')){
@@ -124,37 +106,32 @@ export default function Produto() {
         setComentando(comentando - 1)
     }
 
-    const [user, setUser] = useState('')
-
-    useEffect(() => {
-        if(storage('user-logado')) {
-            const nomeUser = storage('user-logado')
-            setUser(nomeUser.nome)
-        }
-        else {
-            setUser('anonymous')
-        }
-    })
-
-    const idcliente = storage('user-logado')
+    //comentar no produto
+    const [comentarios, setComentarios] = useState ([])
+    const [estrelas, setEstrelas] = useState (0)
+    const [comentario, setComentario] = useState ('')
 
     async function Comentar() {
-        if(storage('user-logado')) {
-            await AdicionarAvaliacaoProd(id, user, estrelas, comentario, idcliente.id)
+        if (estrelas != '') {
+            if (storage('user-logado')) {
+                await AdicionarAvaliacaoProd(id, estrelas, comentario, dadoscliente.id)
+            }
+    
+            else {
+                toast.warning('Você precisa estar logado para comentar!')
+            }
+    
+            setComentando(0)
+            setComentario('')
+            setEstrelas(0)
+            setAvaliacoes(avaliacoes + 1)
         }
-
         else {
-            toast.warning('Você precisa estar logado para comentar!')
+            toast.warning('Escolha o numero de estrelas')
         }
-
-        
-
-        setComentando(0)
-        setComentario('')
-        setEstrelas(0)
-        setAvaliacoes(avaliacoes + 1)
     }
 
+    //buscar comentarios
     async function Comentarios() {
         let resposta = await BuscarComentariosProd(id)
         setComentarios(resposta)
@@ -167,18 +144,14 @@ export default function Produto() {
 
 
 
+    
+
+
+
+
+    //acoes
     const [selectsection, setSelectsection] = useState (1)
-
-
-
-
-
-
     const [emojiselect, setEmojiselect ] = useState(false)
-
-
-
-
 
     const [acoes, setAcoes] = useState(0)
     const [acoesboo, setAcoesboo] = useState(false)
@@ -195,11 +168,27 @@ export default function Produto() {
 
 
 
+
+    const [salvo, setSalvo] = useState(false)
+    const [carrado, setCarrado] = useState(false)
+
+    function VerificarSalvoCarrinho() {
+        for (let item of produtoinfo) {
+            setSalvo(item.salvo)
+            setCarrado(item.item)
+        }
+    }
+
+    useEffect(() => {
+        VerificarSalvoCarrinho()
+    })
+
+     //salvar item no favoritos
     async function SalvarFavoritos() {
         ref.current.continuousStart();
 
         try {
-            await InserirFavorito(id, idcliente.id)
+            await InserirFavorito(id, dadoscliente.id)
             toast.dark("Item salvado com sucesso")
             ref.current.complete()
 
@@ -216,11 +205,12 @@ export default function Produto() {
         }
     }
 
+    //salvar item no carrinho
     async function SalvarCarrinho() {
         ref.current.continuousStart();
 
         try {
-            await InserirCarrinho(id, idcliente.id)
+            await InserirCarrinho(id, dadoscliente.id)
             toast.dark("Item adicionado ao carrinho com sucesso")
             ref.current.complete()
 
@@ -259,6 +249,15 @@ export default function Produto() {
         // }
     }
 
+    //nao sera possivel adicionar
+    function JaAdicionado(para) {
+        if (para == 1) {
+            toast.warning("Este produto já está no carrinho!")
+        }
+        if (para == 2) {
+            toast.warning("Este produto já está salvo!")
+        }
+    }
 
 
 
@@ -266,6 +265,9 @@ export default function Produto() {
 
 
 
+
+    //estabelecer nota do produto
+    const [avaliacoes, setAvaliacoes] = useState ()
 
     const [nota, setNota] = useState("0.0")
     const [porcum, setPorcum] = useState(0)
@@ -348,52 +350,55 @@ export default function Produto() {
         }
     })
 
-    // useEffect(()=> {
-    //     let soma = 0
-
-    //     let notaum = comentarios.filter( item => item.avaliacao == 5)
-    //     for(let i = 0; i < notaum.length; i++) {
-    //         soma = soma + 1
-    //     }
-
-    //     let notadois = comentarios.filter( item => item.avaliacao == 4)
-    //     for(let i = 0; i < notadois.length; i++) {
-    //         soma = soma + 2
-    //     }
-
-    //     let notatres = comentarios.filter( item => item.avaliacao == 3)
-    //     for(let i = 0; i < notatres.length; i++) {
-    //         soma = soma + 3
-    //     }
-
-    //     let notaquatro = comentarios.filter( item => item.avaliacao == 2)
-    //     for(let i = 0; i < notaquatro.length; i++) {
-    //         soma = soma + 4
-    //     }
-
-    //     let notacinco = comentarios.filter( item => item.avaliacao == 1)
-    //     for(let i = 0; i < notacinco.length; i++) {
-    //         soma = soma + 5
-    //     }
-
-    //     setNota(soma / comentarios.length )
-    // })
 
 
+   
+    
+    const [produtos, setProdutos] = useState([])
+    const [produtosparecidos, setProdutosparecidos] = useState([])
 
+    //verificacoes
+    const [categoriaparecido, setCategoriaparecido] = useState()
+    const [empresaparecido, setEmpresaparecido] = useState()
+    const [desenparecido, setDesenparecido] = useState()
 
-
-
-
-
-    async function JogosParecidos() {
+    //aparecer produtos
+    async function Jogos() {
         let resposta = await BuscarProdutos()
+        setProdutos(resposta)
+    }
+
+    useEffect(() => {
+        Jogos()
+    }, [])
+
+    //verificacao para aparecer jogos parecidos
+    function VerificacaoParecidos() {
+        for (let item of produtoinfo) {
+            setEmpresaparecido(item.publi)
+            setDesenparecido(item.desenvolvedor)
+            setCategoriaparecido(item.categoria_id)
+        }
+     }
+ 
+    useEffect(()=> {
+        VerificacaoParecidos()
+    }, [produtos])
+
+    //verificar jogos com as verificacoes
+    function JogosParecidos() {
+        let filtrados = produtos.filter( item => item.empresa == empresaparecido || item.desenvolvedor == desenparecido || item.categoria_id == categoriaparecido) 
+
+        let resposta = filtrados.slice(0, 6)
         setProdutosparecidos(resposta)
     }
 
     useEffect(() => {
         JogosParecidos()
-    }, [])
+    }, [categoriaparecido])
+
+
+
 
 
 
@@ -422,7 +427,7 @@ export default function Produto() {
     }
      
     return(
-        <div className="Produto">
+        <div className="Produto PageTransform">
             <LoadingBar color="#f11946" ref={ref} />
             
             <section className='fake-nerwe'>
@@ -457,9 +462,20 @@ export default function Produto() {
                             <div className='comprar'>
                                 <button><Link to={`/BarraLateral/${id}`}></Link>Comprar</button> 
 
+                                {produtoinfo.map( item => 
+                                <>
+                                {item.item != idprod &&
                                 <button onClick={()=> (SalvarCarrinho())} className='acoes'>
                                     <img src='/assets/images/carrinho/carrinho.png' />
-                                </button>   
+                                </button> } 
+
+                                {item.item == idprod &&
+                                <button onClick={() => (JaAdicionado(1))} className='acoes'>
+                                    <img src='/assets/images/carrinho/carrinho.png' />
+                                </button>
+                                } 
+                                </>    
+                                )} 
 
                                 <button onClick={()=> (setAcoesboo(!acoesboo))} className={`acoes ${acoesboo == true && 'selecionado'}`}>
                                     <img src='/assets/images/acoes/pontos.png' />
@@ -478,9 +494,23 @@ export default function Produto() {
                             Compartilhar
                         </div>
                         <div className='linha'></div>
+                        {produtoinfo.map( item => 
+
+                        <>
+                        {item.salvo != idprod &&
                         <div onClick={()=> (SalvarFavoritos())} className='card'>
                             Salvar
-                        </div>
+                        </div> 
+                        }  
+                            
+                        {item.salvo == idprod &&
+                        <div onClick={() => (JaAdicionado(2))} className='card'>
+                            Salvo
+                        </div> 
+                        }  
+                        </> 
+                            
+                        )}
                         <div className='linha'></div>
                         <div className='card'>
                             Reportar
@@ -499,8 +529,7 @@ export default function Produto() {
                             loop={true}
                             spaceBetween={10}
                             navigation={true}
-                            thumbs={{ swiper: thumbsSwiper }}
-                            modules={[FreeMode, Navigation, Thumbs]}
+                            modules={[FreeMode, Navigation]}
                             className="mySwiper2"
                         >
                             <SwiperSlide>
@@ -725,7 +754,7 @@ export default function Produto() {
                         <div className="comentario">
                             {(storage("user-logado")) &&
                             <>
-                                {idcliente.id == item.id_cliente &&
+                                {dadoscliente.id == item.id_cliente &&
                                     <div onClick={() => (setAcoescomentarios(!acoescomentarios))} className='b-acoes'></div>}
         
                                     {acoescomentarios == true &&
@@ -739,7 +768,7 @@ export default function Produto() {
                             <div className='conteudo'>
                                 <section className='c-user'>
                                     <div className='c-user-image'>
-
+                                        <img src={BuscarImagem(item.img_cliente)} />
                                     </div>
                                     <h1>{item.nm_cliente}</h1>
                                 </section>
@@ -846,10 +875,8 @@ export default function Produto() {
                             <button className={`${estrelas == 4 && 'selecionado' }`} onClick={() => (setEstrelas(4))}><img src="/assets/images/avaliacao/estrela.png" /></button>
                             <button className={`${estrelas == 5 && 'selecionado' }`} onClick={() => (setEstrelas(5))}><img src="/assets/images/avaliacao/estrela.png" /></button>
                         </div>
-                        {estrelas == '' &&
-                        <button onClick={naopode}>Escolha o numero de estrelas</button>}
-                        {estrelas != '' &&
-                        <button onClick={Comentar}>Comentar</button>}
+                        
+                        <button onClick={Comentar}>Comentar</button>
                     </div>}
                     
                 </section>}

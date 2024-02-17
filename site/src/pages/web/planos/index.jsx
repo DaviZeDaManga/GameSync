@@ -9,7 +9,7 @@ import React, { useRef, useState } from 'react';
 export default function Planos(){
  
     return(
-        <div id='Planos'>
+        <div className='Planos PageTransform'>
             <BarraLateral/>
             <Title
             nome={'Planos'}

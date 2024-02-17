@@ -41,7 +41,7 @@ export default function Grupos() {
 
 
     return (
-        <section id='Grupos'>
+        <section className='Grupos PageTransform'>
             <BarraLateral/>
             <Title
             voltar={true}

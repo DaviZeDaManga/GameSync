@@ -1,12 +1,7 @@
-.my-atropos {
-    width: 320px;
-    height: 160px;
-}
+
 
 .Produto {
     width: 100vw;
-    left: 0;
-    position: absolute;
     
     #titles {
         display: flex;
@@ -559,7 +554,7 @@
         width: 100vw;
         height: auto;
         overflow-x: hidden;
-        gap: 22px;
+        gap: 17px;
         padding: 20px 30px 20px 110px;
     }
 
@@ -797,6 +792,12 @@
                             background-color: #D9D9D9;
                             border-radius: 100%;
                             margin-right: 10px;
+
+                            overflow: hidden;
+
+                            img {
+                                width: 100%;
+                            }
                         }
 
                         > h1 {

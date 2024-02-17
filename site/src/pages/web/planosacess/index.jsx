@@ -13,7 +13,7 @@ export default function Planosacess() {
     const [plano, setPlano] = useState(true)
 
     return(
-        <div className='Planosacess'>
+        <div className='Planosacess PageTransform'>
             <BarraLateral/>
             <Title
             nome={'Seja bem-vindo!'}

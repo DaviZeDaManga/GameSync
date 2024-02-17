@@ -1,4 +1,4 @@
-#Change {
+.Change {
     width: 100vw;
     left: 0;
     position: absolute;
@@ -108,7 +108,7 @@
         align-items: center;
 
         width: 100%;
-        height: 40rem; 
+        height: 32rem; 
         position: relative;
         padding: 20px 30px 20px 110px;
 
@@ -128,7 +128,7 @@
             height: 100%;
             background-color: rgba(0, 0, 0, 0.22);
             position: absolute;
-            z-index: 4;
+            z-index: 3;
             top: 0px;
             transition: 0.3s;
             animation: chegada 1s;
@@ -190,22 +190,36 @@
       align-items: center;
 
       width: 100%;
-      height: 650px;
+      height: 570px;
       gap: 20px;
       padding: 145px 30px 20px 110px;
+
+      button {
+        transition: 0.3s;
+        cursor: pointer;
+
+        &:hover {
+          transform: scale(1.02);
+        }
+
+        &:active {
+          transform: scale(0.95);
+        }
+      }
 
       .dados {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: flex-start;
         align-items: flex-start;
 
         width: 100%;
         height: 100%;
-        gap: 10px;
-        padding: 20px;
+        gap: 15px;
+        padding: 15px;
         background-color: rgb(55, 55, 55);
         border-radius: 10px;
+        position: relative;
 
         .name {
           display: flex;
@@ -214,10 +228,10 @@
           align-items: flex-start;
 
           width: auto;
-          height: 80px;
+          height: 60px;
           border-radius: 10px;
           padding: 0px 20px;
-          background-color: rgb(38, 38, 38);
+          background-color: rgb(46, 46, 46);
 
           h1 {
             color: rgb(169, 169, 169);
@@ -229,40 +243,70 @@
           flex-direction: column;
           justify-content: flex-start;
           align-items: center;
-          flex-grow: 1;
 
           width: 100%;
+          height: auto;
+          max-height: 230px;
           border-radius: 10px;
-          background-color: rgb(38, 38, 38);
-        }
-        .info {
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          align-items: center;
+          padding: 15px;
+          overflow: auto;
+          position: relative;
+          background-color: rgb(46, 46, 46);
 
-          width: 100%;
-          height: 60px;
-          gap: 10px;
-
-          button {
-            width: 100%;
-            height: 60px;
-            background-color: rgb(38, 38, 38);
-            border-radius: 10px;
-            border: none;
-            transition: 0.3s;
-            color: white;
-            cursor: pointer;
-  
-            &:hover {
-              transform: scale(1.02);
-            }
-  
-            &:active {
-              transform: scale(0.95);
-            }
+          .linha-desc {
+            width: 4px;
+            height: 100vh;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            background-color: rgb(255, 191, 0);
           }
+
+          p {
+            font-weight: 500;
+          }
+        }
+
+        ::-webkit-scrollbar {
+          width: 0px;
+          height: 5px;
+        }
+          
+        ::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background-color: transparent;
+            border-radius: 20px;
+        }
+
+        .acoes-dados {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+
+            width: 100%;
+            height: 80px;
+            padding: 15px;
+            gap: 15px;
+
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            
+            button {
+              width: 100%;
+              height: 100%;
+              border: none;
+              border-radius: 10px;
+
+              &.black {
+                background-color: rgb(44, 44, 44);
+                color: white;
+              }
+            }
         }
       }
 
@@ -272,9 +316,9 @@
         justify-content: space-between;
         align-items: flex-start;
 
-        width: 100%;
+        width: 50%;
         height: 100%;
-        padding: 20px;
+        padding: 15px;
         border-radius: 10px;
 
         button {
@@ -283,16 +327,6 @@
           background-color: white;
           border-radius: 10px;
           border: none;
-          transition: 0.3s;
-          cursor: pointer;
-
-          &:hover {
-            transform: scale(1.02);
-          }
-
-          &:active {
-            transform: scale(0.95);
-          }
         }
       }
   }

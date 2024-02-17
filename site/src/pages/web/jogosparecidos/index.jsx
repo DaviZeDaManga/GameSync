@@ -22,37 +22,57 @@ export default function JogosParecidos() {
     }, [])
 
 
-    const [jogos, setJogos] = useState([])
 
+
+
+
+
+
+
+
+    const [produtos, setProdutos] = useState([])
+    const [produtosparecidos, setProdutosparecidos] = useState([])
+
+    //verificacoes
+    const [categoriaparecido, setCategoriaparecido] = useState()
+    const [empresaparecido, setEmpresaparecido] = useState()
+    const [desenparecido, setDesenparecido] = useState()
+
+    //aparecer produtos
     async function Jogos() {
         let resposta = await BuscarProdutos()
-        setJogos(resposta)
+        setProdutos(resposta)
     }
 
     useEffect(() => {
         Jogos()
     }, [])
 
+    //verificacao para aparecer jogos parecidos
+    function VerificacaoParecidos() {
+        for (let item of jogoinfo) {
+            setEmpresaparecido(item.publi)
+            setDesenparecido(item.desenvolvedor)
+            setCategoriaparecido(item.categoria_id)
+        }
+     }
+ 
+    useEffect(()=> {
+        VerificacaoParecidos()
+    }, [produtos])
 
-
-
-
-
-
-
-    const [categoria, setCategoria] = useState()
-    const [desenvolvedor, setDesenvolvedor] = useState()
+    //verificar jogos com as verificacoes
+    function JogosParecidos() {
+        let filtrados = produtos.filter( item => item.publi == empresaparecido || item.desenvolvedor == desenparecido || item.categoria_id == categoriaparecido) 
+        setProdutosparecidos(filtrados)
+    }
 
     useEffect(() => {
-        jogoinfo.map( item => setCategoria(item.nm_categoria))
-        jogoinfo.map( item => setDesenvolvedor(item.ds_desenvolvedor))
-    })
-
-    const jogosparecidos = jogos.filter(item => item.categoria_nome == categoria || item.desenvolvedor == desenvolvedor)
-    console.log(jogosparecidos)
+        JogosParecidos()
+    }, [categoriaparecido])
 
     return(
-        <div id='jogosparecidos'>
+        <div className='jogosparecidos PageTransform'>
             <BarraLateral/>
             <Title
             nome={"Jogos Parecidos com"}
@@ -84,7 +104,7 @@ export default function JogosParecidos() {
             </section>
 
             <main className='jogos'>
-                {jogosparecidos.map( item =>
+                {produtosparecidos.map( item =>
                     
                     <ProdutoCard
                     id={item.produto_id}

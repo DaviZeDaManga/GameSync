@@ -206,10 +206,6 @@ server.post('/usuario/avaliacao/produto/:id', async(req, resp) => {
             throw new Error('ID cliente está vazio');
         }
 
-        if (!avaliacao.nome){
-            throw new Error('O nome do cliente esta vazio');
-        }
-
         if(!avaliacao.comentario){
             throw new Error('Comentario está vazio');
         }
