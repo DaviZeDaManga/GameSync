@@ -5,7 +5,7 @@ const server = Router()
 
 
 
-import { BuscarCategoria, BuscarComentariosProd, BuscarItensCarrinho, BuscarProdutos, BuscarProdutosCT, BuscarProdutosFV, BuscarProdutosID, BuscarProdutosNM } from "../Repository/produtoRepository.js";
+import { BuscarCategoria, BuscarCategorias, BuscarComentariosProd, BuscarItensCarrinho, BuscarProdutos, BuscarProdutosCT, BuscarProdutosFV, BuscarProdutosID, BuscarProdutosNM } from "../Repository/produtoRepository.js";
 
 //retornar produtos
 
@@ -68,6 +68,19 @@ server.get('/produto/:id', async (req, resp) => {
         })
     }
 });
+
+//buscar categorias
+server.get('/categorias', async (req, resp) => {
+    try {
+        const resposta = await BuscarCategorias()
+        resp.send(resposta)
+    }
+    catch(err) {
+        resp.status(404).send({
+            erro: err.message
+        })
+    }
+})
 
 //buscar categoria
 server.get('/categorias/:id', async (req, resp) => {

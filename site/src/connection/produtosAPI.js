@@ -46,6 +46,17 @@ export async function BuscarProdutosID(id){
     }
 }
 
+//buscar categorias 
+export async function BuscarCategorias() {
+    try {
+        const resposta = await api.get('/categorias')
+        return resposta.data
+    }
+    catch(erro) {
+        throw erro
+    }
+}
+
 //buscar categoria
 export async function BuscarCategoria(id) {
     try {

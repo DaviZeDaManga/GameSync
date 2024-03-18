@@ -22,6 +22,7 @@ export async function BuscarProdutos(){
         p.ds_empresa_publi AS empresa,
         p.ds_tamanho as tamanho,
         p.ds_desenvolvedor AS desenvolvedor,
+        p.bt_destaque AS destaque,
         
         -- Tabela tb_categoria
         c.id_categoria AS categoria_id,
@@ -108,9 +109,9 @@ export async function BuscarProdutosID(id){
     LEFT JOIN tb_pedido_item pe ON p.id_produto = pe.id_produto
     LEFT JOIN tb_favoritos f ON p.id_produto = f.id_produto
     where p.id_produto = ?`
-  const [linhas] = await conx.query(comando, [id])
-  return linhas
-  }
+    const [linhas] = await conx.query(comando, [id])
+    return linhas
+}
 
 //buscar categoria
 export async function BuscarCategoria(id) {
@@ -124,7 +125,16 @@ export async function BuscarCategoria(id) {
     return linhas;
 }
 
-//buscar por categoria
+//buscar categorias 
+export async function BuscarCategorias() {
+    const comando = `
+    SELECT * FROM tb_categoria;`
+
+    const [linhas] = await conx.query(comando)
+    return linhas;
+}
+
+//buscar por categoria id
 export async function BuscarProdutosCT(id){
     const comando = `
     SELECT  

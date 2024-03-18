@@ -1,16 +1,15 @@
 import './index.scss'
-import { motion } from 'framer-motion';
 import ProdutoCard from '../../../components/produto';
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import BarraLateral from '../../../components/barraLateral';
-import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { BuscarProdutos, BuscarProdutosID, BuscarProdutosNM } from '../../../connection/produtosAPI';
+import { useNavigate } from 'react-router-dom';
+import { BuscarCategorias, BuscarProdutos, BuscarProdutosID, BuscarProdutosNM } from '../../../connection/produtosAPI';
 import { BuscarImagem } from '../../../connection/produtosAPI';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { Keyboard, Mousewheel } from 'swiper/modules';
+import { Keyboard } from 'swiper/modules';
+import LoadingBar from "react-top-loading-bar";
 
 export default function Pesquisa() {
     const [tgames, setTgames] = useState ([])
@@ -40,7 +39,8 @@ export default function Pesquisa() {
         try {
             let resposta = await BuscarProdutosNM(pesqnome)
             setJogosnome(resposta)
-        } catch {
+        } 
+        catch {
             
         }
     }
@@ -49,42 +49,21 @@ export default function Pesquisa() {
         BuscarPorNome()
     }, [pesqnome])
 
+    const [categorias, setCategorias] = useState([])
 
-    const [escolhido, setEscolhido] = useState(0)
-
-    const [xescolher, setXescolher] = useState(0)
-    const [yescolher, setYescolher] = useState(0)
-
-    const [xescolha, setXescolha] = useState(0)
-    const [yescolha, setYescolha] = useState(0)
-
-    const [nomefiltro, setNomefiltro] = useState('oi')
+    async function Categorias() {
+        try {
+            let resposta = await BuscarCategorias()
+            setCategorias(resposta)
+        }
+        catch {
+            
+        }
+    }
 
     useEffect(() => {
-        if(escolhido == 1 || escolhido == 2 || escolhido == 3 ) {
-            setYescolher(3000)
-            setYescolha(-3000)
-        }
-        else {
-            setYescolher(0)
-            setYescolha(0)
-        }
-    }, [escolhido])
-
-    useEffect(()=> {
-        if(escolhido == 1) {
-            setNomefiltro("Promoções")
-        }
-        else if(escolhido == 2) {
-            setNomefiltro("GameGrupos")
-        }
-        else if(escolhido == 3) {
-            setNomefiltro("Surpreenda-me")
-        }
-        else {
-            setEscolhido('none')
-        }
-    }, [escolhido])
+        Categorias()
+    }, [categorias])
 
 
 
@@ -115,9 +94,17 @@ export default function Pesquisa() {
 
 
     const navigate = useNavigate()
+    const ref = useRef()
 
-    function GameGrupos(id) {
-        navigate('/gamegrupos/' + id)
+    function Navegacao(para, id) {
+        ref.current.continuousStart()
+
+        if (para == 1) {
+            setTimeout(() => {
+                ref.current.complete()
+                navigate('/gamegrupos/' + id)
+            }, 1500);
+        }
     }
 
 
@@ -156,11 +143,22 @@ export default function Pesquisa() {
         ))
     }, [categoria])
 
+
+
+
+
+
+
+
+    const [tipoprocura, setTipoprocura] = useState("Destaques")
+
     return(
+        <>
+        <LoadingBar color="#f11946" ref={ref} />
         <div className='BarraDeCima'>
             <BarraLateral/>
 
-            {filtragem == 15 &&
+            {filtragem == true &&
             <section className='filtragemprod'>
                 <section className='card'>
                     <section className='title'>
@@ -214,29 +212,85 @@ export default function Pesquisa() {
                 </section>
             </section>}
 
-            <section className='barraup-pesquisa'>  
-                <button onClick={()=> (setFiltragem(!filtragem))}></button>
-                <input type="text" placeholder="procurar na GameSync" onChange={(e) => setPesqnome(e.target.value)} value={pesqnome}/>
+
+
+            <section className='tipoProcura'>
+                <button onClick={()=> setTipoprocura("Destaques")} className={`${tipoprocura == "Destaques" && 'selecionado'}`}>Destaques</button>
+                <button onClick={()=> setTipoprocura("GameGrupos")} className={`${tipoprocura == "GameGrupos" && 'selecionado'}`}>GameGrupos</button>
+                <button onClick={()=> setTipoprocura("Diversos")} className={`${tipoprocura == "Diversos" && 'selecionado'}`}>Tipos de pesquisa</button>
             </section>
 
-            <section id='pesquisar'>
+            <section className='procuraras'>
+            {tipoprocura == "Destaques" &&
 
-                <section className={`filtragem ${filtragem == true && 'selecionado'}`}>
                 <Swiper
-                    direction={'vertical'}
-                    slidesPerView={'auto'}
-                    spaceBetween={15}
-                    keyboard={{
-                    enabled: true,
-                    }}
-                    mousewheel={true}
-                    modules={[Keyboard, Mousewheel]}
-                    className="mySwiper"
+                slidesPerView={'auto'}
+                spaceBetween={30}
+                keyboard={{
+                enabled: true,
+                }}
+                modules={[Keyboard]}
+                className="mySwiper"
                 >
-                    <SwiperSlide></SwiperSlide>
-                    <SwiperSlide></SwiperSlide>
-                    <SwiperSlide>
-                        <main className='surpreenda'>
+
+                <SwiperSlide className='none'></SwiperSlide>                    
+
+                {tgames.map( item => 
+                <>
+                {item.destaque == true &&
+                <SwiperSlide>
+                    <img src={BuscarImagem(item.imagem_produto)} />
+                    <h1>Destaque</h1>
+                </SwiperSlide>
+                } 
+                </>   
+                )}
+                
+                </Swiper>
+
+            }
+            {tipoprocura == "GameGrupos" &&
+
+                <Swiper
+                slidesPerView={'auto'}
+                spaceBetween={30}
+                keyboard={{
+                enabled: true,
+                }}
+                modules={[Keyboard]}
+                className="mySwiper"
+                >
+
+                <SwiperSlide className='none'></SwiperSlide>  
+                {categorias.map( item =>
+                    
+                <SwiperSlide onClick={()=> Navegacao(1, item.id_categoria)} className='categorias'>
+                    {item.nm_categoria}
+                </SwiperSlide>     
+                    
+                )}                 
+
+                </Swiper>
+
+            }
+            {tipoprocura == "Diversos" &&
+
+                <Swiper
+                slidesPerView={'auto'}
+                spaceBetween={30}
+                keyboard={{
+                enabled: true,
+                }}
+                modules={[Keyboard]}
+                className="mySwiper"
+                >
+
+                <SwiperSlide className='none'></SwiperSlide>   
+                <SwiperSlide className='surpreendame'>
+                    <img className='icon' src='/assets/images/pesquisa/caixa-aberta.png' />
+
+                    {/* <main className='surpreenda'>
+                        <section className='cardEdesc'>
                             <section className='cardsur'>
                                 {idaleatorio > 0 &&
                                 <>
@@ -250,7 +304,7 @@ export default function Pesquisa() {
                                         <p>Clique para ver o produto</p>
                                         </Link>
                                     </div>
-    
+
                                     </>
                                     )}
                                 </>}
@@ -266,21 +320,32 @@ export default function Pesquisa() {
                                     
                                 )}
                             </section>}
+                        </section>
 
-                            <section className='procurar'>
-                                <button onClick={() => (Idaleatorio())}>
-                                    Jogo aleatório
-                                </button>
-                                {idaleatorio > 0 &&
-                                <button onClick={()=> (setIdaleatorio(0))} className='reset'>
-                                    Resetar
-                                </button>}
-                            </section>
-                        </main>
-                    </SwiperSlide>
-
+                        <section className='procurar'>
+                            <button onClick={() => (Idaleatorio())}>
+                                Jogo aleatório
+                            </button>
+                            {idaleatorio > 0 &&
+                            <button onClick={()=> (setIdaleatorio(0))} className='reset'>
+                                Resetar
+                            </button>}
+                        </section>
+                    </main> */}
+                </SwiperSlide>    
+                <SwiperSlide></SwiperSlide> 
+                <SwiperSlide></SwiperSlide>                  
+                
                 </Swiper>
-                </section>
+            }
+            </section>
+
+            <section className='barraup-pesquisa'>  
+                <button onClick={()=> (setFiltragem(!filtragem))}></button>
+                <input type="text" placeholder="procurar na GameSync" onChange={(e) => setPesqnome(e.target.value)} value={pesqnome}/>
+            </section>
+
+            <section id='pesquisar'>
 
                 <main className='pGames'>
 
@@ -320,139 +385,9 @@ export default function Pesquisa() {
                     }
 
                 </main>
-
-    
-
-                {/* <section className='filtragem'>
-                    <motion.div
-                    className='escolhas'
-                    animate={{
-                        x: xescolher, 
-                        y: yescolher
-                    }}
-                    transition={{type: 'tween'}}
-                    >
-                        <div onClick={() => (setEscolhido(1))} className='cardfiltro promo'>
-                            <h1>Promoções</h1>
-                        </div>
-                        <div onClick={() => (setEscolhido(2))} className='cardfiltro grup'>
-                            <h1>GameGrupos</h1>
-                        </div>
-                        <div onClick={() => (setEscolhido(3))} className='cardfiltro sur'>
-                            <h1>Me surpreenda</h1>
-                        </div> 
-                    </motion.div>    
-
-                    <motion.div
-                    className='escolhido'
-                    animate={{
-                        x: xescolha, 
-                        y: yescolha
-                    }}
-                    transition={{type: "tween"}}
-                    >
-                        <section className='title'>
-                            <div onClick={() => (setEscolhido(0))} className='voltar'>
-                                <img src='/assets/images/acoes/seta-esquerda.png' />
-                            </div>
-                            <section className='titlename'>
-                                <h1>{nomefiltro}</h1>
-                            </section>
-                        </section>
-
-                        {escolhido == 2 && 
-                        <main className='gamegrupos'>
-                            <section onClick={()=> (GameGrupos(1))} className='gamegrupo'>
-                                <h1>Ação</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(2))} className='gamegrupo'>
-                                <h1>Terror</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(3))} className='gamegrupo'>
-                                <h1>FPS</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(4))} className='gamegrupo'>
-                                <h1>RPG</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(5))} className='gamegrupo'>
-                                <h1>Souls Like</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(6))} className='gamegrupo'>
-                                <h1>Aventura</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(7))} className='gamegrupo'>
-                                <h1>Tiro</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(8))} className='gamegrupo'>
-                                <h1>Estratégia</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(9))} className='gamegrupo'>
-                                <h1>Esportes</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(10))} className='gamegrupo'>
-                                <h1>Corrida</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(11))} className='gamegrupo'>
-                                <h1>Quebra-Cabeça</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(12))} className='gamegrupo'>
-                                <h1>Plataforma</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(13))} className='gamegrupo'>
-                                <h1>Simulação</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(14))} className='gamegrupo'>
-                                <h1>Luta</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(15))} className='gamegrupo'>
-                                <h1>Sobrevivência</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(16))} className='gamegrupo'>
-                                <h1>RTS</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(17))} className='gamegrupo'>
-                                <h1>Cartas</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(18))} className='gamegrupo'>
-                                <h1>Musica</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(19))} className='gamegrupo'>
-                                <h1>MMO</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(20))} className='gamegrupo'>
-                                <h1>Mundo aberto</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(21))} className='gamegrupo'>
-                                <h1>Sandbox</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(22))} className='gamegrupo'>
-                                <h1>História interatva</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(23))} className='gamegrupo'>
-                                <h1>Educacional</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(24))} className='gamegrupo'>
-                                <h1>Visual Novel</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(25))} className='gamegrupo'>
-                                <h1>Battle Royale</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(26))} className='gamegrupo'>
-                                <h1>Rogue-like</h1>
-                            </section>
-                            <section onClick={()=> (GameGrupos(27))} className='gamegrupo'>
-                                <h1>Construção</h1>
-                            </section>
-
-
-                            
-                        </main>
-                        }
-
-                    </motion.div>
-                </section> */}
             </section>
 
         </div>
+        </>
     )
 }
