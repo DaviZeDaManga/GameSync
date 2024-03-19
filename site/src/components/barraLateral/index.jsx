@@ -543,6 +543,10 @@ export default function BarraLateral() {
                 <div className='meu-menu'></div>
 
                 <main className='navegacao'>
+                    <div onClick={()=> (Menu())} className='abrirmenu'>
+                        <img className={`${menu == 450 && "sairmenu"}`} src='/assets/images/acoes/seta-esquerda.png' />
+                    </div>
+
                     <div onClick={()=> (Navegar(1))} className='navigation'>
                         <img src="/assets/images/barralateral/navegar/lupa.png" />
                     </div>
@@ -556,7 +560,7 @@ export default function BarraLateral() {
                         <img src="/assets/images/barradecima/balao-de-fala.png" />
                     </div>
 
-                    <div onClick={()=> (Menu())} className='linha'></div>
+                    <div className='linha'></div>
 
                     <div onClick={()=> (Funcao(1))} className={`navigation ${funcaoname == "Chat" && 'selecionado'}`}>
                         <img src="/assets/images/carrinho/bot.png" />
@@ -581,7 +585,7 @@ export default function BarraLateral() {
 
 
             <motion.div 
-            className='rgb'
+            className={`rgb ${menu == 450 && "menu"}`}
             animate={{
                 x: 0,
                 y: aparecer.barrinha,
@@ -593,7 +597,7 @@ export default function BarraLateral() {
             </motion.div>
 
             <motion.div 
-            className='funcoes'
+            className={`funcoes ${menu == 450 && "menu"}`}
             animate={{
                 x: 0,
                 y: aparecer.barra,

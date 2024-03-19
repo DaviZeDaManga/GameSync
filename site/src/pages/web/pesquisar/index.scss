@@ -192,11 +192,12 @@
 
         width: 100%;
         height: auto;
-        padding: 20px 0px 15px 0px;
+        padding: 20px 0px 15px 80px;
 
         .swiper {
             width: 100%;
-            height: auto;
+            height: 430px;
+            padding: 0px 30px;
         }
           
         .swiper-slide {
@@ -208,9 +209,15 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            min-height: 460px;
-            max-height: 460px;
+            height: 100%;
             width: 43%;
+            transition: 0.3s;
+
+            &:hover {
+                border: solid 2px white;
+                transform: scale(0.99);
+                cursor: pointer;
+            }
 
             &.none {
                 width: 80px;
@@ -244,7 +251,9 @@
 
 
             &.categorias {
-                
+                height: calc((430px / 3) - 15px) !important;
+                background-color: #2c2c2c;
+                color: rgb(93, 93, 93);
             }
 
             &.surpreendame {
@@ -263,14 +272,14 @@
         justify-content: flex-start;
         align-items: center;
 
-        min-width: 100%;
-        padding: 15px 30px 15px 110px;
+        min-width: 70%;
+        padding: 10px 30px 10px 110px;
         height: auto;
         gap: 10px;
 
         > button {
-            width: 60px;
-            height: 60px;
+            width: 40px;
+            height: 40px;
             background-color: rgb(43, 43, 43);
             border: solid 2px rgb(50, 50, 50);
             border-radius: 10px;
@@ -285,7 +294,7 @@
 
         > input {
             width: 100%;
-            height: 60px;
+            height: 40px;
             border: none;
             border-radius: 10px;
             padding: 0px 20px;

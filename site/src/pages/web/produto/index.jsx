@@ -389,7 +389,7 @@ export default function Produto() {
     function JogosParecidos() {
         let filtrados = produtos.filter( item => item.empresa == empresaparecido || item.desenvolvedor == desenparecido || item.categoria_id == categoriaparecido) 
 
-        let resposta = filtrados.slice(0, 6)
+        let resposta = filtrados.slice(0, 7)
         setProdutosparecidos(resposta)
     }
 

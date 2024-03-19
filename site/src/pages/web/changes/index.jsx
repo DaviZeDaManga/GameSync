@@ -184,6 +184,11 @@ export default function MudarPerfil(){
             </section>
             }
 
+            <Title
+            nome={"Meu Perfil"}
+            voltar={true}
+            />
+
             <nav className='Change-fundo' style={{"background": backgroundColor}}>
                 <main className={`img`}>
                     {dados.map( item => 

@@ -1,6 +1,6 @@
 import './index.scss'
 
-export default function Title({nome, voltar}) {
+export default function Title({nome, voltar, fixed}) {
     function VoltarPagina() {
         window.history.back()
     }

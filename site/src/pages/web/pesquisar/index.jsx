@@ -7,21 +7,23 @@ import { BuscarCategorias, BuscarProdutos, BuscarProdutosID, BuscarProdutosNM } 
 import { BuscarImagem } from '../../../connection/produtosAPI';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import 'swiper/css/pagination';
-import { Keyboard } from 'swiper/modules';
+import 'swiper/css/grid';
+import { Grid, Keyboard } from 'swiper/modules';
 import LoadingBar from "react-top-loading-bar";
 
 export default function Pesquisa() {
     const [tgames, setTgames] = useState ([])
-
+ 
     async function TodosGames() {
-        const resposta = await BuscarProdutos()
+        let resposta = await BuscarProdutos()
         setTgames(resposta)
     }
     
     useEffect(()=> {
         TodosGames()
     }, [tgames])
+
+    
 
 
 
@@ -103,6 +105,12 @@ export default function Pesquisa() {
             setTimeout(() => {
                 ref.current.complete()
                 navigate('/gamegrupos/' + id)
+            }, 1500);
+        }
+        if (para == 2) {
+            setTimeout(() => {
+                ref.current.complete()
+                navigate('/produto/' + id)
             }, 1500);
         }
     }
@@ -225,7 +233,7 @@ export default function Pesquisa() {
 
                 <Swiper
                 slidesPerView={'auto'}
-                spaceBetween={30}
+                spaceBetween={20}
                 keyboard={{
                 enabled: true,
                 }}
@@ -233,12 +241,10 @@ export default function Pesquisa() {
                 className="mySwiper"
                 >
 
-                <SwiperSlide className='none'></SwiperSlide>                    
-
                 {tgames.map( item => 
                 <>
                 {item.destaque == true &&
-                <SwiperSlide>
+                <SwiperSlide onClick={()=> (Navegacao(2, item.produto_id))}>
                     <img src={BuscarImagem(item.imagem_produto)} />
                     <h1>Destaque</h1>
                 </SwiperSlide>
@@ -252,18 +258,20 @@ export default function Pesquisa() {
             {tipoprocura == "GameGrupos" &&
 
                 <Swiper
-                slidesPerView={'auto'}
-                spaceBetween={30}
+                slidesPerView={3}
+                grid={{
+                rows: 3,
+                }}
                 keyboard={{
                 enabled: true,
                 }}
-                modules={[Keyboard]}
+                spaceBetween={20}
+                modules={[Grid, Keyboard]}
                 className="mySwiper"
                 >
 
-                <SwiperSlide className='none'></SwiperSlide>  
                 {categorias.map( item =>
-                    
+                
                 <SwiperSlide onClick={()=> Navegacao(1, item.id_categoria)} className='categorias'>
                     {item.nm_categoria}
                 </SwiperSlide>     
@@ -284,8 +292,7 @@ export default function Pesquisa() {
                 modules={[Keyboard]}
                 className="mySwiper"
                 >
-
-                <SwiperSlide className='none'></SwiperSlide>   
+  
                 <SwiperSlide className='surpreendame'>
                     <img className='icon' src='/assets/images/pesquisa/caixa-aberta.png' />
 
