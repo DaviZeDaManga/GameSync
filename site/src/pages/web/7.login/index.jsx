@@ -6,7 +6,7 @@ import LoadingBar from "react-top-loading-bar";
 import { toast } from "react-toastify";
 import { LoginCliente } from "../../../connection/userAPI";
 
-export default function LoginUsuario() {
+export default function LoginUser() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   let [erro, setErro] = useState("");

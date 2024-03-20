@@ -14,7 +14,7 @@ import { BuscarProdutos } from '../../../connection/produtosAPI'
 import { BuscarGames } from '../../../connection/jogosAPI'
 import { BuscarImagem } from '../../../connection/produtosAPI'
 
-export default function Gamespage() {
+export default function Games() {
 
     const [games, setGames] = useState([])
     const [jogos, setJogos] = useState([])

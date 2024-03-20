@@ -1,6 +1,6 @@
 import './index.scss'
 import BarraDeCima from '../baraDeCima'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import LoadingBar from "react-top-loading-bar";
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
@@ -11,7 +11,6 @@ import { ExcluirCarrinho, ExcluirFavorito, InserirCarrinho, InserirMensagem, ins
 import { BuscarBatepapo, BuscarBatepapos, BuscarBatepaposMensagens } from '../../connection/batepapoAPI';
 import EmojiPicker from 'emoji-picker-react';
 import 'react-image-crop/src/ReactCrop.scss'
-import Ultimamensagem from '../ultimamensagem';
 
 
 export default function BarraLateral() {
@@ -39,13 +38,13 @@ export default function BarraLateral() {
     const navigate = useNavigate()
     const ref = useRef()
 
-    function Navegar(destino, id) {
+    function Navegar(destino, nome, id) {
         ref.current.continuousStart()
 
         if (destino == 1) {
             setTimeout(() => {
                 ref.current.complete()
-                navigate('/pesquisar')
+                navigate('/produtos')
             }, 1500);
         }
 
@@ -72,13 +71,7 @@ export default function BarraLateral() {
         else if (destino == 6) {
             setTimeout(() => {
                 ref.current.complete()
-                navigate(`/produto/${id}`)
-            }, 1500);
-        }
-        else if (destino == 7) {
-            setTimeout(() => {
-                ref.current.complete()
-                navigate("/pesquisar")
+                navigate(`/produtos/${nome}/${id}`)
             }, 1500);
         }
     }
@@ -689,9 +682,6 @@ export default function BarraLateral() {
 
                                 <div className='dados'>
                                     <p>{item.nome}</p>
-                                    <Ultimamensagem
-                                    batepapo={item.id_batepapo}
-                                    />
                                 </div>
                             </section>    
                                 
@@ -799,7 +789,7 @@ export default function BarraLateral() {
                             <section className='item'>
                                 <section className='img'>
                                     <div className='ver'>
-                                        <button onClick={()=> (Navegar(6, item.id_produto))}>Ver produto</button>
+                                        <button onClick={()=> (Navegar(6, item.nome, item.id_produto))}>Ver produto</button>
                                     </div>
                                     <img src={BuscarImagem(item.img_produto)} />
                                 </section>

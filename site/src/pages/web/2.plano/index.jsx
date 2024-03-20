@@ -9,7 +9,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { Keyboard, Navigation, Pagination } from 'swiper/modules';
 
-export default function Planosacess() {
+export default function Plano() {
     const [plano, setPlano] = useState(true)
 
     return(

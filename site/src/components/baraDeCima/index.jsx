@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import storage, { set } from 'local-storage';
 import './index.scss'
@@ -49,12 +49,56 @@ export default function BarraDeCima () {
         window.location.reload()
     }
 
+
+
+
+
+    const ref = useRef()
+
+    function Navegar(destino, nome, id) {
+        ref.current.continuousStart()
+
+        if (destino == 1) {
+            setTimeout(() => {
+                ref.current.complete()
+                navigate('/produtos')
+            }, 1500);
+        }
+
+        else if (destino == 2) {
+            setTimeout(() => {
+                ref.current.complete()
+                navigate('/')
+            }, 1500);
+        }
+
+        else if (destino == 3) {
+            setTimeout(() => {
+                ref.current.complete()
+                navigate('/games')
+            }, 1500);
+        }
+
+        else if (destino == 4) {
+            setTimeout(() => {
+                ref.current.complete()
+                navigate('/planos')
+            }, 1500);
+        }
+        else if (destino == 6) {
+            setTimeout(() => {
+                ref.current.complete()
+                navigate(`/produtos/${nome}/${id}`)
+            }, 1500);
+        }
+    }
+
     return(
         <>
 
         <section className='perfil'>
             <p>{nome}</p>
-            <Link to={`/perfil`}>
+            <Link to={`/perfil/${nome}`}>
                 <div className={`card`}>
                     {dados.map( item =>
                         

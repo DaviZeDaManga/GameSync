@@ -7,6 +7,7 @@ import { useParams, Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { BuscarProdutos, BuscarProdutosID } from '../../../connection/produtosAPI'
 import { BuscarImagem } from '../../../connection/produtosAPI'
+import FooterPage from '../../../components/footerpage/index,'
 
 export default function JogosParecidos() {
     const { id } = useParams();
@@ -116,6 +117,8 @@ export default function JogosParecidos() {
                 )}
 
             </main>
+
+            <FooterPage/>
         </div>
     )
 }

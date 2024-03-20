@@ -4,20 +4,20 @@ import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import LoadingBar from "react-top-loading-bar";
 
-export default function ProdutoCard({id, imagem, nome, produtora, lancamento, tipo, recarregarpage}) {
-    const [tipoprodurl, setTipoprodurl] = useState('/produto/')
+export default function ProdutoCard({id, imagem, nome, lancamento, tipo}) {
+    const [tipoprodurl, setTipoprodurl] = useState('/produtos/' + nome + "/")
     const [tipoprod, setTipoprod] = useState('Jogo')
 
     useEffect(()=> {
         if(tipo == 'conquista') {
-            setTipoprodurl('/conquistas/')
+            setTipoprodurl('/produtos/' + nome + "/" + id  + '/conquistas/')
             setTipoprod("Conquista")
         }
         else if (tipo == 'complemento') {
             setTipoprod("Complemento")
         }
         else if (tipo == 'jogar') {
-            setTipoprodurl('/games/jogar/')
+            setTipoprodurl('/games/' + nome + "/")
             setTipoprod('Jogar')
         }
     })       

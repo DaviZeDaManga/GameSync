@@ -12,7 +12,7 @@ import 'swiper/css/effect-cards';
 
 import { EffectCards } from 'swiper/modules';
 
-export default function EscolherLogin() {
+export default function LoginUserContas() {
     const navigate = useNavigate()
 
     function sairLogin(){

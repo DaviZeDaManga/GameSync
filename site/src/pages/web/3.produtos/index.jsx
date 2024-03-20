@@ -11,7 +11,7 @@ import 'swiper/css/grid';
 import { Grid, Keyboard } from 'swiper/modules';
 import LoadingBar from "react-top-loading-bar";
 
-export default function Pesquisa() {
+export default function Produtos() {
     const [tgames, setTgames] = useState ([])
  
     async function TodosGames() {

@@ -14,7 +14,7 @@ import { toast } from 'react-toastify';
 import LoadingBar from "react-top-loading-bar";
 import Title from '../../../components/title';
 
-export default function MudarPerfil(){
+export default function Perfil(){
     
     const [nome, setNome] = useState()
     const [id, setId] = useState()
