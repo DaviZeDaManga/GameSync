@@ -2,31 +2,28 @@ import './index.scss'
 
 import BarraLateral from '../../../components/barraLateral'
 import FooterPage from '../../../components/footerpage/index,'
-
-import { Swiper, SwiperSlide } from 'swiper/react'
-
-import 'swiper/css';
-import 'swiper/css/free-mode';
-import 'swiper/css/navigation';
-import 'swiper/css/thumbs';
-
-import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
-import { useEffect, useRef, useState } from 'react'
-import { useParams, Link, useNavigate } from 'react-router-dom'
-
-import storage, { set } from 'local-storage';
 import Title from '../../../components/title'
-
-import EmojiPicker from 'emoji-picker-react';
+import Produtos from '../../../components/produtos';
+import storage from 'local-storage';
 import ProdutoCard from '../../../components/produto'
-import { motion } from 'framer-motion'
-
-import { toast } from 'react-toastify';
-import { BuscarComentariosProd, BuscarProdutos, BuscarProdutosID } from '../../../connection/produtosAPI';
+import { BuscarComentariosProd, BuscarProdutosID } from '../../../connection/produtosAPI';
 import { AdicionarAvaliacaoProd, DeletarAvaliacaoProd, InserirCarrinho, InserirFavorito } from '../../../connection/userAPI';
 import { BuscarImagem } from '../../../connection/produtosAPI';
+
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css';
+import { Keyboard } from 'swiper/modules';
+
+import { useEffect, useRef, useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+
+import EmojiPicker from 'emoji-picker-react';
+import { motion } from 'framer-motion'
+import { toast } from 'react-toastify';
+
 import { confirmAlert } from 'react-confirm-alert';
 import LoadingBar from "react-top-loading-bar";
+
 
 
 export default function Produto() {
@@ -34,6 +31,7 @@ export default function Produto() {
 
     //buscar informacoes do game
     const { id } = useParams();
+    const { nomejogo } = useParams()
     const [idprod, setIdprod] = useState (id)
     const [produtoinfo, setProdutoinfo] = useState([])
     const [imagens, setImagens] = useState ([])
@@ -352,52 +350,6 @@ export default function Produto() {
 
 
 
-   
-    
-    const [produtos, setProdutos] = useState([])
-    const [produtosparecidos, setProdutosparecidos] = useState([])
-
-    //verificacoes
-    const [categoriaparecido, setCategoriaparecido] = useState()
-    const [empresaparecido, setEmpresaparecido] = useState()
-    const [desenparecido, setDesenparecido] = useState()
-
-    //aparecer produtos
-    async function Jogos() {
-        let resposta = await BuscarProdutos()
-        setProdutos(resposta)
-    }
-
-    useEffect(() => {
-        Jogos()
-    }, [])
-
-    //verificacao para aparecer jogos parecidos
-    function VerificacaoParecidos() {
-        for (let item of produtoinfo) {
-            setEmpresaparecido(item.publi)
-            setDesenparecido(item.desenvolvedor)
-            setCategoriaparecido(item.categoria_id)
-        }
-     }
- 
-    useEffect(()=> {
-        VerificacaoParecidos()
-    }, [produtos])
-
-    //verificar jogos com as verificacoes
-    function JogosParecidos() {
-        let filtrados = produtos.filter( item => item.empresa == empresaparecido || item.desenvolvedor == desenparecido || item.categoria_id == categoriaparecido) 
-
-        let resposta = filtrados.slice(0, 7)
-        setProdutosparecidos(resposta)
-    }
-
-    useEffect(() => {
-        JogosParecidos()
-    }, [categoriaparecido])
-
-
 
 
 
@@ -429,12 +381,6 @@ export default function Produto() {
     return(
         <div className="Produto PageTransform">
             <LoadingBar color="#f11946" ref={ref} />
-            
-            <section className='fake-nerwe'>
-            <ProdutoCard
-            recarregarpage={true}
-            />
-            </section>
 
             <BarraLateral/>
             <Title
@@ -444,123 +390,127 @@ export default function Produto() {
 
             <section id="produto-card">
                 
-                <section id='produto'>
-                    <section id="info-produto">      
+                <section id="info-produto">      
+                    {produtoinfo.map( item => 
+                        
+                    <>
+                    <div className="titulo">
+                        <h1>{nomejogo}</h1>
+                        <p>{item.descricao}</p>
+                    </div>
+                    <section id='Comprar'>
+                        <div className='info'>
+                            {item.promocao == true &&
+                            <h1 className='promocao'>R${item.vlPromo}</h1>}
+                            <h1 className={`${item.promocao == true && 'noprice'}`}>R${item.preco}</h1>
+                        </div>
+                        <div className='comprar'>
+                            <button>Comprar</button> 
+
+                            {produtoinfo.map( item => 
+                            <>
+                            {item.item != idprod &&
+                            <button onClick={()=> (SalvarCarrinho())} className='acoes'>
+                                <img src='/assets/images/carrinho/carrinho.png' />
+                            </button> } 
+
+                            {item.item == idprod &&
+                            <button onClick={() => (JaAdicionado(1))} className='acoes'>
+                                <img src='/assets/images/carrinho/carrinho.png' />
+                            </button>
+                            } 
+                            </>    
+                            )} 
+
+                            <button onClick={()=> (setAcoesboo(!acoesboo))} className={`acoes ${acoesboo == true && 'selecionado'}`}>
+                                <img src='/assets/images/acoes/pontos.png' />
+                            </button> 
+                        </div>
+                    </section>  
+                    </>  
+                        
+                    )}    
+
+                    <motion.div
+                    className='escolhacard'
+                    animate={{ scale: acoes  }}
+                    >
+                    <div className='card'>
+                        Compartilhar
+                    </div>
+                    <div className='linha'></div>
+                    {produtoinfo.map( item => 
+
+                    <>
+                    {item.salvo != idprod &&
+                    <div onClick={()=> (SalvarFavoritos())} className='card'>
+                        Salvar
+                    </div> 
+                    }  
+                        
+                    {item.salvo == idprod &&
+                    <div onClick={() => (JaAdicionado(2))} className='card'>
+                        Salvo
+                    </div> 
+                    }  
+                    </> 
+                        
+                    )}
+                    <div className='linha'></div>
+                    <div className='card'>
+                        Reportar
+                    </div>
+                    </motion.div>
+                </section>    
+                    
+
+                <main id="produto-images">
+
+                    {produtoinfo.map( item =>     
+                        {item.video != 0 &&
+                        <section className='useSetinha'>
+                            <div className='seta'><img src='/assets/images/acoes/seta-esquerda.png' /></div>
+                            
+                            <div className='seta'><img className="direita" src='/assets/images/acoes/seta-esquerda.png' /></div>
+                        </section>}
+                    )} 
+                
+                    <Swiper
+                        spaceBetween={15}
+                        keyboard={{
+                            enabled: true,
+                        }}
+                        modules={[Keyboard]}
+                        className="mySwiper2"
+                    >
+
+                        <SwiperSlide>
+                        {produtoinfo.map( item =>
+                            <img src={BuscarImagem(item.img)} />    
+                        )}
+                        </SwiperSlide>
+                                    
                         {produtoinfo.map( item => 
                             
-                        <>
-                        <div className="titulo">
-                            <h1>{item.nome}</h1>
-                            <p>{item.descricao}</p>
-                        </div>
-                        <section id='Comprar'>
-                            <div className='info'>
-                                {item.promocao == true &&
-                                <h1 className='promocao'>R${item.vlPromo}</h1>}
-                                <h1 className={`${item.promocao == true && 'noprice'}`}>R${item.preco}</h1>
-                            </div>
-                            <div className='comprar'>
-                                <button><Link to={`/BarraLateral/${id}`}></Link>Comprar</button> 
-
-                                {produtoinfo.map( item => 
-                                <>
-                                {item.item != idprod &&
-                                <button onClick={()=> (SalvarCarrinho())} className='acoes'>
-                                    <img src='/assets/images/carrinho/carrinho.png' />
-                                </button> } 
-
-                                {item.item == idprod &&
-                                <button onClick={() => (JaAdicionado(1))} className='acoes'>
-                                    <img src='/assets/images/carrinho/carrinho.png' />
-                                </button>
-                                } 
-                                </>    
-                                )} 
-
-                                <button onClick={()=> (setAcoesboo(!acoesboo))} className={`acoes ${acoesboo == true && 'selecionado'}`}>
-                                    <img src='/assets/images/acoes/pontos.png' />
-                                </button> 
-                            </div>
-                        </section>  
-                        </>  
+                            <SwiperSlide className={`${item.video == "nao" && 'none'}`}>
+                                <video controls="true">  <source src={item.video} type="video/mp4" /></video>
+                            </SwiperSlide>    
                             
                         )}    
-
-                        <motion.div
-                        className='escolhacard'
-                        animate={{ scale: acoes  }}
-                        >
-                        <div className='card'>
-                            Compartilhar
-                        </div>
-                        <div className='linha'></div>
-                        {produtoinfo.map( item => 
-
-                        <>
-                        {item.salvo != idprod &&
-                        <div onClick={()=> (SalvarFavoritos())} className='card'>
-                            Salvar
-                        </div> 
-                        }  
                             
-                        {item.salvo == idprod &&
-                        <div onClick={() => (JaAdicionado(2))} className='card'>
-                            Salvo
-                        </div> 
-                        }  
-                        </> 
+                        
+                        {imagens.map( item => 
                             
-                        )}
-                        <div className='linha'></div>
-                        <div className='card'>
-                            Reportar
-                        </div>
-                        </motion.div>
-                    </section>    
-                    
-
-                    <main id="produto-images">
-                    
-                        <Swiper
-                            style={{
-                            '--swiper-navigation-color': '#fff',
-                            '--swiper-pagination-color': '#fff',
-                            }}
-                            loop={true}
-                            spaceBetween={10}
-                            navigation={true}
-                            modules={[FreeMode, Navigation]}
-                            className="mySwiper2"
-                        >
                             <SwiperSlide>
-                            {produtoinfo.map( item =>
-                                <img src={BuscarImagem(item.img)} />    
-                            )}
-                            </SwiperSlide>
-                                        
-                            {produtoinfo.map( item => 
-                                
-                                <SwiperSlide className={`${item.video == "nao" && 'none'}`}>
-                                    <video controls="true">  <source src={item.video} type="video/mp4" /></video>
-                                </SwiperSlide>    
-                                
-                            )}    
-                                
-                            
-                            {imagens.map( item => 
-                                
-                                <SwiperSlide>
-                                    <img src={item.image} />
-                                </SwiperSlide>  
+                                <img src={item.image} />
+                            </SwiperSlide>  
 
-                            )}  
+                        )}  
 
-                        </Swiper>
-        
-                    </main>
-                </section> 
-
-            </section>
+                    </Swiper>
+    
+                </main>
+            </section> 
 
             <nav id="descOUcoment">
                 <div className="selecionar">
@@ -645,54 +595,13 @@ export default function Produto() {
 
             </section>
 
-            {produtosparecidos != '' &&
-            <section id='titles'>
-                <h1 className='tinf'>Jogos Parecidos</h1>
-                <Link to={'/produto/'+id+'/jogosparecidos'}>
-                    <button>Ver mais jogos</button>
-                </Link>
-            </section>}
-
-
-            <div id="produtos">  
-
-                {produtosparecidos.map( item => 
-
-                <ProdutoCard
-                id={item.produto_id}
-                imagem={BuscarImagem(item.imagem_produto)}
-                nome={item.nome}
-                lancamento={item.tamanho}
-                /> 
-
-                )}
-
-            </div>
-            
-            {conquistas != '' &&
-            <section id='titles'>
-                <h1 className='tinf'>Conquistas</h1>
-                <Link to={'/conquistas/' + id}>
-                    <button>Ver mais conquistas</button>
-                </Link>
-            </section>}
-
-
-            <div id="produtos">  
-
-                {conquistas.map( item => 
-
-                <ProdutoCard
-                id={id}
-                nome={item.name}
-                lancamento={item.parcent}
-                imagem={item.image}
-                tipo={'conquista'}
-                />
-
-                )}
-
-            </div>
+            <Produtos
+            array={produtoinfo}
+            limite={true}
+            tipo={"Jogos Parecidos por"}
+            nome={nomejogo}
+            id={id}
+            />
             </>}
 
             {mostcoment == true &&

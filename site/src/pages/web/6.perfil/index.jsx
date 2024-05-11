@@ -7,7 +7,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
-import { EffectCoverflow } from 'swiper/modules';
+import { EffectCoverflow, Keyboard } from 'swiper/modules';
 import { BuscarMascoteCliente, DadosCliente, DeletarMascoteCliente, InserirMascoteCliente } from '../../../connection/userAPI';
 import { BuscarImagem } from '../../../connection/produtosAPI';
 import { toast } from 'react-toastify';
@@ -164,7 +164,10 @@ export default function Perfil(){
                     modifier: 1,
                     slideShadows: true,
                     }}
-                    modules={[EffectCoverflow]}
+                    keyboard={{
+                        enabled: true,
+                    }}
+                    modules={[EffectCoverflow, Keyboard]}
                     className="mySwiper"
                 >
 
@@ -180,6 +183,11 @@ export default function Perfil(){
                         <img className='sair' src='/assets/images/login/add.png' />
                     </SwiperSlide>
 
+                    <section className='useSetinha'>
+                        <div className='seta'><img src='/assets/images/acoes/seta-esquerda.png' /></div>
+                        <p>Use as teclas para navegação</p>
+                        <div className='seta'><img className="direita" src='/assets/images/acoes/seta-esquerda.png' /></div>
+                    </section>
                 </Swiper>
             </section>
             }
@@ -212,13 +220,13 @@ export default function Perfil(){
 
             <main className='informacoes'>
                 <section className='dados'>
-                    <section className='name'>
+                    {/* <section className='name'>
                         <h1>{nome}</h1>
-                    </section>
+                    </section> */}
                     <main className='desc'>
                         <div className='linha-desc'></div>
 
-                        <p>Crie, explore, sobreviva e repita. Minecraft: Java Edition e Bedrock Edition agora são um pacote de oferta para Windows. Minecraft: Java & Bedrock Edition dá a você acesso a ambos os jogos com uma compra e um inicializador unificado, tornando mais fácil do que nunca passar de uma edição para outra. Jogue em cross-play com qualquer outro jogador de Minecraft simplesmente mudando para a versão que seus amigos têm. Agora você pode curtir o dobro da mineração e o dobro da criação, com mais jogadores de Minecraft do que nunca. Explore mundos gerados aleatoriamente e construa das casas mais simples aos maiores castelos.</p>
+                        <p>Olá, seja bem-vindo! Quer personalizar seu perfil para que as pessoas possam conhecer mais sobre voce? Edite o seu perfil! Voce pode fazer muitas coisas, como alterar sua descrição, adicionar um mascote que voce goste e que esteja disponivel, entre outros, se divirta! Para fazer edição dos dados basta apenas voce criar sua conta, acessa-la e depois procurar por alterar dados.</p>
                     </main>
                     <div className='acoes-dados'>
                         <button className='black'>Trocar conta</button>

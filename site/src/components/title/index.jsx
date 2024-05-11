@@ -1,6 +1,6 @@
 import './index.scss'
 
-export default function Title({nome, voltar, fixed}) {
+export default function Title({nome, comp, voltar}) {
     function VoltarPagina() {
         window.history.back()
     }
@@ -14,6 +14,11 @@ export default function Title({nome, voltar, fixed}) {
             <section className='title'>
                 <h1>{nome}</h1>
             </section>
+            {comp != null &&
+            <section className='comp'>
+                <p>{comp}</p>
+            </section>
+            }
         </div>
      )
 }

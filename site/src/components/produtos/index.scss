@@ -1,0 +1,89 @@
+#produtos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: auto;
+    padding: 0px 50px 10px 110px;
+    gap: 20px;
+
+    .titles {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+    
+        width: 100%;
+        gap: 10px;
+
+        .tipoFiltro {
+            width: 35px;
+            height: 35px;
+            border: none;
+            border-radius: 10px;
+            background-color: #2D2D2D;
+        }
+        .tipo {
+            height: 35px;
+            background-color: #3f3f3ffd;
+            border-radius: 10px;
+            color: #828282;
+            border: none;
+            width: 200px;
+            transition: 0.3s;
+            cursor: pointer;
+
+            &:hover{
+                color: white;
+            }
+        }
+
+        .filtro {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            padding: 4px 15px;
+            border-radius: 25px;
+            background-color: rgba(172, 172, 172, 0.554);
+        }
+    }
+    
+    
+    .produtos {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-wrap: wrap;
+    
+        width: 100%;
+        height: auto;
+        overflow-x: hidden;
+        gap: 15px;
+
+        .vermais {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+
+            height: calc((100vw - 140px - 110px) / 7);
+            background-color: #252525;
+            transition: 0.3s;
+            border-radius: 10px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #3b3b3b;
+                border: solid 1px white;
+                transform: scale(0.99);
+            }
+            &:active {
+                transform: scale(0.97);
+            }
+        }
+    }
+}

@@ -3,110 +3,222 @@
     left: 0;
     position: absolute;
 
-    #produto {
+    .swiper {
+        width: 100%;
+        height: 510px;
+        border-radius: 10px;
+        padding: 20px 50px 20px 110px;
+
+        img, video {
+            width: 100%;
+            min-width: 100%;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+    }
+        
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #2c2c2c;
+        border-radius: 10px;
+        overflow: hidden;
+        flex-grow: 1;
+        
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
 
-        width: 100vw;
-        height: 500px;
-        padding: 20px 30px 20px 110px;
-
-        .produtocard {
+        .status {
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             justify-content: space-between;
-            align-items: center;
-    
+            align-content: center;
+            text-align: start;
+
             width: 100%;
             height: 100%;
-            gap: 20px;
-
-            .conteudo {
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: flex-start;
-
-                width: 100%;
-                height: 100%;
-                padding: 20px;
-                background-color: rgb(36, 36, 36);
-                border-radius: 10px;
-            }
-
-            .img {
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: flex-start;
-
-                width: 100%;
-                height: 100%;
-                background-color: rgb(28, 28, 28);
-                border-radius: 10px;
-                overflow: hidden;
-
-                img, video {
-                    width: 100%;
-                    height: 100%;
-                    border-radius: 10px;
-                    transition: 0.3s;
-                }
-            }
-        }
-    }
-
-    .filtragem {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-
-        width: 100vw;
-        height: auto;
-        padding: 20px 30px 20px 110px;
-
-        .mostrar {
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            align-items: center;
-    
-            width: auto;
-            height: 40px;
-            padding: 0px 20px;
-            gap: 10px;
-            background-color: rgb(53, 53, 53);
+            padding: 15px;
+            background: linear-gradient(180deg, #4664c9, #3d3086);
             border-radius: 10px;
-            cursor: pointer;
 
-            &:hover {
-                border: solid 2px white;
-                img {
-                    opacity: 1;
+            .cards {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+
+                width: 100%;
+                padding: 20px 0px;
+
+                .card {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    width: 150px;
+                    height: 150px;
+                    padding: 20px;
+                    border-radius: 20px;
+                    background: linear-gradient(180deg, #4669c9, #bc6a1e00);
+                }
+            }
+        }
+
+        #info-produto {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: start;
+
+            width: 100%;
+            height: 470px;
+            padding: 15px;
+            border-radius: 10px;
+            position: relative;
+            background-color: #252525;
+
+            .escolhacard {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+
+                width: 250px;
+                height: auto;
+                padding: 5px 10px;
+                background-color: rgb(52, 52, 52);
+                border-radius: 10px;
+
+                position: absolute;
+                bottom: 60px;
+                right: 15px;
+
+                .linha {
+                    width: 100%;
+                    height: 3px;
+                    background-color: rgba(42, 42, 42, 0.445);
+                    border-radius: 20px;
+                }
+
+                .card {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-around;
+                    align-items: center;
+
+                    width: 100%;
+                    height: 35px;
+                    border-radius: 10px;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: #2c2c2c;
+                    }
+                }
+            }
+            
+
+            .titulo {
+                display: flex;
+                flex-direction: column;
+                justify-self: flex-start;
+                align-items: flex-start; 
+
+                width: 100%;
+                height: auto;
+
+                > p {
+                    overflow-y: hidden;
+                    max-width: 80ch;
+                    max-height: 20ch;
+                    text-overflow: ellipsis;
                 }
             }
 
-            img {
-                height: 20px;
-                transform: rotate(270deg);
-                opacity: 0.6;
+            #Comprar {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                width: 100%;
+                height: auto;
+                background: rgba(154, 34, 34, 0);
+                border-radius: 10px;
+                padding: 0px ;
+
+                .comprar {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    width: 100%;
+                    height: 35px;
+                    gap: 10px;
+
+                    .info {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: flex-start;
+                        align-items: center;
+    
+                        background-color: #343434;
+                        height: 100%;
+                        padding: 0px 10px;
+                        gap: 10px;
+                        border-radius: 10px;
+    
+                        > h1 {
+                            padding: 10px 0px;
+    
+                            &.noprice {
+                                font-size: 15px;
+                            }
+                        }  
+    
+                        .promocao {
+                            color: yellow;
+                        }
+                    }
+
+                    > button {
+                        width: 100%;
+                        height: 35px;
+                        background-color: #343434;
+                        border: none;
+                        border-radius: 10px;
+                        color: white;
+                        transition: 0.3s;
+                        cursor: pointer;
+
+                        img {
+                            height: 100%;
+                            opacity: 0.4;
+                        }
+
+                        &:hover {
+                            border: solid 1px white;
+                            img {
+                                opacity: 1;
+                            }
+                        }
+
+                        &.acoes {
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: center;
+                            align-items: center;
+                            width: 35px;
+                            padding: 10px;
+                            position: relative;
+                        }
+                    }
+                }
             }
         }
-    }
-
-    .jogos {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: flex-start;
-        flex-wrap: wrap;
-
-        width: 100vw;
-        height: auto;
-        gap: 15px;
-        padding: 0px 30px 20px 110px;
     }
 }

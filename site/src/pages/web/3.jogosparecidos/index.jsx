@@ -1,16 +1,26 @@
 import './index.scss'
 import BarraLateral from '../../../components/barraLateral'
 import Title from '../../../components/title'
-import ProdutoCard from '../../../components/produto'
+import Produtos from '../../../components/produtos'
 
-import { useParams, Link } from 'react-router-dom'
-import { useState, useEffect } from 'react'
-import { BuscarProdutos, BuscarProdutosID } from '../../../connection/produtosAPI'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useState, useEffect, useRef } from 'react'
+import { BuscarProdutosID } from '../../../connection/produtosAPI'
 import { BuscarImagem } from '../../../connection/produtosAPI'
 import FooterPage from '../../../components/footerpage/index,'
 
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css';
+import { Keyboard } from 'swiper/modules';
+
+import storage from 'local-storage';
+import LoadingBar from "react-top-loading-bar";
+
 export default function JogosParecidos() {
+    const dadoscliente = storage('user-logado')
+
     const { id } = useParams();
+    const { nomejogo } = useParams()
     const [jogoinfo, setJogoinfo] = useState([])
 
     async function JogoInfo() {
@@ -27,96 +37,102 @@ export default function JogosParecidos() {
 
 
 
+    const ref = useRef()
+    const navigate = useNavigate()
 
+    function verProduto() {
+        ref.current.continuousStart()
 
-
-
-    const [produtos, setProdutos] = useState([])
-    const [produtosparecidos, setProdutosparecidos] = useState([])
-
-    //verificacoes
-    const [categoriaparecido, setCategoriaparecido] = useState()
-    const [empresaparecido, setEmpresaparecido] = useState()
-    const [desenparecido, setDesenparecido] = useState()
-
-    //aparecer produtos
-    async function Jogos() {
-        let resposta = await BuscarProdutos()
-        setProdutos(resposta)
+        setTimeout(() => {
+            ref.current.complete()
+            navigate(`/produtos/${nomejogo}/${id}`)
+        }, 1500);
     }
-
-    useEffect(() => {
-        Jogos()
-    }, [])
-
-    //verificacao para aparecer jogos parecidos
-    function VerificacaoParecidos() {
-        for (let item of jogoinfo) {
-            setEmpresaparecido(item.publi)
-            setDesenparecido(item.desenvolvedor)
-            setCategoriaparecido(item.categoria_id)
-        }
-     }
- 
-    useEffect(()=> {
-        VerificacaoParecidos()
-    }, [produtos])
-
-    //verificar jogos com as verificacoes
-    function JogosParecidos() {
-        let filtrados = produtos.filter( item => item.publi == empresaparecido || item.desenvolvedor == desenparecido || item.categoria_id == categoriaparecido) 
-        setProdutosparecidos(filtrados)
-    }
-
-    useEffect(() => {
-        JogosParecidos()
-    }, [categoriaparecido])
 
     return(
         <div className='jogosparecidos PageTransform'>
+            <LoadingBar color="#f11946" ref={ref} />
             <BarraLateral/>
             <Title
             nome={"Jogos Parecidos com"}
+            // comp={"Assassins II"}
             voltar={true}
             />
 
-            <section id='produto'>
+            {jogoinfo.map( item => 
+                <Swiper
+                    slidesPerView={2}
+                    spaceBetween={15}
+                    keyboard={{
+                        enabled: true,
+                    }}
+                    modules={[Keyboard]}
+                    className="mySwiper2"
+                >
+                    <SwiperSlide>
+                        <img src={BuscarImagem(item.img)} />
+                    </SwiperSlide>  
+                    <SwiperSlide>
+                        <section id="info-produto">  
+                            <div className="titulo">
+                                <h1>{item.nome}</h1>
+                                <p>{item.descricao}</p>
+                            </div>
+                            <section id='Comprar'>
+                                <div className='comprar'>
+                                    <div className='info'>
+                                    {item.promocao &&
+                                        <h1 className='promocao'>R${item.vlPromo}</h1>
+                                    }
+                                    {item.promocao != true &&
+                                        <h1>R${item.preco}</h1>
+                                    }
+                                    </div>
+                                    <button onClick={()=> verProduto()}>Ver produto</button> 
+                                </div>
+                            </section>
+                        </section>
+                    </SwiperSlide> 
+                    <SwiperSlide>
+                        <div className="status">
+                            <h1>Estatisticas</h1>
+                            <div className="cards">
 
-                {jogoinfo.map( item => 
-                    <section className='produtocard'>
-                        <main className='conteudo'>
-                            <h1>{item.nome}</h1>
-                            <p>{item.descricao}</p>
-                        </main>
-                        <div className='img'>
-                            <img src={BuscarImagem(item.img)} />
+                                <div className="card">
+                                    <h2>Historia Principal</h2>
+                                    <p>0 minutos</p>
+                                    <div></div>
+                                </div>
+
+                                <div className="card">
+                                    <h2>Principal + Extras</h2>
+                                    <p>0 minutos</p>
+                                    <div></div>
+                                </div>
+
+                                <div className="card">
+                                    <h2>Complementos</h2>
+                                    <p>0 minutos</p>
+                                    <div></div>
+                                </div>
+
+                                <div className="card">
+                                    <h2>Todos os estilos</h2>
+                                    <p>0 minutos</p>
+                                    <div></div>
+                                </div>
+
+                            </div>
+                            <div></div>
                         </div>
-                    </section>
-                )}
+                    </SwiperSlide> 
+                </Swiper>
+            )}
 
-            </section>
-
-            <section className='filtragem'>
-                <div className='mostrar'>
-                    <h3>Mostrar</h3>
-                    <p>Novos</p>
-                    <img src='/assets/images/acoes/seta-esquerda.png' />
-                </div>
-            </section>
-
-            <main className='jogos'>
-                {produtosparecidos.map( item =>
-                    
-                    <ProdutoCard
-                    id={item.produto_id}
-                    imagem={BuscarImagem(item.imagem_produto)}
-                    nome={item.nome}
-                    lancamento={item.tamanho}
-                    />
-                    
-                )}
-
-            </main>
+            <Produtos
+            array={jogoinfo}
+            tipo={""}
+            />
 
             <FooterPage/>
         </div>

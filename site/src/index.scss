@@ -29,7 +29,7 @@
   
   
   h1 {
-      font-size: 25px;
+      font-size: 23px;
       color: rgb(197, 197, 197);
   }
   p {
@@ -77,9 +77,10 @@
     padding: 20px 20px 20px 120px;
     }
   
-  ::-webkit-scrollbar {
+  body::-webkit-scrollbar {
       height: 5px;
       width: 10px;
+      background-color: rgb(39, 39, 39);
   }
     
   ::-webkit-scrollbar-track {

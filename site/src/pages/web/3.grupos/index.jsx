@@ -3,7 +3,6 @@ import './index.scss'
 import BarraLateral from '../../../components/barraLateral'
 import Title from '../../../components/title'
 import ProdutoCard from '../../../components/produto'
-import Atropos from 'atropos/react';
 
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
@@ -42,27 +41,37 @@ export default function Grupos() {
 
     return (
         <section className='Grupos PageTransform'>
+
             <BarraLateral/>
             <Title
+            nome={"Categoria"}
+            comp={"Ação"}
             voltar={true}
-            nome={'Grupos de Games'}
             />
 
-            <Atropos
-            className='my-atropos'
-            rotateXMax={3}
-            rotateYMax={3}
-            >
-                <div className='name'>
-                    {categoria.map( item =>
-                        
-                        <h1>
-                            {item.categoria}
-                        </h1>    
-                        
-                    )}
-                </div>
-            </Atropos>
+            <section id='categoria'>
+
+                {categoria.map( item => 
+                    <section className='categoriacard'>
+                        <div className='conteudo vazio'>
+                            
+                            <section className='categorianame'>
+                                <h1>{item.categoria}</h1>
+                            </section>
+                            <section className='categoriainfo'>
+                                
+                            </section>
+
+                        </div>
+                        <main className='conteudo'>
+                            
+                            
+
+                        </main> 
+                    </section>
+                )}
+
+            </section>
 
             <section className='filtragem'>
                 <div className='mostrar'>

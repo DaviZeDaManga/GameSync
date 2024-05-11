@@ -17,8 +17,8 @@
         align-items: center;
 
         background-color: rgb(53, 53, 53);
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
         padding: 12px;
         border-radius: 10px;
         transition: 0.3s;
@@ -42,9 +42,27 @@
 
         width: auto;
         min-width: 200px;
-        height: 40px;
+        height: 35px;
         padding: 0px 20px;
         border-radius: 10px;
         background-color: rgb(53, 53, 53);
+    }
+
+    .comp {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        width: auto;
+        height: 40px;
+        padding: 0px 20px;
+        border-radius: 10px;
+        background-color: rgb(34, 34, 34);
+
+        p {
+            color: rgb(78, 78, 78);
+            font-weight: 700;
+        }
     }
 }

@@ -232,8 +232,8 @@ export default function Produtos() {
             {tipoprocura == "Destaques" &&
 
                 <Swiper
-                slidesPerView={'auto'}
-                spaceBetween={20}
+                slidesPerView={"auto"}
+                spaceBetween={15}
                 keyboard={{
                 enabled: true,
                 }}
@@ -285,7 +285,7 @@ export default function Produtos() {
 
                 <Swiper
                 slidesPerView={'auto'}
-                spaceBetween={30}
+                spaceBetween={15}
                 keyboard={{
                 enabled: true,
                 }}
@@ -293,10 +293,12 @@ export default function Produtos() {
                 className="mySwiper"
                 >
   
-                <SwiperSlide className='surpreendame'>
+                <SwiperSlide>
+                    <div style={{"left": 100+"%"}} className='surpreendame'>
                     <img className='icon' src='/assets/images/pesquisa/caixa-aberta.png' />
+                    </div>
 
-                    {/* <main className='surpreenda'>
+                    <main className='surpreenda'>
                         <section className='cardEdesc'>
                             <section className='cardsur'>
                                 {idaleatorio > 0 &&
@@ -307,9 +309,9 @@ export default function Produtos() {
                                     <img src={BuscarImagem(item.imagem_produto)} />    
                                         
                                     <div className='preto'>
-                                        <Link to={`/produto/${item.produto_id}`}>
+                                        
                                         <p>Clique para ver o produto</p>
-                                        </Link>
+                                        
                                     </div>
 
                                     </>
@@ -338,7 +340,7 @@ export default function Produtos() {
                                 Resetar
                             </button>}
                         </section>
-                    </main> */}
+                    </main>
                 </SwiperSlide>    
                 <SwiperSlide></SwiperSlide> 
                 <SwiperSlide></SwiperSlide>                  
