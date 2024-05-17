@@ -70,7 +70,7 @@ export default function Produtos() {
 
 
 
-    const [idaleatorio, setIdaleatorio] = useState(3)
+    const [idaleatorio, setIdaleatorio] = useState(0)
     const [jogoall, setJogoall] = useState([])
 
     function Idaleatorio() {
@@ -98,7 +98,7 @@ export default function Produtos() {
     const navigate = useNavigate()
     const ref = useRef()
 
-    function Navegacao(para, id) {
+    function Navegacao(para, nome, id) {
         ref.current.continuousStart()
 
         if (para == 1) {
@@ -110,7 +110,7 @@ export default function Produtos() {
         if (para == 2) {
             setTimeout(() => {
                 ref.current.complete()
-                navigate('/produto/' + id)
+                navigate(`/produtos/${nome}/${id}`)
             }, 1500);
         }
     }
@@ -159,6 +159,36 @@ export default function Produtos() {
 
 
     const [tipoprocura, setTipoprocura] = useState("Destaques")
+
+    //tipos de procura
+    const [tiposProcura, setTiposProcura] = useState([0, 0, 0])
+
+    function tipoProcura(tipo) {
+        let copia = tiposProcura
+
+        if (tipo == 0) {
+            if (tiposProcura[tipo] == 0) {
+                copia[tipo] = -100
+                setTiposProcura(copia)
+                Idaleatorio()
+            }
+            else {
+                copia[tipo] = 0
+                setTiposProcura(copia)
+            }
+        }
+        else if (tipo == 1) {
+            if (tiposProcura[tipo] == 0) {
+                copia[tipo] = -100
+                setTiposProcura(copia)
+                
+            }
+            else {
+                copia[tipo] = 0
+                setTiposProcura(copia)
+            }
+        }
+    }
 
     return(
         <>
@@ -224,8 +254,8 @@ export default function Produtos() {
 
             <section className='tipoProcura'>
                 <button onClick={()=> setTipoprocura("Destaques")} className={`${tipoprocura == "Destaques" && 'selecionado'}`}>Destaques</button>
-                <button onClick={()=> setTipoprocura("GameGrupos")} className={`${tipoprocura == "GameGrupos" && 'selecionado'}`}>GameGrupos</button>
                 <button onClick={()=> setTipoprocura("Diversos")} className={`${tipoprocura == "Diversos" && 'selecionado'}`}>Tipos de pesquisa</button>
+                <button onClick={()=> setTipoprocura("GameGrupos")} className={`${tipoprocura == "GameGrupos" && 'selecionado'}`}>GameGrupos</button>
             </section>
 
             <section className='procuraras'>
@@ -244,9 +274,12 @@ export default function Produtos() {
                 {tgames.map( item => 
                 <>
                 {item.destaque == true &&
-                <SwiperSlide onClick={()=> (Navegacao(2, item.produto_id))}>
+                <SwiperSlide onClick={()=> (Navegacao(2, item.nome, item.produto_id))}>
                     <img src={BuscarImagem(item.imagem_produto)} />
-                    <h1>Destaque</h1>
+                    <div className='gamename'>
+                        <h1>{item.nome}</h1>
+                    </div>
+                    <p>Destaque</p>
                 </SwiperSlide>
                 } 
                 </>   
@@ -262,11 +295,8 @@ export default function Produtos() {
                 grid={{
                 rows: 3,
                 }}
-                keyboard={{
-                enabled: true,
-                }}
-                spaceBetween={20}
-                modules={[Grid, Keyboard]}
+                spaceBetween={15}
+                modules={[Grid]}
                 className="mySwiper"
                 >
 
@@ -294,55 +324,30 @@ export default function Produtos() {
                 >
   
                 <SwiperSlide>
-                    <div style={{"left": 100+"%"}} className='surpreendame'>
+                    <div onClick={()=> (tipoProcura(0))} style={{"left": tiposProcura[0]+"%"}} className='surpreendame'>
                     <img className='icon' src='/assets/images/pesquisa/caixa-aberta.png' />
                     </div>
 
                     <main className='surpreenda'>
-                        <section className='cardEdesc'>
-                            <section className='cardsur'>
-                                {idaleatorio > 0 &&
-                                <>
-                                    {jogoall.map( item => 
-                                    
-                                    <>
-                                    <img src={BuscarImagem(item.imagem_produto)} />    
-                                        
-                                    <div className='preto'>
-                                        
-                                        <p>Clique para ver o produto</p>
-                                        
-                                    </div>
-
-                                    </>
-                                    )}
-                                </>}
-                                
-                            </section>  
-
-                            
-                            {idaleatorio > 0 &&
-                            <section className='desc'>
-                                {jogoall.map( item => 
-                                    
-                                <p>{item.nome}</p>   
-                                    
-                                )}
-                            </section>}
-                        </section>
+                        {idaleatorio > 0 &&
+                        <>
+                            {jogoall.map( item => 
+                            <img src={BuscarImagem(item.imagem_produto)} />    
+                            )}
+                        </>}
 
                         <section className='procurar'>
                             <button onClick={() => (Idaleatorio())}>
-                                Jogo aleatório
+                                Próximo jogo
                             </button>
-                            {idaleatorio > 0 &&
-                            <button onClick={()=> (setIdaleatorio(0))} className='reset'>
-                                Resetar
-                            </button>}
                         </section>
                     </main>
                 </SwiperSlide>    
-                <SwiperSlide></SwiperSlide> 
+                <SwiperSlide>
+                    <div onClick={()=> (tipoProcura(1))} style={{"left": tiposProcura[1]+"%"}} className='roleta'>
+                    <img className='icon' src='/assets/images/pesquisa/caixa-aberta.png' />
+                    </div>
+                </SwiperSlide> 
                 <SwiperSlide></SwiperSlide>                  
                 
                 </Swiper>

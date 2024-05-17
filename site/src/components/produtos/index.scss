@@ -27,11 +27,13 @@
         }
         .tipo {
             height: 35px;
-            background-color: #3f3f3ffd;
+            background-color: rgb(53, 53, 53);
+            border: solid 2px rgb(72, 72, 72);
             border-radius: 10px;
             color: #828282;
-            border: none;
-            width: 200px;
+            width: auto;
+            padding: 0px 25px;
+            min-width: 200px;
             transition: 0.3s;
             cursor: pointer;
 
@@ -40,14 +42,21 @@
             }
         }
 
-        .filtro {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            
-            padding: 4px 15px;
-            border-radius: 25px;
-            background-color: rgba(172, 172, 172, 0.554);
+        > button {
+            height: 35px;
+            background-color: rgb(53, 53, 53);
+            border: solid 2px rgb(72, 72, 72);
+            border-radius: 10px;
+            color: #828282;
+            width: 200px;
+            transition: 0.3s;
+            cursor: pointer;
+
+            &.false {
+                background-color: #3f3f3f79;
+                border: solid 2px rgba(72, 72, 72, 0.475);
+                color: #8282827f;
+            }
         }
     }
     

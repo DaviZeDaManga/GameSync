@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import './index.scss'
 import { useNavigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
 import LoadingBar from "react-top-loading-bar";
 
 export default function ProdutoCard({id, imagem, nome, lancamento, tipo}) {
@@ -39,10 +38,8 @@ export default function ProdutoCard({id, imagem, nome, lancamento, tipo}) {
         <>
         <LoadingBar color="#f11946" ref={ref} />
 
-        <motion.div
+        <section
         className='produto'
-        whileHover={{scale: 0.97}}
-        whileTap={{scale: 0.93}}
         onClick={()=>(Navegar())}
         >
             <div className='imagem-produto'>
@@ -62,7 +59,7 @@ export default function ProdutoCard({id, imagem, nome, lancamento, tipo}) {
                     <h3>{lancamento}</h3>
                 </div>
             </div>
-        </motion.div>  
+        </section>  
 
          
         </>

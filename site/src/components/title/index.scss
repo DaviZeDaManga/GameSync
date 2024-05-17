@@ -19,13 +19,14 @@
         background-color: rgb(53, 53, 53);
         width: 35px;
         height: 35px;
-        padding: 12px;
+        padding: 10px;
         border-radius: 10px;
         transition: 0.3s;
+        border: solid 2px rgb(72, 72, 72);
         cursor: pointer;
 
         &:hover {
-            padding: 8px;
+            padding: 9px;
             border: solid 2px white;
         }
 
@@ -46,6 +47,7 @@
         padding: 0px 20px;
         border-radius: 10px;
         background-color: rgb(53, 53, 53);
+        border: solid 2px rgb(72, 72, 72);
     }
 
     .comp {

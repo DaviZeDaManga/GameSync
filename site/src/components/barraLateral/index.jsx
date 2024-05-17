@@ -536,9 +536,9 @@ export default function BarraLateral() {
                 <div className='meu-menu'></div>
 
                 <main className='navegacao'>
-                    <div onClick={()=> (Menu())} className='abrirmenu'>
+                    {/* <div onClick={()=> (Menu())} className='abrirmenu'>
                         <img className={`${menu == 450 && "sairmenu"}`} src='/assets/images/acoes/seta-esquerda.png' />
-                    </div>
+                    </div> */}
 
                     <div onClick={()=> (Navegar(1))} className='navigation'>
                         <img src="/assets/images/barralateral/navegar/lupa.png" />

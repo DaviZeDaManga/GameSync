@@ -598,7 +598,7 @@ export default function Produto() {
             <Produtos
             array={produtoinfo}
             limite={true}
-            tipo={"Jogos Parecidos por"}
+            tipo={"Parecidos por"}
             nome={nomejogo}
             id={id}
             />

@@ -339,17 +339,17 @@
             align-items: center;
 
             width: 100%;
-            gap: 15px;
+            gap: 10px;
             height: 35px;
             background-color: rgba(172, 33, 33, 0);
             border-radius: 10px;
 
             > button {
                 height: 35px;
-                background-color: #3f3f3ffd;
+                background-color: rgb(53, 53, 53);
+                border: solid 2px rgb(72, 72, 72);
                 border-radius: 10px;
                 color: #828282;
-                border: none;
                 width: 200px;
                 transition: 0.3s;
                 cursor: pointer;

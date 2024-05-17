@@ -97,21 +97,18 @@ export default function Produtos({array, limite, tipo, nome, id}) {
                 </button>
                 {tipo != "" &&
                 <button className='tipo'>
-                    <p>{tipo}</p>
+                    <h1>{tipo}</h1>
                 </button>}
 
-                {filtros[0] == true &&
-                <div onClick={()=> MudarFiltro(0)} className='filtro'>
-                    <p>Categoria</p>
-                </div>}
-                {filtros[1] == true &&
-                <div onClick={()=> MudarFiltro(1)} className='filtro'>
-                    <p>Desenvolvedor</p>
-                </div>}
-                {filtros[2] == true &&
-                <div onClick={()=> MudarFiltro(2)} className='filtro'>
-                    <p>Empresa</p>
-                </div>}
+                <button onClick={()=> MudarFiltro(0)} className={`filtro`}>
+                    Categoria
+                </button>
+                <button onClick={()=> MudarFiltro(1)} className={`filtro`}>
+                    Desenvolvedor
+                </button>
+                <button className={`${filtros[2] == false && "false"}`}>
+                    Empresa
+                </button>
             </section>
 
 
